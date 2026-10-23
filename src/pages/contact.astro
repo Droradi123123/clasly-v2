@@ -1,0 +1,19 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import LeadForm from '@/components/LeadForm.astro';
+import { whatsappUrl, CONTACT_EMAIL } from '@/config/site';
+const path = '/contact';
+---
+<PageLayout title="צור קשר: הרצאה, סדנה או קורס AI לארגון" description="דברו איתנו על הרצאה, סדנה, קורס או ליווי AI לארגון שלכם. וואטסאפ, אימייל או טופס קצר. מענה תוך יום עסקים." path={path} h1="בואו נדבר" lead="כתבו לנו מה הארגון צריך ונחזור תוך יום עסקים עם הצעה ראשונית." wide>
+  <div class="grid gap-8 md:grid-cols-2">
+    <div class="space-y-4">
+      <a href={whatsappUrl('שלום, אשמח לדבר על הרצאה או סדנת AI.')} target="_blank" rel="noopener" class="btn btn-primary w-full" data-track="whatsapp_click" data-track-label="contact">וואטסאפ: הדרך המהירה</a>
+      <a href={`mailto:${CONTACT_EMAIL}`} class="btn btn-ghost w-full">{CONTACT_EMAIL}</a>
+      <div class="card p-5 text-sm text-muted">
+        <p class="font-semibold text-fg">כדי שנוכל לענות בדיוק:</p>
+        <ul class="mt-2 space-y-1"><li>סוג הארגון (אקדמיה, חברה, מנהל)</li><li>פורמט (הרצאה, סדנה, קורס, ליווי)</li><li>גודל הקבוצה ומועד משוער</li><li>הנושא או האתגר</li></ul>
+      </div>
+    </div>
+    <LeadForm compact />
+  </div>
+</PageLayout>

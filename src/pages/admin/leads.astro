@@ -1,0 +1,74 @@
+---
+/**
+ * Internal leads list. Protected with HTTP Basic auth (ADMIN_PASSWORD secret). Not indexed, excluded from sitemap.
+ * Status workflow: new -> contacted -> proposal_sent -> won | lost
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getEnv } from '@/lib/env';
+import { supabaseAdmin } from '@/lib/supabase';
+export const prerender = false;
+
+const env = getEnv();
+const auth = Astro.request.headers.get('authorization') ?? '';
+const expected = env.ADMIN_PASSWORD ? `Basic ${btoa(`admin:${env.ADMIN_PASSWORD}`)}` : null;
+if (!expected || auth !== expected) {
+  return new Response('Authentication required', { status: 401, headers: { 'www-authenticate': 'Basic realm="leads", charset="UTF-8"', 'x-robots-tag': 'noindex' } });
+}
+const STATUSES = ['new', 'contacted', 'proposal_sent', 'won', 'lost'] as const;
+const supabase = supabaseAdmin();
+
+if (Astro.request.method === 'POST' && supabase) {
+  const form = await Astro.request.formData();
+  const id = String(form.get('id') ?? '');
+  const status = String(form.get('status') ?? '');
+  if (id && (STATUSES as readonly string[]).includes(status)) {
+    await supabase.from('leads').update({ status }).eq('id', id);
+  }
+  return Astro.redirect('/admin/leads', 303);
+}
+
+const { data: leads } = supabase
+  ? await supabase.from('leads').select('id, created_at, source, page, audience_type, name, organization, contact, topic, message, summary, status').order('created_at', { ascending: false }).limit(200)
+  : { data: [] as any[] };
+const { data: sessions } = supabase
+  ? await supabase.from('agent_sessions').select('id, created_at, prompt, converted').order('created_at', { ascending: false }).limit(30)
+  : { data: [] as any[] };
+Astro.response.headers.set('x-robots-tag', 'noindex, nofollow');
+Astro.response.headers.set('cache-control', 'no-store');
+const labels: Record<string, string> = { new: 'חדש', contacted: 'נוצר קשר', proposal_sent: 'נשלחה הצעה', won: 'נסגר', lost: 'לא רלוונטי' };
+---
+<BaseLayout title="לידים" description="רשימת לידים פנימית" path="/admin/leads" noindex hideHeader>
+  <section class="container-x py-10">
+    <h1 class="h2">לידים ({leads?.length ?? 0})</h1>
+    {!supabase && <p class="mt-4 text-muted">Supabase לא מוגדר. הגדירו SUPABASE_URL ו-SUPABASE_SERVICE_ROLE_KEY.</p>}
+    <div class="mt-6 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-start text-muted"><th class="p-2 text-start">תאריך</th><th class="p-2 text-start">שם / ארגון</th><th class="p-2 text-start">קשר</th><th class="p-2 text-start">קהל</th><th class="p-2 text-start">הודעה</th><th class="p-2 text-start">סטטוס</th></tr></thead>
+        <tbody>
+          {(leads ?? []).map((l: any) => (
+            <tr class="border-t border-line align-top">
+              <td class="p-2 whitespace-nowrap">{new Date(l.created_at).toLocaleString('he-IL')}</td>
+              <td class="p-2"><strong>{l.name}</strong><br/>{l.organization}</td>
+              <td class="p-2">{l.contact}</td>
+              <td class="p-2">{l.audience_type ?? ''}<br/><span class="text-muted">{l.page}</span></td>
+              <td class="p-2 max-w-md">{l.summary ? <em class="block text-accent">{l.summary}</em> : null}{l.message}</td>
+              <td class="p-2">
+                <form method="post" class="flex gap-1">
+                  <input type="hidden" name="id" value={l.id} />
+                  <select name="status" class="rounded-lg border border-line bg-bg px-2 py-1">
+                    {STATUSES.map((s) => <option value={s} selected={l.status === s}>{labels[s]}</option>)}
+                  </select>
+                  <button class="btn btn-ghost !min-h-8 !px-3 text-xs">עדכון</button>
+                </form>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <h2 class="h3 mt-12">מה מבקרים מקלידים לסוכן (30 אחרונים)</h2>
+    <ul class="mt-4 space-y-2 text-sm">
+      {(sessions ?? []).map((s: any) => <li class="card p-3">{s.converted ? '✅ ' : ''}{s.prompt} <span class="text-muted">({new Date(s.created_at).toLocaleDateString('he-IL')})</span></li>)}
+    </ul>
+  </section>
+</BaseLayout>

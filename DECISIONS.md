@@ -1,0 +1,24 @@
+# Decisions
+
+Decisions made where the brief left room, with the reasoning. Newest last.
+
+1. **Astro over Next.js static export.** Static HTML for every content page, zero JS by default, first-class MDX and content collections, and the Cloudflare adapter lets the three API routes live in the same project. Next.js static export cannot host the streaming endpoint without a separate server; Astro + the Cloudflare adapter can.
+2. **Cloudflare Workers (static assets) instead of Cloudflare Pages.** Astro 6+ only ships a Workers-based Cloudflare adapter, and Cloudflare now recommends Workers with static assets for new projects. Preview deployments per PR still work through Workers Builds. The brief's "Pages" intent (static hosting + edge functions + PR previews) is fully met.
+3. **Astro 7 with Node 22.23.4.** Latest stable Astro requires Node >= 22.23.4; `.node-version` pins it for Cloudflare builds and contributors.
+4. **API routes inside Astro (`src/pages/api/*`) rather than a separate Worker.** One deploy, shared config (`src/config/site.ts`), shared types. Secrets are read via `cloudflare:workers` `env`.
+5. **Rate limiting and prompt cache in Workers KV** (`AGENT_KV`), fixed window per IP (8 outlines/hour, 5 leads/hour, 120 events/hour). Falls back to an in-memory map locally so dev works without bindings.
+6. **Outline model: `claude-opus-5-5` at `effort: low`, streaming, system prompt cached.** Streaming gets the first tokens on screen in about a second and the full outline well inside five seconds. The model is configurable via the `OUTLINE_MODEL` var; `claude-haiku-5-5` is the cheaper swap if volume grows and quality holds.
+7. **Cheap moderation before the LLM**: length cap (300 chars), URL/script/prompt-injection patterns, minimum letter ratio. The system prompt also instructs the model to fall back to a generic outline for off-topic input, so no second model call is needed.
+8. **Anonymized agent logging**: `agent_sessions` stores prompt, outline, page, cache hit and a truncated IP hash only. No names or contacts are collected with it. `converted` flips when the visitor taps WhatsApp or copies the outline.
+9. **Email notifications via Resend's HTTP API** (one `fetch`, no SDK). Swappable in `src/lib/notify.ts`. Skipped silently until `RESEND_API_KEY` and `CONTACT_EMAIL` are set.
+10. **Turnstile is optional until configured**: when `TURNSTILE_SECRET_KEY` is missing the form still works (honeypot + rate limit only), so the site is testable before the Cloudflare setup is complete.
+11. **Admin leads page uses HTTP Basic auth** (`ADMIN_PASSWORD`), `noindex`, excluded from the sitemap and robots. Simplest protected page with zero dependencies; replace with Cloudflare Access when there are several users.
+12. **OG images are generated after build with sharp** (`scripts/og.mjs`), by scanning the built HTML for title/description/og:image. Hebrew is shaped correctly by librsvg/pango; the bundled Heebo WOFF is converted to TTF on the fly because FreeType cannot read WOFF2. No satori (weak RTL support) and no runtime image endpoint (cost, latency).
+13. **Slugs are short English** (`/lectures`, `/topics/claude-code`, `/blog/n8n-ai-agent`) for clean, shareable URLs; titles and content are Hebrew.
+14. **Theme: dark-first with a light mode**, one accent (`#5ee1c3` / `#0f9d7f`), self-hosted Heebo variable font with the Hebrew subset first. Theme preference is stored in `localStorage`, applied inline to avoid a flash.
+15. **Reveal animations are JS-gated** (`html.js .reveal`), so content is fully visible without JavaScript and for crawlers.
+16. **Testimonials sections are reserved but not rendered** (HTML comments in `index.astro`, `academia.astro`, `companies.astro`) until genuine quotes exist. No invented quotes, no Review schema.
+17. **Topic hubs**: 7 hub routes exist; 3 (Claude Code, n8n, AI agents) carry full pillar content from `src/content/hubs`. The other 4 render a lighter hub (title, article list, CTA) until their pillar content is written, so internal links never 404.
+18. **No `/case-studies` yet** (phase 2 per the brief); the data model (`leads`, `events`) already supports reporting outcomes.
+19. **Old uploads archived**: the two `clasly-main*.zip` files that were in the repo (an unrelated Lovable/Vite project) were moved to `_archive/` untouched rather than deleted.
+20. **Sitemap `changefreq`**: weekly for blog and topics, monthly for the rest; `lastmod` is left to the content's visible "last updated" dates and the Article schema.

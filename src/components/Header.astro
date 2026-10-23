@@ -1,0 +1,39 @@
+---
+import { BRAND_NAME, NAV, whatsappUrl } from '@/config/site';
+const current = Astro.url.pathname;
+const wa = whatsappUrl('שלום, אשמח לשמוע על הרצאות וסדנאות AI לארגון שלנו.');
+---
+<header class="sticky top-0 z-40 border-b border-line/70 bg-bg/80 backdrop-blur">
+  <div class="container-x flex h-16 items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-2 text-lg font-extrabold tracking-tight" aria-label={`${BRAND_NAME}, דף הבית`}>
+      <span class="inline-block h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_18px_var(--glow)]" aria-hidden="true"></span>
+      <span>{BRAND_NAME}</span>
+    </a>
+    <nav aria-label="ניווט ראשי" class="hidden md:block">
+      <ul class="flex items-center gap-6 text-sm font-medium">
+        {NAV.map((item) => (
+          <li><a href={item.href} class={`hover:text-accent transition ${current.startsWith(item.href) ? 'text-accent' : 'text-fg'}`} aria-current={current.startsWith(item.href) ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <div class="flex items-center gap-2">
+      <button type="button" data-theme-toggle class="btn btn-ghost !min-h-10 !px-3" aria-label="החלפת מצב תצוגה בהיר/כהה" aria-pressed="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <a href={wa} class="btn btn-primary !min-h-10 !px-4 text-sm" data-track="whatsapp_click" data-track-label="header" target="_blank" rel="noopener">וואטסאפ</a>
+      <details class="md:hidden relative">
+        <summary class="btn btn-ghost !min-h-10 !px-3 list-none cursor-pointer" aria-label="תפריט">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </summary>
+        <nav aria-label="ניווט נייד" class="absolute left-0 mt-2 w-56 card p-2 shadow-xl">
+          <ul class="flex flex-col">
+            {NAV.map((item) => (
+              <li><a href={item.href} class="block rounded-lg px-3 py-2 hover:bg-soft">{item.label}</a></li>
+            ))}
+            <li><a href="/contact" class="block rounded-lg px-3 py-2 hover:bg-soft">צור קשר</a></li>
+          </ul>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>

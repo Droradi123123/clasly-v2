@@ -1,0 +1,9 @@
+---
+interface Props { eyebrow?: string; title: string; text?: string; id?: string; center?: boolean }
+const { eyebrow, title, text, id, center = false } = Astro.props;
+---
+<div class={center ? 'text-center' : ''}>
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <h2 id={id} class="h2 mt-2">{title}</h2>
+  {text && <p class={`lead mt-3 ${center ? 'mx-auto' : ''} max-w-2xl`}>{text}</p>}
+</div>

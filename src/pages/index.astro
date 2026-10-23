@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeroAgent from '@/components/HeroAgent.astro';
+import LogoStrip from '@/components/LogoStrip.astro';
+import ProofBlocks from '@/components/ProofBlocks.astro';
+import OfferCards from '@/components/OfferCards.astro';
+import CTA from '@/components/CTA.astro';
+import { OFFERS } from '@/config/site';
+import { serviceSchema } from '@/lib/seo';
+
+const title = 'הרצאות וסדנאות AI לארגונים, מאנשים שמטמיעים AI';
+const description = 'הרצאות, סדנאות, קורסים וליווי למנהלים בנושאי AI יישומי: Claude Code, n8n, סוכני AI והטמעת AI בארגון. מהצוות שמטמיע AI בתעשייה, לא מיועצים.';
+const schema = OFFERS.map((o) => serviceSchema({ name: `${o.name} AI`, description: o.value, path: o.href, serviceType: o.name, audience: o.audience }));
+---
+<BaseLayout title={title} description={description} path="/" schema={schema}>
+  <section class="relative overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-x relative py-16 md:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="eyebrow">הרצאות · סדנאות · קורסים · ליווי למנהלים</p>
+        <h1 class="h1 mt-4">הרצאות וסדנאות AI מאנשים שמטמיעים AI בתעשייה, לא מיועצים.</h1>
+        <p class="lead mx-auto mt-5 max-w-2xl">ידע מעשי שנבדק בפרודקשן: סוכנים, אוטומציות עם n8n, Claude Code ואסטרטגיית AI שארגונים באמת מאמצים. בעברית, לארגונים בישראל.</p>
+      </div>
+      <div class="mx-auto mt-10 max-w-3xl">
+        <HeroAgent />
+        <p class="mt-3 text-center text-xs text-muted">כתבו משפט אחד. הסוכן שלנו יבנה מתווה ראשוני להרצאה או סדנה, ותוכלו לשלוח אותו אלינו בלחיצה.</p>
+      </div>
+    </div>
+  </section>
+
+  <LogoStrip />
+  <ProofBlocks />
+  <!-- Testimonials: hidden until genuine quotes are collected (see TODO.md). Never use invented quotes. -->
+  <OfferCards />
+
+  <CTA whatsappMessage="שלום, אשמח לדבר על הרצאה או סדנת AI לארגון שלנו." trackLabel="home" />
+</BaseLayout>

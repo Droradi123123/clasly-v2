@@ -1,0 +1,27 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { TOPICS } from '@/config/site';
+import { breadcrumbSchema } from '@/lib/seo';
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.updatedAt.getTime() - a.data.updatedAt.getTime());
+const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'בלוג', path: '/blog' }];
+---
+<BaseLayout title="בלוג: AI יישומי לארגונים, מהשטח" description="מדריכים מעשיים על Claude Code, n8n, סוכני AI, הטמעת AI ומדידת ROI, מצוות שמטמיע AI בתעשייה. כל מאמר עונה על שאלה אחת ומסתיים בצעדים." path="/blog" schema={[breadcrumbSchema(crumbs)]}>
+  <section class="container-x py-12 md:py-16">
+    <Breadcrumbs items={crumbs} />
+    <h1 class="h1 mt-6">הבלוג: AI יישומי, מהשטח</h1>
+    <p class="lead mt-4 max-w-2xl">כל מאמר עונה על שאלה אחת שארגונים שואלים אותנו, עם דוגמה מיישום אמיתי. לפי נושא:</p>
+    <ul class="mt-6 flex flex-wrap gap-2">{TOPICS.map((t) => <li><a href={`/topics/${t.slug}`} class="rounded-full border border-line px-3 py-1 text-sm hover:border-accent">{t.name}</a></li>)}</ul>
+    <ul class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {posts.map((p) => (
+        <li class="card reveal flex flex-col p-6">
+          <p class="text-xs text-accent">{TOPICS.find((t) => t.slug === p.data.topicHub)?.name}</p>
+          <h2 class="h3 mt-2"><a href={`/blog/${p.data.slug}`} class="hover:text-accent">{p.data.title}</a></h2>
+          <p class="mt-2 flex-1 text-sm text-muted">{p.data.description}</p>
+          <p class="mt-4 text-xs text-muted">עודכן: {p.data.updatedAt.toLocaleDateString('he-IL')}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

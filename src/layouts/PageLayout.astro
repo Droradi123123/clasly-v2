@@ -1,0 +1,23 @@
+---
+/** Simple content page layout with breadcrumbs and optional prose width. */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { breadcrumbSchema } from '@/lib/seo';
+interface Props { title: string; description: string; path: string; h1: string; lead?: string; crumbs?: { name: string; path: string }[]; schema?: object[]; noindex?: boolean; wide?: boolean; updatedAt?: string }
+const { title, description, path, h1, lead, crumbs = [{ name: 'דף הבית', path: '/' }, { name: h1, path }], schema = [], noindex, wide = false, updatedAt } = Astro.props;
+---
+<BaseLayout title={title} description={description} path={path} schema={[breadcrumbSchema(crumbs), ...schema]} noindex={noindex} updatedAt={updatedAt}>
+  <section class="relative overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-x relative py-12 md:py-16">
+      <Breadcrumbs items={crumbs} />
+      <h1 class="h1 mt-6 max-w-4xl">{h1}</h1>
+      {lead && <p class="lead mt-5 max-w-3xl">{lead}</p>}
+      {updatedAt && <p class="mt-3 text-sm text-muted">עודכן לאחרונה: <time datetime={updatedAt}>{new Date(updatedAt).toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' })}</time></p>}
+    </div>
+  </section>
+  <div class={`container-x pb-8 ${wide ? '' : 'prose'}`}>
+    <slot />
+  </div>
+  <slot name="after" />
+</BaseLayout>

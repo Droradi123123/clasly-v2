@@ -1,0 +1,18 @@
+{
+  // Cloudflare Workers (static assets + on-demand API routes) config.
+  // Secrets (ANTHROPIC_API_KEY, SUPABASE_SERVICE_ROLE_KEY, TURNSTILE_SECRET_KEY, RESEND_API_KEY, ADMIN_PASSWORD)
+  // are set with `wrangler secret put <NAME>`, never committed here.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ai-lectures-site",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  "kv_namespaces": [
+    // Rate limiting and prompt cache for the hero outline agent. Auto-provisioned on first deploy.
+    { "binding": "AGENT_KV" }
+  ],
+  "vars": {
+    "PUBLIC_SITE_URL": "https://ai-lectures-site.workers.dev",
+    "OUTLINE_MODEL": "claude-opus-5-5"
+  }
+}
