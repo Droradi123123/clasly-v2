@@ -37,6 +37,8 @@ src/pages/api/event.ts    privacy-friendly event tracking
 src/pages/admin/leads.astro  internal leads list (Basic auth, noindex)
 src/lib/seo.ts            JSON-LD builders, canonical/OG helpers
 src/lib/llms.ts           llms.txt / llms-full.txt generators
+src/lib/sitemap.ts        split sitemaps with lastmod (pages, topics, blog)
+src/data/glossary.ts      36 definitions for /glossary (DefinedTermSet schema)
 scripts/og.mjs            OG image generation (runs after build)
 scripts/new-article.mjs   article draft generator
 scripts/content-check.mjs article quality checklist
@@ -50,7 +52,7 @@ content/STYLE.md          writing rules (GEO structure, voice)
 2. Set secrets: `wrangler secret put ANTHROPIC_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `ADMIN_PASSWORD`.
 3. Set public build vars (Cloudflare build settings or `.env`): `PUBLIC_TURNSTILE_SITE_KEY`, `PUBLIC_CF_ANALYTICS_TOKEN`.
 4. The `AGENT_KV` namespace (and the adapter's `SESSION` KV + `IMAGES` binding) are auto-provisioned on first deploy.
-5. Apply `supabase/migrations/*.sql` to the Supabase project.
+5. Supabase: the schema is already applied to the shared "Lecture" project (`https://mfttuukcawtrlhkpvrjd.supabase.co`, tables prefixed `site_`). For a new project, apply `supabase/migrations/*.sql`.
 6. Set `DOMAIN` in `src/config/site.ts` and `PUBLIC_SITE_URL` in `wrangler.jsonc` once the domain exists.
 
 See `DECISIONS.md` for choices made where the brief left room, and `TODO.md` for what needs a human.

@@ -18,6 +18,7 @@ export interface OfferPageData {
   serviceType: string;
   schemaAudience: string;
   relatedTopics: string[];
+  updatedAt: string; // YYYY-MM-DD, shown on the page and used as sitemap lastmod
 }
 
 export const OFFER_PAGES: OfferPageData[] = [
@@ -57,6 +58,7 @@ export const OFFER_PAGES: OfferPageData[] = [
     serviceType: 'AI lecture',
     schemaAudience: 'Companies and academic institutions in Israel',
     relatedTopics: ['ai-adoption', 'ai-agents', 'ai-for-managers'],
+    updatedAt: '2026-10-23',
   },
   {
     slug: 'workshops',
@@ -95,6 +97,7 @@ export const OFFER_PAGES: OfferPageData[] = [
     serviceType: 'AI workshop',
     schemaAudience: 'Teams at companies and academic programs in Israel',
     relatedTopics: ['claude-code', 'n8n', 'ai-agents'],
+    updatedAt: '2026-10-23',
   },
   {
     slug: 'courses',
@@ -133,6 +136,7 @@ export const OFFER_PAGES: OfferPageData[] = [
     serviceType: 'AI course',
     schemaAudience: 'Universities, colleges and companies in Israel',
     relatedTopics: ['ai-agents', 'building-with-ai', 'claude-code'],
+    updatedAt: '2026-10-23',
   },
   {
     slug: 'executive',
@@ -170,6 +174,7 @@ export const OFFER_PAGES: OfferPageData[] = [
     serviceType: 'Executive AI coaching',
     schemaAudience: 'Executives and managers in Israel',
     relatedTopics: ['ai-for-managers', 'ai-roi', 'ai-adoption'],
+    updatedAt: '2026-10-23',
   },
 ];
 

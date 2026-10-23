@@ -22,16 +22,16 @@ if (Astro.request.method === 'POST' && supabase) {
   const id = String(form.get('id') ?? '');
   const status = String(form.get('status') ?? '');
   if (id && (STATUSES as readonly string[]).includes(status)) {
-    await supabase.from('leads').update({ status }).eq('id', id);
+    await supabase.from('site_leads').update({ status }).eq('id', id);
   }
   return Astro.redirect('/admin/leads', 303);
 }
 
 const { data: leads } = supabase
-  ? await supabase.from('leads').select('id, created_at, source, page, audience_type, name, organization, contact, topic, message, summary, status').order('created_at', { ascending: false }).limit(200)
+  ? await supabase.from('site_leads').select('id, created_at, source, page, audience_type, name, organization, contact, topic, message, summary, status').order('created_at', { ascending: false }).limit(200)
   : { data: [] as any[] };
 const { data: sessions } = supabase
-  ? await supabase.from('agent_sessions').select('id, created_at, prompt, converted').order('created_at', { ascending: false }).limit(30)
+  ? await supabase.from('site_agent_sessions').select('id, created_at, prompt, converted').order('created_at', { ascending: false }).limit(30)
   : { data: [] as any[] };
 Astro.response.headers.set('x-robots-tag', 'noindex, nofollow');
 Astro.response.headers.set('cache-control', 'no-store');

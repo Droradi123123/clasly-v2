@@ -36,7 +36,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const log = async (outline: string, cacheHit: boolean) => {
     if (!supabase) return;
     try {
-      await supabase.from('agent_sessions').insert({ id: sessionId, prompt, outline, page, cache_hit: cacheHit, ip_hash: (await sha256(ip)).slice(0, 16) });
+      await supabase.from('site_agent_sessions').insert({ id: sessionId, prompt, outline, page, cache_hit: cacheHit, ip_hash: (await sha256(ip)).slice(0, 16) });
     } catch (e) { console.error('agent_sessions insert failed', e); }
   };
 

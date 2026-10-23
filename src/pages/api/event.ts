@@ -25,10 +25,10 @@ export const POST: APIRoute = async ({ request }) => {
       referrer: typeof body.referrer === 'string' ? body.referrer.slice(0, 500) : null,
       session_id: typeof body.session_id === 'string' && /^[0-9a-f-]{36}$/.test(body.session_id) ? body.session_id : null,
     };
-    const { error } = await supabase.from('events').insert(row);
+    const { error } = await supabase.from('site_events').insert(row);
     if (error) console.error('event insert failed', error);
     if (row.session_id && (event === 'outline_whatsapp' || event === 'outline_copy')) {
-      await supabase.from('agent_sessions').update({ converted: true }).eq('id', row.session_id);
+      await supabase.from('site_agent_sessions').update({ converted: true }).eq('id', row.session_id);
     }
   }
   return json({ ok: true });

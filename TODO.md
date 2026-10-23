@@ -4,17 +4,21 @@
 - [ ] **Set the brand**: `BRAND_NAME`, `DOMAIN`, `WHATSAPP_NUMBER`, `CONTACT_EMAIL` in `src/config/site.ts`; `PUBLIC_SITE_URL` in `wrangler.jsonc`; `name` in `wrangler.jsonc`.
 - [ ] **Replace placeholder logos** in `public/logos/` with official SVGs (same file names): technion.svg, tau.svg, haifa.svg, bgu.svg, colman.svg. Set `placeholder: false` in `LOGOS` (`src/config/site.ts`). Confirm permission to display each logo.
 - [ ] **Approve program names** in `PROGRAM_NAMES` (`src/config/site.ts`).
-- [ ] **Cloudflare**: create the Worker from GitHub (build `npm run build`, deploy `npx wrangler deploy`), set secrets (`ANTHROPIC_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `ADMIN_PASSWORD`), create a Turnstile widget and set `PUBLIC_TURNSTILE_SITE_KEY`, enable Web Analytics and set `PUBLIC_CF_ANALYTICS_TOKEN`. The Cloudflare MCP connector available in the build session was the deprecated bindings server with no Workers deploy capability, so deployment was not run.
-- [ ] **Supabase**: the connector needed re-authorization during the build session, so the schema was not applied. Apply `supabase/migrations/20261023000000_init.sql`, then verify RLS with the Supabase security advisor.
+- [ ] **Cloudflare**: either connect the repo in the dashboard (Workers Builds) or use `.github/workflows/deploy.yml`: add repository secrets `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` and set the repository variable `CLOUDFLARE_DEPLOY_ENABLED=true`. Then create the Worker from GitHub (build `npm run build`, deploy `npx wrangler deploy`), set secrets (`ANTHROPIC_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `ADMIN_PASSWORD`), create a Turnstile widget and set `PUBLIC_TURNSTILE_SITE_KEY`, enable Web Analytics and set `PUBLIC_CF_ANALYTICS_TOKEN`. The Cloudflare MCP connector available in the build session was the deprecated bindings server with no Workers deploy capability, so deployment was not run.
+- [x] **Supabase**: schema applied to the shared "Lecture" project (`https://mfttuukcawtrlhkpvrjd.supabase.co`, tables `site_*`). Security advisor: only the expected "RLS enabled, no policy" notes. Still needed: copy the project's **service role key** into the Cloudflare secret `SUPABASE_SERVICE_ROLE_KEY` and set `SUPABASE_URL`. Optional: move to a dedicated project when a free slot or paid plan exists (re-run the migration, change the two secrets).
+- [ ] **Unrelated Supabase finding** (project "NY happy"): table `public.site_audit` has RLS disabled and is readable with the anon key. Remediation if intended: `ALTER TABLE "public"."site_audit" ENABLE ROW LEVEL SECURITY;` plus policies. Not changed by this build.
 - [ ] **Email**: verify a sending domain in Resend (or swap provider in `src/lib/notify.ts`).
 - [ ] **Search Console + Bing Webmaster Tools**: verify the domain (DNS record), submit `/sitemap-index.xml`.
 - [ ] **Run Lighthouse on the deployed URL** (mobile) and fix anything under 95.
 
 ## Content
-- [ ] Write full pillar content for the 4 lighter hubs: `ai-adoption`, `building-with-ai`, `ai-roi`, `ai-for-managers` (`src/content/hubs/<slug>.mdx`).
 - [ ] Publish 2 to 3 articles per week from `content/backlog.md`, prioritized by `agent_sessions` prompts and Search Console.
 - [ ] **Request testimonials** from program managers or coordinators at current client institutions (role + institution, with permission). Then un-comment the testimonials sections and add Review schema only for genuine reviews.
 - [ ] Add anonymized case studies per client (challenge, program, outcomes in numbers).
+
+## Hardening
+- [ ] Content-Security-Policy header (needs nonces for the inline theme script, Turnstile and Cloudflare Insights).
+- [ ] Replace Basic auth on `/admin/leads` with Cloudflare Access when more than one person needs it.
 
 ## Phase 2 / 3
 - [ ] **WhatsApp Business API agent**: instant greeting, qualification (organization type, format, group size, date, topic), human handoff with a summary stored in `leads.summary`. The baseline click-to-chat links already pre-fill context; `leads.source = 'whatsapp'` and `summary` are ready for it.

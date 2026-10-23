@@ -64,6 +64,7 @@ export const FOOTER_LINKS = {
   resources: [
     { href: '/blog', label: 'בלוג' },
     { href: '/topics', label: 'נושאים' },
+    { href: '/glossary', label: 'מילון מונחים' },
     { href: '/how-this-site-was-built', label: 'איך נבנה האתר' },
     { href: '/contact', label: 'צור קשר' },
   ],

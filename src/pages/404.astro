@@ -1,0 +1,17 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { OFFERS, TOPICS } from '@/config/site';
+---
+<BaseLayout title="העמוד לא נמצא" description="העמוד שחיפשתם לא קיים. הנה הדרכים המהירות להרצאות, סדנאות, קורסים ולבלוג." path="/404" noindex>
+  <section class="container-x py-20 text-center">
+    <p class="eyebrow">404</p>
+    <h1 class="h1 mt-3">העמוד הזה לא קיים</h1>
+    <p class="lead mx-auto mt-4 max-w-xl">אולי הקישור השתנה. הנה מה שרוב האנשים מחפשים:</p>
+    <div class="mx-auto mt-8 flex max-w-2xl flex-wrap justify-center gap-3">
+      {OFFERS.map((o) => <a href={o.href} class="btn btn-ghost">{o.name}</a>)}
+      <a href="/blog" class="btn btn-ghost">בלוג</a>
+      <a href="/" class="btn btn-primary">לדף הבית</a>
+    </div>
+    <p class="mt-10 text-sm text-muted">נושאים: {TOPICS.map((t, i) => <><a class="text-accent underline underline-offset-2" href={`/topics/${t.slug}`}>{t.name}</a>{i < TOPICS.length - 1 ? ' · ' : ''}</>)}</p>
+  </section>
+</BaseLayout>

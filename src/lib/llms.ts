@@ -41,6 +41,7 @@ export async function llmsShort(): Promise<string> {
     `- [אודות](${abs('/about')})`,
     `- [הצוות](${abs('/team')})`,
     `- [איך נבנה האתר](${abs('/how-this-site-was-built')})`,
+    `- [מילון מונחים](${abs('/glossary')}): הגדרות קצרות ל-36 מונחי AI בעברית.`,
     `- [llms-full.txt](${abs('/llms-full.txt')}): הגרסה המלאה עם תוכן העמודים.`,
     '',
   ].join('\n');

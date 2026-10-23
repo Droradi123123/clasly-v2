@@ -65,7 +65,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const supabase = supabaseAdmin();
   let id: string | null = null;
   if (supabase) {
-    const { data, error } = await supabase.from('leads').insert(lead).select('id').single();
+    const { data, error } = await supabase.from('site_leads').insert(lead).select('id').single();
     if (error) { console.error('lead insert failed', error); return json({ error: 'לא הצלחנו לשמור את הפנייה. כתבו לנו בוואטסאפ.' }, 500); }
     id = data.id;
   } else {

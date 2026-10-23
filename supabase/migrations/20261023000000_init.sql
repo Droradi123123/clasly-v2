@@ -4,16 +4,16 @@
 
 create extension if not exists pgcrypto;
 
-create type lead_source as enum ('whatsapp', 'form', 'agent');
-create type audience_type as enum ('academia', 'company', 'executive');
-create type lead_status as enum ('new', 'contacted', 'proposal_sent', 'won', 'lost');
+create type site_lead_source as enum ('whatsapp', 'form', 'agent');
+create type site_audience_type as enum ('academia', 'company', 'executive');
+create type site_lead_status as enum ('new', 'contacted', 'proposal_sent', 'won', 'lost');
 
-create table public.leads (
+create table public.site_leads (
   id uuid primary key default gen_random_uuid(),
   created_at timestamptz not null default now(),
-  source lead_source not null,
+  source site_lead_source not null,
   page text,
-  audience_type audience_type,
+  audience_type site_audience_type,
   format text,
   group_size text,
   timeframe text,
@@ -23,7 +23,7 @@ create table public.leads (
   organization text,
   contact text,
   summary text,              -- short AI-written summary (need, audience, format, timing), filled in phase 2
-  status lead_status not null default 'new',
+  status site_lead_status not null default 'new',
   utm_source text,
   utm_medium text,
   utm_campaign text,
@@ -31,10 +31,10 @@ create table public.leads (
   utm_content text,
   referrer text
 );
-create index leads_created_at_idx on public.leads (created_at desc);
-create index leads_status_idx on public.leads (status);
+create index site_leads_created_at_idx on public.site_leads (created_at desc);
+create index site_leads_status_idx on public.site_leads (status);
 
-create table public.agent_sessions (
+create table public.site_agent_sessions (
   id uuid primary key default gen_random_uuid(),
   created_at timestamptz not null default now(),
   prompt text not null,      -- anonymized: no name, contact or identifiers are collected with it
@@ -44,30 +44,29 @@ create table public.agent_sessions (
   ip_hash text,              -- truncated sha256, for abuse analysis only
   converted boolean not null default false
 );
-create index agent_sessions_created_at_idx on public.agent_sessions (created_at desc);
+create index site_agent_sessions_created_at_idx on public.site_agent_sessions (created_at desc);
 
-create table public.events (
+create table public.site_events (
   id bigint generated always as identity primary key,
   created_at timestamptz not null default now(),
   event text not null,
   page text,
   label text,
   referrer text,
-  session_id uuid references public.agent_sessions (id) on delete set null
+  session_id uuid references public.site_agent_sessions (id) on delete set null
 );
-create index events_created_at_idx on public.events (created_at desc);
-create index events_event_idx on public.events (event);
+create index site_events_created_at_idx on public.site_events (created_at desc);
+create index site_events_event_idx on public.site_events (event);
 
-alter table public.leads enable row level security;
-alter table public.agent_sessions enable row level security;
-alter table public.events enable row level security;
+alter table public.site_leads enable row level security;
+alter table public.site_agent_sessions enable row level security;
+alter table public.site_events enable row level security;
 
 -- Belt and braces: revoke everything from the public roles. Service role bypasses RLS and grants.
-revoke all on public.leads, public.agent_sessions, public.events from anon, authenticated;
-revoke all on all sequences in schema public from anon, authenticated;
+revoke all on public.site_leads, public.site_agent_sessions, public.site_events from anon, authenticated;
 
 -- Topic research view: what visitors type into the hero agent, grouped by day.
-create view public.agent_prompts_daily as
+create view public.site_agent_prompts_daily with (security_invoker = true) as
   select date_trunc('day', created_at) as day, count(*) as sessions, count(*) filter (where converted) as converted
-  from public.agent_sessions group by 1 order by 1 desc;
-revoke all on public.agent_prompts_daily from anon, authenticated;
+  from public.site_agent_sessions group by 1 order by 1 desc;
+revoke all on public.site_agent_prompts_daily from anon, authenticated;

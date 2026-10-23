@@ -16,7 +16,7 @@ export const absolute = (path: string) => new URL(path, SITE.url).toString();
 
 export function organizationSchema() {
   return {
-    '@type': 'Organization',
+    '@type': ['Organization', 'EducationalOrganization'],
     '@id': `${SITE.url}/#organization`,
     name: BRAND_NAME,
     url: SITE.url,
@@ -109,8 +109,41 @@ export function articleSchema(opts: { title: string; description: string; path: 
     dateModified: opts.updatedAt,
     inLanguage: 'he',
     keywords: opts.keywords,
+    speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead', '.prose > p:first-of-type'] },
+    isPartOf: { '@id': `${SITE.url}/#website` },
     author: { '@id': `${SITE.url}/#organization` },
     publisher: { '@id': `${SITE.url}/#organization` },
+  };
+}
+
+export function webPageSchema(opts: { title: string; description: string; path: string; updatedAt?: string; publishedAt?: string; image: string }) {
+  return {
+    '@type': 'WebPage',
+    '@id': `${absolute(opts.path)}#webpage`,
+    url: absolute(opts.path),
+    name: opts.title,
+    description: opts.description,
+    inLanguage: 'he',
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    about: { '@id': `${SITE.url}/#organization` },
+    primaryImageOfPage: { '@type': 'ImageObject', url: opts.image },
+    ...(opts.publishedAt ? { datePublished: opts.publishedAt } : {}),
+    ...(opts.updatedAt ? { dateModified: opts.updatedAt } : {}),
+  };
+}
+
+export function collectionPageSchema(opts: { name: string; description: string; path: string; items: { name: string; path: string }[] }) {
+  return {
+    '@type': 'CollectionPage',
+    '@id': `${absolute(opts.path)}#collection`,
+    name: opts.name,
+    description: opts.description,
+    url: absolute(opts.path),
+    inLanguage: 'he',
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: opts.items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, name: it.name, url: absolute(it.path) })),
+    },
   };
 }
 
