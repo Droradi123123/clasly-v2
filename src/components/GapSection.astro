@@ -1,0 +1,46 @@
+---
+/** The core message: the gap between learning AI from videos and implementing it in a real organization. */
+const learned = [
+  '10 כלי AI שחייבים להכיר החודש',
+  'הפרומפט המושלם שיחליף לכם עובד',
+  'דמו מרשים שעובד פעם אחת',
+  'AI יחליף את כולם עד סוף השנה',
+  'מצגת עם הרבה חיצים',
+];
+const done = [
+  'איך גורמים לאלפי עובדים להשתמש בזה כל יום, ולא רק בשבוע הראשון',
+  'איך עוברים אבטחת מידע, משפטית ורכש בלי לאבד חצי שנה',
+  'מה נשבר בפרודקשן, ואיך בונים ניטור שאנשים סומכים עליו',
+  'איך מודדים ROI שההנהלה מוכנה לחתום עליו',
+  'מה עושים כשהמודל טועה מול לקוח אמיתי',
+];
+---
+<section class="py-20 md:py-28" aria-labelledby="gap-title">
+  <div class="container-x">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="eyebrow">הפער</p>
+      <h2 id="gap-title" class="h2 mt-3">יש פער עצום בין מי שלמד AI ביוטיוב לבין מי שהטמיע אותו בארגון.</h2>
+      <p class="lead mx-auto mt-5 max-w-2xl">את הכלים כולם כבר מכירים. הקושי מתחיל ביום שאחרי: אנשים, תהליכים, אבטחה ומדידה. את זה לומדים רק מבפנים.</p>
+    </div>
+    <div class="mt-14 grid gap-5 md:grid-cols-2">
+      <article class="card p-7 md:p-9">
+        <p class="text-sm font-semibold text-muted">מה שלומדים מסרטונים</p>
+        <ul class="strike-list mt-6 space-y-4 text-lg" data-inview>
+          {learned.map((t) => <li class="flex items-start gap-3"><span>{t}</span></li>)}
+        </ul>
+      </article>
+      <article class="glow-card p-7 md:p-9">
+        <p class="text-sm font-semibold text-accent">מה שלומדים כשמטמיעים בארגון של אלפי עובדים</p>
+        <ul class="check-list mt-6 space-y-4 text-lg" data-inview>
+          {done.map((t) => (
+            <li class="flex items-start gap-3">
+              <svg class="mt-1.5 h-5 w-5 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+              <span class="font-medium">{t}</span>
+            </li>
+          ))}
+        </ul>
+      </article>
+    </div>
+    <p class="mx-auto mt-12 max-w-2xl text-center text-xl font-bold md:text-2xl">את הרשימה השנייה אי אפשר ללמוד מסרטון. <span class="text-gradient">אותה אנחנו מלמדים.</span></p>
+  </div>
+</section>

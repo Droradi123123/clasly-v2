@@ -1,18 +1,34 @@
 ---
+/**
+ * Client logos as an endless, very slow marquee. Files live in /public/logos and are listed in LOGOS (src/config/site.ts).
+ * The set is repeated so a short list still fills the row; the duplicate half is hidden from assistive tech.
+ */
 import { LOGOS, type Audience } from '@/config/site';
 interface Props { audience?: Audience; title?: string; compact?: boolean }
 const { audience, title = 'הם כבר למדו איתנו', compact = false } = Astro.props;
 const logos = audience ? LOGOS.filter((l) => l.audience === audience) : LOGOS;
+const repeat = Math.max(2, Math.ceil(10 / Math.max(1, logos.length)));
+const group = Array.from({ length: repeat }, () => logos).flat();
+const duration = `${Math.max(70, group.length * 12)}s`;
 ---
 {logos.length > 0 && (
-  <section aria-label={title} class={compact ? 'py-8' : 'py-12'}>
-    <div class="container-x">
-      <p class="text-center text-sm font-medium text-muted">{title}</p>
-      <ul class="logo-strip mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
-        {logos.map((l) => (
-          <li><img src={l.file} alt={`לוגו ${l.name}`} width="220" height="56" loading="lazy" decoding="async" /></li>
-        ))}
-      </ul>
+  <section aria-label={title} class={compact ? 'py-10' : 'py-14'}>
+    <p class="text-center text-sm font-medium tracking-wide text-muted">{title}</p>
+    <div class="marquee mt-8" style={`--duration:${duration}`}>
+      <div class="marquee-track">
+        <ul class="marquee-group" role="list">
+          {group.map((l, i) => (
+            <li aria-hidden={i >= logos.length ? 'true' : undefined}>
+              <img class="logo-item" src={l.file} alt={i < logos.length ? `לוגו ${l.name}` : ''} width="208" height="52" loading="lazy" decoding="async" />
+            </li>
+          ))}
+        </ul>
+        <ul class="marquee-group" aria-hidden="true" role="list">
+          {group.map((l) => (
+            <li><img class="logo-item" src={l.file} alt="" width="208" height="52" loading="lazy" decoding="async" /></li>
+          ))}
+        </ul>
+      </div>
     </div>
   </section>
 )}

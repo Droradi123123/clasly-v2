@@ -2,11 +2,9 @@
 import { env as cfEnv } from 'cloudflare:workers';
 
 export interface AppEnv {
-  ANTHROPIC_API_KEY?: string;
   TURNSTILE_SECRET_KEY?: string;
   RESEND_API_KEY?: string;
   ADMIN_PASSWORD?: string;
-  OUTLINE_MODEL?: string;
   PUBLIC_SITE_URL?: string;
   AGENT_KV?: KVNamespace;
   DB?: D1Database;

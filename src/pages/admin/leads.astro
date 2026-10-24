@@ -30,9 +30,6 @@ if (Astro.request.method === 'POST' && database) {
 const leads = database
   ? (await database.prepare('SELECT id, created_at, source, page, audience_type, name, organization, contact, topic, message, summary, status FROM leads ORDER BY created_at DESC LIMIT 200').all()).results
   : [];
-const sessions = database
-  ? (await database.prepare('SELECT id, created_at, prompt, converted FROM agent_sessions ORDER BY created_at DESC LIMIT 30').all()).results
-  : [];
 Astro.response.headers.set('x-robots-tag', 'noindex, nofollow');
 Astro.response.headers.set('cache-control', 'no-store');
 const labels: Record<string, string> = { new: 'חדש', contacted: 'נוצר קשר', proposal_sent: 'נשלחה הצעה', won: 'נסגר', lost: 'לא רלוונטי' };
@@ -66,9 +63,5 @@ const labels: Record<string, string> = { new: 'חדש', contacted: 'נוצר ק�
         </tbody>
       </table>
     </div>
-    <h2 class="h3 mt-12">מה מבקרים מקלידים לסוכן (30 אחרונים)</h2>
-    <ul class="mt-4 space-y-2 text-sm">
-      {(sessions ?? []).map((s: any) => <li class="card p-3">{s.converted ? '✅ ' : ''}{s.prompt} <span class="text-muted">({new Date(s.created_at).toLocaleDateString('he-IL')})</span></li>)}
-    </ul>
   </section>
 </BaseLayout>

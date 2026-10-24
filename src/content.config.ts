@@ -35,6 +35,14 @@ const hubs = defineCollection({
     relatedOffer: z.enum(offers),
     faq: z.array(z.object({ q: z.string(), a: z.string() })).min(3),
     updatedAt: z.coerce.date(),
+    /** Optional step-by-step method, published as HowTo structured data. */
+    howTo: z
+      .object({
+        name: z.string(),
+        description: z.string(),
+        steps: z.array(z.object({ name: z.string(), text: z.string() })).min(2),
+      })
+      .optional(),
   }),
 });
 

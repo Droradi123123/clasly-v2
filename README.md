@@ -7,9 +7,9 @@ Brand: **RealAI**, domain **realai.co.il**. The WhatsApp number and contact emai
 
 ## Stack
 - **Astro 7** (static output, Cloudflare adapter for the three API routes) + **Tailwind 4** + **MDX**
-- **Cloudflare Workers** with static assets (hosting), KV (rate limiting + outline cache), Web Analytics, Turnstile
+- **Cloudflare Workers** with static assets (hosting), KV (rate limiting), Web Analytics, Turnstile
 - **Cloudflare D1** (leads, agent sessions, events), reachable only through the Worker binding `DB`
-- **Claude API** (`@anthropic-ai/sdk`) for the hero outline agent, streaming
+- **Claude API** (`@anthropic-ai/sdk`, dev only) for the optional AI draft mode of `scripts/new-article.mjs`
 - **Resend** (or any HTTP email API) for lead notifications
 
 ## Local development
@@ -32,7 +32,6 @@ src/data/offers.ts        offer page content (answer-first hero, outcomes, logis
 src/data/programs.ts      named programs + sample syllabi (rendered on offer pages)
 src/content/blog/*.mdx    articles (schema in src/content.config.ts)
 src/content/hubs/*.mdx    topic hub pillar content
-src/pages/api/outline.ts  hero outline agent (streaming, rate limit, moderation, cache, logging)
 src/pages/api/lead.ts     lead form endpoint (Turnstile, D1, email)
 src/pages/api/event.ts    privacy-friendly event tracking
 src/pages/admin/leads.astro  internal leads list (Basic auth, noindex)
@@ -51,7 +50,7 @@ content/STYLE.md          writing rules (GEO structure, voice)
 
 ## Deployment (Cloudflare Workers)
 1. Create the Worker from this repo in the Cloudflare dashboard (Workers & Pages → Create → connect GitHub), build command `npm run build`, deploy command `npx wrangler deploy`. Preview deployments run for every pull request.
-2. Set secrets: `wrangler secret put ANTHROPIC_API_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `ADMIN_PASSWORD`.
+2. Set secrets: `wrangler secret put ADMIN_PASSWORD` (later `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`).
 3. Set public build vars (Cloudflare build settings or `.env`): `PUBLIC_TURNSTILE_SITE_KEY`, `PUBLIC_CF_ANALYTICS_TOKEN`.
 4. The `AGENT_KV` namespace (and the adapter's `SESSION` KV + `IMAGES` binding) are auto-provisioned on first deploy.
 5. D1: the `realai-leads` database exists and the schema is applied. For a new database: `npx wrangler d1 create realai-leads`, put its id in `wrangler.jsonc`, then `npx wrangler d1 migrations apply realai-leads --remote`.

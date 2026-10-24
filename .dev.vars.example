@@ -1,5 +1,4 @@
 # Copy to .dev.vars for local development (wrangler reads it). Never commit real values.
-ANTHROPIC_API_KEY=
 TURNSTILE_SECRET_KEY=
 RESEND_API_KEY=
 ADMIN_PASSWORD=

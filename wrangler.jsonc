@@ -1,6 +1,6 @@
 {
   // Cloudflare Workers (static assets + on-demand API routes) config.
-  // Secrets (ANTHROPIC_API_KEY, TURNSTILE_SECRET_KEY, RESEND_API_KEY, ADMIN_PASSWORD)
+  // Secrets (ADMIN_PASSWORD, later TURNSTILE_SECRET_KEY and RESEND_API_KEY)
   // are set with `wrangler secret put <NAME>`, never committed here.
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "clasly-v2",
@@ -17,11 +17,10 @@
     }
   ],
   "kv_namespaces": [
-    // Rate limiting and prompt cache for the hero outline agent. Auto-provisioned on first deploy.
+    // Rate limiting for the lead and event endpoints. Auto-provisioned on first deploy.
     { "binding": "AGENT_KV" }
   ],
   "vars": {
-    "PUBLIC_SITE_URL": "https://realai.co.il",
-    "OUTLINE_MODEL": "claude-opus-5-5"
+    "PUBLIC_SITE_URL": "https://realai.co.il"
   }
 }
