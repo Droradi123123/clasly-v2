@@ -1,0 +1,19 @@
+---
+import { PROOF_POINTS } from '@/config/site';
+---
+<section class="py-16" aria-labelledby="proof-title">
+  <div class="container-x">
+    <p class="eyebrow">למה אנחנו</p>
+    <h2 id="proof-title" class="h2 mt-2">בונים, לא מייעצים</h2>
+    <p class="lead mt-3 max-w-2xl">הצוות שלנו מוביל AI בחברות טכנולוגיה ישראליות וגלובליות מובילות, ומטמיע AI בידיים כל יום. מה שאנחנו מלמדים, עשינו בפרודקשן.</p>
+    <div class="mt-10 grid gap-5 md:grid-cols-3">
+      {PROOF_POINTS.map((p, i) => (
+        <article class="card reveal p-6" style={`transition-delay:${i * 80}ms`}>
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-accent/15 text-accent font-bold" aria-hidden="true">{i + 1}</span>
+          <h3 class="h3 mt-4">{p.title}</h3>
+          <p class="mt-2 text-muted">{p.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+---
+import { LOGOS, type Audience } from '@/config/site';
+interface Props { audience?: Audience; title?: string; compact?: boolean }
+const { audience, title = 'הם כבר למדו איתנו', compact = false } = Astro.props;
+const logos = audience ? LOGOS.filter((l) => l.audience === audience) : LOGOS;
+---
+{logos.length > 0 && (
+  <section aria-label={title} class={compact ? 'py-8' : 'py-12'}>
+    <div class="container-x">
+      <p class="text-center text-sm font-medium text-muted">{title}</p>
+      <ul class="logo-strip mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+        {logos.map((l) => (
+          <li><img src={l.file} alt={`לוגו ${l.name}`} width="220" height="56" loading="lazy" decoding="async" /></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}

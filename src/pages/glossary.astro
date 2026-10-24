@@ -1,0 +1,61 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CTA from '@/components/CTA.astro';
+import { GLOSSARY } from '@/data/glossary';
+import { breadcrumbSchema, absolute } from '@/lib/seo';
+import { BRAND_NAME } from '@/config/site';
+const path = '/glossary';
+const title = 'מילון מונחי AI לארגונים: הגדרות קצרות בעברית';
+const description = `${GLOSSARY.length} מונחי AI שארגונים צריכים להכיר, כל אחד במשפט אחד ועם דוגמה מהשטח: סוכנים, RAG, טוקנים, n8n, Claude Code, ROI ועוד.`;
+const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'מילון מונחים', path }];
+const bySlug = Object.fromEntries(GLOSSARY.map((t) => [t.slug, t]));
+const schema = [
+  breadcrumbSchema(crumbs),
+  {
+    '@type': 'DefinedTermSet',
+    '@id': `${absolute(path)}#terms`,
+    name: `מילון מונחי AI של ${BRAND_NAME}`,
+    inLanguage: 'he',
+    hasDefinedTerm: GLOSSARY.map((t) => ({
+      '@type': 'DefinedTerm',
+      '@id': `${absolute(path)}#${t.slug}`,
+      name: t.term,
+      ...(t.en ? { alternateName: t.en } : {}),
+      description: t.definition,
+      inDefinedTermSet: `${absolute(path)}#terms`,
+    })),
+  },
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema} updatedAt="2026-10-23">
+  <section class="relative overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-x relative py-12 md:py-16">
+      <Breadcrumbs items={crumbs} />
+      <h1 class="h1 mt-6 max-w-4xl">מילון מונחי AI לארגונים</h1>
+      <p class="lead mt-5 max-w-3xl">{description}</p>
+      <nav aria-label="קפיצה למונח" class="mt-6 flex flex-wrap gap-2.5 text-sm">
+        {GLOSSARY.map((t) => <a href={`#${t.slug}`} class="inline-flex min-h-9 items-center rounded-full border border-line px-3.5 py-1.5 hover:border-accent">{t.term}</a>)}
+      </nav>
+    </div>
+  </section>
+  <section class="container-x pb-8">
+    <dl class="grid gap-5 md:grid-cols-2">
+      {GLOSSARY.map((t) => (
+        <div id={t.slug} class="card scroll-mt-24 p-6">
+          <dt class="h3">{t.term}{t.en && <span class="ms-2 text-sm font-normal text-muted" dir="ltr">{t.en}</span>}</dt>
+          <dd class="mt-2"><p class="font-medium">{t.definition}</p><p class="mt-2 text-muted">{t.detail}</p>
+            {(t.related?.length || t.link) && (
+              <p class="mt-3 flex flex-wrap gap-2 text-sm">
+                {t.related?.filter((r) => bySlug[r]).map((r) => <a href={`#${r}`} class="inline-flex min-h-8 items-center rounded-full bg-soft px-3 text-accent">{bySlug[r].term}</a>)}
+                {t.link && <a href={t.link} class="inline-flex min-h-8 items-center rounded-full border border-accent/40 px-3 font-semibold text-accent">להרחבה ←</a>}
+              </p>
+            )}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+  <CTA title="רוצים שהצוות שלכם ידבר את השפה הזו?" text="הרצאה אחת מיישרת קו בארגון שלם. סדנה אחת הופכת מילים לכלים שעובדים." whatsappMessage="שלום, אשמח לשמוע על הרצאה או סדנת AI לצוות שלנו." trackLabel="glossary" />
+</BaseLayout>

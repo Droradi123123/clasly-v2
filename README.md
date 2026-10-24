@@ -1,0 +1,58 @@
+# RealAI: realai.co.il (Hebrew, RTL)
+
+Marketing and lead-generation site for a company that delivers applied AI education to organizations in Israel:
+lectures, hands-on workshops, courses and executive one-on-ones. Built with Astro, Tailwind, MDX, Cloudflare Workers and Supabase.
+
+Brand: **RealAI**, domain **realai.co.il**. The WhatsApp number and contact email are still placeholders. All four live in **one file**: `src/config/site.ts`.
+
+## Stack
+- **Astro 7** (static output, Cloudflare adapter for the three API routes) + **Tailwind 4** + **MDX**
+- **Cloudflare Workers** with static assets (hosting), KV (rate limiting + outline cache), Web Analytics, Turnstile
+- **Supabase** Postgres (leads, agent sessions, events) with RLS, server-only writes
+- **Claude API** (`@anthropic-ai/sdk`) for the hero outline agent, streaming
+- **Resend** (or any HTTP email API) for lead notifications
+
+## Local development
+```bash
+npm install                 # Node >= 22.23.4 (see .node-version)
+cp .dev.vars.example .dev.vars   # fill secrets for local API routes (optional)
+npm run dev                 # http://localhost:4321 (API routes run in workerd via the Cloudflare Vite plugin)
+npm run build               # astro build + OG image generation into dist/client/og
+npm run preview             # wrangler dev on the production build
+npm run check               # astro check (types)
+npm run content:check       # article quality checklist
+npm run new-article -- "ביטוי מפתח" --slug my-slug --hub n8n --offer /workshops [--ai]
+```
+
+## Project map
+```
+src/config/site.ts        placeholders, entity facts, nav, logos, offers, topics, program names
+src/data/offers.ts        offer page content (answer-first hero, outcomes, logistics, FAQ)
+src/data/programs.ts      named programs + sample syllabi (rendered on offer pages)
+src/content/blog/*.mdx    articles (schema in src/content.config.ts)
+src/content/hubs/*.mdx    topic hub pillar content
+src/pages/api/outline.ts  hero outline agent (streaming, rate limit, moderation, cache, logging)
+src/pages/api/lead.ts     lead form endpoint (Turnstile, Supabase, email)
+src/pages/api/event.ts    privacy-friendly event tracking
+src/pages/admin/leads.astro  internal leads list (Basic auth, noindex)
+src/lib/seo.ts            JSON-LD builders, canonical/OG helpers
+src/lib/llms.ts           llms.txt / llms-full.txt generators
+src/lib/sitemap.ts        split sitemaps with lastmod (pages, topics, blog)
+src/data/glossary.ts      36 definitions for /glossary (DefinedTermSet schema)
+scripts/og.mjs            OG image generation (runs after build)
+scripts/new-article.mjs   article draft generator
+scripts/content-check.mjs article quality checklist
+supabase/migrations/      schema + RLS
+content/backlog.md        50 key phrases to write next
+content/STYLE.md          writing rules (GEO structure, voice)
+```
+
+## Deployment (Cloudflare Workers)
+1. Create the Worker from this repo in the Cloudflare dashboard (Workers & Pages → Create → connect GitHub), build command `npm run build`, deploy command `npx wrangler deploy`. Preview deployments run for every pull request.
+2. Set secrets: `wrangler secret put ANTHROPIC_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `ADMIN_PASSWORD`.
+3. Set public build vars (Cloudflare build settings or `.env`): `PUBLIC_TURNSTILE_SITE_KEY`, `PUBLIC_CF_ANALYTICS_TOKEN`.
+4. The `AGENT_KV` namespace (and the adapter's `SESSION` KV + `IMAGES` binding) are auto-provisioned on first deploy.
+5. Supabase: the schema is already applied to the shared "Lecture" project (`https://mfttuukcawtrlhkpvrjd.supabase.co`, tables prefixed `site_`). For a new project, apply `supabase/migrations/*.sql`.
+6. Attach `realai.co.il` to the `realai` Worker as a custom domain and redirect `www` to the apex.
+
+See `DECISIONS.md` for choices made where the brief left room, and `TODO.md` for what needs a human.

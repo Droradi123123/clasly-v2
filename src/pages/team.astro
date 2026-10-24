@@ -1,0 +1,17 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import CTA from '@/components/CTA.astro';
+const path = '/team';
+const roles = [
+  { title: 'מוביל/ת חדשנות AI בחברת טכנולוגיה גלובלית', facts: ['בנה והוביל אסטרטגיית AI ארגונית', 'עשרות סוכני AI ואוטומציות בפרודקשן', 'מרצה בחמישה מוסדות אקדמיים בישראל', 'בונה עם Claude Code ו-n8n כל יום'] },
+  { title: 'מהנדס/ת AI ואוטומציה', facts: ['מערכות ניטור והערכה למודלי שפה', 'חיבור סוכנים למערכות ארגוניות (CRM, תמיכה, נתונים)', 'מדידת ROI ועלויות טוקנים בקנה מידה'] },
+  { title: 'מנחה/ת סדנאות ותוכניות', facts: ['עיצוב סילבוסים לאקדמיה ולארגונים', 'הנחיית סדנאות בנייה ל-8 עד 30 משתתפים', 'ליווי פרויקטים מסכמים'] },
+];
+---
+<PageLayout title="הצוות: מי מעביר את ההרצאות והסדנאות" description="הצוות שלנו: מובילי AI, מהנדסים ומנחים שעובדים בחברות טכנולוגיה מובילות ומלמדים באוניברסיטאות ובמכללות בישראל. תפקידים וניסיון, בלי סיסמאות." path={path} h1="הצוות" lead="אנשים שמטמיעים AI בתעשייה ומלמדים את זה לארגונים. אנחנו מציגים תפקידים וניסיון, לא שמות: המותג הוא החברה, והידע הוא מה שחשוב." wide>
+  <div class="grid gap-5 md:grid-cols-3">
+    {roles.map((r) => <article class="card reveal p-6"><h2 class="h3">{r.title}</h2><ul class="mt-4 space-y-2 text-muted">{r.facts.map((f) => <li class="flex gap-2"><span class="text-accent">•</span>{f}</li>)}</ul></article>)}
+  </div>
+  <p class="mt-8 max-w-3xl text-muted">כל מרצה וכל מנחה בצוות עובדים היום בתעשייה. זה התנאי. ככה הדוגמאות בכיתה הן מהחודש האחרון, והתשובות לשאלות הקשות מגיעות מניסיון ולא מניחוש.</p>
+  <Fragment slot="after"><CTA whatsappMessage="שלום, אשמח לתאם שיחה עם הצוות על הרצאה או סדנה." trackLabel="team" /></Fragment>
+</PageLayout>

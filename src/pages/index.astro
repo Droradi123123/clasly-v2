@@ -1,0 +1,47 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeroAgent from '@/components/HeroAgent.astro';
+import LogoStrip from '@/components/LogoStrip.astro';
+import ProofBlocks from '@/components/ProofBlocks.astro';
+import OfferCards from '@/components/OfferCards.astro';
+import CTA from '@/components/CTA.astro';
+import FAQ from '@/components/FAQ.astro';
+import { OFFERS } from '@/config/site';
+import { serviceSchema, faqSchema } from '@/lib/seo';
+
+const title = 'הרצאות וסדנאות AI לארגונים, מאנשים שמטמיעים AI';
+const description = 'הרצאות, סדנאות, קורסים וליווי למנהלים בנושאי AI יישומי: Claude Code, n8n, סוכני AI והטמעת AI בארגון. מהצוות שמטמיע AI בתעשייה, לא מיועצים.';
+const faq = [
+  { q: 'מה אתם מעבירים בדיוק?', a: 'ארבעה פורמטים: הרצאות (45 עד 90 דקות), סדנאות מעשיות (חצי יום עד יום), קורסים והכשרות (4 עד 12 מפגשים) וליווי אישי למנהלים (4 עד 8 מפגשים). הכול בעברית, לארגונים בישראל, פרונטלי או Zoom.' },
+  { q: 'למי זה מתאים?', a: 'לאוניברסיטאות ומכללות (תוכניות יזמות, לימודי המשך, פקולטות), לחברות וצוותים (HR, תפעול, שירות, פיתוח, הנהלה) ולמנהלים בכירים שרוצים להוביל AI בארגון.' },
+  { q: 'במה אתם שונים מיועצים או ממרצי AI אחרים?', a: 'אנחנו בונים. הצוות שלנו מוביל AI בחברות טכנולוגיה ישראליות וגלובליות: אסטרטגיית AI ארגונית, סוכנים ואוטומציות בפרודקשן, מדידת ROI. כל דוגמה בכיתה היא משהו שרץ היום.' },
+  { q: 'אילו נושאים אתם מכסים?', a: 'Claude Code, n8n ואוטומציה, סוכני AI, הטמעת AI בארגון, בניית מוצרים עם AI, ROI של AI, ו-AI למנהלים. כל נושא זמין כהרצאה, סדנה או קורס.' },
+  { q: 'האם צריך רקע טכני?', a: 'לא. רוב הקהלים שלנו אינם טכניים. בסדנאות גם מי שלא כתב שורת קוד בונה אוטומציה או כלי עובד. לקהל טכני יש מסלולים מעמיקים.' },
+  { q: 'איך מתחילים?', a: 'כותבים לנו בוואטסאפ או בטופס מה הארגון צריך. תוך יום עסקים חוזרים עם הצעה ראשונית, ואחרי שיחת הכנה קצרה מתאימים את התוכן לקהל שלכם.' },
+];
+const schema = [...OFFERS.map((o) => serviceSchema({ name: `${o.name} AI`, description: o.value, path: o.href, serviceType: o.name, audience: o.audience })), faqSchema(faq)];
+---
+<BaseLayout title={title} description={description} path="/" schema={schema}>
+  <section class="relative overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-x relative py-16 md:py-24">
+      <div class="mx-auto max-w-3xl text-center">
+        <p class="eyebrow">הרצאות · סדנאות · קורסים · ליווי למנהלים</p>
+        <h1 class="h1 mt-4">הרצאות וסדנאות AI מאנשים שמטמיעים AI בתעשייה, לא מיועצים.</h1>
+        <p class="lead mx-auto mt-5 max-w-2xl">ידע מעשי שנבדק בפרודקשן: סוכנים, אוטומציות עם n8n, Claude Code ואסטרטגיית AI שארגונים באמת מאמצים. בעברית, לארגונים בישראל.</p>
+      </div>
+      <div class="mx-auto mt-10 max-w-3xl">
+        <HeroAgent />
+        <p class="mt-3 text-center text-xs text-muted">כתבו משפט אחד. הסוכן שלנו יבנה מתווה ראשוני להרצאה או סדנה, ותוכלו לשלוח אותו אלינו בלחיצה.</p>
+      </div>
+    </div>
+  </section>
+
+  <LogoStrip />
+  <ProofBlocks />
+  <!-- Testimonials: hidden until genuine quotes are collected (see TODO.md). Never use invented quotes. -->
+  <OfferCards />
+  <FAQ items={faq} title="שאלות שארגונים שואלים אותנו" />
+
+  <CTA whatsappMessage="שלום, אשמח לדבר על הרצאה או סדנת AI לארגון שלנו." trackLabel="home" />
+</BaseLayout>

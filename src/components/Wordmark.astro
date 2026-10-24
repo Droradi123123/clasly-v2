@@ -1,0 +1,6 @@
+---
+/** Text wordmark rendered from BRAND_NAME. A trailing "AI" gets the accent colour (RealAI -> Real + AI). */
+import { BRAND_NAME } from '@/config/site';
+const m = BRAND_NAME.match(/^(.*?)(AI)$/);
+---
+{m ? <span dir="ltr" class="whitespace-nowrap">{m[1]}<span class="text-accent">{m[2]}</span></span> : <span>{BRAND_NAME}</span>}

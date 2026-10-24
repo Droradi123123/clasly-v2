@@ -1,0 +1,46 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { TOPICS } from '@/config/site';
+import { breadcrumbSchema, collectionPageSchema } from '@/lib/seo';
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.updatedAt.getTime() - a.data.updatedAt.getTime());
+const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'בלוג', path: '/blog' }];
+const title = 'בלוג: AI יישומי לארגונים, מהשטח';
+const description = 'מדריכים מעשיים על Claude Code, n8n, סוכני AI, הטמעת AI ומדידת ROI, מצוות שמטמיע AI בתעשייה. כל מאמר עונה על שאלה אחת ומסתיים בצעדים.';
+const latest = posts.slice(0, 6);
+const byTopic = TOPICS.map((t) => ({ topic: t, posts: posts.filter((p) => p.data.topicHub === t.slug) })).filter((g) => g.posts.length > 0);
+const schema = [breadcrumbSchema(crumbs), collectionPageSchema({ name: title, description, path: '/blog', items: posts.map((p) => ({ name: p.data.title, path: `/blog/${p.data.slug}` })) })];
+---
+<BaseLayout title={title} description={description} path="/blog" schema={schema}>
+  <section class="container-x py-12 md:py-16">
+    <Breadcrumbs items={crumbs} />
+    <h1 class="h1 mt-6">הבלוג: AI יישומי, מהשטח</h1>
+    <p class="lead mt-4 max-w-2xl">כל מאמר עונה על שאלה אחת שארגונים שואלים אותנו, עם דוגמה מיישום אמיתי. לפי נושא:</p>
+    <ul class="mt-6 flex flex-wrap gap-2">{TOPICS.map((t) => <li><a href={`/topics/${t.slug}`} class="rounded-full border border-line px-3 py-1 text-sm hover:border-accent">{t.name}</a></li>)}</ul>
+    <h2 class="h2 mt-12">החדשים ביותר</h2>
+    <ul class="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {latest.map((p) => (
+        <li class="card reveal flex flex-col p-6">
+          <p class="text-xs text-accent">{TOPICS.find((t) => t.slug === p.data.topicHub)?.name}</p>
+          <h3 class="h3 mt-2"><a href={`/blog/${p.data.slug}`} class="hover:text-accent">{p.data.title}</a></h3>
+          <p class="mt-2 flex-1 text-sm text-muted">{p.data.description}</p>
+          <p class="mt-4 text-xs text-muted">עודכן: {p.data.updatedAt.toLocaleDateString('he-IL')}</p>
+        </li>
+      ))}
+    </ul>
+    {byTopic.map((g) => (
+      <section class="mt-14" aria-labelledby={`topic-${g.topic.slug}`}>
+        <div class="flex items-baseline justify-between gap-4">
+          <h2 id={`topic-${g.topic.slug}`} class="h2">{g.topic.name}</h2>
+          <a href={`/topics/${g.topic.slug}`} class="text-sm text-accent underline underline-offset-2">למרכז הנושא ←</a>
+        </div>
+        <ul class="mt-5 grid gap-3 md:grid-cols-2">
+          {g.posts.map((p) => (
+            <li class="card p-4"><a href={`/blog/${p.data.slug}`} class="font-semibold hover:text-accent">{p.data.title}</a><p class="mt-1 text-sm text-muted">{p.data.description}</p></li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </section>
+</BaseLayout>

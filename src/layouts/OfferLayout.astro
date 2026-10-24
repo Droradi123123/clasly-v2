@@ -1,0 +1,97 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import LogoStrip from '@/components/LogoStrip.astro';
+import FAQ from '@/components/FAQ.astro';
+import CTA from '@/components/CTA.astro';
+import OfferCards from '@/components/OfferCards.astro';
+import { programsFor } from '@/data/programs';
+import { TOPICS } from '@/config/site';
+import { breadcrumbSchema, faqSchema, serviceSchema, courseSchema } from '@/lib/seo';
+import type { OfferPageData } from '@/data/offers';
+
+interface Props { data: OfferPageData }
+const { data } = Astro.props;
+const programs = programsFor(data.slug);
+const crumbs = [{ name: 'דף הבית', path: '/' }, { name: data.h1.split(':')[0], path: data.path }];
+const schema: object[] = [
+  breadcrumbSchema(crumbs),
+  faqSchema(data.faq),
+  serviceSchema({ name: data.h1, description: data.answer, path: data.path, serviceType: data.serviceType, audience: data.schemaAudience }),
+];
+if (data.slug === 'courses') for (const p of programs) schema.push(courseSchema({ name: p.name, description: p.summary, path: data.path }));
+const topics = TOPICS.filter((t) => data.relatedTopics.includes(t.slug));
+---
+<BaseLayout title={data.title} description={data.description} path={data.path} schema={schema} updatedAt={data.updatedAt}>
+  <section class="relative overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-x relative py-12 md:py-20">
+      <Breadcrumbs items={crumbs} />
+      <h1 class="h1 mt-6 max-w-4xl">{data.h1}</h1>
+      <p class="lead mt-5 max-w-3xl">{data.answer}</p>
+      <p class="mt-3 text-sm text-muted">עודכן לאחרונה: <time datetime={data.updatedAt}>{new Date(data.updatedAt).toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' })}</time></p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#contact-cta" class="btn btn-primary">בואו נדבר על זה</a>
+        <a href="#programs" class="btn btn-ghost">לתוכניות לדוגמה</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-14" aria-labelledby="outcomes-title">
+    <div class="container-x">
+      <h2 id="outcomes-title" class="h2">עם מה המשתתפים יוצאים</h2>
+      <ul class="mt-8 grid gap-4 md:grid-cols-2">
+        {data.outcomes.map((o) => (
+          <li class="card reveal flex gap-3 p-5"><span class="mt-1 text-accent" aria-hidden="true">✓</span><span>{o}</span></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="programs" class="py-14 bg-elev/40" aria-labelledby="programs-title">
+    <div class="container-x">
+      <p class="eyebrow">תוכניות לדוגמה</p>
+      <h2 id="programs-title" class="h2 mt-2">סילבוס לדוגמה</h2>
+      <p class="lead mt-3 max-w-2xl">כל תוכנית מותאמת לארגון. אלה נקודות הפתיחה.</p>
+      <div class="mt-8 grid gap-6 lg:grid-cols-2">
+        {programs.map((p) => (
+          <article class="card reveal p-6">
+            <h3 class="h3">{p.name}</h3>
+            <p class="mt-2 text-muted">{p.summary}</p>
+            <p class="mt-3 text-sm"><span class="text-muted">אורך:</span> {p.length} · <span class="text-muted">למי:</span> {p.audience}</p>
+            <ol class="mt-5 space-y-3">
+              {p.modules.map((m, i) => (
+                <li class="flex gap-3"><span class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent/15 text-xs font-bold text-accent" aria-hidden="true">{i + 1}</span><div><strong>{m.title}.</strong> <span class="text-muted">{m.text}</span></div></li>
+              ))}
+            </ol>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-14" aria-labelledby="logistics-title">
+    <div class="container-x grid gap-10 md:grid-cols-2">
+      <div>
+        <h2 id="logistics-title" class="h2">פורמט ולוגיסטיקה</h2>
+        <dl class="mt-6 divide-y divide-line border-y border-line">
+          {data.logistics.map((l) => (
+            <div class="grid grid-cols-3 gap-4 py-3"><dt class="text-muted">{l.label}</dt><dd class="col-span-2">{l.value}</dd></div>
+          ))}
+        </dl>
+      </div>
+      <div>
+        <h2 class="h2">למה בונים, לא יועצים</h2>
+        <p class="mt-6 text-lg">{data.whyBuilders}</p>
+        {topics.length > 0 && (
+          <p class="mt-6 text-sm text-muted">נושאים קשורים: {topics.map((t, i) => <><a class="text-accent underline underline-offset-2" href={`/topics/${t.slug}`}>{t.name}</a>{i < topics.length - 1 ? ', ' : ''}</>)}</p>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <LogoStrip audience={data.logoAudience} />
+  <FAQ items={data.faq} />
+  <CTA whatsappMessage={data.whatsappMessage} audienceType={data.audienceType} topic={data.focusKeyPhrase} trackLabel={data.slug} title={`רוצים ${data.h1.split(':')[0]} לארגון שלכם?`} />
+  <OfferCards title="עוד דרכים ללמוד איתנו" exclude={data.slug} />
+</BaseLayout>

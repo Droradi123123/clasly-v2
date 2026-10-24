@@ -1,0 +1,41 @@
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+
+const topicSlugs = ['claude-code', 'n8n', 'ai-agents', 'ai-adoption', 'building-with-ai', 'ai-roi', 'ai-for-managers'] as const;
+const offers = ['/lectures', '/workshops', '/courses', '/executive'] as const;
+
+/** Blog articles: one focus key phrase each, answer-first, FAQ, contextual CTA. */
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/blog' }),
+  schema: z.object({
+    title: z.string().max(70),
+    slug: z.string().regex(/^[a-z0-9-]+$/),
+    description: z.string().max(160),
+    focusKeyPhrase: z.string(),
+    topicHub: z.enum(topicSlugs),
+    relatedOffer: z.enum(offers),
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).min(3),
+    publishedAt: z.coerce.date(),
+    updatedAt: z.coerce.date(),
+    keywords: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
+/** Topic hubs: long-form pillar content, written in full for the launch hubs. */
+const hubs = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/hubs' }),
+  schema: z.object({
+    title: z.string().max(70),
+    slug: z.enum(topicSlugs),
+    description: z.string().max(160),
+    focusKeyPhrase: z.string(),
+    h1: z.string(),
+    relatedOffer: z.enum(offers),
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).min(3),
+    updatedAt: z.coerce.date(),
+  }),
+});
+
+export const collections = { blog, hubs };

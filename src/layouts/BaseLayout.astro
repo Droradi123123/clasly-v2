@@ -1,0 +1,76 @@
+---
+import '@/styles/global.css';
+import { SITE, BRAND_NAME } from '@/config/site';
+import { absolute, graph, organizationSchema, websiteSchema, webPageSchema, ogPathFor, type SeoProps } from '@/lib/seo';
+import heeboHebrew from '@fontsource-variable/heebo/files/heebo-hebrew-wght-normal.woff2?url';
+import heeboLatin from '@fontsource-variable/heebo/files/heebo-latin-wght-normal.woff2?url';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+
+interface Props extends SeoProps {
+  schema?: object[]; // extra JSON-LD nodes
+  hideHeader?: boolean;
+}
+const { title, description, path, ogImage, type = 'website', noindex = false, schema = [], publishedAt, updatedAt, hideHeader } = Astro.props;
+const canonical = absolute(path);
+const og = absolute(ogImage ?? ogPathFor(path));
+// Append the brand only when the result still fits Google's ~60 character title width.
+const withBrand = `${title} | ${BRAND_NAME}`;
+const fullTitle = title.includes(BRAND_NAME) || withBrand.length > 60 ? title : withBrand;
+const jsonLd = JSON.stringify(graph(organizationSchema(), websiteSchema(), webPageSchema({ title, description, path, updatedAt, publishedAt, image: og }), ...schema)).replace(/</g, '\\u003c');
+---
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="he" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={heeboHebrew} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={heeboLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="alternate" type="application/rss+xml" title={`${BRAND_NAME} בלוג`} href="/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#0b0e14" />
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={BRAND_NAME} />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={og} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    {publishedAt && <meta property="article:published_time" content={publishedAt} />}
+    {updatedAt && <meta property="article:modified_time" content={updatedAt} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={og} />
+    <script type="application/ld+json" set:html={jsonLd} />
+    <script is:inline>
+      // Theme: dark-first, respect saved preference. Inline to avoid a flash.
+      (function(){document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();
+    </script>
+    <slot name="head" />
+  </head>
+  <body class="bg-bg text-fg antialiased">
+    <a href="#main" class="skip-link">דלגו לתוכן</a>
+    {!hideHeader && <Header />}
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '@/lib/client';
+    </script>
+    {SITE.cfAnalyticsToken && (
+      <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${SITE.cfAnalyticsToken}"}`}></script>
+    )}
+  </body>
+</html>

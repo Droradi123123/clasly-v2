@@ -1,0 +1,8 @@
+# Copy to .dev.vars for local development (wrangler reads it). Never commit real values.
+ANTHROPIC_API_KEY=
+SUPABASE_URL=https://mfttuukcawtrlhkpvrjd.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=
+TURNSTILE_SECRET_KEY=
+RESEND_API_KEY=
+ADMIN_PASSWORD=
+# Supabase project used by the site (shared "Lecture" project, tables prefixed site_): https://mfttuukcawtrlhkpvrjd.supabase.co
