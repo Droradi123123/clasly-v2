@@ -16,7 +16,8 @@
 - [ ] **Run Lighthouse on the deployed URL** (mobile) and fix anything under 95.
 
 ## Content
-- [x] Launch content: 7 topic hubs written in full, 44 articles (all pass `npm run content:check`), 36-term glossary.
+- [x] Launch content: 7 topic hubs written in full, 54 articles (all pass `npm run content:check`), 36-term glossary.
+- [x] AI adoption pillar (`/topics/ai-adoption`) and 10 articles rewritten or written from the founder playbook (`content/source/ai-adoption-playbook.md`), with no invented figures.
 - [ ] Publish 2 to 3 articles per week from `content/backlog.md` (phrases already written are marked there), prioritized by `agent_sessions` prompts and Search Console.
 - [ ] Editorial pass by a human on the 44 articles: the anonymized numbers are plausible composites written by the content agents, so replace any figure you cannot stand behind with a real one before launch.
 - [ ] **Request testimonials** from program managers or coordinators at current client institutions (role + institution, with permission). Then un-comment the testimonials sections and add Review schema only for genuine reviews.
