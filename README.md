@@ -1,14 +1,14 @@
 # RealAI: realai.co.il (Hebrew, RTL)
 
 Marketing and lead-generation site for a company that delivers applied AI education to organizations in Israel:
-lectures, hands-on workshops, courses and executive one-on-ones. Built with Astro, Tailwind, MDX, Cloudflare Workers and Supabase.
+lectures, hands-on workshops, courses and executive one-on-ones. Built with Astro, Tailwind, MDX and Cloudflare Workers with D1.
 
 Brand: **RealAI**, domain **realai.co.il**. The WhatsApp number and contact email are still placeholders. All four live in **one file**: `src/config/site.ts`.
 
 ## Stack
 - **Astro 7** (static output, Cloudflare adapter for the three API routes) + **Tailwind 4** + **MDX**
 - **Cloudflare Workers** with static assets (hosting), KV (rate limiting + outline cache), Web Analytics, Turnstile
-- **Supabase** Postgres (leads, agent sessions, events) with RLS, server-only writes
+- **Cloudflare D1** (leads, agent sessions, events), reachable only through the Worker binding `DB`
 - **Claude API** (`@anthropic-ai/sdk`) for the hero outline agent, streaming
 - **Resend** (or any HTTP email API) for lead notifications
 
@@ -16,6 +16,7 @@ Brand: **RealAI**, domain **realai.co.il**. The WhatsApp number and contact emai
 ```bash
 npm install                 # Node 24.18.0 (see .node-version)
 cp .dev.vars.example .dev.vars   # fill secrets for local API routes (optional)
+npx wrangler d1 migrations apply realai-leads --local   # local copy of the lead database
 npm run dev                 # http://localhost:4321 (API routes run in workerd via the Cloudflare Vite plugin)
 npm run build               # astro build + OG image generation into dist/client/og
 npm run preview             # wrangler dev on the production build
@@ -32,7 +33,7 @@ src/data/programs.ts      named programs + sample syllabi (rendered on offer pag
 src/content/blog/*.mdx    articles (schema in src/content.config.ts)
 src/content/hubs/*.mdx    topic hub pillar content
 src/pages/api/outline.ts  hero outline agent (streaming, rate limit, moderation, cache, logging)
-src/pages/api/lead.ts     lead form endpoint (Turnstile, Supabase, email)
+src/pages/api/lead.ts     lead form endpoint (Turnstile, D1, email)
 src/pages/api/event.ts    privacy-friendly event tracking
 src/pages/admin/leads.astro  internal leads list (Basic auth, noindex)
 src/lib/seo.ts            JSON-LD builders, canonical/OG helpers
@@ -42,17 +43,18 @@ src/data/glossary.ts      36 definitions for /glossary (DefinedTermSet schema)
 scripts/og.mjs            OG image generation (runs after build)
 scripts/new-article.mjs   article draft generator
 scripts/content-check.mjs article quality checklist
-supabase/migrations/      schema + RLS
+migrations/               D1 schema (wrangler d1 migrations)
+src/lib/db.ts             D1 data layer
 content/backlog.md        50 key phrases to write next
 content/STYLE.md          writing rules (GEO structure, voice)
 ```
 
 ## Deployment (Cloudflare Workers)
 1. Create the Worker from this repo in the Cloudflare dashboard (Workers & Pages → Create → connect GitHub), build command `npm run build`, deploy command `npx wrangler deploy`. Preview deployments run for every pull request.
-2. Set secrets: `wrangler secret put ANTHROPIC_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `ADMIN_PASSWORD`.
+2. Set secrets: `wrangler secret put ANTHROPIC_API_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `ADMIN_PASSWORD`.
 3. Set public build vars (Cloudflare build settings or `.env`): `PUBLIC_TURNSTILE_SITE_KEY`, `PUBLIC_CF_ANALYTICS_TOKEN`.
 4. The `AGENT_KV` namespace (and the adapter's `SESSION` KV + `IMAGES` binding) are auto-provisioned on first deploy.
-5. Supabase: the schema is already applied to the shared "Lecture" project (`https://mfttuukcawtrlhkpvrjd.supabase.co`, tables prefixed `site_`). For a new project, apply `supabase/migrations/*.sql`.
+5. D1: the `realai-leads` database exists and the schema is applied. For a new database: `npx wrangler d1 create realai-leads`, put its id in `wrangler.jsonc`, then `npx wrangler d1 migrations apply realai-leads --remote`.
 6. Attach `realai.co.il` to the `clasly-v2` Worker as a custom domain and redirect `www` to the apex.
 
 See `DECISIONS.md` for choices made where the brief left room, and `TODO.md` for what needs a human.

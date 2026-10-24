@@ -1,6 +1,6 @@
 import { CONTACT_EMAIL, BRAND_NAME } from '@/config/site';
 import { getEnv } from './env';
-import type { LeadInsert } from './supabase';
+import type { LeadInsert } from './db';
 
 /** Email notification via Resend (RESEND_API_KEY). Swap the provider here if needed. */
 export async function notifyNewLead(lead: LeadInsert & { id: string | null }) {

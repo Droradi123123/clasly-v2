@@ -1,12 +1,21 @@
 {
   // Cloudflare Workers (static assets + on-demand API routes) config.
-  // Secrets (ANTHROPIC_API_KEY, SUPABASE_SERVICE_ROLE_KEY, TURNSTILE_SECRET_KEY, RESEND_API_KEY, ADMIN_PASSWORD)
+  // Secrets (ANTHROPIC_API_KEY, TURNSTILE_SECRET_KEY, RESEND_API_KEY, ADMIN_PASSWORD)
   // are set with `wrangler secret put <NAME>`, never committed here.
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "clasly-v2",
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
+  "d1_databases": [
+    // Leads, hero-agent sessions and events. Schema in migrations/.
+    {
+      "binding": "DB",
+      "database_name": "realai-leads",
+      "database_id": "e9d22428-da4e-46cd-9ad0-3fec4dce93eb",
+      "migrations_dir": "migrations"
+    }
+  ],
   "kv_namespaces": [
     // Rate limiting and prompt cache for the hero outline agent. Auto-provisioned on first deploy.
     { "binding": "AGENT_KV" }

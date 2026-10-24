@@ -5,7 +5,7 @@
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getEnv } from '@/lib/env';
-import { supabaseAdmin } from '@/lib/supabase';
+import { db, LEAD_STATUSES } from '@/lib/db';
 export const prerender = false;
 
 const env = getEnv();
@@ -14,25 +14,25 @@ const expected = env.ADMIN_PASSWORD ? `Basic ${btoa(`admin:${env.ADMIN_PASSWORD}
 if (!expected || auth !== expected) {
   return new Response('Authentication required', { status: 401, headers: { 'www-authenticate': 'Basic realm="leads", charset="UTF-8"', 'x-robots-tag': 'noindex' } });
 }
-const STATUSES = ['new', 'contacted', 'proposal_sent', 'won', 'lost'] as const;
-const supabase = supabaseAdmin();
+const STATUSES = LEAD_STATUSES;
+const database = db();
 
-if (Astro.request.method === 'POST' && supabase) {
+if (Astro.request.method === 'POST' && database) {
   const form = await Astro.request.formData();
   const id = String(form.get('id') ?? '');
   const status = String(form.get('status') ?? '');
   if (id && (STATUSES as readonly string[]).includes(status)) {
-    await supabase.from('site_leads').update({ status }).eq('id', id);
+    await database.prepare('UPDATE leads SET status = ? WHERE id = ?').bind(status, id).run();
   }
   return Astro.redirect('/admin/leads', 303);
 }
 
-const { data: leads } = supabase
-  ? await supabase.from('site_leads').select('id, created_at, source, page, audience_type, name, organization, contact, topic, message, summary, status').order('created_at', { ascending: false }).limit(200)
-  : { data: [] as any[] };
-const { data: sessions } = supabase
-  ? await supabase.from('site_agent_sessions').select('id, created_at, prompt, converted').order('created_at', { ascending: false }).limit(30)
-  : { data: [] as any[] };
+const leads = database
+  ? (await database.prepare('SELECT id, created_at, source, page, audience_type, name, organization, contact, topic, message, summary, status FROM leads ORDER BY created_at DESC LIMIT 200').all()).results
+  : [];
+const sessions = database
+  ? (await database.prepare('SELECT id, created_at, prompt, converted FROM agent_sessions ORDER BY created_at DESC LIMIT 30').all()).results
+  : [];
 Astro.response.headers.set('x-robots-tag', 'noindex, nofollow');
 Astro.response.headers.set('cache-control', 'no-store');
 const labels: Record<string, string> = { new: 'חדש', contacted: 'נוצר קשר', proposal_sent: 'נשלחה הצעה', won: 'נסגר', lost: 'לא רלוונטי' };
@@ -40,7 +40,7 @@ const labels: Record<string, string> = { new: 'חדש', contacted: 'נוצר ק�
 <BaseLayout title="לידים" description="רשימת לידים פנימית" path="/admin/leads" noindex hideHeader>
   <section class="container-x py-10">
     <h1 class="h2">לידים ({leads?.length ?? 0})</h1>
-    {!supabase && <p class="mt-4 text-muted">Supabase לא מוגדר. הגדירו SUPABASE_URL ו-SUPABASE_SERVICE_ROLE_KEY.</p>}
+    {!database && <p class="mt-4 text-muted">מסד הנתונים לא מחובר (binding בשם DB).</p>}
     <div class="mt-6 overflow-x-auto">
       <table class="w-full text-sm">
         <thead><tr class="text-start text-muted"><th class="p-2 text-start">תאריך</th><th class="p-2 text-start">שם / ארגון</th><th class="p-2 text-start">קשר</th><th class="p-2 text-start">קהל</th><th class="p-2 text-start">הודעה</th><th class="p-2 text-start">סטטוס</th></tr></thead>
