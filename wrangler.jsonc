@@ -3,7 +3,7 @@
   // Secrets (ANTHROPIC_API_KEY, SUPABASE_SERVICE_ROLE_KEY, TURNSTILE_SECRET_KEY, RESEND_API_KEY, ADMIN_PASSWORD)
   // are set with `wrangler secret put <NAME>`, never committed here.
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "realai",
+  "name": "clasly-v2",
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },

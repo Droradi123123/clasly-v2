@@ -3,7 +3,7 @@
 ## Launch blockers
 - [x] **Brand and domain**: RealAI, realai.co.il (set in `src/config/site.ts`, `wrangler.jsonc`).
 - [ ] **Contact details**: `WHATSAPP_NUMBER` and `CONTACT_EMAIL` in `src/config/site.ts` are still placeholders and are visible on the site (footer, contact, accessibility, privacy).
-- [ ] **Domain on Cloudflare**: add realai.co.il to Cloudflare, attach it to the `realai` Worker as a custom domain, and redirect `www.realai.co.il` to the apex (canonical URLs use `https://realai.co.il`).
+- [ ] **Domain on Cloudflare**: add realai.co.il to Cloudflare, attach it to the `clasly-v2` Worker as a custom domain, and redirect `www.realai.co.il` to the apex (canonical URLs use `https://realai.co.il`).
 - [ ] **Register realai.ai or other variants** if you want to protect the name.
 - [ ] **Replace placeholder logos** in `public/logos/` with official SVGs (same file names): technion.svg, tau.svg, haifa.svg, bgu.svg, colman.svg. Set `placeholder: false` in `LOGOS` (`src/config/site.ts`). Confirm permission to display each logo.
 - [ ] **Approve program names** in `PROGRAM_NAMES` (`src/config/site.ts`).

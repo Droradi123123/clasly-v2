@@ -53,6 +53,6 @@ content/STYLE.md          writing rules (GEO structure, voice)
 3. Set public build vars (Cloudflare build settings or `.env`): `PUBLIC_TURNSTILE_SITE_KEY`, `PUBLIC_CF_ANALYTICS_TOKEN`.
 4. The `AGENT_KV` namespace (and the adapter's `SESSION` KV + `IMAGES` binding) are auto-provisioned on first deploy.
 5. Supabase: the schema is already applied to the shared "Lecture" project (`https://mfttuukcawtrlhkpvrjd.supabase.co`, tables prefixed `site_`). For a new project, apply `supabase/migrations/*.sql`.
-6. Attach `realai.co.il` to the `realai` Worker as a custom domain and redirect `www` to the apex.
+6. Attach `realai.co.il` to the `clasly-v2` Worker as a custom domain and redirect `www` to the apex.
 
 See `DECISIONS.md` for choices made where the brief left room, and `TODO.md` for what needs a human.
