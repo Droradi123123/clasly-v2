@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getEnv, clientIp, json } from '@/lib/env';
 import { rateLimit } from '@/lib/ratelimit';
-import { supabaseAdmin, utmFromUrl, audienceFromPage, type LeadInsert } from '@/lib/supabase';
+import { db, insertLead, utmFromUrl, audienceFromPage, type LeadInsert } from '@/lib/db';
 import { notifyNewLead } from '@/lib/notify';
 
 export const prerender = false;
@@ -62,14 +62,18 @@ export const POST: APIRoute = async ({ request, locals }) => {
     referrer: str(form.get('referrer'), 500) ?? referer,
   };
 
-  const supabase = supabaseAdmin();
-  let id: string | null = null;
-  if (supabase) {
-    const { data, error } = await supabase.from('site_leads').insert(lead).select('id').single();
-    if (error) { console.error('lead insert failed', error); return json({ error: 'לא הצלחנו לשמור את הפנייה. כתבו לנו בוואטסאפ.' }, 500); }
-    id = data.id;
-  } else {
-    console.warn('Supabase not configured; lead not stored', lead);
+  const database = db();
+  if (!database) {
+    // Never tell a visitor "thanks" when the lead would be lost.
+    console.error('DB binding missing; lead not stored');
+    return json({ error: 'לא הצלחנו לשמור את הפנייה. כתבו לנו בוואטסאפ או במייל.' }, 503);
+  }
+  let id: string;
+  try {
+    id = await insertLead(database, lead);
+  } catch (e) {
+    console.error('lead insert failed', e);
+    return json({ error: 'לא הצלחנו לשמור את הפנייה. כתבו לנו בוואטסאפ או במייל.' }, 500);
   }
 
   locals.cfContext?.waitUntil?.(notifyNewLead({ ...lead, id }));

@@ -4,7 +4,7 @@ import { getEnv, clientIp, json } from '@/lib/env';
 import { rateLimit, sha256 } from '@/lib/ratelimit';
 import { moderatePrompt, normalizeForCache } from '@/lib/moderation';
 import { OUTLINE_SYSTEM } from '@/lib/outline-prompt';
-import { supabaseAdmin } from '@/lib/supabase';
+import { db, insertAgentSession } from '@/lib/db';
 
 export const prerender = false;
 
@@ -13,7 +13,7 @@ const CACHE_TTL = 60 * 60 * 24 * 14;
 
 /**
  * POST { prompt } -> streams a Hebrew outline as text/plain (chunked).
- * Headers: x-session-id (agent_sessions row id, when Supabase is configured), x-cache: HIT|MISS.
+ * Headers: x-session-id (agent_sessions row id), x-cache: HIT|MISS.
  */
 export const POST: APIRoute = async ({ request, locals }) => {
   const env = getEnv();
@@ -28,15 +28,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const prompt = mod.prompt;
   const page = typeof body?.page === 'string' ? body.page.slice(0, 200) : null;
 
-  const supabase = supabaseAdmin();
+  const database = db();
   const cacheKey = `outline:${await sha256(normalizeForCache(prompt))}`;
   const cached = env.AGENT_KV ? await env.AGENT_KV.get(cacheKey) : null;
 
   const sessionId = crypto.randomUUID();
   const log = async (outline: string, cacheHit: boolean) => {
-    if (!supabase) return;
+    if (!database) return;
     try {
-      await supabase.from('site_agent_sessions').insert({ id: sessionId, prompt, outline, page, cache_hit: cacheHit, ip_hash: (await sha256(ip)).slice(0, 16) });
+      await insertAgentSession(database, { id: sessionId, prompt, outline, page, cache_hit: cacheHit, ip_hash: (await sha256(ip)).slice(0, 16) });
     } catch (e) { console.error('agent_sessions insert failed', e); }
   };
 

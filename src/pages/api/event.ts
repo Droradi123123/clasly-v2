@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { json, getEnv, clientIp } from '@/lib/env';
 import { rateLimit } from '@/lib/ratelimit';
-import { supabaseAdmin } from '@/lib/supabase';
+import { db, insertEvent, markSessionConverted } from '@/lib/db';
 
 export const prerender = false;
 
@@ -16,8 +16,8 @@ export const POST: APIRoute = async ({ request }) => {
   try { body = await request.json(); } catch { return json({ ok: false }, 400); }
   const event = String(body?.event ?? '');
   if (!ALLOWED.has(event)) return json({ ok: false }, 400);
-  const supabase = supabaseAdmin();
-  if (supabase) {
+  const database = db();
+  if (database) {
     const row = {
       event,
       page: typeof body.page === 'string' ? body.page.slice(0, 200) : null,
@@ -25,11 +25,10 @@ export const POST: APIRoute = async ({ request }) => {
       referrer: typeof body.referrer === 'string' ? body.referrer.slice(0, 500) : null,
       session_id: typeof body.session_id === 'string' && /^[0-9a-f-]{36}$/.test(body.session_id) ? body.session_id : null,
     };
-    const { error } = await supabase.from('site_events').insert(row);
-    if (error) console.error('event insert failed', error);
-    if (row.session_id && (event === 'outline_whatsapp' || event === 'outline_copy')) {
-      await supabase.from('site_agent_sessions').update({ converted: true }).eq('id', row.session_id);
-    }
+    try {
+      await insertEvent(database, row);
+      if (row.session_id && (event === 'outline_whatsapp' || event === 'outline_copy')) await markSessionConverted(database, row.session_id);
+    } catch (e) { console.error('event insert failed', e); }
   }
   return json({ ok: true });
 };
