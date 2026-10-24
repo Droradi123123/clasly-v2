@@ -1,9 +1,9 @@
-# AI Lectures & Workshops Site (Hebrew, RTL)
+# RealAI: realai.co.il (Hebrew, RTL)
 
 Marketing and lead-generation site for a company that delivers applied AI education to organizations in Israel:
 lectures, hands-on workshops, courses and executive one-on-ones. Built with Astro, Tailwind, MDX, Cloudflare Workers and Supabase.
 
-The brand name, domain, WhatsApp number and contact email are placeholders. Change them in **one file**: `src/config/site.ts`.
+Brand: **RealAI**, domain **realai.co.il**. The WhatsApp number and contact email are still placeholders. All four live in **one file**: `src/config/site.ts`.
 
 ## Stack
 - **Astro 7** (static output, Cloudflare adapter for the three API routes) + **Tailwind 4** + **MDX**
@@ -53,6 +53,6 @@ content/STYLE.md          writing rules (GEO structure, voice)
 3. Set public build vars (Cloudflare build settings or `.env`): `PUBLIC_TURNSTILE_SITE_KEY`, `PUBLIC_CF_ANALYTICS_TOKEN`.
 4. The `AGENT_KV` namespace (and the adapter's `SESSION` KV + `IMAGES` binding) are auto-provisioned on first deploy.
 5. Supabase: the schema is already applied to the shared "Lecture" project (`https://mfttuukcawtrlhkpvrjd.supabase.co`, tables prefixed `site_`). For a new project, apply `supabase/migrations/*.sql`.
-6. Set `DOMAIN` in `src/config/site.ts` and `PUBLIC_SITE_URL` in `wrangler.jsonc` once the domain exists.
+6. Attach `realai.co.il` to the `realai` Worker as a custom domain and redirect `www` to the apex.
 
 See `DECISIONS.md` for choices made where the brief left room, and `TODO.md` for what needs a human.

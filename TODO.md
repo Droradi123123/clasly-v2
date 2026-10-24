@@ -1,7 +1,10 @@
 # TODO (needs a human or external access)
 
 ## Launch blockers
-- [ ] **Set the brand**: `BRAND_NAME`, `DOMAIN`, `WHATSAPP_NUMBER`, `CONTACT_EMAIL` in `src/config/site.ts`; `PUBLIC_SITE_URL` in `wrangler.jsonc`; `name` in `wrangler.jsonc`.
+- [x] **Brand and domain**: RealAI, realai.co.il (set in `src/config/site.ts`, `wrangler.jsonc`).
+- [ ] **Contact details**: `WHATSAPP_NUMBER` and `CONTACT_EMAIL` in `src/config/site.ts` are still placeholders and are visible on the site (footer, contact, accessibility, privacy).
+- [ ] **Domain on Cloudflare**: add realai.co.il to Cloudflare, attach it to the `realai` Worker as a custom domain, and redirect `www.realai.co.il` to the apex (canonical URLs use `https://realai.co.il`).
+- [ ] **Register realai.ai or other variants** if you want to protect the name.
 - [ ] **Replace placeholder logos** in `public/logos/` with official SVGs (same file names): technion.svg, tau.svg, haifa.svg, bgu.svg, colman.svg. Set `placeholder: false` in `LOGOS` (`src/config/site.ts`). Confirm permission to display each logo.
 - [ ] **Approve program names** in `PROGRAM_NAMES` (`src/config/site.ts`).
 - [ ] **Cloudflare**: either connect the repo in the dashboard (Workers Builds) or use `.github/workflows/deploy.yml`: add repository secrets `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID` and set the repository variable `CLOUDFLARE_DEPLOY_ENABLED=true`. Then create the Worker from GitHub (build `npm run build`, deploy `npx wrangler deploy`), set secrets (`ANTHROPIC_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `ADMIN_PASSWORD`), create a Turnstile widget and set `PUBLIC_TURNSTILE_SITE_KEY`, enable Web Analytics and set `PUBLIC_CF_ANALYTICS_TOKEN`. The Cloudflare MCP connector available in the build session was the deprecated bindings server with no Workers deploy capability, so deployment was not run.

@@ -45,6 +45,7 @@ function prepareFonts() {
 prepareFonts();
 const sharp = (await import('sharp')).default;
 
+const brandMarkup = () => { const m = BRAND.match(/^(.*?)(AI)$/); return m ? `${esc(m[1])}<tspan fill="#5ee1c3">${m[2]}</tspan>` : esc(BRAND); };
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 function wrap(text, max) {
   const words = text.split(/\s+/); const lines = []; let cur = '';
@@ -62,7 +63,7 @@ function svg({ title, description, kicker }) {
   <defs><radialGradient id="g" cx="80%" cy="10%" r="70%"><stop offset="0" stop-color="#5ee1c3" stop-opacity=".28"/><stop offset="1" stop-color="#0b0e14" stop-opacity="0"/></radialGradient></defs>
   <rect width="1200" height="630" fill="#0b0e14"/><rect width="1200" height="630" fill="url(#g)"/>
   <circle cx="1096" cy="128" r="10" fill="#5ee1c3"/>
-  <text x="1076" y="140" direction="rtl" text-anchor="start" font-family="Heebo" font-weight="800" font-size="34" fill="#e8ecf3">${esc(BRAND)}</text>
+  <text x="1076" y="140" direction="ltr" text-anchor="end" font-family="Heebo" font-weight="800" font-size="34" fill="#e8ecf3">${brandMarkup()}</text>
   <text x="1110" y="210" direction="rtl" text-anchor="start" font-family="Heebo" font-weight="400" font-size="24" fill="#5ee1c3">${esc(kicker)}</text>
   ${titleText}${descText}
   <rect x="90" y="560" width="1020" height="2" fill="#242c3b"/>

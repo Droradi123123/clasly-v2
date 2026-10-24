@@ -14,7 +14,9 @@ interface Props extends SeoProps {
 const { title, description, path, ogImage, type = 'website', noindex = false, schema = [], publishedAt, updatedAt, hideHeader } = Astro.props;
 const canonical = absolute(path);
 const og = absolute(ogImage ?? ogPathFor(path));
-const fullTitle = title.includes(BRAND_NAME) ? title : `${title} | ${BRAND_NAME}`;
+// Append the brand only when the result still fits Google's ~60 character title width.
+const withBrand = `${title} | ${BRAND_NAME}`;
+const fullTitle = title.includes(BRAND_NAME) || withBrand.length > 60 ? title : withBrand;
 const jsonLd = JSON.stringify(graph(organizationSchema(), websiteSchema(), webPageSchema({ title, description, path, updatedAt, publishedAt, image: og }), ...schema)).replace(/</g, '\\u003c');
 ---
 <!doctype html>

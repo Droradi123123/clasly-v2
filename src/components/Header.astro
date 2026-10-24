@@ -1,5 +1,6 @@
 ---
 import { BRAND_NAME, NAV, whatsappUrl } from '@/config/site';
+import Wordmark from './Wordmark.astro';
 const current = Astro.url.pathname;
 const wa = whatsappUrl('שלום, אשמח לשמוע על הרצאות וסדנאות AI לארגון שלנו.');
 ---
@@ -7,7 +8,7 @@ const wa = whatsappUrl('שלום, אשמח לשמוע על הרצאות וסדנ
   <div class="container-x flex h-16 items-center justify-between gap-4">
     <a href="/" class="flex items-center gap-2 text-lg font-extrabold tracking-tight" aria-label={`${BRAND_NAME}, דף הבית`}>
       <span class="inline-block h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_18px_var(--glow)]" aria-hidden="true"></span>
-      <span>{BRAND_NAME}</span>
+      <Wordmark />
     </a>
     <nav aria-label="ניווט ראשי" class="hidden md:block">
       <ul class="flex items-center gap-6 text-sm font-medium">

@@ -3,13 +3,13 @@
  * Change the brand name, domain, WhatsApp number and contact email HERE ONLY.
  * Every page, schema block, llms.txt and OG image reads from this file.
  */
-export const BRAND_NAME = '{{BRAND_NAME}}';
-export const DOMAIN = '{{DOMAIN}}';
+export const BRAND_NAME = 'RealAI';
+export const DOMAIN = 'realai.co.il';
 export const WHATSAPP_NUMBER = '{{WHATSAPP_NUMBER}}'; // international format, digits only, e.g. 9725XXXXXXXX
 export const CONTACT_EMAIL = '{{CONTACT_EMAIL}}';
 
 /** Until DOMAIN is set, the Cloudflare preview URL is used for canonical links. */
-const PREVIEW_URL = 'https://ai-lectures-site.workers.dev';
+const PREVIEW_URL = 'https://realai.workers.dev';
 export const SITE_URL = DOMAIN.startsWith('{{') ? PREVIEW_URL : `https://${DOMAIN}`;
 
 export const SITE = {

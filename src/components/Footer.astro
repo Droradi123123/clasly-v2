@@ -1,5 +1,6 @@
 ---
 import { BRAND_NAME, FOOTER_LINKS, CONTACT_EMAIL, whatsappUrl } from '@/config/site';
+import Wordmark from './Wordmark.astro';
 const year = new Date().getFullYear();
 const groups = [
   { title: 'מה אנחנו מעבירים', items: FOOTER_LINKS.offers },
@@ -11,7 +12,7 @@ const groups = [
   <div class="container-x py-14">
     <div class="grid gap-10 md:grid-cols-4">
       <div>
-        <p class="text-xl font-extrabold">{BRAND_NAME}</p>
+        <p class="text-xl font-extrabold"><Wordmark /></p>
         <p class="mt-3 text-sm text-muted">הרצאות, סדנאות, קורסים וליווי למנהלים בנושאי AI יישומי. מועבר בעברית, מניסיון יישום אמיתי בתעשייה.</p>
         <p class="mt-4 text-sm"><a class="hover:text-accent" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
         <p class="mt-1 text-sm"><a class="hover:text-accent" href={whatsappUrl('שלום, אשמח לפרטים על הרצאות וסדנאות AI.')} target="_blank" rel="noopener" data-track="whatsapp_click" data-track-label="footer">דברו איתנו בוואטסאפ</a></p>
