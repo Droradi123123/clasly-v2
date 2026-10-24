@@ -14,7 +14,7 @@ Brand: **RealAI**, domain **realai.co.il**. The WhatsApp number and contact emai
 
 ## Local development
 ```bash
-npm install                 # Node >= 22.23.4 (see .node-version)
+npm install                 # Node 24.18.0 (see .node-version)
 cp .dev.vars.example .dev.vars   # fill secrets for local API routes (optional)
 npm run dev                 # http://localhost:4321 (API routes run in workerd via the Cloudflare Vite plugin)
 npm run build               # astro build + OG image generation into dist/client/og
