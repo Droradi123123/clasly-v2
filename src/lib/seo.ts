@@ -147,6 +147,17 @@ export function collectionPageSchema(opts: { name: string; description: string; 
   };
 }
 
+export function howToSchema(opts: { name: string; description: string; path: string; steps: { name: string; text: string }[] }) {
+  return {
+    '@type': 'HowTo',
+    '@id': `${absolute(opts.path)}#howto`,
+    name: opts.name,
+    description: opts.description,
+    inLanguage: 'he',
+    step: opts.steps.map((st, i) => ({ '@type': 'HowToStep', position: i + 1, name: st.name, text: st.text, url: `${absolute(opts.path)}#step-${i + 1}` })),
+  };
+}
+
 export function graph(...nodes: object[]) {
   return { '@context': 'https://schema.org', '@graph': nodes };
 }

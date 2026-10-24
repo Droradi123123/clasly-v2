@@ -45,19 +45,8 @@ export async function insertLead(d: D1Database, lead: LeadInsert): Promise<strin
   return id;
 }
 
-export async function insertAgentSession(d: D1Database, s: { id: string; prompt: string; outline: string; page: string | null; cache_hit: boolean; ip_hash: string }) {
-  await d
-    .prepare('INSERT INTO agent_sessions (id, prompt, outline, page, cache_hit, ip_hash) VALUES (?, ?, ?, ?, ?, ?)')
-    .bind(s.id, s.prompt, s.outline, s.page, s.cache_hit ? 1 : 0, s.ip_hash)
-    .run();
-}
-
 export async function insertEvent(d: D1Database, e: { event: string; page: string | null; label: string | null; referrer: string | null; session_id: string | null }) {
   await d.prepare('INSERT INTO events (event, page, label, referrer, session_id) VALUES (?, ?, ?, ?, ?)').bind(e.event, e.page, e.label, e.referrer, e.session_id).run();
-}
-
-export async function markSessionConverted(d: D1Database, id: string) {
-  await d.prepare('UPDATE agent_sessions SET converted = 1 WHERE id = ?').bind(id).run();
 }
 
 export function utmFromUrl(url: string | null): Pick<LeadInsert, 'utm_source' | 'utm_medium' | 'utm_campaign' | 'utm_term' | 'utm_content'> {
