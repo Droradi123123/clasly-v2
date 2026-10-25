@@ -1,7 +1,7 @@
 ---
 import { OFFERS } from '@/config/site';
 interface Props { title?: string; exclude?: string }
-const { title = 'מה אנחנו מעבירים לארגונים', exclude } = Astro.props;
+const { title = 'מה אנחנו מעבירים לארגונים?', exclude } = Astro.props;
 const offers = OFFERS.filter((o) => o.slug !== exclude);
 ---
 <section class="py-20" aria-labelledby="offers-title">
@@ -15,7 +15,7 @@ const offers = OFFERS.filter((o) => o.slug !== exclude);
       {offers.map((o, i) => (
         <a href={o.href} class="glow-card reveal group flex flex-col p-7" style={`transition-delay:${i * 70}ms`}>
           <span class="text-sm font-bold text-muted" aria-hidden="true">0{i + 1}</span>
-          <h3 class="mt-3 text-2xl font-extrabold group-hover:text-accent">{o.name}</h3>
+          <h3 class="mt-3 text-2xl font-bold">{o.name}</h3>
           <p class="mt-3 flex-1 text-muted">{o.value}</p>
           <p class="mt-5 text-sm"><span class="text-muted">למי: </span>{o.audience}</p>
           <span class="mt-6 inline-flex items-center gap-2 font-bold text-accent">לפרטים <span class="transition group-hover:-translate-x-1" aria-hidden="true">←</span></span>

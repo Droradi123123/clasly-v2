@@ -5,11 +5,16 @@
  */
 export const BRAND_NAME = 'RealAI';
 export const DOMAIN = 'realai.co.il';
-export const WHATSAPP_NUMBER = '972548023445'; // international format, digits only (054-802-3445)
+/** The only place the WhatsApp/phone number is set: international format, digits only, no "+". */
+export const WHATSAPP_NUMBER = '972548023445';
 export const CONTACT_EMAIL = 'happytelaviv@gmail.com';
-/** Display and E.164 forms of the WhatsApp/phone number. */
-export const PHONE_DISPLAY = '054-802-3445';
-export const PHONE_E164 = '+972548023445';
+/** Display (054-802-3445) and E.164 (+972548023445) forms, derived from WHATSAPP_NUMBER. */
+const localNumber = `0${WHATSAPP_NUMBER.replace(/^972/, '')}`;
+export const PHONE_DISPLAY = `${localNumber.slice(0, 3)}-${localNumber.slice(3, 6)}-${localNumber.slice(6)}`;
+export const PHONE_E164 = `+${WHATSAPP_NUMBER}`;
+if (!/^9725\d{8}$/.test(WHATSAPP_NUMBER)) {
+  console.warn(`[site config] WHATSAPP_NUMBER "${WHATSAPP_NUMBER}" is not an Israeli mobile number (9725XXXXXXXX). WhatsApp links will not open the right chat.`);
+}
 
 /** Until DOMAIN is set, the Cloudflare preview URL is used for canonical links. */
 const PREVIEW_URL = 'https://realai.workers.dev';
@@ -21,7 +26,7 @@ export const SITE = {
   locale: 'he_IL',
   lang: 'he',
   // Entity facts: keep identical everywhere (site, LinkedIn, directories) so AI engines form one stable entity.
-  tagline: 'להטמיע AI בארגון זה קשה. אנחנו עשינו את זה, ועכשיו מלמדים את זה',
+  tagline: 'להטמיע AI בארגון זה קשה. אנחנו עושים את זה, ומלמדים אתכם לעשות את זה',
   description:
     'הרצאות, סדנאות, קורסים וליווי אישי למנהלים בהטמעת AI בארגונים בישראל. מועבר בעברית על ידי צוות שהטמיע AI בעצמו בחברות טכנולוגיה מובילות עם אלפי עובדים: Claude Code, n8n, סוכני AI ומדידת ROI.',
   whatsappNumber: WHATSAPP_NUMBER,
@@ -94,7 +99,11 @@ export const FOOTER_LINKS = {
   ],
 } as const;
 
-/** Client logos. SVG files live in /public/logos. Add a line here to add a logo. */
+/**
+ * Client logos. SVG files live in /public/logos. Add a line here to add a logo.
+ * TODO(Dror): every file is a typographic placeholder. Replace each with the official logo asset once usage
+ * rights are confirmed: drop the file in /public/logos and set placeholder: false.
+ */
 export type Audience = 'academia' | 'company';
 export const LOGOS: { id: string; name: string; file: string; audience: Audience; placeholder: boolean }[] = [
   { id: 'technion', name: 'הטכניון', file: '/logos/technion.svg', audience: 'academia', placeholder: true },

@@ -5,15 +5,15 @@
  */
 import { LOGOS, type Audience } from '@/config/site';
 interface Props { audience?: Audience; title?: string; compact?: boolean }
-const { audience, title = 'הם כבר למדו איתנו', compact = false } = Astro.props;
+const { audience, title = 'לומדים עם RealAI', compact = false } = Astro.props;
 const logos = audience ? LOGOS.filter((l) => l.audience === audience) : LOGOS;
 const repeat = Math.max(2, Math.ceil(10 / Math.max(1, logos.length)));
 const group = Array.from({ length: repeat }, () => logos).flat();
-const duration = `${Math.max(70, group.length * 12)}s`;
+const duration = `${Math.max(30, group.length * 4.5)}s`;
 ---
 {logos.length > 0 && (
   <section aria-label={title} class={compact ? 'py-10' : 'py-14'}>
-    <p class="text-center text-sm font-medium tracking-wide text-muted">{title}</p>
+    <p class="text-center text-sm tracking-wide text-muted">{title}</p>
     <div class="marquee mt-8" style={`--duration:${duration}`}>
       <div class="marquee-track">
         <ul class="marquee-group" role="list">

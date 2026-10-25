@@ -25,7 +25,7 @@ const ctaByOffer: Record<string, string> = {
   '/lectures': 'רוצים הרצאה על זה לארגון שלכם?',
   '/workshops': `רוצים סדנה על ${topic.name} לצוות שלכם?`,
   '/courses': `רוצים קורס ${topic.name} לארגון או לתוכנית שלכם?`,
-  '/executive': 'רוצים ליווי אישי ליישום זה בארגון?',
+  '/executive': 'רוצים ליווי אישי כדי ליישם את זה בארגון שלכם?',
 };
 ---
 <BaseLayout title={d.title} description={d.description} path={path} type="article" schema={schema} publishedAt={iso(d.publishedAt)} updatedAt={iso(d.updatedAt)}>
@@ -63,7 +63,7 @@ const ctaByOffer: Record<string, string> = {
           <a href={d.relatedOffer} class="mt-2 block text-center text-sm text-accent underline underline-offset-2">על {offer.name}</a>
         </div>
         <div class="card p-5 text-sm">
-          <p class="font-semibold">בנושא <a href={`/topics/${topic.slug}`} class="text-accent">{topic.name}</a></p>
+          <p class="font-bold">בנושא <a href={`/topics/${topic.slug}`} class="text-accent">{topic.name}</a></p>
           {related.length > 0 && <ul class="mt-3 space-y-2 text-muted">{related.map((r) => <li><a class="hover:text-accent" href={`/blog/${r.data.slug}`}>{r.data.title}</a></li>)}</ul>}
         </div>
       </aside>

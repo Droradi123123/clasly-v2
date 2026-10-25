@@ -7,11 +7,11 @@ import ProofBlocks from '@/components/ProofBlocks.astro';
 import OfferCards from '@/components/OfferCards.astro';
 import CTA from '@/components/CTA.astro';
 import FAQ from '@/components/FAQ.astro';
-import { OFFERS, whatsappUrl } from '@/config/site';
+import { OFFERS } from '@/config/site';
 import { serviceSchema, faqSchema } from '@/lib/seo';
 
 const title = 'הרצאות וסדנאות AI לארגונים, מאנשים שהטמיעו AI';
-const description = 'להטמיע AI בארגון זה קשה. אנחנו עשינו את זה בחברות טכנולוגיה מובילות עם אלפי עובדים. הרצאות, סדנאות, קורסים וליווי למנהלים, מהשטח ובעברית.';
+const description = 'להטמיע AI בארגון זה קשה. אנחנו עושים את זה בחברות טכנולוגיה מובילות עם אלפי עובדים. הרצאות, סדנאות, קורסים וליווי למנהלים, מהשטח ובעברית.';
 const faq = [
   { q: 'מה אתם מעבירים בדיוק?', a: 'הרצאות, סדנאות מעשיות, קורסים והכשרות, וליווי אישי למנהלים. כל תוכנית נבנית סביב הארגון: הקהל, האתגר והקצב. הכול בעברית, לארגונים בישראל, פרונטלי או Zoom.' },
   { q: 'במה אתם שונים ממרצי AI אחרים?', a: 'לא למדנו AI מסרטונים. הטמענו אותו בעצמנו בחברות טכנולוגיה מובילות עם אלפי עובדים: אסטרטגיה ארגונית, סוכנים ואוטומציות בפרודקשן, אבטחת מידע, ניטור ומדידת ROI. כל דוגמה בכיתה היא משהו שעשינו בידיים.' },
@@ -23,26 +23,27 @@ const faq = [
   { q: 'איך מתחילים?', a: 'כותבים לנו בוואטסאפ או בטופס מה הארגון צריך. תוך יום עסקים חוזרים אליכם, ואחרי שיחת היכרות קצרה בונים יחד את התוכנית.' },
 ];
 const schema = [...OFFERS.map((o) => serviceSchema({ name: `${o.name} AI`, description: o.value, path: o.href, serviceType: o.name, audience: o.audience })), faqSchema(faq)];
-const wa = whatsappUrl('שלום, אשמח לדבר על הטמעת AI בארגון שלנו.');
 ---
 <BaseLayout title={title} description={description} path="/" schema={schema}>
   <section class="hero">
-    <div class="aurora aurora-a" aria-hidden="true"></div>
-    <div class="aurora aurora-b" aria-hidden="true"></div>
-    <div class="hero-grid" aria-hidden="true"></div>
-    <div class="container-x relative pb-16 pt-14 md:pb-24 md:pt-24">
-      <div class="mx-auto max-w-5xl text-center">
-        <p class="pill rise"><span class="dot" aria-hidden="true"></span>לחברות · לאוניברסיטאות ומכללות · למנהלים</p>
-        <h1 class="display mt-8">
-          <span class="rise block" style="animation-delay:.1s">להטמיע AI בארגון</span>
-          <span class="rise block" style="animation-delay:.25s">זה <span class="scribble">קשה<svg viewBox="0 0 200 22" preserveAspectRatio="none" aria-hidden="true"><path d="M196 13 C 160 4, 128 20, 92 11 S 34 6, 4 14" /></svg></span>.</span>
-          <span class="rise text-gradient block pt-2" style="animation-delay:.85s">אנחנו עשינו את זה.</span>
+    <div class="container-x pb-16 pt-14 md:pb-24 md:pt-20">
+      <div class="mx-auto max-w-4xl text-center">
+        <nav aria-label="למי זה מתאים">
+          <ul class="audience-list" role="list">
+            <li><a href="/companies">לחברות</a></li>
+            <li><a href="/academia">לאוניברסיטאות ומכללות</a></li>
+            <li><a href="/executive">למנהלים</a></li>
+          </ul>
+        </nav>
+        <h1 class="display mt-8 text-balance">
+          <span class="block">להטמיע AI בארגון זה קשה.</span>
+          <span class="block text-accent">אנחנו עושים את זה.</span>
         </h1>
-        <p class="rise mx-auto mt-8 max-w-3xl text-balance text-xl font-bold leading-snug md:text-2xl" style="animation-delay:1s">הרצאות, סדנאות וקורסים להטמעת AI בארגון, מאנשים שעשו את זה בעצמם.</p>
-        <p class="lead rise mx-auto mt-4 max-w-2xl text-balance" style="animation-delay:1.05s">לא למדנו AI מסרטונים. הטמענו אותו בחברות טכנולוגיה מובילות עם אלפי עובדים, ועכשיו אנחנו מלמדים את הצוותים, הסטודנטים והמנהלים שלכם לעשות את אותו הדבר.</p>
-        <div class="rise mt-10 flex flex-wrap justify-center gap-3" style="animation-delay:1.1s">
-          <a href={wa} class="btn btn-primary" target="_blank" rel="noopener" data-track="whatsapp_click" data-track-label="hero">בואו נתאים לכם תוכנית</a>
-          <a href="#offers-title" class="btn btn-ghost">מה אנחנו מעבירים</a>
+        <p class="mx-auto mt-8 max-w-3xl text-balance text-xl font-bold leading-snug md:text-2xl">הרצאות, סדנאות וקורסים להטמעת AI בארגון, מאנשים שעושים את זה בעצמם.</p>
+        <p class="lead mx-auto mt-4 max-w-2xl text-balance">לא למדנו AI מסרטונים. אנחנו מטמיעים אותו בחברות טכנולוגיה מובילות עם אלפי עובדים, ומלמדים את הצוותים, הסטודנטים והמנהלים שלכם לעשות את אותו הדבר.</p>
+        <div class="mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+          <a href="/program" class="btn btn-primary" data-track="cta_click" data-track-label="hero">בואו נבנה לכם תוכנית המתאימה לצרכים שלכם</a>
+          <a href="#offers-title" class="btn btn-ghost">מה אנחנו מעבירים?</a>
         </div>
       </div>
     </div>

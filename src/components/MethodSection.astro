@@ -10,20 +10,20 @@ const stages = [
   <div class="container-x">
     <div class="max-w-3xl">
       <p class="eyebrow">איך מטמיעים</p>
-      <h2 id="method-title" class="h2 mt-3">הטמעת AI בארגון היא לא פרויקט טכנולוגי. <span class="text-gradient">היא שינוי באופן שבו העבודה נעשית.</span></h2>
+      <h2 id="method-title" class="h2 mt-3">הטמעת AI בארגון היא לא פרויקט טכנולוגי. <span class="text-accent">היא שינוי באופן שבו העבודה נעשית.</span></h2>
       <p class="lead mt-5">זו השיטה שבנינו בשטח, בשלושה שלבים. כל שלב הוא תנאי לשלב שאחריו.</p>
     </div>
     <ol class="mt-12 grid gap-5 md:grid-cols-3">
       {stages.map((s, i) => (
         <li class="glow-card reveal p-7" style={`transition-delay:${i * 90}ms`}>
-          <span class="text-gradient text-5xl font-black tracking-tight" aria-hidden="true">{s.n}</span>
-          <h3 class="mt-4 text-2xl font-extrabold">{s.title}</h3>
+          <span class="text-accent text-3xl font-bold" aria-hidden="true">{s.n}</span>
+          <h3 class="mt-4 text-2xl font-bold">{s.title}</h3>
           <p class="mt-3 text-muted">{s.text}</p>
         </li>
       ))}
     </ol>
     <div class="mt-14 flex flex-col items-center gap-6 text-center">
-      <p class="max-w-3xl text-2xl font-black leading-snug md:text-4xl">הטכנולוגיה היא החלק הקל. <span class="text-gradient">הפסיכולוגיה היא החלק האמיתי.</span></p>
+      <p class="max-w-3xl text-2xl font-bold leading-snug md:text-3xl">הטכנולוגיה היא החלק הקל. <span class="text-accent">הפסיכולוגיה היא החלק האמיתי.</span></p>
       <a href="/topics/ai-adoption" class="btn btn-ghost">המדריך המלא להטמעת AI בארגון ←</a>
     </div>
   </div>

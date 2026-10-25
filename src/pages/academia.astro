@@ -12,17 +12,17 @@ const title = 'קורס בינה מלאכותית לאקדמיה | AI לאוני
 const description = 'קורס בינה מלאכותית לאקדמיה, הרצאות אורח וסדנאות לתוכניות יזמות ולימודי המשך. סילבוס, מטלות והערכה, מאנשים שהטמיעו AI בתעשייה.';
 const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'לאקדמיה', path }];
 const faq = [
-  { q: 'אילו פורמטים מתאימים לאוניברסיטה או למכללה?', a: 'הרצאת אורח בקורס קיים, סדנה של יום בתוכנית יזמות, קורס סמסטריאלי בלימודי המשך, או סדרת מפגשים לסגל. אנחנו מתאימים את הפורמט לתוכנית.' },
-  { q: 'האם יש סילבוס אקדמי?', a: 'כן. לכל קורס יש סילבוס עם מטרות, מפגשים, מטלות והערכה, שאפשר להגיש לוועדת הוראה.' },
-  { q: 'האם הסטודנטים צריכים רקע בתכנות?', a: 'תלוי בקורס. קורס בניית מוצרים עם AI ו-Claude Code מתאים גם לסטודנטים ללא רקע. בוטקמפ סוכני AI מתאים לסטודנטים עם רקע בסיסי בנתונים או קוד.' },
-  { q: 'מה עם סגל ומרצים?', a: 'אנחנו מעבירים גם סדנאות לסגל: איך להשתמש ב-AI בהוראה ובמחקר, ואיך לשלב כלים בקורסים קיימים.' },
-  { q: 'איך מתחילים?', a: 'שיחה קצרה עם מנהל התוכנית, ואז הצעה עם סילבוס ולוח זמנים. בדרך כלל אפשר להתחיל תוך שבועות ספורים.' },
+  { q: 'אילו פורמטים מתאימים לאוניברסיטה או למכללה?', a: 'הרצאת אורח בקורס קיים, סדנה של יום בתוכנית יזמות, קורס סמסטריאלי בלימודי המשך, או סדרת מפגשים לסגל. אנחנו מתאימים את הפורמט למבנה התוכנית.' },
+  { q: 'האם יש סילבוס אקדמי?', a: 'כן. לכל קורס יש סילבוס עם מטרות, מפגשים, מטלות והערכה, מוכן להגשה לוועדת הוראה.' },
+  { q: 'האם הסטודנטים צריכים רקע בתכנות?', a: 'תלוי בקורס. הקורס לבניית מוצרים עם AI ו-Claude Code מתאים גם לסטודנטים בלי רקע טכני. בוטקמפ סוכני AI מתאים לסטודנטים עם רקע בסיסי בנתונים או בקוד.' },
+  { q: 'מה עם סגל ומרצים?', a: 'אנחנו מעבירים גם סדנאות לסגל: איך להשתמש ב-AI בהוראה ובמחקר, ואיך לשלב כלי AI בקורסים קיימים.' },
+  { q: 'איך מתחילים?', a: 'מתחילים בשיחה קצרה עם מנהלי התוכנית, ואחריה שולחים הצעה עם סילבוס ולוח זמנים. בדרך כלל אפשר לצאת לדרך תוך שבועות ספורים.' },
 ];
 const schema = [breadcrumbSchema(crumbs), faqSchema(faq), serviceSchema({ name: 'הרצאות וקורסי AI לאקדמיה', description, path, serviceType: 'AI education for academia', audience: 'Universities and colleges in Israel' })];
 const blocks = [
   { title: 'תוכניות יזמות', text: `${PROGRAM_NAMES.claudeCodeDay} או ${PROGRAM_NAMES.productBuildersCourse}: הסטודנטים בונים מוצר עובד, לא מצגת.` , href: '/workshops' },
-  { title: 'לימודי המשך', text: `${PROGRAM_NAMES.agentsBootcamp} או קורס AI יישומי למנהלים: קורס שמביא נרשמים כי הוא מועבר על ידי מי שבונה בתעשייה.`, href: '/courses' },
-  { title: 'הרצאות אורח ופקולטות', text: 'הרצאה בקורס קיים, יום עיון, או סדרה לסגל על AI בהוראה ובמחקר.', href: '/lectures' },
+  { title: 'לימודי המשך', text: `${PROGRAM_NAMES.agentsBootcamp} או קורס AI יישומי למנהלים: קורס שמושך נרשמים, כי מלמדים בו אנשים שבונים בתעשייה.`, href: '/courses' },
+  { title: 'הרצאות אורח ופקולטות', text: 'הרצאה בקורס קיים, יום עיון או סדרת מפגשים לסגל על AI בהוראה ובמחקר.', href: '/lectures' },
 ];
 ---
 <BaseLayout title={title} description={description} path={path} schema={schema}>
@@ -31,32 +31,32 @@ const blocks = [
     <div class="container-x relative py-12 md:py-20">
       <Breadcrumbs items={crumbs} />
       <h1 class="h1 mt-6 max-w-4xl">AI לאוניברסיטאות ולמכללות: מהתעשייה ישר לכיתה</h1>
-      <p class="lead mt-5 max-w-3xl">הרצאות, סדנאות וקורסי בינה מלאכותית לאקדמיה, מועברים על ידי אנשים שמטמיעים AI בחברות טכנולוגיה מובילות. הסטודנטים יוצאים עם פרויקט שעובד, ומנהלי התוכניות מקבלים סילבוס, מטלות והערכה מוכנים.</p>
-      <div class="mt-8 flex flex-wrap gap-3"><a href="#contact-cta" class="btn btn-primary">בואו נבנה תוכנית</a><a href="/courses" class="btn btn-ghost">לקורסים</a></div>
+      <p class="lead mt-5 max-w-3xl">הרצאות, סדנאות וקורסי בינה מלאכותית לאקדמיה, מאנשים שמטמיעים AI בחברות טכנולוגיה מובילות. הסטודנטים יוצאים עם פרויקט שעובד, ומנהלי התוכניות מקבלים סילבוס, מטלות והערכה מוכנים.</p>
+      <div class="mt-8 flex flex-wrap gap-3"><a href="/program" class="btn btn-primary" data-track="cta_click" data-track-label="academia">בואו נבנה לכם תוכנית המתאימה לצרכים שלכם</a><a href="/courses" class="btn btn-ghost">לקורסים</a></div>
     </div>
   </section>
-  <LogoStrip audience="academia" title="מוסדות שכבר למדו איתנו" />
+  <LogoStrip audience="academia" title="מוסדות שלומדים עם RealAI" />
   <section class="py-14"><div class="container-x">
     <h2 class="h2">מה מתאים לתוכנית שלכם</h2>
     <div class="mt-8 grid gap-5 md:grid-cols-3">
-      {blocks.map((b) => <a href={b.href} class="card reveal p-6 hover:border-accent"><h3 class="h3">{b.title}</h3><p class="mt-2 text-muted">{b.text}</p><span class="mt-4 block font-semibold text-accent">לפרטים ←</span></a>)}
+      {blocks.map((b) => <a href={b.href} class="card reveal p-6 hover:border-accent"><h3 class="h3">{b.title}</h3><p class="mt-2 text-muted">{b.text}</p><span class="mt-4 block font-bold text-accent">לפרטים ←</span></a>)}
     </div>
   </div></section>
   <section class="py-14 bg-elev/40"><div class="container-x grid gap-10 md:grid-cols-2">
     <div><h2 class="h2">למה מנהלי תוכניות בוחרים בנו</h2>
       <ul class="mt-6 space-y-3">
         <li class="flex gap-3"><span class="text-accent">✓</span>המרצים עובדים בתעשייה ומביאים דוגמאות מהשבוע שעבר, לא מספר לימוד.</li>
-        <li class="flex gap-3"><span class="text-accent">✓</span>כל קורס מסתיים בתוצר: סוכן, אוטומציה או מוצר. זה מה שהסטודנטים מספרים הלאה.</li>
-        <li class="flex gap-3"><span class="text-accent">✓</span>סילבוס, מטלות והערכה מוכנים להגשה. בלי עבודה נוספת לרכז.</li>
-        <li class="flex gap-3"><span class="text-accent">✓</span>מועבר בעברית, פרונטלי או Zoom, בלוח זמנים סמסטריאלי או מרוכז.</li>
+        <li class="flex gap-3"><span class="text-accent">✓</span>כל קורס מסתיים בתוצר: סוכן, אוטומציה או מוצר. וזה מה שהסטודנטים מספרים עליו הלאה.</li>
+        <li class="flex gap-3"><span class="text-accent">✓</span>סילבוס, מטלות והערכה מוכנים להגשה. בלי עבודה נוספת לרכזי התוכנית.</li>
+        <li class="flex gap-3"><span class="text-accent">✓</span>בעברית, פרונטלי או ב-Zoom, במתכונת סמסטריאלית או מרוכזת.</li>
       </ul>
     </div>
     <div><h2 class="h2">איך זה עובד</h2>
       <ol class="mt-6 space-y-3 list-decimal ps-5">
-        <li>שיחה של 30 דקות: קהל, יעדים, מסגרת שעות.</li>
-        <li>הצעה עם סילבוס מותאם ולוח זמנים, תוך שבוע.</li>
-        <li>הקמה: חשבונות בכלים, מדריך לסטודנטים, תיאום לוגיסטי.</li>
-        <li>העברה, הערכה, ודוח סיכום עם מדדים לתוכנית.</li>
+        <li>שיחת היכרות של 30 דקות: קהל, יעדים ומסגרת שעות.</li>
+        <li>תוך שבוע: הצעה עם סילבוס מותאם ולוח זמנים.</li>
+        <li>הכנה: חשבונות בכלים, מדריך לסטודנטים ותיאום לוגיסטי.</li>
+        <li>העברת הקורס, הערכה ודוח סיכום עם מדדים לתוכנית.</li>
       </ol>
     </div>
   </div></section>
