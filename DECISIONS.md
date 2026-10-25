@@ -49,9 +49,12 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 46. **Wordmark.** `src/components/Wordmark.astro`: a small SVG mark (rounded square with three rising bars, one per stage of the adoption method) plus "RealAI" as live text, with "AI" in the accent colour. Variant `text` (no mark, a short accent rule under "AI") is available through `variant="text"`. Favicon and OG images were not changed.
 47. **Copy pass.** The page copy was rewritten for tone and plural address, and the articles were proofread (spelling, plural address, translated phrasing). Titles, meta descriptions, H1s and FAQ questions were not changed, apart from clear grammar fixes in five article H2s. Details: `copy-audit-pages.md`, `copy-audit-articles.md`.
 
+48. **All primary CTAs go to `/program`** (owner, 2026-10-25): the homepage, academia, companies and every offer page hero now say "בואו נבנה לכם תוכנית המתאימה לצרכים שלכם" and link to the landing page.
+49. **First official client logos.** Tel Aviv University and Technion (t:hub), from files the owner supplied, converted to white on transparency so they sit on the dark strip (light mode inverts them). Haifa, Ben-Gurion and the College of Management are still placeholders. Reichman University: the link the owner sent is blocked from the build environment, so the file is still needed as an upload. The IDF, 8200 and Navy emblems the owner sent are held back pending the owner's decision (open question below).
+
 ## Open questions for Dror (v2)
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
 - Client logos: all five files in `public/logos/` are typographic placeholders. Send official files and confirm you may use them (TODO in `src/config/site.ts`).
-- Should the "בואו נדבר" buttons on /companies and the offer pages also switch to the main phrase and `/program`?
+- IDF, 8200 and Navy emblems: not on the site yet. Official IDF symbols usually need IDF Spokesperson approval for commercial use, and they conflict with the rule of not naming where the team worked. Confirm before adding them.
 - Is the present tense in "לומדים עם RealAI" accurate for every institution shown?
 - Proposed copy not applied (titles and FAQ questions): see "Proposed, not applied" in `copy-audit-pages.md`.

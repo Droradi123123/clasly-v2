@@ -100,17 +100,17 @@ export const FOOTER_LINKS = {
 } as const;
 
 /**
- * Client logos. SVG files live in /public/logos. Add a line here to add a logo.
- * TODO(Dror): every file is a typographic placeholder. Replace each with the official logo asset once usage
- * rights are confirmed: drop the file in /public/logos and set placeholder: false.
+ * Client logos, shown in the marquee in this order. Files live in /public/logos; width/height are the file's pixel size.
+ * Real logos are white on transparency (the strip inverts them in light mode).
+ * TODO(Dror): haifa, bgu and colman are still typographic placeholders: send the official files.
  */
 export type Audience = 'academia' | 'company';
-export const LOGOS: { id: string; name: string; file: string; audience: Audience; placeholder: boolean }[] = [
-  { id: 'technion', name: 'הטכניון', file: '/logos/technion.svg', audience: 'academia', placeholder: true },
-  { id: 'tau', name: 'אוניברסיטת תל אביב', file: '/logos/tau.svg', audience: 'academia', placeholder: true },
-  { id: 'haifa', name: 'אוניברסיטת חיפה', file: '/logos/haifa.svg', audience: 'academia', placeholder: true },
-  { id: 'bgu', name: 'אוניברסיטת בן-גוריון', file: '/logos/bgu.svg', audience: 'academia', placeholder: true },
-  { id: 'colman', name: 'המכללה למינהל', file: '/logos/colman.svg', audience: 'academia', placeholder: true },
+export const LOGOS: { id: string; name: string; file: string; width: number; height: number; audience: Audience; placeholder: boolean }[] = [
+  { id: 'tau', name: 'אוניברסיטת תל אביב', file: '/logos/tau.png', width: 293, height: 160, audience: 'academia', placeholder: false },
+  { id: 'technion-thub', name: 'הטכניון, t:hub', file: '/logos/technion-thub.png', width: 482, height: 96, audience: 'academia', placeholder: false },
+  { id: 'haifa', name: 'אוניברסיטת חיפה', file: '/logos/haifa.svg', width: 220, height: 56, audience: 'academia', placeholder: true },
+  { id: 'bgu', name: 'אוניברסיטת בן-גוריון', file: '/logos/bgu.svg', width: 220, height: 56, audience: 'academia', placeholder: true },
+  { id: 'colman', name: 'המכללה למינהל', file: '/logos/colman.svg', width: 220, height: 56, audience: 'academia', placeholder: true },
 ];
 
 /** Proof points. Never name an employer. */

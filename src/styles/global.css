@@ -119,7 +119,7 @@ a.glow-card:hover { border-color: var(--fg-muted); }
 .marquee-group { display: flex; align-items: center; gap: var(--gap); flex-shrink: 0; }
 @keyframes marquee { to { transform: translateX(calc(-50% - var(--gap) / 2)); } }
 .logo-item { height: 4rem; width: auto; max-width: 15rem; object-fit: contain; opacity: .75; filter: grayscale(1) brightness(1.5); transition: opacity .2s; }
-:root[data-theme="light"] .logo-item { filter: grayscale(1); }
+:root[data-theme="light"] .logo-item { filter: invert(1) grayscale(1); }
 @media (hover: hover) and (pointer: fine) {
   .marquee:hover .marquee-track { animation-play-state: paused; }
   .logo-item:hover { opacity: 1; }

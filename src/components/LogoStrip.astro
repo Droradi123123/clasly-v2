@@ -19,13 +19,13 @@ const duration = `${Math.max(30, group.length * 4.5)}s`;
         <ul class="marquee-group" role="list">
           {group.map((l, i) => (
             <li aria-hidden={i >= logos.length ? 'true' : undefined}>
-              <img class="logo-item" src={l.file} alt={i < logos.length ? `לוגו ${l.name}` : ''} width="208" height="52" loading="lazy" decoding="async" />
+              <img class="logo-item" src={l.file} alt={i < logos.length ? `לוגו ${l.name}` : ''} width={l.width} height={l.height} loading="lazy" decoding="async" />
             </li>
           ))}
         </ul>
         <ul class="marquee-group" aria-hidden="true" role="list">
           {group.map((l) => (
-            <li><img class="logo-item" src={l.file} alt="" width="208" height="52" loading="lazy" decoding="async" /></li>
+            <li><img class="logo-item" src={l.file} alt="" width={l.width} height={l.height} loading="lazy" decoding="async" /></li>
           ))}
         </ul>
       </div>
