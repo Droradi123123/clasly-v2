@@ -1,0 +1,28 @@
+---
+/** Internal-linking block: articles that support a money page or audience page. */
+import { getCollection } from 'astro:content';
+interface Props { offer?: string; slugs?: string[]; title?: string; limit?: number }
+const { offer, slugs, title = 'מדריכים שיעזרו לכם להחליט', limit = 6 } = Astro.props;
+const all = await getCollection('blog', ({ data }) => !data.draft);
+const picked = slugs
+  ? slugs.map((s) => all.find((p) => p.data.slug === s)).filter((p): p is NonNullable<typeof p> => Boolean(p))
+  : all.filter((p) => p.data.relatedOffer === offer).sort((a, b) => b.data.updatedAt.getTime() - a.data.updatedAt.getTime());
+const posts = picked.slice(0, limit);
+---
+{posts.length > 0 && (
+  <section class="py-14" aria-labelledby="related-articles-title">
+    <div class="container-x">
+      <h2 id="related-articles-title" class="h2">{title}</h2>
+      <ul class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((p) => (
+          <li class="card p-5 transition hover:border-accent">
+            <a href={`/blog/${p.data.slug}`} class="block">
+              <span class="font-bold leading-snug hover:text-accent">{p.data.title}</span>
+              <span class="mt-2 block text-sm text-muted">{p.data.description}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}

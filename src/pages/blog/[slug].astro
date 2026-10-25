@@ -9,6 +9,9 @@ export async function getStaticPaths() {
   }));
 }
 const { entry, related } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
+const toc = headings.filter((h) => h.depth === 2).map((h) => ({ slug: h.slug, text: h.text }));
+// Reading time from the MDX body: Hebrew prose reads at roughly 200 words a minute.
+const words = (entry.body ?? '').replace(/<[^>]+>/g, ' ').replace(/[#*_>|`\[\]()-]/g, ' ').split(/\s+/).filter(Boolean).length;
 ---
-<ArticleLayout entry={entry} related={related}><Content /></ArticleLayout>
+<ArticleLayout entry={entry} related={related} toc={toc} words={words}><Content /></ArticleLayout>

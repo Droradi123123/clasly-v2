@@ -4,11 +4,12 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import LogoStrip from '@/components/LogoStrip.astro';
 import FAQ from '@/components/FAQ.astro';
 import CTA from '@/components/CTA.astro';
+import RelatedArticles from '@/components/RelatedArticles.astro';
 import { breadcrumbSchema, faqSchema, serviceSchema } from '@/lib/seo';
 import { PROGRAM_NAMES } from '@/config/site';
 const path = '/academia';
-const title = 'קורס בינה מלאכותית לאקדמיה: הרצאות וסדנאות AI';
-const description = 'הרצאות, סדנאות וקורסי AI לאוניברסיטאות ומכללות: תוכניות יזמות, לימודי המשך ופקולטות. Claude Code, סוכני AI ובניית מוצרים, מועבר בעברית על ידי אנשי תעשייה.';
+const title = 'קורס בינה מלאכותית לאקדמיה | AI לאוניברסיטאות ומכללות';
+const description = 'קורס בינה מלאכותית לאקדמיה, הרצאות אורח וסדנאות לתוכניות יזמות ולימודי המשך. סילבוס, מטלות והערכה, מאנשים שהטמיעו AI בתעשייה.';
 const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'לאקדמיה', path }];
 const faq = [
   { q: 'אילו פורמטים מתאימים לאוניברסיטה או למכללה?', a: 'הרצאת אורח בקורס קיים, סדנה של יום בתוכנית יזמות, קורס סמסטריאלי בלימודי המשך, או סדרת מפגשים לסגל. אנחנו מתאימים את הפורמט לתוכנית.' },
@@ -61,5 +62,6 @@ const blocks = [
   </div></section>
   <!-- Testimonials for academia: hidden until genuine quotes are collected (TODO.md). -->
   <FAQ items={faq} />
+  <RelatedArticles slugs={['ai-course-for-academia-what-is-different', 'ai-for-entrepreneurship-programs', 'ai-workshop-for-faculty-and-teachers', 'build-product-with-ai-without-developers', 'claude-code-for-non-developers', 'ai-agents-bootcamp-who-is-it-for']} />
   <CTA whatsappMessage="שלום, אני ממוסד אקדמי ואשמח לשמוע על קורס או סדנת AI לתוכנית שלנו." audienceType="academia" topic="אקדמיה" trackLabel="academia" title="בואו נבנה תוכנית AI לסטודנטים שלכם" />
 </BaseLayout>

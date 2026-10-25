@@ -32,6 +32,15 @@ export const SITE = {
   turnstileSiteKey: import.meta.env?.PUBLIC_TURNSTILE_SITE_KEY ?? '',
 } as const;
 
+/** Public profiles of the brand (LinkedIn, YouTube...). Added to Organization.sameAs so engines link the entity. */
+export const SOCIAL_PROFILES: string[] = [];
+
+/** Search engine verification codes (meta tags). Prefer DNS verification in Cloudflare; these are a fallback. */
+export const SITE_VERIFICATION = {
+  google: import.meta.env?.PUBLIC_GOOGLE_SITE_VERIFICATION ?? '',
+  bing: import.meta.env?.PUBLIC_BING_SITE_VERIFICATION ?? '',
+};
+
 /** Named programs (placeholders until approved). Names sell better and become searchable brand terms. */
 export const PROGRAM_NAMES = {
   claudeCodeDay: 'יום Claude Code',
@@ -63,6 +72,14 @@ export const FOOTER_LINKS = {
     { href: '/companies', label: 'לחברות וצוותים' },
     { href: '/team', label: 'הצוות' },
     { href: '/about', label: 'אודות' },
+  ],
+  guides: [
+    { href: '/topics/ai-adoption', label: 'איך להטמיע AI בארגון' },
+    { href: '/blog/hours-saved-is-not-an-ai-strategy', label: 'חיסכון בשעות הוא לא אסטרטגיה' },
+    { href: '/blog/how-to-measure-ai-roi', label: 'מדידת ROI של AI' },
+    { href: '/blog/chatbot-vs-automation-vs-agent', label: 'צ׳אטבוט, אוטומציה או סוכן?' },
+    { href: '/blog/claude-code-for-non-developers', label: 'Claude Code למי שלא מתכנת' },
+    { href: '/blog/n8n-ai-agent', label: 'סוכן AI עם n8n' },
   ],
   resources: [
     { href: '/blog', label: 'בלוג' },

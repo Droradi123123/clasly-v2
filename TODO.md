@@ -12,7 +12,8 @@
 - [ ] **Optional cleanup**: the earlier `site_*` tables in the Supabase project "Lecture" are no longer used and can be dropped.
 - [ ] **Unrelated Supabase finding** (project "NY happy"): table `public.site_audit` has RLS disabled and is readable with the anon key. Remediation if intended: `ALTER TABLE "public"."site_audit" ENABLE ROW LEVEL SECURITY;` plus policies. Not changed by this build.
 - [ ] **Email notifications**: create a Resend account, verify realai.co.il as a sending domain (notifications are sent from leads@realai.co.il to happytelaviv@gmail.com), and add the `RESEND_API_KEY` secret.
-- [ ] **Search Console + Bing Webmaster Tools**: verify the domain (DNS record), submit `/sitemap-index.xml`.
+- [ ] **Search Console + Bing Webmaster Tools**: follow the launch checklist in SEO.md (DNS verification, submit `/sitemap-index.xml`, run the IndexNow workflow once).
+- [ ] **Social profiles**: create a LinkedIn company page and Google Business Profile, then add the URLs to `SOCIAL_PROFILES` in `src/config/site.ts`.
 - [ ] **Run Lighthouse on the deployed URL** (mobile) and fix anything under 95.
 
 ## Content

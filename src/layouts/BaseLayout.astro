@@ -1,6 +1,6 @@
 ---
 import '@/styles/global.css';
-import { SITE, BRAND_NAME } from '@/config/site';
+import { SITE, BRAND_NAME, SITE_VERIFICATION } from '@/config/site';
 import { absolute, graph, organizationSchema, websiteSchema, webPageSchema, ogPathFor, type SeoProps } from '@/lib/seo';
 import heeboHebrew from '@fontsource-variable/heebo/files/heebo-hebrew-wght-normal.woff2?url';
 import heeboLatin from '@fontsource-variable/heebo/files/heebo-latin-wght-normal.woff2?url';
@@ -27,10 +27,15 @@ const jsonLd = JSON.stringify(graph(organizationSchema(), websiteSchema(), webPa
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="he" href={canonical} />
+    <link rel="alternate" hreflang="he-IL" href={canonical} />
     <link rel="alternate" hreflang="x-default" href={canonical} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+    {SITE_VERIFICATION.google && <meta name="google-site-verification" content={SITE_VERIFICATION.google} />}
+    {SITE_VERIFICATION.bing && <meta name="msvalidate.01" content={SITE_VERIFICATION.bing} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" href={heeboHebrew} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={heeboLatin} as="font" type="font/woff2" crossorigin />
     <link rel="alternate" type="application/rss+xml" title={`${BRAND_NAME} בלוג`} href="/rss.xml" />
@@ -39,6 +44,7 @@ const jsonLd = JSON.stringify(graph(organizationSchema(), websiteSchema(), webPa
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content={BRAND_NAME} />
     <meta property="og:locale" content={SITE.locale} />
+    <meta name="author" content={BRAND_NAME} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />

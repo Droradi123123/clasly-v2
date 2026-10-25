@@ -5,6 +5,7 @@ import LogoStrip from '@/components/LogoStrip.astro';
 import FAQ from '@/components/FAQ.astro';
 import CTA from '@/components/CTA.astro';
 import OfferCards from '@/components/OfferCards.astro';
+import RelatedArticles from '@/components/RelatedArticles.astro';
 import { programsFor } from '@/data/programs';
 import { TOPICS } from '@/config/site';
 import { breadcrumbSchema, faqSchema, serviceSchema, courseSchema } from '@/lib/seo';
@@ -92,6 +93,7 @@ const topics = TOPICS.filter((t) => data.relatedTopics.includes(t.slug));
 
   <LogoStrip audience={data.logoAudience} />
   <FAQ items={data.faq} />
+  <RelatedArticles offer={data.path} />
   <CTA whatsappMessage={data.whatsappMessage} audienceType={data.audienceType} topic={data.focusKeyPhrase} trackLabel={data.slug} title={`רוצים ${data.h1.split(':')[0]} לארגון שלכם?`} />
   <OfferCards title="עוד דרכים ללמוד איתנו" exclude={data.slug} />
 </BaseLayout>
