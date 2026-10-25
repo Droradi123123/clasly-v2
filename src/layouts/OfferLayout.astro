@@ -14,6 +14,8 @@ import type { OfferPageData } from '@/data/offers';
 interface Props { data: OfferPageData }
 const { data } = Astro.props;
 const programs = programsFor(data.slug);
+/** Short noun for the closing CTA title ("רוצים הרצאה לארגון שלכם?"); the H1s are full sentences. */
+const CTA_NOUN = { lectures: 'הרצאה', workshops: 'סדנה', courses: 'קורס', executive: 'ליווי AI למנהלים' } as const;
 const crumbs = [{ name: 'דף הבית', path: '/' }, { name: data.h1.split(':')[0], path: data.path }];
 const schema: object[] = [
   breadcrumbSchema(crumbs),
@@ -53,7 +55,7 @@ const topics = TOPICS.filter((t) => data.relatedTopics.includes(t.slug));
     <div class="container-x">
       <p class="eyebrow">תוכניות לדוגמה</p>
       <h2 id="programs-title" class="h2 mt-2">סילבוס לדוגמה</h2>
-      <p class="lead mt-3 max-w-2xl">כל תוכנית מותאמת לארגון. אלה נקודות הפתיחה.</p>
+      <p class="lead mt-3 max-w-2xl">כל תוכנית מותאמת לארגון שלכם. אלה נקודות הפתיחה.</p>
       <div class="mt-8 grid gap-6 lg:grid-cols-2">
         {programs.map((p) => (
           <article class="card reveal p-6">
@@ -94,6 +96,6 @@ const topics = TOPICS.filter((t) => data.relatedTopics.includes(t.slug));
   <LogoStrip audience={data.logoAudience} />
   <FAQ items={data.faq} />
   <RelatedArticles offer={data.path} />
-  <CTA whatsappMessage={data.whatsappMessage} audienceType={data.audienceType} topic={data.focusKeyPhrase} trackLabel={data.slug} title={`רוצים ${data.h1.split(':')[0]} לארגון שלכם?`} />
+  <CTA whatsappMessage={data.whatsappMessage} audienceType={data.audienceType} topic={data.focusKeyPhrase} trackLabel={data.slug} title={`רוצים ${CTA_NOUN[data.slug]} לארגון שלכם?`} />
   <OfferCards title="עוד דרכים ללמוד איתנו" exclude={data.slug} />
 </BaseLayout>

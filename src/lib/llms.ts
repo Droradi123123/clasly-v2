@@ -30,6 +30,7 @@ export async function llmsShort(): Promise<string> {
     '## קהלים',
     `- [לאקדמיה](${abs('/academia')})`,
     `- [לחברות](${abs('/companies')})`,
+    `- [בניית תוכנית מותאמת](${abs('/program')}): פורמטים, דוגמאות לתוכניות ואיך מתחילים.`,
     '',
     '## מרכזי נושא',
     ...TOPICS.map((t) => `- [${t.name}](${abs(`/topics/${t.slug}`)})`),

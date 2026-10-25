@@ -45,11 +45,11 @@ const schema = [
       {GLOSSARY.map((t) => (
         <div id={t.slug} class="card scroll-mt-24 p-6">
           <dt class="h3">{t.term}{t.en && <span class="ms-2 text-sm font-normal text-muted" dir="ltr">{t.en}</span>}</dt>
-          <dd class="mt-2"><p class="font-medium">{t.definition}</p><p class="mt-2 text-muted">{t.detail}</p>
+          <dd class="mt-2"><p>{t.definition}</p><p class="mt-2 text-muted">{t.detail}</p>
             {(t.related?.length || t.link) && (
               <p class="mt-3 flex flex-wrap gap-2 text-sm">
                 {t.related?.filter((r) => bySlug[r]).map((r) => <a href={`#${r}`} class="inline-flex min-h-8 items-center rounded-full bg-soft px-3 text-accent">{bySlug[r].term}</a>)}
-                {t.link && <a href={t.link} class="inline-flex min-h-8 items-center rounded-full border border-accent/40 px-3 font-semibold text-accent">להרחבה ←</a>}
+                {t.link && <a href={t.link} class="inline-flex min-h-8 items-center rounded-full border border-accent/40 px-3 font-bold text-accent">להרחבה ←</a>}
               </p>
             )}
           </dd>

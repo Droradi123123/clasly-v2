@@ -24,23 +24,23 @@ const done = [
     </div>
     <div class="mt-14 grid gap-5 md:grid-cols-2">
       <article class="card p-7 md:p-9">
-        <p class="text-sm font-semibold text-muted">מה שלומדים מסרטונים</p>
+        <p class="text-sm font-bold text-muted">מה שלומדים מסרטונים</p>
         <ul class="strike-list mt-6 space-y-4 text-lg" data-inview>
           {learned.map((t) => <li class="flex items-start gap-3"><span>{t}</span></li>)}
         </ul>
       </article>
       <article class="glow-card p-7 md:p-9">
-        <p class="text-sm font-semibold text-accent">מה שלומדים כשמטמיעים בארגון של אלפי עובדים</p>
+        <p class="text-sm font-bold text-accent">מה שלומדים כשמטמיעים בארגון של אלפי עובדים</p>
         <ul class="check-list mt-6 space-y-4 text-lg" data-inview>
           {done.map((t) => (
             <li class="flex items-start gap-3">
               <svg class="mt-1.5 h-5 w-5 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
-              <span class="font-medium">{t}</span>
+              <span>{t}</span>
             </li>
           ))}
         </ul>
       </article>
     </div>
-    <p class="mx-auto mt-12 max-w-2xl text-center text-xl font-bold md:text-2xl">את הרשימה השנייה אי אפשר ללמוד מסרטון. <span class="text-gradient">אותה אנחנו מלמדים בארגון שלכם.</span></p>
+    <p class="mx-auto mt-12 max-w-2xl text-center text-xl font-bold md:text-2xl">את הרשימה השנייה אי אפשר ללמוד מסרטון. <span class="text-accent">אותה אנחנו מלמדים בארגון שלכם.</span></p>
   </div>
 </section>

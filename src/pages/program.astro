@@ -1,0 +1,112 @@
+---
+/**
+ * Landing page for the main CTA ("בואו נבנה לכם תוכנית המתאימה לצרכים שלכם").
+ * Every fact comes from existing data: formats from OFFERS + offer logistics, examples from PROGRAMS.
+ * WhatsApp is the action here; the rest of the site links to this page instead of opening WhatsApp directly.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CTA from '@/components/CTA.astro';
+import { OFFERS, whatsappUrl } from '@/config/site';
+import { offerBySlug } from '@/data/offers';
+import { PROGRAMS } from '@/data/programs';
+import { breadcrumbSchema } from '@/lib/seo';
+
+const path = '/program';
+const title = 'תוכנית AI מותאמת לארגון: הרצאה, סדנה או קורס';
+const description = 'בונים לכם תוכנית AI לפי מה שהארגון צריך: הרצאה, סדנה מעשית, קורס או ליווי למנהלים. דוגמאות לתוכניות, איך התהליך עובד ואיך מתחילים.';
+const h1 = 'בואו נבנה לכם תוכנית AI המתאימה לצרכים שלכם';
+const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'בניית תוכנית', path }];
+const waMessage = 'שלום, הגעתי מעמוד בניית התוכנית באתר. אשמח לבנות תוכנית AI לארגון שלנו.';
+const wa = whatsappUrl(waMessage);
+
+const lengthOf = (slug: (typeof OFFERS)[number]['slug']) => offerBySlug(slug).logistics.find((l) => l.label === 'אורך')?.value ?? '';
+const formats = OFFERS.map((o) => ({ ...o, length: lengthOf(o.slug) }));
+
+const formatLabel = { lectures: 'הרצאה', workshops: 'סדנה', courses: 'קורס', executive: 'ליווי למנהלים' } as const;
+const examples = PROGRAMS.map((p) => ({ ...p, format: formatLabel[p.offer], href: `/${p.offer}` }));
+
+const steps = [
+  { title: 'שיחת היכרות', text: 'שיחה קצרה על הארגון: מי הקהל, איפה אתם עומדים עם AI ומה צריך לקרות אחרי המפגש.' },
+  { title: 'תוכנית מותאמת', text: 'בוחרים יחד פורמט ונושאים, ומקבלים סילבוס והצעה מסודרת תוך יום עסקים.' },
+  { title: 'מעבירים', text: 'פרונטלי או ב-Zoom, בעברית, עם דוגמאות מהתחום שלכם ובנייה בידיים.' },
+  { title: 'מה קורה אחרי', text: 'כל משתתף יוצא עם צעדים לשבוע הקרוב. בסדנאות ובקורסים יוצאים גם עם תבניות ותוצר שעובד.' },
+];
+
+const schema = [breadcrumbSchema(crumbs)];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <section class="hero">
+    <div class="container-x py-12 md:py-20">
+      <Breadcrumbs items={crumbs} />
+      <h1 class="h1 mt-6 max-w-4xl text-balance">{h1}</h1>
+      <p class="lead mt-5 max-w-3xl">הרצאה לכל הארגון, סדנה מעשית לצוות, קורס שבונה יכולת או ליווי אישי להנהלה. אנחנו מטמיעים AI בחברות טכנולוגיה מובילות עם אלפי עובדים, ובונים לכם תוכנית שמתאימה לקהל, לאתגר ולקצב שלכם.</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href={wa} class="btn btn-primary" target="_blank" rel="noopener" data-track="whatsapp_click" data-track-label="program-hero">דברו איתנו בוואטסאפ</a>
+        <a href="#examples-title" class="btn btn-ghost">דוגמאות לתוכניות</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20" aria-labelledby="formats-title">
+    <div class="container-x">
+      <p class="eyebrow">פורמטים</p>
+      <h2 id="formats-title" class="h2 mt-3">ארבע דרכים לעבוד איתנו</h2>
+      <p class="lead mt-4 max-w-3xl">אפשר להתחיל בפורמט אחד ולהמשיך לאחר. הרבה ארגונים מתחילים בהרצאה לכולם וממשיכים לסדנה לצוות אחד.</p>
+      <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" role="list">
+        {formats.map((f) => (
+          <li>
+            <a href={f.href} class="glow-card flex h-full flex-col p-6">
+              <h3 class="h3">{f.name}</h3>
+              <p class="mt-3 flex-1 text-muted">{f.value}</p>
+              <dl class="mt-5 space-y-1 text-sm">
+                <div><dt class="inline text-muted">למי: </dt><dd class="inline">{f.audience}</dd></div>
+                {f.length && <div><dt class="inline text-muted">אורך: </dt><dd class="inline">{f.length}</dd></div>}
+              </dl>
+              <span class="mt-5 text-sm font-bold text-accent">לפרטים על {f.name} ←</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-elev py-16 md:py-20" aria-labelledby="examples-title">
+    <div class="container-x">
+      <p class="eyebrow">דוגמאות</p>
+      <h2 id="examples-title" class="h2 mt-3">תוכניות שאנחנו מעבירים</h2>
+      <p class="lead mt-4 max-w-3xl">כל תוכנית מותאמת לארגון. אלה נקודות פתיחה נפוצות, לא קטלוג סגור.</p>
+      <ul class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3" role="list">
+        {examples.map((p) => (
+          <li class="card flex flex-col bg-bg p-6">
+            <p class="text-sm font-bold text-accent">{p.format}</p>
+            <h3 class="h3 mt-2">{p.name}</h3>
+            <p class="mt-3 flex-1 text-muted">{p.summary}</p>
+            <dl class="mt-5 space-y-1 border-t border-line pt-4 text-sm">
+              <div><dt class="inline text-muted">למי: </dt><dd class="inline">{p.audience}</dd></div>
+              <div><dt class="inline text-muted">אורך: </dt><dd class="inline">{p.length}</dd></div>
+            </dl>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20" aria-labelledby="steps-title">
+    <div class="container-x">
+      <p class="eyebrow">איך זה עובד</p>
+      <h2 id="steps-title" class="h2 mt-3">מהשיחה הראשונה ועד אחרי המפגש</h2>
+      <ol class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s, i) => (
+          <li class="card p-6">
+            <span class="text-2xl font-bold text-accent" aria-hidden="true">0{i + 1}</span>
+            <h3 class="h3 mt-3">{s.title}</h3>
+            <p class="mt-2 text-muted">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <CTA title="ספרו לנו מה הארגון צריך" text="כתבו לנו בוואטסאפ או השאירו פרטים. נחזור תוך יום עסקים עם כיוון ראשון לתוכנית." whatsappMessage={waMessage} trackLabel="program" />
+</BaseLayout>
