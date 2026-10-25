@@ -1,5 +1,5 @@
 import { getCollection } from 'astro:content';
-import { SITE, BRAND_NAME, TOPICS, PROOF_POINTS, LOGOS } from '@/config/site';
+import { SITE, BRAND_NAME, TOPICS, PROOF_POINTS, LOGOS, CONTACT_EMAIL, PHONE_DISPLAY } from '@/config/site';
 import { OFFER_PAGES } from '@/data/offers';
 import { PROGRAMS } from '@/data/programs';
 
@@ -19,7 +19,7 @@ export async function llmsShort(): Promise<string> {
     '- נושאים: Claude Code, n8n ואוטומציה, סוכני AI, הטמעת AI בארגון, בניית מוצרים עם AI, ROI של AI, AI למנהלים.',
     '- הבידול: להטמיע AI בארגון זה קשה, והצוות עשה את זה בעצמו. הצוות הטמיע AI בחברות טכנולוגיה מובילות עם אלפי עובדים: אסטרטגיה, סוכנים בפרודקשן, אבטחה, ניטור ומדידת ROI. הידע מגיע מעבודה בידיים, לא מסרטונים.',
     `- לקוחות (מוסדות): ${LOGOS.map((l) => l.name).join(', ')}.`,
-    `- יצירת קשר: ${abs('/contact')}`,
+    `- יצירת קשר: ${abs('/contact')} · ${CONTACT_EMAIL} · וואטסאפ ${PHONE_DISPLAY}`,
     '',
     '## הצעות',
     ...OFFER_PAGES.map((o) => `- [${o.h1}](${abs(o.path)}): ${o.answer}`),

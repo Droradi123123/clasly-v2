@@ -1,5 +1,5 @@
 ---
-import { BRAND_NAME, FOOTER_LINKS, CONTACT_EMAIL, whatsappUrl } from '@/config/site';
+import { BRAND_NAME, FOOTER_LINKS, CONTACT_EMAIL, PHONE_DISPLAY, whatsappUrl } from '@/config/site';
 import Wordmark from './Wordmark.astro';
 const year = new Date().getFullYear();
 const groups = [
@@ -15,7 +15,7 @@ const groups = [
         <p class="text-xl font-extrabold"><Wordmark /></p>
         <p class="mt-3 text-sm text-muted">הרצאות, סדנאות, קורסים וליווי למנהלים בנושאי AI יישומי. מועבר בעברית, מניסיון יישום אמיתי בתעשייה.</p>
         <p class="mt-4 text-sm"><a class="hover:text-accent" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
-        <p class="mt-1 text-sm"><a class="hover:text-accent" href={whatsappUrl('שלום, אשמח לפרטים על הרצאות וסדנאות AI.')} target="_blank" rel="noopener" data-track="whatsapp_click" data-track-label="footer">דברו איתנו בוואטסאפ</a></p>
+        <p class="mt-1 text-sm"><a class="hover:text-accent" href={whatsappUrl('שלום, אשמח לפרטים על הרצאות וסדנאות AI.')} target="_blank" rel="noopener" data-track="whatsapp_click" data-track-label="footer">וואטסאפ: <span dir="ltr">{PHONE_DISPLAY}</span></a></p>
       </div>
       {groups.map((g) => (
         <nav aria-label={g.title}>
