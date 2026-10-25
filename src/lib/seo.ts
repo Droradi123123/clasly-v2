@@ -1,4 +1,4 @@
-import { SITE, BRAND_NAME, CONTACT_EMAIL } from '@/config/site';
+import { SITE, BRAND_NAME, CONTACT_EMAIL, PHONE_E164 } from '@/config/site';
 
 export interface SeoProps {
   title: string; // under 60 chars
@@ -22,6 +22,15 @@ export function organizationSchema() {
     url: SITE.url,
     logo: { '@type': 'ImageObject', url: absolute('/og/default.png') },
     email: CONTACT_EMAIL,
+    telephone: PHONE_E164,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      telephone: PHONE_E164,
+      email: CONTACT_EMAIL,
+      areaServed: 'IL',
+      availableLanguage: ['he'],
+    },
     description: SITE.description,
     areaServed: { '@type': 'Country', name: 'Israel' },
     knowsAbout: ['Claude Code', 'n8n', 'AI agents', 'AI adoption', 'AI ROI', 'Building products with AI', 'AI for managers'],

@@ -5,8 +5,11 @@
  */
 export const BRAND_NAME = 'RealAI';
 export const DOMAIN = 'realai.co.il';
-export const WHATSAPP_NUMBER = '{{WHATSAPP_NUMBER}}'; // international format, digits only, e.g. 9725XXXXXXXX
-export const CONTACT_EMAIL = '{{CONTACT_EMAIL}}';
+export const WHATSAPP_NUMBER = '972548023445'; // international format, digits only (054-802-3445)
+export const CONTACT_EMAIL = 'happytelaviv@gmail.com';
+/** Display and E.164 forms of the WhatsApp/phone number. */
+export const PHONE_DISPLAY = '054-802-3445';
+export const PHONE_E164 = '+972548023445';
 
 /** Until DOMAIN is set, the Cloudflare preview URL is used for canonical links. */
 const PREVIEW_URL = 'https://realai.workers.dev';

@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL, BRAND_NAME } from '@/config/site';
+import { CONTACT_EMAIL, BRAND_NAME, DOMAIN } from '@/config/site';
 import { getEnv } from './env';
 import type { LeadInsert } from './db';
 
@@ -23,7 +23,8 @@ export async function notifyNewLead(lead: LeadInsert & { id: string | null }) {
       method: 'POST',
       headers: { authorization: `Bearer ${RESEND_API_KEY}`, 'content-type': 'application/json' },
       body: JSON.stringify({
-        from: `${BRAND_NAME} <leads@${CONTACT_EMAIL.split('@')[1]}>`,
+        // Sender must be on a domain verified in Resend (realai.co.il), never the recipient's mailbox domain.
+        from: `${BRAND_NAME} <leads@${DOMAIN}>`,
         to: [CONTACT_EMAIL],
         subject: `ליד חדש: ${lead.organization ?? lead.name ?? ''}`,
         text: lines.join('\n'),

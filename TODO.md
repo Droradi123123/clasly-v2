@@ -2,7 +2,7 @@
 
 ## Launch blockers
 - [x] **Brand and domain**: RealAI, realai.co.il (set in `src/config/site.ts`, `wrangler.jsonc`).
-- [ ] **Contact details**: `WHATSAPP_NUMBER` and `CONTACT_EMAIL` in `src/config/site.ts` are still placeholders and are visible on the site (footer, contact, accessibility, privacy).
+- [x] **Contact details**: happytelaviv@gmail.com and WhatsApp 054-802-3445 set in `src/config/site.ts` (also in Organization schema).
 - [ ] **Domain on Cloudflare**: add realai.co.il to Cloudflare, attach it to the `clasly-v2` Worker as a custom domain, and redirect `www.realai.co.il` to the apex (canonical URLs use `https://realai.co.il`).
 - [ ] **Register realai.ai or other variants** if you want to protect the name.
 - [ ] **Replace placeholder logos (blocking: the homepage marquee shows them)** in `public/logos/` with official SVGs (same file names): technion.svg, tau.svg, haifa.svg, bgu.svg, colman.svg. Set `placeholder: false` in `LOGOS` (`src/config/site.ts`). Confirm permission to display each logo.
@@ -11,7 +11,7 @@
 - [x] **Lead database**: Cloudflare D1 `realai-leads` created, schema applied, bound as `DB`. Nothing to configure.
 - [ ] **Optional cleanup**: the earlier `site_*` tables in the Supabase project "Lecture" are no longer used and can be dropped.
 - [ ] **Unrelated Supabase finding** (project "NY happy"): table `public.site_audit` has RLS disabled and is readable with the anon key. Remediation if intended: `ALTER TABLE "public"."site_audit" ENABLE ROW LEVEL SECURITY;` plus policies. Not changed by this build.
-- [ ] **Email**: verify a sending domain in Resend (or swap provider in `src/lib/notify.ts`).
+- [ ] **Email notifications**: create a Resend account, verify realai.co.il as a sending domain (notifications are sent from leads@realai.co.il to happytelaviv@gmail.com), and add the `RESEND_API_KEY` secret.
 - [ ] **Search Console + Bing Webmaster Tools**: verify the domain (DNS record), submit `/sitemap-index.xml`.
 - [ ] **Run Lighthouse on the deployed URL** (mobile) and fix anything under 95.
 
