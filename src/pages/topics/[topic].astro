@@ -5,7 +5,7 @@ import FAQ from '@/components/FAQ.astro';
 import CTA from '@/components/CTA.astro';
 import { getCollection, render } from 'astro:content';
 import { TOPICS, OFFERS } from '@/config/site';
-import { breadcrumbSchema, faqSchema, howToSchema } from '@/lib/seo';
+import { breadcrumbSchema, faqSchema, howToSchema, collectionPageSchema } from '@/lib/seo';
 
 export async function getStaticPaths() {
   const hubs = await getCollection('hubs');
@@ -24,7 +24,7 @@ const description = hub?.data.description ?? `כל המאמרים שלנו בנ�
 const h1 = hub?.data.h1 ?? `${topic.name}: מה למדנו מהשטח`;
 const relatedOffer = hub?.data.relatedOffer ?? '/workshops';
 const offer = OFFERS.find((o) => o.href === relatedOffer)!;
-const schema: object[] = [breadcrumbSchema(crumbs)];
+const schema: object[] = [breadcrumbSchema(crumbs), collectionPageSchema({ name: h1, description, path, items: posts.map((p) => ({ name: p.data.title, path: `/blog/${p.data.slug}` })) })];
 if (hub) schema.push(faqSchema(hub.data.faq));
 if (hub?.data.howTo) schema.push(howToSchema({ ...hub.data.howTo, path }));
 const iso = hub ? hub.data.updatedAt.toISOString().slice(0, 10) : null;

@@ -10,7 +10,8 @@
     "check": "astro check",
     "og": "node scripts/og.mjs",
     "new-article": "node scripts/new-article.mjs",
-    "content:check": "node scripts/content-check.mjs"
+    "content:check": "node scripts/content-check.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.4.2",

@@ -1,4 +1,4 @@
-import { SITE, BRAND_NAME, CONTACT_EMAIL, PHONE_E164 } from '@/config/site';
+import { SITE, BRAND_NAME, CONTACT_EMAIL, PHONE_E164, OFFERS, SOCIAL_PROFILES } from '@/config/site';
 
 export interface SeoProps {
   title: string; // under 60 chars
@@ -20,7 +20,15 @@ export function organizationSchema() {
     '@id': `${SITE.url}/#organization`,
     name: BRAND_NAME,
     url: SITE.url,
-    logo: { '@type': 'ImageObject', url: absolute('/og/default.png') },
+    logo: { '@type': 'ImageObject', url: absolute('/logo.png'), width: 512, height: 512 },
+    image: absolute('/og/default.png'),
+    slogan: SITE.tagline,
+    ...(SOCIAL_PROFILES.length ? { sameAs: SOCIAL_PROFILES } : {}),
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'הרצאות, סדנאות, קורסים וליווי בהטמעת AI',
+      itemListElement: OFFERS.map((o) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: o.name, description: o.value, url: absolute(o.href) } })),
+    },
     email: CONTACT_EMAIL,
     telephone: PHONE_E164,
     contactPoint: {
@@ -105,7 +113,7 @@ export function courseSchema(opts: { name: string; description: string; path: st
   };
 }
 
-export function articleSchema(opts: { title: string; description: string; path: string; publishedAt: string; updatedAt: string; image: string; keywords?: string[] }) {
+export function articleSchema(opts: { title: string; description: string; path: string; publishedAt: string; updatedAt: string; image: string; keywords?: string[]; section?: string; words?: number; minutes?: number; about?: string }) {
   return {
     '@type': 'BlogPosting',
     '@id': `${absolute(opts.path)}#article`,
@@ -118,6 +126,10 @@ export function articleSchema(opts: { title: string; description: string; path: 
     dateModified: opts.updatedAt,
     inLanguage: 'he',
     keywords: opts.keywords,
+    ...(opts.section ? { articleSection: opts.section } : {}),
+    ...(opts.words ? { wordCount: opts.words } : {}),
+    ...(opts.minutes ? { timeRequired: `PT${opts.minutes}M` } : {}),
+    ...(opts.about ? { about: { '@type': 'Thing', name: opts.about } } : {}),
     speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead', '.prose > p:first-of-type'] },
     isPartOf: { '@id': `${SITE.url}/#website` },
     author: { '@id': `${SITE.url}/#organization` },

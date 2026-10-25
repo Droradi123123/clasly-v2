@@ -9,6 +9,14 @@ import { join, basename } from 'node:path';
 
 const BLOG_DIR = 'src/content/blog';
 const HUB_DIR = 'src/content/hubs';
+// Commercial phrases owned by money pages. Articles must not use them as their focus phrase (keyword cannibalization).
+const RESERVED = {
+  'הרצאה על בינה מלאכותית': '/lectures', 'מרצה בינה מלאכותית': '/lectures', 'הרצאת AI לחברות': '/lectures',
+  'סדנת AI לארגונים': '/workshops', 'סדנת בינה מלאכותית': '/workshops',
+  'קורס AI לעובדים': '/courses', 'קורס בינה מלאכותית': '/courses',
+  'ליווי AI למנהלים': '/executive', 'אסטרטגיית AI לארגון': '/executive',
+  'הכשרת AI לארגונים': '/companies', 'קורס בינה מלאכותית לאקדמיה': '/academia',
+};
 const NAME_PATTERNS = [/\bמונדיי\b/, /monday\.com/i, /\bDror\b/i, /\bדרור\b/, /\bLinkedIn\.com\/in\//i];
 
 function parse(src) {
@@ -49,6 +57,7 @@ function check(file, kind) {
   if (kind === 'blog' && fm.topicHub && !links.some((l) => l.startsWith(`/topics/${fm.topicHub}`))) errs.push('missing link to topic hub');
   if (fm.relatedOffer && !links.some((l) => l === fm.relatedOffer || l.startsWith(fm.relatedOffer + '#'))) errs.push(`missing link to related offer ${fm.relatedOffer}`);
   if (!Array.isArray(fm.faq) || fm.faq.length < 3) errs.push('faq missing or < 3');
+  if (kind === 'blog' && RESERVED[phrase]) errs.push(`focus phrase "${phrase}" is owned by ${RESERVED[phrase]}; pick a long-tail variant and link to that page`);
   if (/[—–]/.test(src)) errs.push('em/en dash found (use comma, colon or new sentence)');
   for (const re of NAME_PATTERNS) if (re.test(src)) errs.push(`forbidden name pattern: ${re}`);
   if (/\*\*[^*]+\*\*/.test(fm.title || '')) warn.push('markdown in title');
@@ -61,9 +70,16 @@ const files = args.length ? args.map((f) => [f, f.includes('/hubs/') ? 'hub' : '
   ...readdirSync(HUB_DIR).filter((f) => f.endsWith('.mdx')).map((f) => [join(HUB_DIR, f), 'hub']),
 ];
 let failed = 0;
+const seen = { focus: new Map(), title: new Map(), description: new Map() };
 for (const [f, kind] of files) {
   try {
     const r = check(f, kind);
+    const { fm } = parse(readFileSync(f, 'utf8'));
+    for (const k of ['focusKeyPhrase', 'title', 'description']) {
+      const key = k === 'focusKeyPhrase' ? 'focus' : k;
+      const v = (fm[k] || '').trim();
+      if (v && seen[key].has(v)) r.errs.push(`duplicate ${k} with ${seen[key].get(v)}`); else seen[key].set(v, r.file);
+    }
     const ok = r.errs.length === 0;
     if (!ok) failed++;
     console.log(`${ok ? '✓' : '✗'} ${r.file} (${r.words} words)`);

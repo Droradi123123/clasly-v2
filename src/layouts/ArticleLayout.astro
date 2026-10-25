@@ -7,8 +7,9 @@ import { TOPICS, OFFERS, whatsappUrl } from '@/config/site';
 import { breadcrumbSchema, faqSchema, articleSchema, ogPathFor } from '@/lib/seo';
 import type { CollectionEntry } from 'astro:content';
 
-interface Props { entry: CollectionEntry<'blog'>; related: CollectionEntry<'blog'>[] }
-const { entry, related } = Astro.props;
+interface Props { entry: CollectionEntry<'blog'>; related: CollectionEntry<'blog'>[]; toc?: { slug: string; text: string }[]; words?: number }
+const { entry, related, toc = [], words = 0 } = Astro.props;
+const minutes = Math.max(3, Math.round(words / 200));
 const d = entry.data;
 const path = `/blog/${d.slug}`;
 const topic = TOPICS.find((t) => t.slug === d.topicHub)!;
@@ -17,7 +18,7 @@ const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'בלוג', path: 
 const iso = (x: Date) => x.toISOString().slice(0, 10);
 const schema = [
   breadcrumbSchema(crumbs),
-  articleSchema({ title: d.title, description: d.description, path, publishedAt: iso(d.publishedAt), updatedAt: iso(d.updatedAt), image: ogPathFor(path), keywords: [d.focusKeyPhrase, ...d.keywords] }),
+  articleSchema({ title: d.title, description: d.description, path, publishedAt: iso(d.publishedAt), updatedAt: iso(d.updatedAt), image: ogPathFor(path), keywords: [d.focusKeyPhrase, ...d.keywords], section: topic.name, words, minutes, about: d.focusKeyPhrase }),
   faqSchema(d.faq),
 ];
 const ctaByOffer: Record<string, string> = {
@@ -36,13 +37,23 @@ const ctaByOffer: Record<string, string> = {
         <h1 class="h1 mt-6 max-w-4xl">{d.title}</h1>
         <p class="lead mt-5 max-w-3xl">{d.description}</p>
         <p class="mt-4 text-sm text-muted">
-          נכתב על ידי צוות היישום שלנו · עודכן לאחרונה: <time datetime={iso(d.updatedAt)}>{d.updatedAt.toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+          נכתב על ידי <a href="/team" class="underline underline-offset-2 hover:text-accent">צוות היישום של RealAI</a> · {minutes} דקות קריאה · עודכן לאחרונה: <time datetime={iso(d.updatedAt)}>{d.updatedAt.toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
         </p>
       </div>
     </header>
     <div class="container-x grid gap-12 lg:grid-cols-[minmax(0,1fr)_18rem]">
-      <div class="prose">
-        <slot />
+      <div>
+        {toc.length >= 3 && (
+          <nav aria-label="תוכן העניינים" class="card mb-8 max-w-[70ch] p-5">
+            <p class="font-bold">בעמוד הזה</p>
+            <ol class="mt-3 space-y-1.5 text-sm">
+              {toc.map((h) => <li><a href={`#${h.slug}`} class="text-muted hover:text-accent">{h.text}</a></li>)}
+            </ol>
+          </nav>
+        )}
+        <div class="prose">
+          <slot />
+        </div>
       </div>
       <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start">
         <div class="card p-5">

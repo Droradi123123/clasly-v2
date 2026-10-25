@@ -178,3 +178,4 @@ a.glow-card:hover { transform: translateY(-3px); }
 .skip-link:focus { top: 1rem; }
 
 
+.prose h2, .prose h3 { scroll-margin-top: 6rem; }

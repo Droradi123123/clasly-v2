@@ -1,0 +1,18 @@
+name: IndexNow ping
+# After each push to main, wait for Cloudflare to deploy, then tell Bing (and engines that use Bing's index) about every URL.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - name: Wait for the Cloudflare deploy
+        run: sleep 240
+      - name: Ping IndexNow
+        run: node scripts/indexnow.mjs https://realai.co.il || true

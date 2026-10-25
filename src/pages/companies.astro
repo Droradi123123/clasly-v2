@@ -3,11 +3,12 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import FAQ from '@/components/FAQ.astro';
 import CTA from '@/components/CTA.astro';
+import RelatedArticles from '@/components/RelatedArticles.astro';
 import ProofBlocks from '@/components/ProofBlocks.astro';
 import { breadcrumbSchema, faqSchema, serviceSchema } from '@/lib/seo';
 const path = '/companies';
-const title = 'הכשרת AI לארגונים: הרצאות וסדנאות לחברות וצוותים';
-const description = 'הכשרת AI לארגונים וחברות: הרצאת AI לעובדים, סדנאות n8n ו-Claude Code, וקורסים לצוותים. מהצוות שמטמיע AI בחברות טכנולוגיה, עם ROI נמדד.';
+const title = 'הכשרת AI לארגונים | הדרכת בינה מלאכותית לעובדים';
+const description = 'הכשרת AI לארגונים וחברות: הרצאות לכל העובדים, סדנאות מעשיות וקורסים לצוותים. מצוות שהטמיע AI בארגונים של אלפי עובדים, עם ROI נמדד.';
 const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'לחברות', path }];
 const faq = [
   { q: 'מאיפה מתחילים הכשרת AI בארגון?', a: 'בדרך כלל מהרצאה לכל הארגון שמיישרת קו, ואז סדנה לצוות אחד עם תהליך אמיתי. אחרי שיש הצלחה אחת מדידה, מרחיבים.' },
@@ -43,5 +44,6 @@ const paths = [
   <ProofBlocks />
   <!-- Testimonials for companies: hidden until genuine quotes are collected (TODO.md). -->
   <FAQ items={faq} />
+  <RelatedArticles slugs={['ai-course-for-employees-sample-syllabus', 'measuring-ai-training-success', 'ai-lecture-for-employees-what-to-include', 'why-employees-dont-use-ai-tools', 'ai-workshop-for-hr-teams', 'ai-adoption-90-day-plan']} />
   <CTA whatsappMessage="שלום, אני מחברה ואשמח לשמוע על הכשרת AI לצוות שלנו." audienceType="company" topic="חברות" trackLabel="companies" title="בואו נבנה תוכנית AI לצוות שלכם" />
 </BaseLayout>
