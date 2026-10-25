@@ -3,7 +3,7 @@
   // Secrets (ADMIN_PASSWORD, later TURNSTILE_SECRET_KEY and RESEND_API_KEY)
   // are set with `wrangler secret put <NAME>`, never committed here.
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "clasly-v2",
+  "name": "realai",
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
