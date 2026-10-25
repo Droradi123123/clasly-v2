@@ -32,16 +32,17 @@ const wa = whatsappUrl('שלום, אשמח לדבר על הטמעת AI בארג�
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="container-x relative pb-16 pt-14 md:pb-24 md:pt-24">
       <div class="mx-auto max-w-5xl text-center">
-        <p class="pill rise"><span class="dot" aria-hidden="true"></span>הרצאות · סדנאות · קורסים · ליווי למנהלים</p>
+        <p class="pill rise"><span class="dot" aria-hidden="true"></span>לחברות · לאוניברסיטאות ומכללות · למנהלים</p>
         <h1 class="display mt-8">
           <span class="rise block" style="animation-delay:.1s">להטמיע AI בארגון</span>
           <span class="rise block" style="animation-delay:.25s">זה <span class="scribble">קשה<svg viewBox="0 0 200 22" preserveAspectRatio="none" aria-hidden="true"><path d="M196 13 C 160 4, 128 20, 92 11 S 34 6, 4 14" /></svg></span>.</span>
           <span class="rise text-gradient block pt-2" style="animation-delay:.85s">אנחנו עשינו את זה.</span>
         </h1>
-        <p class="lead rise mx-auto mt-8 max-w-2xl" style="animation-delay:1s">לא למדנו AI מסרטונים. הטמענו אותו בעצמנו, בחברות טכנולוגיה מובילות עם אלפי עובדים: מהאסטרטגיה, דרך סוכנים שרצים בפרודקשן, ועד הרגע שבו אנשים באמת משתמשים בזה כל יום. עכשיו אנחנו מלמדים את מה שלמדנו בדרך הקשה.</p>
+        <p class="rise mx-auto mt-8 max-w-3xl text-balance text-xl font-bold leading-snug md:text-2xl" style="animation-delay:1s">הרצאות, סדנאות וקורסים להטמעת AI בארגון, מאנשים שעשו את זה בעצמם.</p>
+        <p class="lead rise mx-auto mt-4 max-w-2xl text-balance" style="animation-delay:1.05s">לא למדנו AI מסרטונים. הטמענו אותו בחברות טכנולוגיה מובילות עם אלפי עובדים, ועכשיו אנחנו מלמדים את הצוותים, הסטודנטים והמנהלים שלכם לעשות את אותו הדבר.</p>
         <div class="rise mt-10 flex flex-wrap justify-center gap-3" style="animation-delay:1.1s">
-          <a href={wa} class="btn btn-primary" target="_blank" rel="noopener" data-track="whatsapp_click" data-track-label="hero">בואו נדבר</a>
-          <a href="#offers-title" class="btn btn-ghost">איך עובדים איתנו</a>
+          <a href={wa} class="btn btn-primary" target="_blank" rel="noopener" data-track="whatsapp_click" data-track-label="hero">בואו נתאים לכם תוכנית</a>
+          <a href="#offers-title" class="btn btn-ghost">מה אנחנו מעבירים</a>
         </div>
       </div>
     </div>
@@ -49,10 +50,10 @@ const wa = whatsappUrl('שלום, אשמח לדבר על הטמעת AI בארג�
 
   <LogoStrip />
   <GapSection />
+  <OfferCards />
   <MethodSection />
   <ProofBlocks />
   <!-- Testimonials: hidden until genuine quotes are collected (see TODO.md). Never use invented quotes. -->
-  <OfferCards />
   <FAQ items={faq} title="שאלות שארגונים שואלים אותנו" />
 
   <CTA title="בואו נדבר על הארגון שלכם" text="ספרו לנו איפה אתם עומדים עם AI ומה תקוע. נחזור תוך יום עסקים עם כיוון ראשון." whatsappMessage="שלום, אשמח לדבר על הטמעת AI בארגון שלנו." trackLabel="home" />
