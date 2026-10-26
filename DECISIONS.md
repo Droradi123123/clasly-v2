@@ -62,6 +62,8 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 
 55. **Headline: "לומדים AI מאנשים שבנו מאות אייג׳נטים / מתוך ארגונים של אלפי עובדים."** (owner, 2026-10-26). Plural, and the experience is framed as built from inside real organizations; it is the reason the teaching is good, not the subject. The credential lines under the headline were removed: the logo strip carries the institutions. Logo marquee slowed to about 12 seconds per logo (about 18px a second, was about 67).
 
+56. **Homepage explains, the blog argues** (owner, 2026-10-26). The method section ("not a technology project", "psychology is the real part") and two thesis questions in the FAQ left the homepage; that thinking lives in the adoption pillar and the articles. The homepage now runs: hero, logos, what we deliver (formats, then the subjects as links to their hubs), why us (proof), the YouTube vs. hands-on gap, how working with us goes (shared with /program), three blog guides, FAQ (with price and language/Zoom questions), contact.
+
 ## Open questions for Dror (v2)
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
 - Client logos: all five files in `public/logos/` are typographic placeholders. Send official files and confirm you may use them (TODO in `src/config/site.ts`).

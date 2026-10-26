@@ -7,6 +7,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import CTA from '@/components/CTA.astro';
+import HowItWorks from '@/components/HowItWorks.astro';
 import { OFFERS, whatsappUrl } from '@/config/site';
 import { offerBySlug } from '@/data/offers';
 import { PROGRAMS } from '@/data/programs';
@@ -26,12 +27,6 @@ const formats = OFFERS.map((o) => ({ ...o, length: lengthOf(o.slug) }));
 const formatLabel = { lectures: 'הרצאה', workshops: 'סדנה', courses: 'קורס', executive: 'ליווי למנהלים' } as const;
 const examples = PROGRAMS.map((p) => ({ ...p, format: formatLabel[p.offer], href: `/${p.offer}` }));
 
-const steps = [
-  { title: 'שיחת היכרות', text: 'שיחה קצרה על הארגון: מי הקהל, איפה אתם עומדים עם AI ומה צריך לקרות אחרי המפגש.' },
-  { title: 'תוכנית מותאמת', text: 'בוחרים יחד פורמט ונושאים, ומקבלים סילבוס והצעה מסודרת תוך יום עסקים.' },
-  { title: 'מעבירים', text: 'פרונטלי או ב-Zoom, בעברית, עם דוגמאות מהתחום שלכם ובנייה בידיים.' },
-  { title: 'מה קורה אחרי', text: 'כל משתתף יוצא עם צעדים לשבוע הקרוב. בסדנאות ובקורסים יוצאים גם עם תבניות ותוצר שעובד.' },
-];
 
 const schema = [breadcrumbSchema(crumbs)];
 ---
@@ -92,21 +87,7 @@ const schema = [breadcrumbSchema(crumbs)];
     </div>
   </section>
 
-  <section class="py-16 md:py-20" aria-labelledby="steps-title">
-    <div class="container-x">
-      <p class="eyebrow">איך זה עובד</p>
-      <h2 id="steps-title" class="h2 mt-3">מהשיחה הראשונה ועד אחרי המפגש</h2>
-      <ol class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {steps.map((s, i) => (
-          <li class="card p-6">
-            <span class="text-2xl font-bold text-accent" aria-hidden="true">0{i + 1}</span>
-            <h3 class="h3 mt-3">{s.title}</h3>
-            <p class="mt-2 text-muted">{s.text}</p>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
+  <HowItWorks />
 
   <CTA title="ספרו לנו מה הארגון צריך" text="כתבו לנו בוואטסאפ או השאירו פרטים. נחזור תוך יום עסקים עם כיוון ראשון לתוכנית." whatsappMessage={waMessage} trackLabel="program" />
 </BaseLayout>

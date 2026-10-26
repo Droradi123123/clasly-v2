@@ -1,0 +1,15 @@
+---
+/** The subjects we teach, one link per topic hub. Sits right under the offers so "what we deliver" reads as formats plus subjects. */
+import { TOPICS } from '@/config/site';
+---
+<section class="pb-20 md:pb-24" aria-labelledby="topics-title">
+  <div class="container-x">
+    <h2 id="topics-title" class="h3">על מה מלמדים</h2>
+    <p class="mt-2 text-muted">כל נושא זמין כהרצאה, סדנה, קורס או ליווי, לקהל טכני ולא טכני.</p>
+    <ul class="mt-6 flex flex-wrap gap-3" role="list">
+      {TOPICS.map((t) => (
+        <li><a href={`/topics/${t.slug}`} class="inline-flex min-h-11 items-center rounded-full border-[1.5px] border-ink px-5 font-bold transition hover:bg-ink hover:text-bg">{t.name}</a></li>
+      ))}
+    </ul>
+  </div>
+</section>
