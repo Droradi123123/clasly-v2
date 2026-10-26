@@ -52,9 +52,10 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 48. **All primary CTAs go to `/program`** (owner, 2026-10-25): the homepage, academia, companies and every offer page hero now say "בואו נבנה לכם תוכנית המתאימה לצרכים שלכם" and link to the landing page.
 49. **First official client logos.** Tel Aviv University and Technion (t:hub), from files the owner supplied, converted to white on transparency so they sit on the dark strip (light mode inverts them). Haifa, Ben-Gurion and the College of Management are still placeholders. Reichman University: the link the owner sent is blocked from the build environment, so the file is still needed as an upload. The IDF, 8200 and Navy emblems the owner sent are held back pending the owner's decision (open question below).
 
+50. **IDF, 8200 and Navy emblems added** (owner, 2026-10-26: the team gave lectures there). Audience `company`, so they appear on the homepage strip and not on the academia strip. Note: commercial use of official IDF symbols usually requires IDF Spokesperson approval; the owner decided to include them.
+
 ## Open questions for Dror (v2)
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
 - Client logos: all five files in `public/logos/` are typographic placeholders. Send official files and confirm you may use them (TODO in `src/config/site.ts`).
-- IDF, 8200 and Navy emblems: not on the site yet. Official IDF symbols usually need IDF Spokesperson approval for commercial use, and they conflict with the rule of not naming where the team worked. Confirm before adding them.
 - Is the present tense in "לומדים עם RealAI" accurate for every institution shown?
 - Proposed copy not applied (titles and FAQ questions): see "Proposed, not applied" in `copy-audit-pages.md`.
