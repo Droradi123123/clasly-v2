@@ -75,6 +75,8 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 64. **Hero animation: "AI" drawn in dots** (`src/components/DotsAI.astro`), replacing the agent playground (owner chose prototype C of three). The dots fly in on load, scatter from the cursor or a finger and spring back; the animation pauses off screen and stays still for reduced motion.
 65. **"מה אנחנו מעבירים?" speaks to students too**, and links to two detailed pages. /companies gained "what an organization learns beyond the tools" (strategy, work plan, moving the whole organization, team skills, security, measurement). /academia gained the hiring angle: we interview candidates ourselves, the junior job market is very hard, and what interviewers look for today; plus what students leave with and what the program gains. Titles, descriptions and H1s of both pages are unchanged.
 
+66. **Third hero credential: "בנינו מוצרי AI עם עשרות אלפי משתמשים"** (owner, 2026-10-26), replacing the "from a single agent to strategy" line.
+
 ## Open questions for Dror (v2)
 - "תוריד את צה״ל" was applied to the credential line (removed). The IDF emblem is still in the homepage logo strip; say if it should go too.
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
