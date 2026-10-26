@@ -1,0 +1,26 @@
+---
+/** How working with us goes, in four steps. Shared by the homepage and /program so the process reads the same everywhere. */
+interface Props { title?: string }
+const { title = 'מהשיחה הראשונה ועד אחרי המפגש' } = Astro.props;
+const steps = [
+  { title: 'שיחת היכרות', text: 'שיחה קצרה על הארגון: מי הקהל, איפה אתם עומדים עם AI ומה צריך לקרות אחרי המפגש.' },
+  { title: 'תוכנית מותאמת', text: 'בוחרים יחד פורמט ונושאים, ומקבלים סילבוס והצעה מסודרת תוך יום עסקים.' },
+  { title: 'מעבירים', text: 'פרונטלי או ב-Zoom, בעברית, עם דוגמאות מהתחום שלכם ובנייה בידיים.' },
+  { title: 'מה קורה אחרי', text: 'כל משתתף יוצא עם צעדים לשבוע הקרוב. בסדנאות ובקורסים יוצאים גם עם תבניות ותוצר שעובד.' },
+];
+---
+<section class="border-t border-line py-20 md:py-24" aria-labelledby="steps-title">
+  <div class="container-x">
+    <p class="eyebrow">איך זה עובד</p>
+    <h2 id="steps-title" class="h2 mt-3">{title}</h2>
+    <ol class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+      {steps.map((s, i) => (
+        <li class="rule-top">
+          <span class="font-display text-3xl text-accent" aria-hidden="true">0{i + 1}</span>
+          <h3 class="h3 mt-3">{s.title}</h3>
+          <p class="mt-2 text-muted">{s.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

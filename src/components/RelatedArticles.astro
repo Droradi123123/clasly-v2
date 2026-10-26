@@ -1,8 +1,8 @@
 ---
 /** Internal-linking block: articles that support a money page or audience page. */
 import { getCollection } from 'astro:content';
-interface Props { offer?: string; slugs?: string[]; title?: string; limit?: number }
-const { offer, slugs, title = 'מדריכים שיעזרו לכם להחליט', limit = 6 } = Astro.props;
+interface Props { offer?: string; slugs?: string[]; title?: string; limit?: number; moreHref?: string; moreLabel?: string }
+const { offer, slugs, title = 'מדריכים שיעזרו לכם להחליט', limit = 6, moreHref, moreLabel = 'לכל המאמרים' } = Astro.props;
 const all = await getCollection('blog', ({ data }) => !data.draft);
 const picked = slugs
   ? slugs.map((s) => all.find((p) => p.data.slug === s)).filter((p): p is NonNullable<typeof p> => Boolean(p))
@@ -23,6 +23,7 @@ const posts = picked.slice(0, limit);
           </li>
         ))}
       </ul>
+      {moreHref && <a href={moreHref} class="btn btn-ghost mt-8">{moreLabel}</a>}
     </div>
   </section>
 )}

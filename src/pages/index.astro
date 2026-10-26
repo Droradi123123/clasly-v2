@@ -4,7 +4,9 @@ import LogoStrip from '@/components/LogoStrip.astro';
 import GapSection from '@/components/GapSection.astro';
 import ProofBlocks from '@/components/ProofBlocks.astro';
 import OfferCards from '@/components/OfferCards.astro';
-import MethodSection from '@/components/MethodSection.astro';
+import TopicLinks from '@/components/TopicLinks.astro';
+import HowItWorks from '@/components/HowItWorks.astro';
+import RelatedArticles from '@/components/RelatedArticles.astro';
 import CTA from '@/components/CTA.astro';
 import FAQ from '@/components/FAQ.astro';
 import { OFFERS } from '@/config/site';
@@ -15,10 +17,10 @@ const description = 'לומדים AI מאנשים שבנו מאות אייג׳נ
 const faq = [
   { q: 'מה אתם מעבירים בדיוק?', a: 'הרצאות, סדנאות מעשיות, קורסים והכשרות, וליווי אישי למנהלים. כל תוכנית נבנית סביב הארגון: הקהל, האתגר והקצב. הכול בעברית, לארגונים בישראל, פרונטלי או Zoom.' },
   { q: 'במה אתם שונים ממרצי AI אחרים?', a: 'לא למדנו AI מסרטונים. הטמענו אותו בעצמנו בחברות טכנולוגיה מובילות עם אלפי עובדים: אסטרטגיה ארגונית, סוכנים ואוטומציות בפרודקשן, אבטחת מידע, ניטור ומדידת ROI. כל דוגמה בכיתה היא משהו שעשינו בידיים.' },
-  { q: 'איך מתחילים להטמיע AI בארגון?', a: 'לא מכלי ולא מרישיונות. מתחילים מאנשים: סביבה בטוחה עם הרשאות קריאה בלבד, מסר ברור שמותר לטעות, ושגרירים בכל צוות שמפיצים את השימוש מבפנים. רק כשאנשים משתמשים, עוברים לבנייה מהירה של הרבה מקרי שימוש קטנים, ומשם לבנייה מחדש של תחום שלם.' },
-  { q: 'למה רוב הטמעות ה-AI נכשלות?', a: 'כי ניגשים אליהן כמו לפרויקט טכנולוגי. המחסום האמיתי הוא אנושי: אנשים חוששים לטעות, לא בטוחים מה מותר, ולא רואים איך הכלי מתחבר לעבודה שלהם. ובנוסף, רוב התהליכים לא מתועדים, ואי אפשר לבנות מחדש תהליך שאף אחד לא יודע לתאר.' },
+  { q: 'כמה זה עולה?', a: 'המחיר תלוי בפורמט, באורך, בגודל הקבוצה וברמת ההתאמה לארגון. אחרי שיחת היכרות קצרה שולחים סילבוס והצעת מחיר מסודרת תוך יום עסקים.' },
+  { q: 'זה בעברית? אפשר ב-Zoom?', a: 'כן לשניהם. הכול מועבר בעברית, עם שמות הכלים באנגלית. אפשר פרונטלי בארגון, בכנס או בקמפוס, ב-Zoom, או במשולב.' },
   { q: 'למי זה מתאים?', a: 'לאוניברסיטאות ומכללות (תוכניות יזמות, לימודי המשך, פקולטות), לחברות וצוותים (HR, תפעול, שירות, פיתוח, הנהלה) ולמנהלים שרוצים להוביל AI בארגון ולא רק לדבר עליו.' },
-  { q: 'אילו נושאים אתם מכסים?', a: 'הטמעת AI בארגון, Claude Code, n8n ואוטומציה, סוכני AI, בניית מוצרים עם AI, ROI של AI ו-AI למנהלים. כל נושא זמין כהרצאה, סדנה, קורס או ליווי.' },
+  { q: 'אילו נושאים אתם מכסים?', a: 'Claude Code, סוכני AI, n8n ואוטומציה, בניית מוצרים עם AI, AI למנהלים, ROI של AI והטמעת AI בארגון. כל נושא זמין כהרצאה, סדנה, קורס או ליווי.' },
   { q: 'האם צריך רקע טכני?', a: 'לא. רוב הקהלים שלנו אינם טכניים. בסדנאות גם מי שלא כתב שורת קוד בונה אוטומציה או כלי שעובד. לקהל טכני יש מסלולים מעמיקים.' },
   { q: 'איך מתחילים?', a: 'כותבים לנו בוואטסאפ או בטופס מה הארגון צריך. תוך יום עסקים חוזרים אליכם, ואחרי שיחת היכרות קצרה בונים יחד את התוכנית.' },
 ];
@@ -47,10 +49,12 @@ const schema = [...OFFERS.map((o) => serviceSchema({ name: `${o.name} AI`, descr
   </section>
 
   <LogoStrip />
-  <GapSection />
   <OfferCards />
-  <MethodSection />
+  <TopicLinks />
   <ProofBlocks />
+  <GapSection />
+  <HowItWorks title="איך עובדים איתנו" />
+  <RelatedArticles title="מהבלוג: מדריכים מהשטח" slugs={['claude-code-for-non-developers', 'n8n-ai-agent', 'hours-saved-is-not-an-ai-strategy']} limit={3} moreHref="/blog" />
   <!-- Testimonials: hidden until genuine quotes are collected (see TODO.md). Never use invented quotes. -->
   <FAQ items={faq} title="שאלות שארגונים שואלים אותנו" />
 
