@@ -9,7 +9,7 @@ const { audience, title = 'לומדים עם RealAI', compact = false } = Astro.
 const logos = audience ? LOGOS.filter((l) => l.audience === audience) : LOGOS;
 const repeat = Math.max(2, Math.ceil(10 / Math.max(1, logos.length)));
 const group = Array.from({ length: repeat }, () => logos).flat();
-const duration = `${Math.max(30, group.length * 4.5)}s`;
+const duration = `${Math.max(90, group.length * 12)}s`;
 ---
 {logos.length > 0 && (
   <section aria-label={title} class={compact ? 'py-10' : 'border-t border-line py-14'}>

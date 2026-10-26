@@ -60,6 +60,8 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 
 54. **Homepage content back to the start-of-day version, on the v4 design** (owner, 2026-10-26). Same sections and copy as before (gap, offers, method, proof, FAQ, CTA); the bridge and topics sections were removed. New headline: "לומדים AI ממי שעושה את זה." with three credentials under it (hundreds of agents built, AI adoption in organizations of thousands of employees, lecturing at the Technion, Tel Aviv University and the IDF). The second proof point now carries "hundreds of agents". Supersedes the message in 51 for the homepage.
 
+55. **Headline: "לומדים AI מאנשים שבנו מאות אייג׳נטים / מתוך ארגונים של אלפי עובדים."** (owner, 2026-10-26). Plural, and the experience is framed as built from inside real organizations; it is the reason the teaching is good, not the subject. The credential lines under the headline were removed: the logo strip carries the institutions. Logo marquee slowed to about 12 seconds per logo (about 18px a second, was about 67).
+
 ## Open questions for Dror (v2)
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
 - Client logos: all five files in `public/logos/` are typographic placeholders. Send official files and confirm you may use them (TODO in `src/config/site.ts`).
