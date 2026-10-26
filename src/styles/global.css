@@ -4,8 +4,7 @@
 
 /*
  * Design tokens. White page, black type, one blue. Secular One (round, friendly Hebrew display) for headings,
- * Assistant for text. One theme only. The one living thing on the site is the bridge on the homepage;
- * everything else is still.
+ * Assistant for text. One theme only. Motion is limited to the client marquee and gentle reveals on scroll.
  */
 :root {
   --paper: #ffffff;
@@ -78,9 +77,6 @@ body { position: relative; min-height: 100dvh; font-size: 1.0625rem; line-height
 a.glow-card:hover { border-color: var(--ink); }
 .rule-top { border-top: 1px solid var(--rule-strong); padding-top: 1.1rem; }
 .pill { display: inline-flex; align-items: center; gap: .5rem; padding: .35rem .8rem; border: 1px solid var(--rule); border-radius: 999px; font-size: .9rem; color: var(--ink-2); }
-/* Topic chips: the subjects we teach, as a row of outlined pills. */
-.chip { display: inline-flex; align-items: center; min-height: 2.75rem; padding: .5rem 1.1rem; border: 1.5px solid var(--ink); border-radius: 999px; font-weight: 700; transition: background .15s, color .15s; }
-.chip:hover { background: var(--ink); color: var(--paper); }
 .hero { border-bottom: 1px solid var(--rule); }
 .hero-glow { display: none; }
 
@@ -108,31 +104,6 @@ html.js .reveal.in { opacity: 1; transform: none; }
 .check-list.in li:nth-child(1) { transition-delay: 1s; } .check-list.in li:nth-child(2) { transition-delay: 1.15s; } .check-list.in li:nth-child(3) { transition-delay: 1.3s; }
 .check-list.in li:nth-child(4) { transition-delay: 1.45s; } .check-list.in li:nth-child(5) { transition-delay: 1.6s; }
 
-/* ---------- The bridge: a line grows from what we did to what we teach ----------
-   Rows animate once when scrolled into view (the .in class from the reveal observer). */
-.bridge-row { display: grid; grid-template-columns: 1fr clamp(2.5rem, 12vw, 10rem) 1fr; gap: .75rem 1rem; align-items: center; padding-block: 1rem; border-top: 1px solid var(--rule); }
-.bridge-row .did { font-weight: 600; font-size: clamp(1rem, 1.6vw, 1.2rem); }
-.bridge-row .teach { font-family: var(--font-display); font-size: clamp(1.3rem, 2.3vw, 1.9rem); line-height: 1.2; color: var(--accent); text-align: left; }
-.bridge-row .teach a { text-decoration: none; }
-.bridge-row .teach a:hover { text-decoration: underline; text-underline-offset: .2em; }
-.bridge-row .ln { position: relative; height: 2px; background: var(--rule); }
-.bridge-row .ln::before { content: ""; position: absolute; inset: 0; background: var(--accent); transform-origin: right; transform: scaleX(1); }
-.bridge-row .ln::after { content: ""; position: absolute; left: -1px; top: -5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
-html.js .bridge:not(.in) .bridge-row .ln::before { transform: scaleX(0); }
-html.js .bridge:not(.in) .bridge-row .ln::after { opacity: 0; transform: scale(.4); }
-html.js .bridge:not(.in) .bridge-row .teach { opacity: 0; }
-html.js .bridge.in .bridge-row .ln::before { animation: bridge-grow .7s cubic-bezier(.2,.7,.2,1) both; animation-delay: var(--d, 0s); }
-html.js .bridge.in .bridge-row .ln::after { animation: bridge-pop .35s ease-out both; animation-delay: calc(var(--d, 0s) + .6s); }
-html.js .bridge.in .bridge-row .teach { animation: bridge-up .5s ease-out both; animation-delay: calc(var(--d, 0s) + .55s); }
-@keyframes bridge-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes bridge-pop { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: scale(1); } }
-@keyframes bridge-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-@media (max-width: 640px) {
-  .bridge-row { grid-template-columns: 1fr; gap: .35rem; }
-  .bridge-row .ln { width: 2.5rem; }
-  .bridge-row .teach { text-align: right; }
-}
-
 /* ---------- Client logo marquee: endless loop of two identical groups ----------
    Pauses on hover only on devices with a real pointer (a tap used to stop it for good). */
 .marquee { --gap: 3.5rem; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); direction: ltr; }
@@ -153,7 +124,6 @@ html.js .bridge.in .bridge-row .teach { animation: bridge-up .5s ease-out both; 
   .marquee-group { flex-wrap: wrap; justify-content: center; row-gap: 1.5rem; }
   .marquee-group[aria-hidden="true"], .marquee-group li[aria-hidden="true"] { display: none; }
   .strike-list li span::after { transition: none; } .check-list li { transition: none; }
-  html.js .bridge .bridge-row .ln::before, html.js .bridge .bridge-row .ln::after, html.js .bridge .bridge-row .teach { animation: none; opacity: 1; transform: none; }
 }
 
 /* ---------- Prose for MDX articles (RTL aware) ---------- */
