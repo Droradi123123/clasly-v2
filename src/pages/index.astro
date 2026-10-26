@@ -11,7 +11,7 @@ import { OFFERS } from '@/config/site';
 import { serviceSchema, faqSchema } from '@/lib/seo';
 
 const title = 'הרצאות וסדנאות AI לארגונים, מאנשים שהטמיעו AI';
-const description = 'לומדים AI ממי שעושה את זה: הרצאות, סדנאות וקורסים לחברות, לאקדמיה ולמנהלים, מצוות שבנה מאות אייג׳נטים והטמיע AI בארגונים של אלפי עובדים.';
+const description = 'לומדים AI מאנשים שבנו מאות אייג׳נטים מתוך ארגונים של אלפי עובדים: הרצאות, סדנאות וקורסים לחברות, לאקדמיה ולמנהלים, בעברית.';
 const faq = [
   { q: 'מה אתם מעבירים בדיוק?', a: 'הרצאות, סדנאות מעשיות, קורסים והכשרות, וליווי אישי למנהלים. כל תוכנית נבנית סביב הארגון: הקהל, האתגר והקצב. הכול בעברית, לארגונים בישראל, פרונטלי או Zoom.' },
   { q: 'במה אתם שונים ממרצי AI אחרים?', a: 'לא למדנו AI מסרטונים. הטמענו אותו בעצמנו בחברות טכנולוגיה מובילות עם אלפי עובדים: אסטרטגיה ארגונית, סוכנים ואוטומציות בפרודקשן, אבטחת מידע, ניטור ומדידת ROI. כל דוגמה בכיתה היא משהו שעשינו בידיים.' },
@@ -34,16 +34,11 @@ const schema = [...OFFERS.map((o) => serviceSchema({ name: `${o.name} AI`, descr
           <li><a href="/executive">למנהלים</a></li>
         </ul>
       </nav>
-      <h1 class="display mt-7 max-w-5xl text-balance">
-        <span class="block">לומדים AI</span>
-        <span class="block text-accent">ממי שעושה את זה.</span>
+      <h1 class="display mt-7 text-balance">
+        <span class="block">לומדים AI מאנשים שבנו מאות אייג׳נטים</span>
+        <span class="block text-accent">מתוך ארגונים של אלפי עובדים.</span>
       </h1>
-      <ul class="mt-8 flex flex-col gap-2 text-lg font-bold sm:flex-row sm:flex-wrap sm:gap-x-8" aria-label="הרקע שלנו">
-        <li class="flex items-baseline gap-2"><span class="text-accent" aria-hidden="true">—</span>בנינו מאות אייג׳נטים</li>
-        <li class="flex items-baseline gap-2"><span class="text-accent" aria-hidden="true">—</span>הטמענו AI בארגונים של אלפי עובדים</li>
-        <li class="flex items-baseline gap-2"><span class="text-accent" aria-hidden="true">—</span>מרצים בטכניון, באוניברסיטת תל אביב ובצה״ל</li>
-      </ul>
-      <p class="lead mt-6 max-w-3xl">הרצאות, סדנאות וקורסים על AI לחברות, לאקדמיה ולמנהלים. לא למדנו AI מסרטונים: אנחנו בונים איתו כל יום, ומלמדים מתוך מה שעובד ומה שנשבר.</p>
+      <p class="lead mt-8 max-w-3xl">הרצאות, סדנאות וקורסים על AI לחברות, לאקדמיה ולמנהלים. לא למדנו AI מסרטונים: אנחנו בונים איתו כל יום, ומלמדים מתוך מה שעובד ומה שנשבר.</p>
       <div class="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
         <a href="/program" class="btn btn-primary" data-track="cta_click" data-track-label="hero">בואו נבנה לכם תוכנית המתאימה לצרכים שלכם</a>
         <a href="#offers-title" class="btn btn-ghost">מה אנחנו מעבירים?</a>
