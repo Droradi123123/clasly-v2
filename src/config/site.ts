@@ -26,7 +26,7 @@ export const SITE = {
   locale: 'he_IL',
   lang: 'he',
   // Entity facts: keep identical everywhere (site, LinkedIn, directories) so AI engines form one stable entity.
-  tagline: 'לומדים AI מאנשים שבנו מאות אייג׳נטים מתוך ארגונים של אלפי עובדים',
+  tagline: 'לומדים AI ממי שעושה את זה',
   description:
     'הרצאות, סדנאות, קורסים וליווי אישי למנהלים בהטמעת AI בארגונים בישראל. מועבר בעברית על ידי צוות שהטמיע AI בעצמו בחברות טכנולוגיה מובילות עם אלפי עובדים: Claude Code, n8n, סוכני AI ומדידת ROI.',
   whatsappNumber: WHATSAPP_NUMBER,
@@ -106,8 +106,8 @@ export const FOOTER_LINKS = {
  */
 export type Audience = 'academia' | 'company';
 export const LOGOS: { id: string; name: string; file: string; width: number; height: number; audience: Audience; placeholder: boolean }[] = [
-  { id: 'tau', name: 'אוניברסיטת תל אביב', file: '/logos/tau.png', width: 293, height: 160, audience: 'academia', placeholder: false },
   { id: 'technion-thub', name: 'הטכניון, t:hub', file: '/logos/technion-thub.png', width: 482, height: 96, audience: 'academia', placeholder: false },
+  { id: 'tau', name: 'אוניברסיטת תל אביב', file: '/logos/tau.png', width: 293, height: 160, audience: 'academia', placeholder: false },
   { id: 'idf', name: 'צה״ל', file: '/logos/idf.png', width: 171, height: 160, audience: 'company', placeholder: false },
   { id: '8200', name: 'יחידה 8200', file: '/logos/8200.png', width: 160, height: 160, audience: 'company', placeholder: false },
   { id: 'navy', name: 'חיל הים', file: '/logos/navy.png', width: 294, height: 110, audience: 'company', placeholder: false },
