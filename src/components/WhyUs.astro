@@ -1,0 +1,67 @@
+---
+/**
+ * Why us, the first section after the hero: we come from industry, we did this in the real world, not on YouTube.
+ * Three parts: the claim, the evidence (proof points), and the gap between what videos teach and what the field teaches.
+ */
+import { PROOF_POINTS } from '@/config/site';
+const learned = [
+  '10 כלי AI שחייבים להכיר החודש',
+  'הפרומפט המושלם שיחליף לכם עובד',
+  'דמו מרשים שעובד פעם אחת',
+  'AI יחליף את כולם עד סוף השנה',
+  'מצגת עם הרבה חיצים',
+];
+const done = [
+  'איך גורמים לאלפי עובדים להשתמש בזה כל יום, ולא רק בשבוע הראשון',
+  'איך עוברים אבטחת מידע, משפטית ורכש בלי לאבד חצי שנה',
+  'מה נשבר בפרודקשן, ואיך בונים ניטור שאנשים סומכים עליו',
+  'איך מודדים ROI שההנהלה מוכנה לחתום עליו',
+  'מה עושים כשהמודל טועה מול לקוח אמיתי',
+];
+---
+<section class="py-20 md:py-28" aria-labelledby="why-title">
+  <div class="container-x">
+    <div class="grid gap-10 md:grid-cols-12 md:gap-12">
+      <div class="md:col-span-7">
+        <p class="eyebrow">למה אנחנו</p>
+        <h2 id="why-title" class="h2 mt-3">למדנו AI בעולם האמיתי. <span class="text-accent">לא ביוטיוב.</span></h2>
+      </div>
+      <div class="md:col-span-5 md:self-end">
+        <p class="lead">אנחנו מגיעים מהתעשייה, ועדיין עובדים בה. בנינו מאות אייג׳נטים והובלנו הטמעת AI בחברות טכנולוגיה עם אלפי עובדים. כל מה שאנחנו מלמדים ניסינו קודם על אנשים אמיתיים, בתהליכים אמיתיים, עם תקלות אמיתיות. זה היתרון שלנו.</p>
+      </div>
+    </div>
+
+    <div class="mt-14 grid gap-x-8 gap-y-10 md:grid-cols-3">
+      {PROOF_POINTS.map((p, i) => (
+        <article class="rule-top reveal" style={`transition-delay:${i * 90}ms`}>
+          <p class="font-display text-3xl md:text-4xl">{p.stat}</p>
+          <h3 class="mt-4 text-lg font-bold">{p.title}</h3>
+          <p class="mt-2 text-muted">{p.text}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-20 rounded-[4px] bg-soft p-6 md:p-10">
+      <h3 class="h3 max-w-2xl">מה ההבדל בפועל? יש פער עצום בין מי שלמד AI ביוטיוב לבין מי שעשה את זה בארגון.</h3>
+      <div class="mt-8 grid gap-10 md:grid-cols-2 md:gap-14">
+        <div>
+          <p class="rule-top text-sm font-bold text-muted">מה שלומדים מסרטונים</p>
+          <ul class="strike-list mt-3 divide-y divide-line text-lg" data-inview>
+            {learned.map((t) => <li class="py-3"><span>{t}</span></li>)}
+          </ul>
+        </div>
+        <div>
+          <p class="rule-top text-sm font-bold text-accent">מה שלומדים בתעשייה, ואנחנו מביאים לכיתה</p>
+          <ul class="check-list mt-3 divide-y divide-line text-lg" data-inview>
+            {done.map((t, i) => (
+              <li class="flex gap-4 py-3">
+                <span class="font-display text-accent" aria-hidden="true">{i + 1}.</span>
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

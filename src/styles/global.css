@@ -106,10 +106,10 @@ html.js .reveal.in { opacity: 1; transform: none; }
 
 /* ---------- Client logo marquee: endless loop of two identical groups ----------
    Pauses on hover only on devices with a real pointer (a tap used to stop it for good). */
-.marquee { --gap: 3.5rem; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); direction: ltr; }
+.marquee { --gap: 3.5rem; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); direction: rtl; }
 .marquee-track { display: flex; gap: var(--gap); width: max-content; animation: marquee var(--duration, 40s) linear infinite; }
 .marquee-group { display: flex; align-items: center; gap: var(--gap); flex-shrink: 0; }
-@keyframes marquee { to { transform: translateX(calc(-50% - var(--gap) / 2)); } }
+@keyframes marquee { to { transform: translateX(calc(50% + var(--gap) / 2)); } }
 .logo-item { height: 3.5rem; width: auto; max-width: 15rem; object-fit: contain; opacity: .85; transition: opacity .2s; }
 @media (hover: hover) and (pointer: fine) {
   .marquee:hover .marquee-track { animation-play-state: paused; }

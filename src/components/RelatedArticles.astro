@@ -1,6 +1,7 @@
 ---
 /** Internal-linking block: articles that support a money page or audience page. */
 import { getCollection } from 'astro:content';
+import ArticleCover from './ArticleCover.astro';
 interface Props { offer?: string; slugs?: string[]; title?: string; limit?: number; moreHref?: string; moreLabel?: string }
 const { offer, slugs, title = 'מדריכים שיעזרו לכם להחליט', limit = 6, moreHref, moreLabel = 'לכל המאמרים' } = Astro.props;
 const all = await getCollection('blog', ({ data }) => !data.draft);
@@ -15,10 +16,13 @@ const posts = picked.slice(0, limit);
       <h2 id="related-articles-title" class="h2">{title}</h2>
       <ul class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((p) => (
-          <li class="card p-5 transition hover:border-accent">
-            <a href={`/blog/${p.data.slug}`} class="block">
-              <span class="font-bold leading-snug hover:text-accent">{p.data.title}</span>
-              <span class="mt-2 block text-sm text-muted">{p.data.description}</span>
+          <li class="card overflow-hidden transition hover:border-ink">
+            <a href={`/blog/${p.data.slug}`} class="group block">
+              <ArticleCover slug={p.data.slug} topic={p.data.topicHub} />
+              <span class="block p-5">
+                <span class="font-bold leading-snug group-hover:text-accent">{p.data.title}</span>
+                <span class="mt-2 block text-sm text-muted">{p.data.description}</span>
+              </span>
             </a>
           </li>
         ))}

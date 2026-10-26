@@ -1,0 +1,23 @@
+---
+/** Why learning AI matters now. Plain reasons a manager or program head can repeat to their own boss; no statistics we cannot source. */
+const reasons = [
+  { title: 'העובדים כבר משתמשים ב-AI', text: 'השאלה היא לא אם, אלא איך. בלי הכשרה כל אחד ממציא לבד, ולא תמיד בצורה בטוחה או חכמה.' },
+  { title: 'הפער נפתח מהר', text: 'מי שלומד לבנות עם AI, ולא רק לשאול אותו שאלות, עושה בשעה מה שלקח יום. ההבדל מצטבר כל שבוע.' },
+  { title: 'הכלים משתנים כל חודש', text: 'לכן לא מלמדים כפתורים. מלמדים דרך חשיבה ושיטת עבודה שנשארות גם כשהכלי מתחלף.' },
+  { title: 'השוק כבר מצפה לזה', text: 'מעסיקים מחפשים אנשים שיודעים לעבוד עם AI מהיום הראשון. סטודנטים ועובדים שלמדו את זה מקבלים יתרון.' },
+];
+---
+<section class="border-t border-line py-20 md:py-24" aria-labelledby="whynow-title">
+  <div class="container-x">
+    <p class="eyebrow">למה עכשיו</p>
+    <h2 id="whynow-title" class="h2 mt-3 max-w-3xl">למה זה חשוב ללמוד AI עכשיו?</h2>
+    <ul class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4" role="list">
+      {reasons.map((r) => (
+        <li class="rule-top">
+          <h3 class="text-lg font-bold">{r.title}</h3>
+          <p class="mt-2 text-muted">{r.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

@@ -64,8 +64,14 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 
 56. **Homepage explains, the blog argues** (owner, 2026-10-26). The method section ("not a technology project", "psychology is the real part") and two thesis questions in the FAQ left the homepage; that thinking lives in the adoption pillar and the articles. The homepage now runs: hero, logos, what we deliver (formats, then the subjects as links to their hubs), why us (proof), the YouTube vs. hands-on gap, how working with us goes (shared with /program), three blog guides, FAQ (with price and language/Zoom questions), contact.
 
+57. **Hero back to "לומדים AI / ממי שעושה את זה."** with the three credential lines and the sub-line (owner, 2026-10-26).
+58. **Hero playground: "בנו אייג׳נט בשלושה קליקים"** (`src/components/AgentPlayground.astro`). The visitor picks a trigger, an action and a destination; Run lights the flow and types a sample result. It is scripted and labelled "הדגמה", not a live model call, so it is instant and free and never fails. It links to /workshops. Runs are tracked as `agent_toy_run`. The event API now also accepts `cta_click`, which the main buttons were already sending and the API was silently rejecting.
+59. **Homepage order: hero, logos, why us, why now, what we teach, how it works, blog, FAQ, contact** (owner). Why us (`WhyUs.astro`) folds together the claim (we come from industry, not YouTube), the three proof points and the videos vs. industry comparison. Why now (`WhyNow.astro`) gives four plain reasons with no unsourced statistics. `GapSection` was merged into WhyUs and deleted.
+60. **Logos start from the Technion, and the strip runs right to left**, so the Technion is the first logo a Hebrew reader sees.
+61. **Generated article covers** (`src/components/ArticleCover.astro`): each topic has its own visual language (agents as a network, n8n as a flow, Claude Code as a terminal, ROI as a chart, adoption as people dots, building as blocks, managers as a roadmap) and the slug seeds the variation, so every article has its own image. Inline SVG in the site palette; shown on the blog index, topic hubs, related-article blocks and the article header.
+
 ## Open questions for Dror (v2)
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
-- Client logos: all five files in `public/logos/` are typographic placeholders. Send official files and confirm you may use them (TODO in `src/config/site.ts`).
+- Client logos still missing: University of Haifa, Ben-Gurion University, the College of Management (typographic placeholders) and Reichman University (the link was blocked from the build environment; upload the file). Any other institution you have lectured at can be added the same way.
 - Is the present tense in "לומדים עם RealAI" accurate for every institution shown?
 - Proposed copy not applied (titles and FAQ questions): see "Proposed, not applied" in `copy-audit-pages.md`.
