@@ -1,26 +1,24 @@
 @import "tailwindcss";
-@import "@fontsource/frank-ruhl-libre/400.css";
-@import "@fontsource/frank-ruhl-libre/700.css";
-@import "@fontsource/frank-ruhl-libre/900.css";
+@import "@fontsource/secular-one";
 @import "@fontsource-variable/assistant";
 
 /*
- * Design tokens. Editorial and warm: paper, ink, one red "pen" accent.
- * Frank Ruhl Libre (a Hebrew newspaper serif) for headings, Assistant for text.
- * One theme only. Wow comes from type scale and whitespace, not from effects.
+ * Design tokens. White page, black type, one blue. Secular One (round, friendly Hebrew display) for headings,
+ * Assistant for text. One theme only. The one living thing on the site is the bridge on the homepage;
+ * everything else is still.
  */
 :root {
-  --paper: #f5f0e8;
-  --paper-2: #ebe4d7;
-  --paper-field: #fdfbf7;
-  --ink: #1b1813;
-  --ink-2: #625b50;
-  --rule: #d5ccbd;
-  --rule-strong: #1b1813;
-  --accent: #c23b22;
-  --accent-strong: #a32f19;
-  --accent-ink: #fdfbf7;
-  --ring: rgba(194, 59, 34, 0.55);
+  --paper: #ffffff;
+  --paper-2: #f4f4f1;
+  --paper-field: #ffffff;
+  --ink: #141414;
+  --ink-2: #6a6a65;
+  --rule: #e2e2dd;
+  --rule-strong: #141414;
+  --accent: #1f3fd1;
+  --accent-strong: #1733ad;
+  --accent-ink: #ffffff;
+  --ring: rgba(31, 63, 209, 0.5);
   color-scheme: light;
 }
 
@@ -36,7 +34,7 @@
   --color-accent-strong: var(--accent-strong);
   --color-accent-ink: var(--accent-ink);
   --font-sans: "Assistant Variable", "Assistant", "Segoe UI", Arial, sans-serif;
-  --font-display: "Frank Ruhl Libre", "David", Georgia, "Times New Roman", serif;
+  --font-display: "Secular One", "Assistant Variable", "Assistant", Arial, sans-serif;
 }
 
 html {
@@ -47,9 +45,7 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 body { position: relative; min-height: 100dvh; font-size: 1.0625rem; line-height: 1.65; text-rendering: optimizeLegibility; overflow-x: clip; }
-/* A faint paper grain: the one texture on the site. */
-body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .5; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .09 0 0 0 0 .07 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
-::selection { background: var(--ink); color: var(--paper); }
+::selection { background: var(--accent); color: var(--accent-ink); }
 
 :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
 
@@ -57,37 +53,40 @@ body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-even
 @media (min-width: 640px) { .container-x { padding-inline: 2rem; } }
 
 /* ---------- Type ---------- */
-.font-display, .display, .h1, .h2, .h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: 0; }
-.display { font-size: clamp(2.75rem, 8.2vw, 6.25rem); line-height: 1.02; font-weight: 900; }
-.h1 { font-size: clamp(2.25rem, 5.2vw, 3.75rem); line-height: 1.1; }
-.h2 { font-size: clamp(1.8rem, 3.8vw, 2.75rem); line-height: 1.15; }
-.h3 { font-size: 1.45rem; line-height: 1.3; }
+.font-display, .display, .h1, .h2, .h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: 0; }
+.display { font-size: clamp(2.75rem, 7vw, 5.75rem); line-height: 1.06; }
+.h1 { font-size: clamp(2.25rem, 5vw, 3.6rem); line-height: 1.1; }
+.h2 { font-size: clamp(1.75rem, 3.6vw, 2.75rem); line-height: 1.15; }
+.h3 { font-size: 1.5rem; line-height: 1.25; }
 .lead { font-size: clamp(1.1rem, 1.9vw, 1.3rem); line-height: 1.6; color: var(--ink-2); }
 .eyebrow { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; font-weight: 700; color: var(--accent); }
 .eyebrow::before { content: ""; width: 1.5rem; height: 2px; background: var(--accent); }
 .text-balance { text-wrap: balance; }
 
 /* ---------- Buttons: one primary, one text link with an arrow ---------- */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 3rem; padding: .7rem 1.4rem; border-radius: 3px; font-weight: 700; line-height: 1.3; text-align: center; text-decoration: none; transition: background .15s ease, color .15s ease, border-color .15s ease; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 3rem; padding: .7rem 1.4rem; border-radius: 4px; font-weight: 700; line-height: 1.3; text-align: center; text-decoration: none; transition: background .15s ease, color .15s ease, border-color .15s ease; }
 .btn-primary { background: var(--ink); color: var(--paper); }
 .btn-primary:hover { background: var(--accent); color: var(--accent-ink); }
-.btn-ghost { padding-inline: .25rem; border-bottom: 2px solid var(--ink); border-radius: 0; min-height: 2.5rem; color: var(--ink); }
-.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn-ghost { padding-inline: .25rem; border-bottom: 2px solid var(--accent); border-radius: 0; min-height: 2.5rem; color: var(--ink); }
+.btn-ghost:hover { color: var(--accent); }
 .btn-ghost::after { content: "←"; font-weight: 400; transition: transform .15s ease; }
 .btn-ghost:hover::after { transform: translateX(-3px); }
 
 /* ---------- Surfaces: rules instead of cards ---------- */
-.card { background: transparent; border: 1px solid var(--rule); border-radius: 3px; }
-.glow-card { background: transparent; border: 1px solid var(--rule); border-radius: 3px; transition: border-color .15s ease; }
+.card { background: transparent; border: 1px solid var(--rule); border-radius: 4px; }
+.glow-card { background: transparent; border: 1px solid var(--rule); border-radius: 4px; transition: border-color .15s ease; }
 a.glow-card:hover { border-color: var(--ink); }
 .rule-top { border-top: 1px solid var(--rule-strong); padding-top: 1.1rem; }
-.pill { display: inline-flex; align-items: center; gap: .5rem; padding: .35rem .8rem; border: 1px solid var(--rule); border-radius: 3px; font-size: .9rem; color: var(--ink-2); }
+.pill { display: inline-flex; align-items: center; gap: .5rem; padding: .35rem .8rem; border: 1px solid var(--rule); border-radius: 999px; font-size: .9rem; color: var(--ink-2); }
+/* Topic chips: the subjects we teach, as a row of outlined pills. */
+.chip { display: inline-flex; align-items: center; min-height: 2.75rem; padding: .5rem 1.1rem; border: 1.5px solid var(--ink); border-radius: 999px; font-weight: 700; transition: background .15s, color .15s; }
+.chip:hover { background: var(--ink); color: var(--paper); }
 .hero { border-bottom: 1px solid var(--rule); }
 .hero-glow { display: none; }
 
 /* Audience line: plain links separated by slashes, the current page underlined in red. */
 .audience-list { display: flex; flex-wrap: wrap; gap: .35rem .75rem; font-size: .95rem; color: var(--ink-2); }
-.audience-list li + li::before { content: "/"; margin-inline-end: .75rem; color: var(--rule); }
+.audience-list li + li::before { content: "·"; margin-inline-end: .75rem; color: var(--ink-2); }
 .audience-list a { color: inherit; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .3em; text-decoration-thickness: 2px; transition: color .15s, text-decoration-color .15s; }
 .audience-list a:hover, .audience-list a[aria-current="page"] { color: var(--ink); text-decoration-color: var(--accent); }
 
@@ -97,7 +96,7 @@ html.js .reveal.in { opacity: 1; transform: none; }
 
 /* ---------- The gap: red pen through the clichés ---------- */
 .strike-list li span { position: relative; }
-.strike-list li span::after { content: ""; position: absolute; inset-inline-start: -2px; inset-inline-end: -2px; top: 54%; height: 2px; width: 0; background: var(--accent); transform: rotate(-1deg); transition: width .5s cubic-bezier(.65,0,.35,1); }
+.strike-list li span::after { content: ""; position: absolute; inset-inline-start: -2px; inset-inline-end: -2px; top: 54%; height: 2px; width: 0; background: var(--ink); transform: rotate(-1deg); transition: width .5s cubic-bezier(.65,0,.35,1); }
 .strike-list li { transition: color .5s ease; }
 .strike-list.in li span::after { width: calc(100% + 4px); }
 .strike-list.in li { color: var(--ink-2); }
@@ -109,13 +108,38 @@ html.js .reveal.in { opacity: 1; transform: none; }
 .check-list.in li:nth-child(1) { transition-delay: 1s; } .check-list.in li:nth-child(2) { transition-delay: 1.15s; } .check-list.in li:nth-child(3) { transition-delay: 1.3s; }
 .check-list.in li:nth-child(4) { transition-delay: 1.45s; } .check-list.in li:nth-child(5) { transition-delay: 1.6s; }
 
+/* ---------- The bridge: a line grows from what we did to what we teach ----------
+   Rows animate once when scrolled into view (the .in class from the reveal observer). */
+.bridge-row { display: grid; grid-template-columns: 1fr clamp(2.5rem, 12vw, 10rem) 1fr; gap: .75rem 1rem; align-items: center; padding-block: 1rem; border-top: 1px solid var(--rule); }
+.bridge-row .did { font-weight: 600; font-size: clamp(1rem, 1.6vw, 1.2rem); }
+.bridge-row .teach { font-family: var(--font-display); font-size: clamp(1.3rem, 2.3vw, 1.9rem); line-height: 1.2; color: var(--accent); text-align: left; }
+.bridge-row .teach a { text-decoration: none; }
+.bridge-row .teach a:hover { text-decoration: underline; text-underline-offset: .2em; }
+.bridge-row .ln { position: relative; height: 2px; background: var(--rule); }
+.bridge-row .ln::before { content: ""; position: absolute; inset: 0; background: var(--accent); transform-origin: right; transform: scaleX(1); }
+.bridge-row .ln::after { content: ""; position: absolute; left: -1px; top: -5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+html.js .bridge:not(.in) .bridge-row .ln::before { transform: scaleX(0); }
+html.js .bridge:not(.in) .bridge-row .ln::after { opacity: 0; transform: scale(.4); }
+html.js .bridge:not(.in) .bridge-row .teach { opacity: 0; }
+html.js .bridge.in .bridge-row .ln::before { animation: bridge-grow .7s cubic-bezier(.2,.7,.2,1) both; animation-delay: var(--d, 0s); }
+html.js .bridge.in .bridge-row .ln::after { animation: bridge-pop .35s ease-out both; animation-delay: calc(var(--d, 0s) + .6s); }
+html.js .bridge.in .bridge-row .teach { animation: bridge-up .5s ease-out both; animation-delay: calc(var(--d, 0s) + .55s); }
+@keyframes bridge-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes bridge-pop { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: scale(1); } }
+@keyframes bridge-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (max-width: 640px) {
+  .bridge-row { grid-template-columns: 1fr; gap: .35rem; }
+  .bridge-row .ln { width: 2.5rem; }
+  .bridge-row .teach { text-align: right; }
+}
+
 /* ---------- Client logo marquee: endless loop of two identical groups ----------
    Pauses on hover only on devices with a real pointer (a tap used to stop it for good). */
 .marquee { --gap: 3.5rem; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); direction: ltr; }
 .marquee-track { display: flex; gap: var(--gap); width: max-content; animation: marquee var(--duration, 40s) linear infinite; }
 .marquee-group { display: flex; align-items: center; gap: var(--gap); flex-shrink: 0; }
 @keyframes marquee { to { transform: translateX(calc(-50% - var(--gap) / 2)); } }
-.logo-item { height: 3.75rem; width: auto; max-width: 15rem; object-fit: contain; opacity: .8; transition: opacity .2s; }
+.logo-item { height: 3.5rem; width: auto; max-width: 15rem; object-fit: contain; opacity: .85; transition: opacity .2s; }
 @media (hover: hover) and (pointer: fine) {
   .marquee:hover .marquee-track { animation-play-state: paused; }
   .logo-item:hover { opacity: 1; }
@@ -129,6 +153,7 @@ html.js .reveal.in { opacity: 1; transform: none; }
   .marquee-group { flex-wrap: wrap; justify-content: center; row-gap: 1.5rem; }
   .marquee-group[aria-hidden="true"], .marquee-group li[aria-hidden="true"] { display: none; }
   .strike-list li span::after { transition: none; } .check-list li { transition: none; }
+  html.js .bridge .bridge-row .ln::before, html.js .bridge .bridge-row .ln::after, html.js .bridge .bridge-row .teach { animation: none; opacity: 1; transform: none; }
 }
 
 /* ---------- Prose for MDX articles (RTL aware) ---------- */
@@ -141,7 +166,7 @@ html.js .reveal.in { opacity: 1; transform: none; }
 .prose ul, .prose ol { padding-inline-start: 1.4em; }
 .prose ul { list-style: disc; } .prose ol { list-style: decimal; }
 .prose li + li { margin-top: .35em; }
-.prose blockquote { border-inline-start: 3px solid var(--accent); padding-inline-start: 1em; color: var(--ink-2); font-family: var(--font-display); font-size: 1.2em; }
+.prose blockquote { border-inline-start: 3px solid var(--accent); padding-inline-start: 1em; color: var(--ink-2); font-size: 1.05em; }
 .prose code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; background: var(--paper-2); padding: .1em .35em; border-radius: 3px; direction: ltr; unicode-bidi: embed; }
 .prose pre { background: var(--ink); color: var(--paper); border-radius: 3px; padding: 1rem; overflow-x: auto; direction: ltr; text-align: left; }
 .prose pre code { background: transparent; color: inherit; padding: 0; }

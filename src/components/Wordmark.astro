@@ -1,10 +1,8 @@
 ---
-/**
- * Brand wordmark: "RealAI" set in the display serif, closed with a red full stop.
- * Live text, not an image: crisp at any size, readable by engines, and it reads like a masthead, not an app icon.
- */
+/** Brand wordmark: "RealAI" in the display face, with "AI" in the accent. Live text, not an image. */
 import { BRAND_NAME } from '@/config/site';
 interface Props { class?: string }
 const { class: cls = '' } = Astro.props;
+const m = BRAND_NAME.match(/^(.*?)(AI)$/);
 ---
-<span dir="ltr" class={`font-display whitespace-nowrap font-bold leading-none ${cls}`}>{BRAND_NAME}<span class="text-accent" aria-hidden="true">.</span></span>
+<span dir="ltr" class={`font-display whitespace-nowrap leading-none ${cls}`}>{m ? <>{m[1]}<span class="text-accent">{m[2]}</span></> : BRAND_NAME}</span>

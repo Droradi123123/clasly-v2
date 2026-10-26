@@ -1,0 +1,32 @@
+---
+/**
+ * The one living element on the site: a line grows from what we did (right) to what we teach (left).
+ * Every "did" is a claim the site already makes elsewhere (proof points, team, how-this-site-was-built).
+ * Each "teach" links to its topic hub or offer page.
+ */
+const rows = [
+  { did: 'בנינו מאות אייג׳נטים, חלקם בפרודקשן מול לקוחות', teach: 'סוכני AI', href: '/topics/ai-agents' },
+  { did: 'חיברנו מערכות ובנינו אוטומציות שרצות כל יום', teach: 'n8n ואוטומציה', href: '/topics/n8n' },
+  { did: 'בנינו מוצרים שלמים עם סוכן קוד, כולל האתר הזה', teach: 'Claude Code ובניית מוצרים', href: '/topics/claude-code' },
+  { did: 'הובלנו אסטרטגיית AI והטמעה בארגונים של אלפי עובדים', teach: 'AI למנהלים והטמעה בארגון', href: '/topics/ai-adoption' },
+  { did: 'מדדנו ROI של AI מול הנהלה ודירקטוריון', teach: 'ROI של AI', href: '/topics/ai-roi' },
+];
+---
+<section class="py-10 md:py-16" aria-labelledby="bridge-title">
+  <div class="container-x">
+    <div class="bridge" data-inview>
+      <div class="hidden grid-cols-[1fr_clamp(2.5rem,12vw,10rem)_1fr] gap-4 text-sm font-bold text-muted sm:grid">
+        <p id="bridge-title">מה עשינו</p><p></p><p class="text-left">מה אנחנו מלמדים</p>
+      </div>
+      <ol class="mt-2">
+        {rows.map((r, i) => (
+          <li class="bridge-row" style={`--d:${0.15 + i * 0.28}s`}>
+            <span class="did">{r.did}</span>
+            <span class="ln" aria-hidden="true"></span>
+            <span class="teach"><a href={r.href}>{r.teach}</a></span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>

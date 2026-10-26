@@ -4,15 +4,15 @@ import { PROOF_POINTS } from '@/config/site';
 <section class="border-t border-line py-20 md:py-24" aria-labelledby="proof-title">
   <div class="container-x">
     <div class="max-w-3xl">
-      <p class="eyebrow">למה אנחנו</p>
-      <h2 id="proof-title" class="h2 mt-3">אנחנו עושים את זה בחברות הטכנולוגיה המובילות. <span class="text-accent">ומשתפים אתכם בידע.</span></h2>
+      <p class="eyebrow">מה עשינו</p>
+      <h2 id="proof-title" class="h2 mt-3">הניסיון הוא הסיבה שאנחנו טובים בללמד. <span class="text-accent">לא הנושא.</span></h2>
     </div>
     <div class="mt-12 grid gap-x-8 gap-y-10 md:grid-cols-3">
       {PROOF_POINTS.map((p, i) => (
         <article class="rule-top reveal" style={`transition-delay:${i * 90}ms`}>
           <p class="font-display text-3xl font-bold md:text-4xl">{p.stat}</p>
           <h3 class="mt-4 text-lg font-bold">{p.title}</h3>
-          <p class="mt-2 text-muted">{p.text}</p>
+          <p class="mt-2 text-muted">{p.text}{p.stat === 'גם היום' && <> <a href="/how-this-site-was-built" class="text-accent underline underline-offset-2">איך נבנה האתר</a>.</>}</p>
         </article>
       ))}
     </div>

@@ -61,7 +61,7 @@ Each article owns one long-tail phrase. `npm run content:check` fails when an ar
 
 - `/llms.txt` and `/llms-full.txt` describe the entity, the offers, the topics and every article.
 - robots.txt explicitly allows GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, PerplexityBot, Google-Extended, Bingbot, Applebot and others.
-- Entity facts are identical everywhere: what RealAI does, for whom, the formats, contact details and the "implemented AI in organizations of thousands of employees" positioning.
+- Entity facts are identical everywhere: what RealAI does, for whom, the formats, contact details and the positioning: everything the team teaches, it did first (hundreds of agents, AI adoption in organizations of thousands of employees).
 - IndexNow pings Bing on every push to main (`.github/workflows/indexnow.yml`). Bing's index feeds ChatGPT search and Copilot.
 - First-hand methodology (`content/source/ai-adoption-playbook.md`) is the source for the adoption pillar. Original, experience-based content is what answer engines cite.
 

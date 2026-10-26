@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Brand icons: "R" in Frank Ruhl Libre 900 with a red full stop, on paper. The glyph is converted to a path
+ * Brand icons: "R" in Secular One with a blue dot, on white. The glyph is converted to a path
  * so favicon.svg needs no font, and the PNG sizes are rendered from the same SVG with sharp.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -11,7 +11,7 @@ import opentype from 'opentype.js';
 import sharp from 'sharp';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const PAPER = '#f5f0e8', INK = '#1b1813', ACCENT = '#c23b22';
+const PAPER = '#ffffff', INK = '#141414', ACCENT = '#1f3fd1';
 
 // WOFF (zlib tables) -> TTF buffer, same approach as og.mjs.
 function woffToTtf(buf) {
@@ -26,7 +26,7 @@ function woffToTtf(buf) {
   tables.forEach((t, i) => { const o = 12 + i * 16; t.tag.copy(out, o); out.writeUInt32BE(t.sum, o + 4); out.writeUInt32BE(t.out, o + 8); out.writeUInt32BE(t.orig, o + 12); t.data.copy(out, t.out); });
   return out;
 }
-const ttf = woffToTtf(readFileSync(join(root, 'node_modules/@fontsource/frank-ruhl-libre/files/frank-ruhl-libre-latin-900-normal.woff')));
+const ttf = woffToTtf(readFileSync(join(root, 'node_modules/@fontsource/secular-one/files/secular-one-latin-400-normal.woff')));
 const font = opentype.parse(ttf.buffer.slice(ttf.byteOffset, ttf.byteOffset + ttf.byteLength));
 
 // 64x64 canvas: the R fills most of it, the full stop sits at the baseline on the right.
