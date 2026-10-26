@@ -26,24 +26,26 @@ const schema = [...OFFERS.map((o) => serviceSchema({ name: `${o.name} AI`, descr
 ---
 <BaseLayout title={title} description={description} path="/" schema={schema}>
   <section class="hero">
-    <div class="container-x pb-16 pt-14 md:pb-24 md:pt-20">
-      <div class="mx-auto max-w-4xl text-center">
-        <nav aria-label="למי זה מתאים">
-          <ul class="audience-list" role="list">
-            <li><a href="/companies">לחברות</a></li>
-            <li><a href="/academia">לאוניברסיטאות ומכללות</a></li>
-            <li><a href="/executive">למנהלים</a></li>
-          </ul>
-        </nav>
-        <h1 class="display mt-8 text-balance">
+    <div class="container-x pb-14 pt-12 md:pb-24 md:pt-20">
+      <nav aria-label="למי זה מתאים">
+        <ul class="audience-list" role="list">
+          <li><a href="/companies">לחברות</a></li>
+          <li><a href="/academia">לאוניברסיטאות ומכללות</a></li>
+          <li><a href="/executive">למנהלים</a></li>
+        </ul>
+      </nav>
+      <div class="mt-8 grid gap-10 md:grid-cols-12 md:gap-8">
+        <h1 class="display md:col-span-8">
           <span class="block">להטמיע AI בארגון זה קשה.</span>
           <span class="block text-accent">אנחנו עושים את זה.</span>
         </h1>
-        <p class="mx-auto mt-8 max-w-3xl text-balance text-xl font-bold leading-snug md:text-2xl">הרצאות, סדנאות וקורסים להטמעת AI בארגון, מאנשים שעושים את זה בעצמם.</p>
-        <p class="lead mx-auto mt-4 max-w-2xl text-balance">לא למדנו AI מסרטונים. אנחנו מטמיעים אותו בחברות טכנולוגיה מובילות עם אלפי עובדים, ומלמדים את הצוותים, הסטודנטים והמנהלים שלכם לעשות את אותו הדבר.</p>
-        <div class="mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-          <a href="/program" class="btn btn-primary" data-track="cta_click" data-track-label="hero">בואו נבנה לכם תוכנית המתאימה לצרכים שלכם</a>
-          <a href="#offers-title" class="btn btn-ghost">מה אנחנו מעבירים?</a>
+        <div class="md:col-span-4 md:self-end">
+          <p class="text-xl font-bold leading-snug">הרצאות, סדנאות וקורסים להטמעת AI בארגון, מאנשים שעושים את זה בעצמם.</p>
+          <p class="mt-4 text-muted">לא למדנו AI מסרטונים. אנחנו מטמיעים אותו בחברות טכנולוגיה מובילות עם אלפי עובדים, ומלמדים את הצוותים, הסטודנטים והמנהלים שלכם לעשות את אותו הדבר.</p>
+          <div class="mt-8 flex flex-col items-start gap-4">
+            <a href="/program" class="btn btn-primary" data-track="cta_click" data-track-label="hero">בואו נבנה לכם תוכנית המתאימה לצרכים שלכם</a>
+            <a href="#offers-title" class="btn btn-ghost">מה אנחנו מעבירים?</a>
+          </div>
         </div>
       </div>
     </div>

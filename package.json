@@ -11,14 +11,14 @@
     "og": "node scripts/og.mjs",
     "new-article": "node scripts/new-article.mjs",
     "content:check": "node scripts/content-check.mjs",
-    "indexnow": "node scripts/indexnow.mjs"
+    "indexnow": "node scripts/indexnow.mjs",
+    "icons": "node scripts/icons.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.4.2",
     "@astrojs/mdx": "^8.1.1",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
-    "@fontsource-variable/heebo": "^5.3.0",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.4.2",
     "tailwindcss": "^4.3.3"
@@ -27,7 +27,10 @@
     "@anthropic-ai/sdk": "^1.1.0",
     "@astrojs/check": "latest",
     "@cloudflare/workers-types": "^5.20261023.1",
-    "@fontsource/heebo": "^5.3.0",
+    "@fontsource-variable/assistant": "^5.3.0",
+    "@fontsource/assistant": "^5.3.0",
+    "@fontsource/frank-ruhl-libre": "^5.3.0",
+    "opentype.js": "^2.0.0",
     "sharp": "^0.35.5",
     "typescript": "^5",
     "wrangler": "latest"

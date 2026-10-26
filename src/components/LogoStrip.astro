@@ -12,7 +12,7 @@ const group = Array.from({ length: repeat }, () => logos).flat();
 const duration = `${Math.max(30, group.length * 4.5)}s`;
 ---
 {logos.length > 0 && (
-  <section aria-label={title} class={compact ? 'py-10' : 'py-14'}>
+  <section aria-label={title} class={compact ? 'py-10' : 'border-t border-line py-14'}>
     <p class="text-center text-sm tracking-wide text-muted">{title}</p>
     <div class="marquee mt-8" style={`--duration:${duration}`}>
       <div class="marquee-track">

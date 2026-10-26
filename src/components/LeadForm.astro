@@ -3,7 +3,7 @@ import { SITE } from '@/config/site';
 interface Props { audienceType?: 'academia' | 'company' | 'executive' | ''; topic?: string; compact?: boolean }
 const { audienceType = '', topic = '', compact = false } = Astro.props;
 ---
-<form class="lead-form card p-6" method="post" action="/api/lead" novalidate aria-describedby="form-help">
+<form class="lead-form card bg-elev p-6" method="post" action="/api/lead" novalidate aria-describedby="form-help">
   <input type="hidden" name="audience_type" value={audienceType} />
   <input type="hidden" name="topic" value={topic} />
   <input type="hidden" name="page" value={Astro.url.pathname} />
@@ -11,24 +11,24 @@ const { audienceType = '', topic = '', compact = false } = Astro.props;
   <div class={`grid gap-4 ${compact ? '' : 'sm:grid-cols-2'}`}>
     <label class="block text-sm">
       <span class="font-bold">שם</span>
-      <input name="name" required minlength="2" autocomplete="name" class="mt-1 w-full rounded-xl border border-line bg-bg px-3 py-2.5 focus:border-accent" />
+      <input name="name" required minlength="2" autocomplete="name" class="mt-1 w-full rounded-[3px] border border-line bg-elev px-3 py-2.5 focus:border-accent" />
     </label>
     <label class="block text-sm">
       <span class="font-bold">ארגון</span>
-      <input name="organization" required autocomplete="organization" class="mt-1 w-full rounded-xl border border-line bg-bg px-3 py-2.5 focus:border-accent" />
+      <input name="organization" required autocomplete="organization" class="mt-1 w-full rounded-[3px] border border-line bg-elev px-3 py-2.5 focus:border-accent" />
     </label>
     <label class="block text-sm sm:col-span-2">
       <span class="font-bold">טלפון או אימייל</span>
-      <input name="contact" required autocomplete="on" inputmode="email" class="mt-1 w-full rounded-xl border border-line bg-bg px-3 py-2.5 focus:border-accent" />
+      <input name="contact" required autocomplete="on" inputmode="email" class="mt-1 w-full rounded-[3px] border border-line bg-elev px-3 py-2.5 focus:border-accent" />
     </label>
     <label class="block text-sm sm:col-span-2">
       <span class="font-bold">מה אתם צריכים?</span>
-      <textarea name="message" required minlength="10" rows="3" placeholder="לדוגמה: סדנת n8n לצוות תפעול של 20 אנשים, בחודש הבא" class="mt-1 w-full rounded-xl border border-line bg-bg px-3 py-2.5 focus:border-accent"></textarea>
+      <textarea name="message" required minlength="10" rows="3" placeholder="לדוגמה: סדנת n8n לצוות תפעול של 20 אנשים, בחודש הבא" class="mt-1 w-full rounded-[3px] border border-line bg-elev px-3 py-2.5 focus:border-accent"></textarea>
     </label>
   </div>
   {SITE.turnstileSiteKey && <div class="cf-turnstile mt-4" data-sitekey={SITE.turnstileSiteKey} data-language="he"></div>}
   <p id="form-help" class="mt-3 text-xs text-muted">נחזור אליכם תוך יום עסקים. הפרטים משמשים רק למענה על הפנייה.</p>
-  <p class="form-error mt-2 hidden text-sm text-red-400" role="alert"></p>
+  <p class="form-error mt-2 hidden text-sm text-accent" role="alert"></p>
   <button type="submit" class="btn btn-primary mt-4 w-full sm:w-auto">שלחו ונחזור אליכם</button>
   <p class="form-success mt-3 hidden text-accent" role="status">תודה! קיבלנו את הפנייה ונחזור אליכם תוך יום עסקים.</p>
 </form>

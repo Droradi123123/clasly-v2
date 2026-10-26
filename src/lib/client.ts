@@ -8,17 +8,6 @@ const io = 'IntersectionObserver' in window
   : null;
 document.querySelectorAll('.reveal, [data-inview]').forEach((el) => (io ? io.observe(el) : el.classList.add('in')));
 
-// Theme toggle
-document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const root = document.documentElement;
-    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-    root.setAttribute('data-theme', next);
-    try { localStorage.setItem('theme', next); } catch {}
-    btn.setAttribute('aria-pressed', String(next === 'light'));
-  });
-});
-
 // Event tracking: WhatsApp clicks and other data-track elements.
 export function track(event: string, props: Record<string, unknown> = {}) {
   const body = JSON.stringify({ event, page: location.pathname, referrer: document.referrer || null, ...props });

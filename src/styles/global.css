@@ -1,125 +1,121 @@
 @import "tailwindcss";
-@import "@fontsource-variable/heebo";
+@import "@fontsource/frank-ruhl-libre/400.css";
+@import "@fontsource/frank-ruhl-libre/700.css";
+@import "@fontsource/frank-ruhl-libre/900.css";
+@import "@fontsource-variable/assistant";
 
-/* Design tokens. Dark-first and muted: one restrained teal accent, no glows or gradients. */
+/*
+ * Design tokens. Editorial and warm: paper, ink, one red "pen" accent.
+ * Frank Ruhl Libre (a Hebrew newspaper serif) for headings, Assistant for text.
+ * One theme only. Wow comes from type scale and whitespace, not from effects.
+ */
 :root {
-  --bg: #0b0d12;
-  --bg-elev: #12151c;
-  --bg-soft: #181c25;
-  --fg: #e9ecf2;
-  --fg-muted: #a1aab9;
-  --line: #262c38;
-  --accent: #4fb89f;
-  --accent-strong: #43a58e;
-  --accent-ink: #061a15;
-  --ring: rgba(79, 184, 159, 0.55);
-  --radius-btn: .75rem;
-  --radius-card: 1rem;
-  color-scheme: dark;
-}
-:root[data-theme="light"] {
-  --bg: #f7f8fa;
-  --bg-elev: #ffffff;
-  --bg-soft: #eef1f5;
-  --fg: #0f1520;
-  --fg-muted: #4d5869;
-  --line: #dde2ea;
-  --accent: #0b7f67;
-  --accent-strong: #096b57;
-  --accent-ink: #ffffff;
-  --ring: rgba(11, 127, 103, 0.45);
+  --paper: #f5f0e8;
+  --paper-2: #ebe4d7;
+  --paper-field: #fdfbf7;
+  --ink: #1b1813;
+  --ink-2: #625b50;
+  --rule: #d5ccbd;
+  --rule-strong: #1b1813;
+  --accent: #c23b22;
+  --accent-strong: #a32f19;
+  --accent-ink: #fdfbf7;
+  --ring: rgba(194, 59, 34, 0.55);
   color-scheme: light;
 }
 
 @theme inline {
-  --color-bg: var(--bg);
-  --color-elev: var(--bg-elev);
-  --color-soft: var(--bg-soft);
-  --color-fg: var(--fg);
-  --color-muted: var(--fg-muted);
-  --color-line: var(--line);
+  --color-bg: var(--paper);
+  --color-elev: var(--paper-field);
+  --color-soft: var(--paper-2);
+  --color-fg: var(--ink);
+  --color-muted: var(--ink-2);
+  --color-line: var(--rule);
+  --color-ink: var(--rule-strong);
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-accent-ink: var(--accent-ink);
-  --font-sans: "Heebo Variable", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-  --radius-xl2: 1.25rem;
+  --font-sans: "Assistant Variable", "Assistant", "Segoe UI", Arial, sans-serif;
+  --font-display: "Frank Ruhl Libre", "David", Georgia, "Times New Roman", serif;
 }
 
 html {
   font-family: var(--font-sans);
-  background: var(--bg);
-  color: var(--fg);
+  background: var(--paper);
+  color: var(--ink);
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
-body { min-height: 100dvh; line-height: 1.6; text-rendering: optimizeLegibility; overflow-x: clip; }
-::selection { background: var(--accent); color: var(--accent-ink); }
+body { position: relative; min-height: 100dvh; font-size: 1.0625rem; line-height: 1.65; text-rendering: optimizeLegibility; overflow-x: clip; }
+/* A faint paper grain: the one texture on the site. */
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .5; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .09 0 0 0 0 .07 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
+::selection { background: var(--ink); color: var(--paper); }
 
-:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; border-radius: 6px; }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
 
-.container-x { width: 100%; max-width: 74rem; margin-inline: auto; padding-inline: 1.25rem; }
+.container-x { width: 100%; max-width: 76rem; margin-inline: auto; padding-inline: 1.25rem; }
 @media (min-width: 640px) { .container-x { padding-inline: 2rem; } }
 
-/* One primary and one secondary button, one radius for buttons and one for cards. */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 3rem; padding: .75rem 1.35rem; border-radius: var(--radius-btn); font-weight: 700; line-height: 1.3; text-align: center; transition: background .2s ease, border-color .2s ease, color .2s ease; text-decoration: none; }
-.btn-primary { background: var(--accent); color: var(--accent-ink); }
-.btn-primary:hover { background: var(--accent-strong); }
-.btn-ghost { border: 1px solid var(--line); color: var(--fg); background: transparent; }
-.btn-ghost:hover { border-color: var(--fg-muted); }
+/* ---------- Type ---------- */
+.font-display, .display, .h1, .h2, .h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: 0; }
+.display { font-size: clamp(2.75rem, 8.2vw, 6.25rem); line-height: 1.02; font-weight: 900; }
+.h1 { font-size: clamp(2.25rem, 5.2vw, 3.75rem); line-height: 1.1; }
+.h2 { font-size: clamp(1.8rem, 3.8vw, 2.75rem); line-height: 1.15; }
+.h3 { font-size: 1.45rem; line-height: 1.3; }
+.lead { font-size: clamp(1.1rem, 1.9vw, 1.3rem); line-height: 1.6; color: var(--ink-2); }
+.eyebrow { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; font-weight: 700; color: var(--accent); }
+.eyebrow::before { content: ""; width: 1.5rem; height: 2px; background: var(--accent); }
+.text-balance { text-wrap: balance; }
 
-.card { background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--radius-card); }
-.eyebrow { font-size: .85rem; color: var(--accent); font-weight: 700; }
-.pill { display: inline-flex; align-items: center; gap: .55rem; padding: .4rem .9rem; border: 1px solid var(--line); border-radius: var(--radius-btn); font-size: .85rem; color: var(--fg-muted); }
+/* ---------- Buttons: one primary, one text link with an arrow ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 3rem; padding: .7rem 1.4rem; border-radius: 3px; font-weight: 700; line-height: 1.3; text-align: center; text-decoration: none; transition: background .15s ease, color .15s ease, border-color .15s ease; }
+.btn-primary { background: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--accent); color: var(--accent-ink); }
+.btn-ghost { padding-inline: .25rem; border-bottom: 2px solid var(--ink); border-radius: 0; min-height: 2.5rem; color: var(--ink); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn-ghost::after { content: "←"; font-weight: 400; transition: transform .15s ease; }
+.btn-ghost:hover::after { transform: translateX(-3px); }
 
-/* Audience line in the hero: every item has the same visible dot; no glow, hover fills it with the accent. */
-.audience-list { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1.25rem; font-size: .9rem; color: var(--fg-muted); }
-.audience-list a { display: inline-flex; align-items: center; gap: .5rem; color: inherit; transition: color .2s ease; }
-.audience-list a::before { content: ""; width: .5rem; height: .5rem; border-radius: 999px; border: 1.5px solid var(--fg-muted); flex-shrink: 0; transition: background .2s ease, border-color .2s ease; }
-.audience-list a:hover, .audience-list a[aria-current="page"] { color: var(--fg); }
-.audience-list a:hover::before, .audience-list a[aria-current="page"]::before { background: var(--accent); border-color: var(--accent); }
-
-.h1 { font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.15; font-weight: 700; letter-spacing: -.01em; }
-.display { font-size: clamp(2.4rem, 7.5vw, 4.5rem); line-height: 1.1; font-weight: 700; letter-spacing: -.015em; }
-.h2 { font-size: clamp(1.6rem, 3.6vw, 2.5rem); line-height: 1.2; font-weight: 700; letter-spacing: -.01em; }
-.h3 { font-size: 1.25rem; font-weight: 700; line-height: 1.35; }
-.lead { font-size: clamp(1.05rem, 2vw, 1.25rem); line-height: 1.7; color: var(--fg-muted); }
-
-/* Gentle reveal: respects reduced motion. */
-html.js .reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
-html.js .reveal.in { opacity: 1; transform: none; }
-
-.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
-/* Kept as a no-op so layouts that still render it stay valid. */
+/* ---------- Surfaces: rules instead of cards ---------- */
+.card { background: transparent; border: 1px solid var(--rule); border-radius: 3px; }
+.glow-card { background: transparent; border: 1px solid var(--rule); border-radius: 3px; transition: border-color .15s ease; }
+a.glow-card:hover { border-color: var(--ink); }
+.rule-top { border-top: 1px solid var(--rule-strong); padding-top: 1.1rem; }
+.pill { display: inline-flex; align-items: center; gap: .5rem; padding: .35rem .8rem; border: 1px solid var(--rule); border-radius: 3px; font-size: .9rem; color: var(--ink-2); }
+.hero { border-bottom: 1px solid var(--rule); }
 .hero-glow { display: none; }
 
-/* Cards that link somewhere: plain card, the border darkens on hover. */
-.glow-card { position: relative; background: var(--bg-elev); border: 1px solid var(--line); border-radius: var(--radius-card); transition: border-color .2s ease; }
-a.glow-card:hover { border-color: var(--fg-muted); }
+/* Audience line: plain links separated by slashes, the current page underlined in red. */
+.audience-list { display: flex; flex-wrap: wrap; gap: .35rem .75rem; font-size: .95rem; color: var(--ink-2); }
+.audience-list li + li::before { content: "/"; margin-inline-end: .75rem; color: var(--rule); }
+.audience-list a { color: inherit; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .3em; text-decoration-thickness: 2px; transition: color .15s, text-decoration-color .15s; }
+.audience-list a:hover, .audience-list a[aria-current="page"] { color: var(--ink); text-decoration-color: var(--accent); }
 
-/* ---------- The gap: struck-through clichés vs. field work ---------- */
-.gap-list li { position: relative; }
+/* Gentle reveal on scroll; respects reduced motion. */
+html.js .reveal { opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
+html.js .reveal.in { opacity: 1; transform: none; }
+
+/* ---------- The gap: red pen through the clichés ---------- */
 .strike-list li span { position: relative; }
-.strike-list li span::after { content: ""; position: absolute; inset-inline-start: 0; top: 55%; height: 2px; width: 0; background: var(--fg-muted); border-radius: 2px; transition: width .6s cubic-bezier(.65,0,.35,1); }
-.strike-list li { color: var(--fg-muted); transition: opacity .6s ease; }
-.strike-list.in li span::after { width: 100%; }
-.strike-list.in li { opacity: .55; }
-.strike-list.in li:nth-child(1) span::after { transition-delay: .15s; } .strike-list.in li:nth-child(2) span::after { transition-delay: .4s; }
-.strike-list.in li:nth-child(3) span::after { transition-delay: .65s; } .strike-list.in li:nth-child(4) span::after { transition-delay: .9s; }
-.strike-list.in li:nth-child(5) span::after { transition-delay: 1.15s; }
-.check-list li { opacity: .35; transition: opacity .5s ease; }
+.strike-list li span::after { content: ""; position: absolute; inset-inline-start: -2px; inset-inline-end: -2px; top: 54%; height: 2px; width: 0; background: var(--accent); transform: rotate(-1deg); transition: width .5s cubic-bezier(.65,0,.35,1); }
+.strike-list li { transition: color .5s ease; }
+.strike-list.in li span::after { width: calc(100% + 4px); }
+.strike-list.in li { color: var(--ink-2); }
+.strike-list.in li:nth-child(1) span::after { transition-delay: .1s; } .strike-list.in li:nth-child(2) span::after { transition-delay: .3s; }
+.strike-list.in li:nth-child(3) span::after { transition-delay: .5s; } .strike-list.in li:nth-child(4) span::after { transition-delay: .7s; }
+.strike-list.in li:nth-child(5) span::after { transition-delay: .9s; }
+.check-list li { opacity: .4; transition: opacity .5s ease; }
 .check-list.in li { opacity: 1; }
-.check-list.in li:nth-child(1) { transition-delay: 1.2s; } .check-list.in li:nth-child(2) { transition-delay: 1.4s; } .check-list.in li:nth-child(3) { transition-delay: 1.6s; }
-.check-list.in li:nth-child(4) { transition-delay: 1.8s; } .check-list.in li:nth-child(5) { transition-delay: 2s; }
+.check-list.in li:nth-child(1) { transition-delay: 1s; } .check-list.in li:nth-child(2) { transition-delay: 1.15s; } .check-list.in li:nth-child(3) { transition-delay: 1.3s; }
+.check-list.in li:nth-child(4) { transition-delay: 1.45s; } .check-list.in li:nth-child(5) { transition-delay: 1.6s; }
 
 /* ---------- Client logo marquee: endless loop of two identical groups ----------
-   Pauses on hover only on devices with a real pointer. On touch screens a tap used to leave
-   the strip in a sticky :hover state, which stopped it for good. */
+   Pauses on hover only on devices with a real pointer (a tap used to stop it for good). */
 .marquee { --gap: 3.5rem; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); direction: ltr; }
 .marquee-track { display: flex; gap: var(--gap); width: max-content; animation: marquee var(--duration, 40s) linear infinite; }
 .marquee-group { display: flex; align-items: center; gap: var(--gap); flex-shrink: 0; }
 @keyframes marquee { to { transform: translateX(calc(-50% - var(--gap) / 2)); } }
-.logo-item { height: 4rem; width: auto; max-width: 15rem; object-fit: contain; opacity: .75; filter: grayscale(1) brightness(1.5); transition: opacity .2s; }
-:root[data-theme="light"] .logo-item { filter: invert(1) grayscale(1); }
+.logo-item { height: 3.75rem; width: auto; max-width: 15rem; object-fit: contain; opacity: .8; transition: opacity .2s; }
 @media (hover: hover) and (pointer: fine) {
   .marquee:hover .marquee-track { animation-play-state: paused; }
   .logo-item:hover { opacity: 1; }
@@ -135,30 +131,28 @@ a.glow-card:hover { border-color: var(--fg-muted); }
   .strike-list li span::after { transition: none; } .check-list li { transition: none; }
 }
 
-/* Prose for MDX articles (RTL aware) */
-.prose { max-width: 70ch; font-size: 1.075rem; }
+/* ---------- Prose for MDX articles (RTL aware) ---------- */
+.prose { max-width: 68ch; font-size: 1.125rem; line-height: 1.7; }
 .prose > * + * { margin-top: 1.1em; }
-.prose h2 { font-size: 1.6rem; font-weight: 700; margin-top: 2.2em; line-height: 1.25; }
-.prose h3 { font-size: 1.25rem; font-weight: 700; margin-top: 1.8em; }
-.prose p { color: var(--fg); }
+.prose h2 { font-family: var(--font-display); font-size: 1.85rem; font-weight: 700; margin-top: 2.2em; line-height: 1.2; }
+.prose h3 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; margin-top: 1.8em; line-height: 1.3; }
+.prose p { color: var(--ink); }
 .prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 .prose ul, .prose ol { padding-inline-start: 1.4em; }
 .prose ul { list-style: disc; } .prose ol { list-style: decimal; }
 .prose li + li { margin-top: .35em; }
-.prose blockquote { border-inline-start: 3px solid var(--accent); padding-inline-start: 1em; color: var(--fg-muted); }
-.prose code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; background: var(--bg-soft); padding: .1em .35em; border-radius: .35em; direction: ltr; unicode-bidi: embed; }
-.prose pre { background: var(--bg-soft); border: 1px solid var(--line); border-radius: .75rem; padding: 1rem; overflow-x: auto; direction: ltr; text-align: left; }
-.prose pre code { background: transparent; padding: 0; }
+.prose blockquote { border-inline-start: 3px solid var(--accent); padding-inline-start: 1em; color: var(--ink-2); font-family: var(--font-display); font-size: 1.2em; }
+.prose code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; background: var(--paper-2); padding: .1em .35em; border-radius: 3px; direction: ltr; unicode-bidi: embed; }
+.prose pre { background: var(--ink); color: var(--paper); border-radius: 3px; padding: 1rem; overflow-x: auto; direction: ltr; text-align: left; }
+.prose pre code { background: transparent; color: inherit; padding: 0; }
 .prose table { width: 100%; border-collapse: collapse; font-size: .95em; }
-.prose th, .prose td { border: 1px solid var(--line); padding: .55em .75em; text-align: start; vertical-align: top; }
-.prose th { background: var(--bg-soft); }
-.prose img { border-radius: .75rem; }
-.prose .definition { background: var(--bg-soft); border: 1px solid var(--line); border-inline-start: 3px solid var(--accent); border-radius: .75rem; padding: 1rem 1.1rem; }
-.prose hr { border: 0; border-top: 1px solid var(--line); }
+.prose th, .prose td { border-bottom: 1px solid var(--rule); padding: .6em .75em; text-align: start; vertical-align: top; }
+.prose th { border-bottom: 2px solid var(--ink); font-weight: 700; }
+.prose img { border-radius: 3px; }
+.prose .definition { background: var(--paper-2); border-inline-start: 3px solid var(--accent); padding: 1rem 1.1rem; }
+.prose hr { border: 0; border-top: 1px solid var(--rule); }
+.prose h2, .prose h3 { scroll-margin-top: 6rem; }
 
 /* Skip link */
-.skip-link { position: absolute; top: -100px; inset-inline-start: 1rem; background: var(--accent); color: var(--accent-ink); padding: .5rem 1rem; border-radius: .5rem; z-index: 100; }
+.skip-link { position: absolute; top: -100px; inset-inline-start: 1rem; background: var(--ink); color: var(--paper); padding: .5rem 1rem; border-radius: 3px; z-index: 100; }
 .skip-link:focus { top: 1rem; }
-
-
-.prose h2, .prose h3 { scroll-margin-top: 6rem; }

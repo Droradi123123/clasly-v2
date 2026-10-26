@@ -1,28 +1,10 @@
 ---
 /**
- * Brand wordmark: a small SVG mark (three rising bars, one per stage of the adoption method) plus "RealAI".
- * variant="mark" (default) shows mark + text; variant="text" shows the text with a short accent rule under "AI".
- * The text stays live HTML in the site font, so it is crisp at any size and readable by search engines.
+ * Brand wordmark: "RealAI" set in the display serif, closed with a red full stop.
+ * Live text, not an image: crisp at any size, readable by engines, and it reads like a masthead, not an app icon.
  */
 import { BRAND_NAME } from '@/config/site';
-interface Props { variant?: 'mark' | 'text'; class?: string }
-const { variant = 'mark', class: cls = '' } = Astro.props;
-const m = BRAND_NAME.match(/^(.*?)(AI)$/);
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
 ---
-<span dir="ltr" class={`wordmark inline-flex items-center gap-2 whitespace-nowrap ${cls}`}>
-  {variant === 'mark' && (
-    <svg class="h-[1.4em] w-[1.4em] shrink-0" viewBox="0 0 28 28" aria-hidden="true" focusable="false">
-      <rect width="28" height="28" rx="7" fill="var(--accent)" />
-      <rect x="7" y="15" width="3.5" height="6" rx="1" fill="var(--accent-ink)" />
-      <rect x="12.25" y="11" width="3.5" height="10" rx="1" fill="var(--accent-ink)" />
-      <rect x="17.5" y="7" width="3.5" height="14" rx="1" fill="var(--accent-ink)" />
-    </svg>
-  )}
-  {m ? (
-    <span class="tracking-tight">{m[1]}<span class={variant === 'text' ? 'wordmark-ai text-accent' : 'text-accent'}>{m[2]}</span></span>
-  ) : <span>{BRAND_NAME}</span>}
-</span>
-<style>
-  .wordmark-ai { position: relative; }
-  .wordmark-ai::after { content: ""; position: absolute; inset-inline: 0; bottom: -.12em; height: .12em; border-radius: 1px; background: currentColor; }
-</style>
+<span dir="ltr" class={`font-display whitespace-nowrap font-bold leading-none ${cls}`}>{BRAND_NAME}<span class="text-accent" aria-hidden="true">.</span></span>
