@@ -17,7 +17,7 @@ const schema = [breadcrumbSchema(crumbs), collectionPageSchema({ name: title, de
     <Breadcrumbs items={crumbs} />
     <h1 class="h1 mt-6">הבלוג: AI יישומי, מהשטח</h1>
     <p class="lead mt-4 max-w-2xl">כל מאמר עונה על שאלה אחת שארגונים שואלים אותנו, עם דוגמה מיישום אמיתי. בחרו נושא:</p>
-    <ul class="mt-6 flex flex-wrap gap-2">{TOPICS.map((t) => <li><a href={`/topics/${t.slug}`} class="rounded-full border border-line px-3 py-1 text-sm hover:border-accent">{t.name}</a></li>)}</ul>
+    <ul class="mt-6 flex flex-wrap gap-2">{TOPICS.map((t) => <li><a href={`/topics/${t.slug}`} class="rounded-[3px] border border-line px-3 py-1 text-sm hover:border-accent">{t.name}</a></li>)}</ul>
     <h2 class="h2 mt-12">החדשים ביותר</h2>
     <ul class="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
       {latest.map((p) => (

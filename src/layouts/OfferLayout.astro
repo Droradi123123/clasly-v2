@@ -64,7 +64,7 @@ const topics = TOPICS.filter((t) => data.relatedTopics.includes(t.slug));
             <p class="mt-3 text-sm"><span class="text-muted">אורך:</span> {p.length} · <span class="text-muted">למי:</span> {p.audience}</p>
             <ol class="mt-5 space-y-3">
               {p.modules.map((m, i) => (
-                <li class="flex gap-3"><span class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent/15 text-xs font-bold text-accent" aria-hidden="true">{i + 1}</span><div><strong>{m.title}.</strong> <span class="text-muted">{m.text}</span></div></li>
+                <li class="flex gap-3"><span class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-[3px] bg-accent/15 text-xs font-bold text-accent" aria-hidden="true">{i + 1}</span><div><strong>{m.title}.</strong> <span class="text-muted">{m.text}</span></div></li>
               ))}
             </ol>
           </article>

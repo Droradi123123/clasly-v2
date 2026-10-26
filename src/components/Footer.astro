@@ -9,11 +9,11 @@ const groups = [
   { title: 'משאבים', items: FOOTER_LINKS.resources },
 ];
 ---
-<footer class="mt-24 border-t border-line bg-elev/40">
+<footer class="mt-24 border-t border-ink">
   <div class="container-x py-14">
     <div class="grid gap-10 sm:grid-cols-2 md:grid-cols-5">
       <div>
-        <p class="text-xl font-bold"><Wordmark /></p>
+        <p class="text-2xl"><Wordmark /></p>
         <p class="mt-3 text-sm text-muted">הרצאות, סדנאות, קורסים וליווי למנהלים בנושאי AI יישומי. מועבר בעברית, מניסיון יישום אמיתי בתעשייה.</p>
         <p class="mt-4 text-sm"><a class="hover:text-accent" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
         <p class="mt-1 text-sm"><a class="hover:text-accent" href={whatsappUrl('שלום, אשמח לפרטים על הרצאות וסדנאות AI.')} target="_blank" rel="noopener" data-track="whatsapp_click" data-track-label="footer">וואטסאפ: <span dir="ltr">{PHONE_DISPLAY}</span></a></p>

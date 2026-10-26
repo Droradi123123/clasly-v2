@@ -2,7 +2,7 @@
 /**
  * Auto-generates one Open Graph image (1200x630 PNG) per built page.
  * Runs after `astro build`: scans dist/client/**\/*.html for <title>, description and og:image,
- * renders an SVG with the self-hosted Heebo font and converts it with sharp.
+ * renders an SVG with the self-hosted Secular One and Assistant fonts and converts it with sharp.
  * Hebrew RTL text is shaped by librsvg/pango, so no manual bidi handling is needed.
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync } from 'node:fs';
@@ -33,10 +33,13 @@ function woffToTtf(src, dst) {
 }
 function prepareFonts() {
   mkdirSync(CACHE, { recursive: true });
-  const src = join(root, 'node_modules/@fontsource/heebo/files');
-  for (const f of ['heebo-hebrew-400-normal', 'heebo-hebrew-800-normal', 'heebo-latin-400-normal', 'heebo-latin-800-normal']) {
-    const dst = join(CACHE, `${f}.ttf`);
-    if (!existsSync(dst)) woffToTtf(join(src, `${f}.woff`), dst);
+  const files = [
+    ...['secular-one-hebrew-400-normal', 'secular-one-latin-400-normal'].map((f) => join(root, 'node_modules/@fontsource/secular-one/files', f)),
+    ...['assistant-hebrew-400-normal', 'assistant-hebrew-700-normal', 'assistant-latin-400-normal', 'assistant-latin-700-normal'].map((f) => join(root, 'node_modules/@fontsource/assistant/files', f)),
+  ];
+  for (const f of files) {
+    const dst = join(CACHE, `${f.split('/').pop()}.ttf`);
+    if (!existsSync(dst)) woffToTtf(`${f}.woff`, dst);
   }
   const conf = join(CACHE, 'fonts.conf');
   writeFileSync(conf, `<?xml version="1.0"?><!DOCTYPE fontconfig SYSTEM "fonts.dtd"><fontconfig><dir>${CACHE}</dir><cachedir>${join(CACHE, 'fc')}</cachedir></fontconfig>`);
@@ -45,7 +48,9 @@ function prepareFonts() {
 prepareFonts();
 const sharp = (await import('sharp')).default;
 
-const brandMarkup = () => { const m = BRAND.match(/^(.*?)(AI)$/); return m ? `${esc(m[1])}<tspan fill="#5ee1c3">${m[2]}</tspan>` : esc(BRAND); };
+const PAPER = '#ffffff', INK = '#141414', INK2 = '#6a6a65', RULE = '#e2e2dd', ACCENT = '#1f3fd1';
+// The full stop is a separate shape: a tspan inside an RTL-shaped line ends up on the wrong side.
+const brandMarkup = () => { const m = BRAND.match(/^(.*?)(AI)$/); return m ? `${esc(m[1])}<tspan fill="${ACCENT}">${m[2]}</tspan>` : esc(BRAND); };
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 function wrap(text, max) {
   const words = text.split(/\s+/); const lines = []; let cur = '';
@@ -56,18 +61,18 @@ function svg({ title, description, kicker }) {
   const tl = wrap(title, 34); const size = tl.length > 2 ? 54 : 64;
   const dl = wrap(description, 60).slice(0, 2);
   let y = 250;
-  const titleText = tl.map((l) => `<text x="1110" y="${(y += size * 1.15)}" direction="rtl" text-anchor="start" font-family="Heebo" font-weight="800" font-size="${size}" fill="#e8ecf3">${esc(l)}</text>`).join('');
+  const titleText = tl.map((l) => `<text x="1110" y="${(y += size * 1.15)}" direction="rtl" text-anchor="start" font-family="Secular One" font-weight="400" font-size="${size}" fill="${INK}">${esc(l)}</text>`).join('');
   y += 30;
-  const descText = dl.map((l) => `<text x="1110" y="${(y += 38)}" direction="rtl" text-anchor="start" font-family="Heebo" font-weight="400" font-size="28" fill="#9aa4b5">${esc(l)}</text>`).join('');
+  const descText = dl.map((l) => `<text x="1110" y="${(y += 38)}" direction="rtl" text-anchor="start" font-family="Assistant" font-weight="400" font-size="28" fill="${INK2}">${esc(l)}</text>`).join('');
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <defs><radialGradient id="g" cx="80%" cy="10%" r="70%"><stop offset="0" stop-color="#5ee1c3" stop-opacity=".28"/><stop offset="1" stop-color="#0b0e14" stop-opacity="0"/></radialGradient></defs>
-  <rect width="1200" height="630" fill="#0b0e14"/><rect width="1200" height="630" fill="url(#g)"/>
-  <circle cx="1096" cy="128" r="10" fill="#5ee1c3"/>
-  <text x="1076" y="140" direction="ltr" text-anchor="end" font-family="Heebo" font-weight="800" font-size="34" fill="#e8ecf3">${brandMarkup()}</text>
-  <text x="1110" y="210" direction="rtl" text-anchor="start" font-family="Heebo" font-weight="400" font-size="24" fill="#5ee1c3">${esc(kicker)}</text>
+  <rect width="1200" height="630" fill="${PAPER}"/>
+  <rect x="90" y="90" width="1020" height="2" fill="${INK}"/>
+  <text x="1110" y="150" direction="ltr" text-anchor="end" font-family="Secular One" font-weight="400" font-size="40" fill="${INK}">${brandMarkup()}</text>
+  <rect x="1086" y="206" width="24" height="2" fill="${ACCENT}"/>
+  <text x="1076" y="214" direction="rtl" text-anchor="start" font-family="Assistant" font-weight="700" font-size="22" fill="${ACCENT}">${esc(kicker)}</text>
   ${titleText}${descText}
-  <rect x="90" y="560" width="1020" height="2" fill="#242c3b"/>
-  <text x="1110" y="600" direction="rtl" text-anchor="start" font-family="Heebo" font-weight="400" font-size="22" fill="#9aa4b5">להטמיע AI זה קשה. אנחנו עושים את זה.</text>
+  <rect x="90" y="560" width="1020" height="1" fill="${RULE}"/>
+  <text x="1110" y="600" direction="rtl" text-anchor="start" font-family="Assistant" font-weight="400" font-size="22" fill="${INK2}">כל מה שאנחנו מלמדים, עשינו קודם.</text>
 </svg>`;
 }
 
@@ -87,6 +92,6 @@ for (const file of htmlFiles(DIST)) {
   const kicker = /\/blog\//.test(og) ? 'מהבלוג' : /\/topics\//.test(og) ? 'מרכז נושא' : 'AI יישומי לארגונים';
   jobs.push(sharp(Buffer.from(svg({ title, description, kicker }))).png({ compressionLevel: 9 }).toFile(join(OUT, name)).then(() => count++));
 }
-jobs.push(sharp(Buffer.from(svg({ title: 'להטמיע AI בארגון זה קשה. אנחנו עושים את זה.', description: 'הרצאות, סדנאות, קורסים וליווי למנהלים, מצוות שהטמיע AI בארגונים של אלפי עובדים.', kicker: 'AI יישומי לארגונים' }))).png().toFile(join(OUT, 'default.png')).then(() => count++));
+jobs.push(sharp(Buffer.from(svg({ title: 'כל מה שאנחנו מלמדים, עשינו קודם.', description: 'הרצאות, סדנאות וקורסים על AI, מצוות שבנה מאות אייג׳נטים והטמיע AI בארגונים של אלפי עובדים.', kicker: 'AI יישומי לארגונים' }))).png().toFile(join(OUT, 'default.png')).then(() => count++));
 await Promise.all(jobs);
 console.log(`[og] generated ${count} images in ${OUT}`);

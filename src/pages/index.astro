@@ -2,57 +2,54 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import LogoStrip from '@/components/LogoStrip.astro';
 import GapSection from '@/components/GapSection.astro';
-import MethodSection from '@/components/MethodSection.astro';
 import ProofBlocks from '@/components/ProofBlocks.astro';
-import OfferCards from '@/components/OfferCards.astro';
+import TopicsSection from '@/components/TopicsSection.astro';
+import BridgeSection from '@/components/BridgeSection.astro';
 import CTA from '@/components/CTA.astro';
 import FAQ from '@/components/FAQ.astro';
 import { OFFERS } from '@/config/site';
 import { serviceSchema, faqSchema } from '@/lib/seo';
 
-const title = 'הרצאות וסדנאות AI לארגונים, מאנשים שהטמיעו AI';
-const description = 'להטמיע AI בארגון זה קשה. אנחנו עושים את זה בחברות טכנולוגיה מובילות עם אלפי עובדים. הרצאות, סדנאות, קורסים וליווי למנהלים, מהשטח ובעברית.';
+const title = 'הרצאות וסדנאות AI לארגונים, ממי שעשה את זה קודם';
+const description = 'הרצאות, סדנאות וקורסים על AI: Claude Code, סוכני AI, n8n, בניית מוצרים ו-AI למנהלים. מצוות שבנה מאות אייג׳נטים והטמיע AI בארגונים של אלפי עובדים. בעברית.';
 const faq = [
-  { q: 'מה אתם מעבירים בדיוק?', a: 'הרצאות, סדנאות מעשיות, קורסים והכשרות, וליווי אישי למנהלים. כל תוכנית נבנית סביב הארגון: הקהל, האתגר והקצב. הכול בעברית, לארגונים בישראל, פרונטלי או Zoom.' },
-  { q: 'במה אתם שונים ממרצי AI אחרים?', a: 'לא למדנו AI מסרטונים. הטמענו אותו בעצמנו בחברות טכנולוגיה מובילות עם אלפי עובדים: אסטרטגיה ארגונית, סוכנים ואוטומציות בפרודקשן, אבטחת מידע, ניטור ומדידת ROI. כל דוגמה בכיתה היא משהו שעשינו בידיים.' },
-  { q: 'איך מתחילים להטמיע AI בארגון?', a: 'לא מכלי ולא מרישיונות. מתחילים מאנשים: סביבה בטוחה עם הרשאות קריאה בלבד, מסר ברור שמותר לטעות, ושגרירים בכל צוות שמפיצים את השימוש מבפנים. רק כשאנשים משתמשים, עוברים לבנייה מהירה של הרבה מקרי שימוש קטנים, ומשם לבנייה מחדש של תחום שלם.' },
-  { q: 'למה רוב הטמעות ה-AI נכשלות?', a: 'כי ניגשים אליהן כמו לפרויקט טכנולוגי. המחסום האמיתי הוא אנושי: אנשים חוששים לטעות, לא בטוחים מה מותר, ולא רואים איך הכלי מתחבר לעבודה שלהם. ובנוסף, רוב התהליכים לא מתועדים, ואי אפשר לבנות מחדש תהליך שאף אחד לא יודע לתאר.' },
+  { q: 'מה אתם מעבירים בדיוק?', a: 'הרצאות, סדנאות מעשיות, קורסים והכשרות, וליווי אישי למנהלים. הנושאים: Claude Code, סוכני AI, n8n ואוטומציה, בניית מוצרים עם AI, AI למנהלים, ROI של AI והטמעת AI בארגון. כל תוכנית נבנית סביב הארגון: הקהל, האתגר והקצב. הכול בעברית, פרונטלי או Zoom.' },
+  { q: 'במה אתם שונים ממרצי AI אחרים?', a: 'כל מה שאנחנו מלמדים, עשינו קודם ואנחנו עושים גם היום. בנינו מאות אייג׳נטים, חלקם בפרודקשן מול לקוחות, והובלנו הטמעת AI בחברות טכנולוגיה עם אלפי עובדים. כל דוגמה בכיתה היא משהו שבנינו בידיים, לא סיכום של סרטון.' },
+  { q: 'מי מעביר את ההרצאות והסדנאות?', a: 'אנשים שעובדים היום בתעשייה ובונים עם הכלים האלה כל יום. זה תנאי סף אצלנו, כדי שהדוגמאות בכיתה יהיו מהחודש האחרון ולא משנה שעברה.' },
   { q: 'למי זה מתאים?', a: 'לאוניברסיטאות ומכללות (תוכניות יזמות, לימודי המשך, פקולטות), לחברות וצוותים (HR, תפעול, שירות, פיתוח, הנהלה) ולמנהלים שרוצים להוביל AI בארגון ולא רק לדבר עליו.' },
-  { q: 'אילו נושאים אתם מכסים?', a: 'הטמעת AI בארגון, Claude Code, n8n ואוטומציה, סוכני AI, בניית מוצרים עם AI, ROI של AI ו-AI למנהלים. כל נושא זמין כהרצאה, סדנה, קורס או ליווי.' },
   { q: 'האם צריך רקע טכני?', a: 'לא. רוב הקהלים שלנו אינם טכניים. בסדנאות גם מי שלא כתב שורת קוד בונה אוטומציה או כלי שעובד. לקהל טכני יש מסלולים מעמיקים.' },
-  { q: 'איך מתחילים?', a: 'כותבים לנו בוואטסאפ או בטופס מה הארגון צריך. תוך יום עסקים חוזרים אליכם, ואחרי שיחת היכרות קצרה בונים יחד את התוכנית.' },
+  { q: 'עם מה יוצאים מסדנה או מקורס?', a: 'עם משהו שעובד: אוטומציה, סוכן או מוצר קטן שנבנה על תהליך אמיתי מהארגון, ועם צעדים לשבוע הקרוב. לא עם מצגת.' },
+  { q: 'איך מתחילים להטמיע AI בארגון?', a: 'מאנשים, לא מכלים: סביבה בטוחה, מסר ברור שמותר לטעות, ושגרירים בכל צוות. רק אחר כך בונים הרבה מקרי שימוש קטנים. זה נושא שאנחנו מלמדים, ויש עליו מדריך מלא באתר.' },
+  { q: 'איך מתחילים לעבוד איתכם?', a: 'כותבים לנו בוואטסאפ או בטופס מה הארגון צריך. תוך יום עסקים חוזרים אליכם, ואחרי שיחת היכרות קצרה בונים יחד את התוכנית.' },
 ];
 const schema = [...OFFERS.map((o) => serviceSchema({ name: `${o.name} AI`, description: o.value, path: o.href, serviceType: o.name, audience: o.audience })), faqSchema(faq)];
 ---
 <BaseLayout title={title} description={description} path="/" schema={schema}>
   <section class="hero">
-    <div class="container-x pb-16 pt-14 md:pb-24 md:pt-20">
-      <div class="mx-auto max-w-4xl text-center">
-        <nav aria-label="למי זה מתאים">
-          <ul class="audience-list" role="list">
-            <li><a href="/companies">לחברות</a></li>
-            <li><a href="/academia">לאוניברסיטאות ומכללות</a></li>
-            <li><a href="/executive">למנהלים</a></li>
-          </ul>
-        </nav>
-        <h1 class="display mt-8 text-balance">
-          <span class="block">להטמיע AI בארגון זה קשה.</span>
-          <span class="block text-accent">אנחנו עושים את זה.</span>
-        </h1>
-        <p class="mx-auto mt-8 max-w-3xl text-balance text-xl font-bold leading-snug md:text-2xl">הרצאות, סדנאות וקורסים להטמעת AI בארגון, מאנשים שעושים את זה בעצמם.</p>
-        <p class="lead mx-auto mt-4 max-w-2xl text-balance">לא למדנו AI מסרטונים. אנחנו מטמיעים אותו בחברות טכנולוגיה מובילות עם אלפי עובדים, ומלמדים את הצוותים, הסטודנטים והמנהלים שלכם לעשות את אותו הדבר.</p>
-        <div class="mt-10 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-          <a href="/program" class="btn btn-primary" data-track="cta_click" data-track-label="hero">בואו נבנה לכם תוכנית המתאימה לצרכים שלכם</a>
-          <a href="#offers-title" class="btn btn-ghost">מה אנחנו מעבירים?</a>
-        </div>
+    <div class="container-x pb-6 pt-12 md:pb-10 md:pt-20">
+      <nav aria-label="למי זה מתאים">
+        <ul class="audience-list" role="list">
+          <li><a href="/companies">לחברות</a></li>
+          <li><a href="/academia">לאוניברסיטאות ומכללות</a></li>
+          <li><a href="/executive">למנהלים</a></li>
+        </ul>
+      </nav>
+      <h1 class="display mt-7 max-w-5xl text-balance">
+        <span class="block">כל מה שאנחנו מלמדים,</span>
+        <span class="block text-accent">עשינו קודם.</span>
+      </h1>
+      <p class="lead mt-7 max-w-3xl">הרצאות, סדנאות וקורסים על AI: Claude Code, סוכני AI, n8n ואוטומציה, בניית מוצרים ו-AI למנהלים. מצוות ש<strong class="text-fg">בנה מאות אייג׳נטים</strong> ו<strong class="text-fg">הטמיע AI בארגונים של אלפי עובדים</strong>, ומלמד מתוך זה.</p>
+      <div class="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+        <a href="/program" class="btn btn-primary" data-track="cta_click" data-track-label="hero">בואו נבנה לכם תוכנית המתאימה לצרכים שלכם</a>
+        <a href="#offers-title" class="btn btn-ghost">מה אנחנו מעבירים?</a>
       </div>
     </div>
+    <BridgeSection />
   </section>
 
   <LogoStrip />
+  <TopicsSection />
   <GapSection />
-  <OfferCards />
-  <MethodSection />
   <ProofBlocks />
   <!-- Testimonials: hidden until genuine quotes are collected (see TODO.md). Never use invented quotes. -->
   <FAQ items={faq} title="שאלות שארגונים שואלים אותנו" />
