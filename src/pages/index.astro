@@ -4,7 +4,7 @@ import LogoStrip from '@/components/LogoStrip.astro';
 import OfferCards from '@/components/OfferCards.astro';
 import WhyUs from '@/components/WhyUs.astro';
 import WhyNow from '@/components/WhyNow.astro';
-import AgentPlayground from '@/components/AgentPlayground.astro';
+import DotsAI from '@/components/DotsAI.astro';
 import TopicLinks from '@/components/TopicLinks.astro';
 import HowItWorks from '@/components/HowItWorks.astro';
 import RelatedArticles from '@/components/RelatedArticles.astro';
@@ -14,7 +14,7 @@ import { OFFERS } from '@/config/site';
 import { serviceSchema, faqSchema } from '@/lib/seo';
 
 const title = 'הרצאות וסדנאות AI לארגונים, מאנשים שהטמיעו AI';
-const description = 'לומדים AI ממי שעושה את זה: הרצאות, סדנאות וקורסים לחברות, לאקדמיה ולמנהלים, מצוות שבנה מאות אייג׳נטים והטמיע AI בארגונים של אלפי עובדים.';
+const description = 'לומדים AI ממי שעושים את זה: הרצאות, סדנאות וקורסים לחברות, לאקדמיה ולמנהלים, מצוות שבנה מאות אייג׳נטים והטמיע AI בארגונים של אלפי עובדים.';
 const faq = [
   { q: 'מה אתם מעבירים בדיוק?', a: 'הרצאות, סדנאות מעשיות, קורסים והכשרות, וליווי אישי למנהלים. כל תוכנית נבנית סביב הארגון: הקהל, האתגר והקצב. הכול בעברית, לארגונים בישראל, פרונטלי או Zoom.' },
   { q: 'במה אתם שונים ממרצי AI אחרים?', a: 'לא למדנו AI מסרטונים. הטמענו אותו בעצמנו בחברות טכנולוגיה מובילות עם אלפי עובדים: אסטרטגיה ארגונית, סוכנים ואוטומציות בפרודקשן, אבטחת מידע, ניטור ומדידת ROI. כל דוגמה בכיתה היא משהו שעשינו בידיים.' },
@@ -40,21 +40,21 @@ const schema = [...OFFERS.map((o) => serviceSchema({ name: `${o.name} AI`, descr
         </nav>
         <h1 class="display mt-7 text-balance">
           <span class="block">לומדים AI</span>
-          <span class="block text-accent">ממי שעושה את זה.</span>
+          <span class="block text-accent">ממי שעושים את זה.</span>
         </h1>
         <ul class="mt-8 flex flex-col gap-2 text-lg font-bold" aria-label="הרקע שלנו">
           <li class="flex items-baseline gap-2"><span class="text-accent" aria-hidden="true">—</span>בנינו מאות אייג׳נטים</li>
           <li class="flex items-baseline gap-2"><span class="text-accent" aria-hidden="true">—</span>הטמענו AI בארגונים של אלפי עובדים</li>
-          <li class="flex items-baseline gap-2"><span class="text-accent" aria-hidden="true">—</span>מרצים בטכניון, באוניברסיטת תל אביב ובצה״ל</li>
+          <li class="flex items-baseline gap-2"><span class="text-accent" aria-hidden="true">—</span>מבניית אייג׳נט בודד ועד אסטרטגיית AI לארגון שלם</li>
         </ul>
-        <p class="lead mt-6 max-w-2xl">הרצאות, סדנאות וקורסים על AI לחברות, לאקדמיה ולמנהלים. לא למדנו AI מסרטונים: אנחנו בונים איתו כל יום, ומלמדים מתוך מה שעובד ומה שנשבר.</p>
+        <p class="lead mt-6 max-w-2xl">הרצאות, סדנאות וקורסים על AI לחברות, לאקדמיה ולמנהלים. לא למדנו AI מסרטונים. עשינו את זה בארגונים אמיתיים, ומלמדים מתוך מה שעבד ומה שנשבר.</p>
         <div class="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
           <a href="/program" class="btn btn-primary" data-track="cta_click" data-track-label="hero">בואו נבנה לכם תוכנית המתאימה לצרכים שלכם</a>
           <a href="#offers-title" class="btn btn-ghost">מה אנחנו מעבירים?</a>
         </div>
       </div>
       <div class="md:col-span-5 md:self-center">
-        <AgentPlayground />
+        <DotsAI />
       </div>
     </div>
   </section>
@@ -62,7 +62,7 @@ const schema = [...OFFERS.map((o) => serviceSchema({ name: `${o.name} AI`, descr
   <LogoStrip />
   <WhyUs />
   <WhyNow />
-  <OfferCards />
+  <OfferCards audienceLinks />
   <TopicLinks />
   <HowItWorks title="איך עובדים איתנו" />
   <RelatedArticles title="מהבלוג: מדריכים מהשטח" slugs={['claude-code-for-non-developers', 'n8n-ai-agent', 'hours-saved-is-not-an-ai-strategy']} limit={3} moreHref="/blog" />

@@ -12,6 +12,7 @@ const title = 'קורס בינה מלאכותית לאקדמיה | AI לאוני
 const description = 'קורס בינה מלאכותית לאקדמיה, הרצאות אורח וסדנאות לתוכניות יזמות ולימודי המשך. סילבוס, מטלות והערכה, מאנשים שהטמיעו AI בתעשייה.';
 const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'לאקדמיה', path }];
 const faq = [
+  { q: 'למה סטודנטים צריכים יכולות AI פרקטיות כבר עכשיו?', a: 'כי זה מה שמראיינים בודקים היום. אנחנו מגייסים בעצמנו לחברות טכנולוגיה, ובכל ראיון שואלים איך המועמד עובד עם AI ומה הוא בנה איתו. שוק העבודה לג׳וניורים קשה מאוד, ומי שמגיע בלי יכולות AI פרקטיות מתחיל מאחור, גם עם ציונים טובים.' },
   { q: 'אילו פורמטים מתאימים לאוניברסיטה או למכללה?', a: 'הרצאת אורח בקורס קיים, סדנה של יום בתוכנית יזמות, קורס סמסטריאלי בלימודי המשך, או סדרת מפגשים לסגל. אנחנו מתאימים את הפורמט למבנה התוכנית.' },
   { q: 'האם יש סילבוס אקדמי?', a: 'כן. לכל קורס יש סילבוס עם מטרות, מפגשים, מטלות והערכה, מוכן להגשה לוועדת הוראה.' },
   { q: 'האם הסטודנטים צריכים רקע בתכנות?', a: 'תלוי בקורס. הקורס לבניית מוצרים עם AI ו-Claude Code מתאים גם לסטודנטים בלי רקע טכני. בוטקמפ סוכני AI מתאים לסטודנטים עם רקע בסיסי בנתונים או בקוד.' },
@@ -36,6 +37,47 @@ const blocks = [
     </div>
   </section>
   <LogoStrip audience="academia" title="מוסדות שלומדים עם RealAI" />
+
+  <section class="border-t border-line py-20 md:py-24" aria-labelledby="market-title">
+    <div class="container-x">
+      <div class="grid gap-10 md:grid-cols-12 md:gap-12">
+        <div class="md:col-span-7">
+          <p class="eyebrow">שוק העבודה</p>
+          <h2 id="market-title" class="h2 mt-3">אנחנו גם מראיינים. <span class="text-accent">ואנחנו רואים מה קורה בשוק.</span></h2>
+        </div>
+        <div class="md:col-span-5 md:self-end">
+          <p class="lead">חוץ מללמד, אנחנו יושבים מול מועמדים ומגייסים לחברות טכנולוגיה. שוק העבודה לג׳וניורים קשה מאוד היום, ובכל ראיון אנחנו שואלים את אותה שאלה: איך אתה עובד עם AI? מי שאין לו תשובה טובה מתחיל מאחור, גם עם תואר מצוין.</p>
+        </div>
+      </div>
+      <h3 class="h3 mt-14">מה מראיינים מחפשים היום</h3>
+      <ul class="mt-6 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4" role="list">
+        <li class="rule-top"><p class="font-bold">"מה בנית עם AI?"</p><p class="mt-2 text-muted">לא "השתמשתי ב-ChatGPT", אלא פרויקט שאפשר לפתוח ולהראות: אוטומציה, סוכן או מוצר קטן שעובד.</p></li>
+        <li class="rule-top"><p class="font-bold">שיטת עבודה, לא טריקים</p><p class="mt-2 text-muted">איך משתמשים ב-AI במחקר, בכתיבה, בניתוח ובקוד, ביום-יום ובשיקול דעת.</p></li>
+        <li class="rule-top"><p class="font-bold">לדעת מתי ה-AI טועה</p><p class="mt-2 text-muted">לבדוק תוצאות, לזהות המצאות ולא להעביר הלאה עבודה שלא נבדקה. זה מה שמפריד בין מתחיל למקצוען.</p></li>
+        <li class="rule-top"><p class="font-bold">ללמוד כלי חדש מהר</p><p class="mt-2 text-muted">הכלים משתנים כל חודש. מחפשים אנשים שיודעים להיכנס לכלי חדש ולהפיק ממנו ערך תוך ימים.</p></li>
+      </ul>
+      <div class="mt-16 grid gap-10 rounded-[4px] bg-soft p-6 md:grid-cols-2 md:p-10">
+        <div>
+          <h3 class="h3">עם מה הסטודנטים שלכם יוצאים</h3>
+          <ul class="mt-5 space-y-3">
+            <li class="flex gap-3"><span class="text-accent" aria-hidden="true">—</span>פרויקט עובד לתיק העבודות, ותשובה חזקה לשאלה "מה בנית עם AI?"</li>
+            <li class="flex gap-3"><span class="text-accent" aria-hidden="true">—</span>ניסיון בכלים שמשתמשים בהם בתעשייה: Claude Code, n8n וסוכני AI</li>
+            <li class="flex gap-3"><span class="text-accent" aria-hidden="true">—</span>שיטת עבודה עם AI שמתאימה לתחום שלהם, גם בלי רקע טכני</li>
+            <li class="flex gap-3"><span class="text-accent" aria-hidden="true">—</span>הרגל לבדוק את ה-AI, לא רק להשתמש בו</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="h3">מה זה נותן לתוכנית</h3>
+          <ul class="mt-5 space-y-3">
+            <li class="flex gap-3"><span class="text-accent" aria-hidden="true">—</span>בוגרים שמגיעים לראיונות עם יתרון ברור</li>
+            <li class="flex gap-3"><span class="text-accent" aria-hidden="true">—</span>קורס שמושך נרשמים, כי מלמדים בו אנשים מהתעשייה</li>
+            <li class="flex gap-3"><span class="text-accent" aria-hidden="true">—</span>סילבוס, מטלות והערכה מוכנים, בלי עבודה נוספת לרכזים</li>
+            <li class="flex gap-3"><span class="text-accent" aria-hidden="true">—</span>קשר ישיר לתעשייה: הדוגמאות בכיתה הן מהחודש האחרון</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="py-14"><div class="container-x">
     <h2 class="h2">מה מתאים לתוכנית שלכם</h2>
     <div class="mt-8 grid gap-5 md:grid-cols-3">

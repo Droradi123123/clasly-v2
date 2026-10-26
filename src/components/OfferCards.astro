@@ -1,7 +1,7 @@
 ---
 import { OFFERS } from '@/config/site';
-interface Props { title?: string; exclude?: string }
-const { title = 'מה אנחנו מעבירים לארגונים?', exclude } = Astro.props;
+interface Props { title?: string; exclude?: string; audienceLinks?: boolean }
+const { title = 'מה אנחנו מעבירים?', exclude, audienceLinks = false } = Astro.props;
 const offers = OFFERS.filter((o) => o.slug !== exclude);
 ---
 <section class="py-20 md:py-24" aria-labelledby="offers-title">
@@ -9,7 +9,7 @@ const offers = OFFERS.filter((o) => o.slug !== exclude);
     <div class="max-w-3xl">
       <p class="eyebrow">דרכים לעבוד איתנו</p>
       <h2 id="offers-title" class="h2 mt-3">{title}</h2>
-      <p class="lead mt-4">כל תוכנית נבנית סביב הארגון שלכם: הקהל, האתגר והקצב. מתחילים בשיחה, לא בקטלוג.</p>
+      <p class="lead mt-4">לארגונים, לצוותים ולמנהלים, וגם לסטודנטים באוניברסיטאות ובמכללות. כל תוכנית נבנית סביב הקהל, האתגר והקצב. מתחילים בשיחה, לא בקטלוג.</p>
     </div>
     <ol class={`mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 ${offers.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
       {offers.map((o, i) => (
@@ -24,5 +24,15 @@ const offers = OFFERS.filter((o) => o.slug !== exclude);
         </li>
       ))}
     </ol>
+    {audienceLinks && (
+      <div class="mt-12 grid gap-4 sm:grid-cols-2">
+        <a href="/companies" class="group flex items-center justify-between gap-4 rounded-[4px] border-[1.5px] border-ink p-5 transition hover:bg-ink hover:text-bg">
+          <span><span class="block text-sm text-muted group-hover:text-bg">לחברות ולארגונים</span><span class="font-display text-xl">איך מכשירים ארגון שלם ל-AI</span></span><span aria-hidden="true">←</span>
+        </a>
+        <a href="/academia" class="group flex items-center justify-between gap-4 rounded-[4px] border-[1.5px] border-ink p-5 transition hover:bg-ink hover:text-bg">
+          <span><span class="block text-sm text-muted group-hover:text-bg">לאוניברסיטאות ולמכללות</span><span class="font-display text-xl">AI פרקטי לסטודנטים, לפני שוק העבודה</span></span><span aria-hidden="true">←</span>
+        </a>
+      </div>
+    )}
   </div>
 </section>
