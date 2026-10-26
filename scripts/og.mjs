@@ -72,7 +72,7 @@ function svg({ title, description, kicker }) {
   <text x="1076" y="214" direction="rtl" text-anchor="start" font-family="Assistant" font-weight="700" font-size="22" fill="${ACCENT}">${esc(kicker)}</text>
   ${titleText}${descText}
   <rect x="90" y="560" width="1020" height="1" fill="${RULE}"/>
-  <text x="1110" y="600" direction="rtl" text-anchor="start" font-family="Assistant" font-weight="400" font-size="22" fill="${INK2}">לומדים AI ממי שעושה את זה.</text>
+  <text x="1110" y="600" direction="rtl" text-anchor="start" font-family="Assistant" font-weight="400" font-size="22" fill="${INK2}">לומדים AI ממי שעושים את זה.</text>
 </svg>`;
 }
 
@@ -92,6 +92,6 @@ for (const file of htmlFiles(DIST)) {
   const kicker = /\/blog\//.test(og) ? 'מהבלוג' : /\/topics\//.test(og) ? 'מרכז נושא' : 'AI יישומי לארגונים';
   jobs.push(sharp(Buffer.from(svg({ title, description, kicker }))).png({ compressionLevel: 9 }).toFile(join(OUT, name)).then(() => count++));
 }
-jobs.push(sharp(Buffer.from(svg({ title: 'לומדים AI ממי שעושה את זה.', description: 'הרצאות, סדנאות וקורסים על AI, מצוות שבנה מאות אייג׳נטים והטמיע AI בארגונים של אלפי עובדים.', kicker: 'AI יישומי לארגונים' }))).png().toFile(join(OUT, 'default.png')).then(() => count++));
+jobs.push(sharp(Buffer.from(svg({ title: 'לומדים AI ממי שעושים את זה.', description: 'הרצאות, סדנאות וקורסים על AI, מצוות שבנה מאות אייג׳נטים והטמיע AI בארגונים של אלפי עובדים.', kicker: 'AI יישומי לארגונים' }))).png().toFile(join(OUT, 'default.png')).then(() => count++));
 await Promise.all(jobs);
 console.log(`[og] generated ${count} images in ${OUT}`);

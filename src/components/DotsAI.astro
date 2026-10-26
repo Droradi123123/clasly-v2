@@ -1,0 +1,96 @@
+---
+/**
+ * Hero toy: the letters "AI" drawn from a few thousand dots. On load the dots fly in and settle; the cursor (or a
+ * finger) pushes them away and they spring back. Canvas only, no library. Paused while off screen; still for
+ * visitors who ask for reduced motion.
+ */
+---
+<div class="dots-ai" data-dots-ai>
+  <canvas role="img" aria-label="האותיות AI עשויות נקודות שמתפזרות כשמעבירים עליהן את העכבר"></canvas>
+  <p class="dots-cap">העבירו את העכבר על האותיות</p>
+</div>
+
+<style>
+  .dots-ai { position: relative; width: 100%; max-width: 100%; aspect-ratio: 1 / .78; }
+  .dots-ai canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: pan-y; cursor: crosshair; }
+  .dots-cap { position: absolute; inset-inline: 0; bottom: 0; text-align: center; font-size: .85rem; color: var(--ink-2); pointer-events: none; }
+  @media (hover: none) { .dots-cap::after { content: " (או עם האצבע)"; } }
+</style>
+
+<script>
+  type P = { hx: number; hy: number; x: number; y: number; vx: number; vy: number; blue: boolean };
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLElement>('[data-dots-ai]').forEach((root) => {
+    const cv = root.querySelector('canvas')!;
+    const cx = cv.getContext('2d')!;
+    const css = getComputedStyle(document.documentElement);
+    const INK = css.getPropertyValue('--ink').trim() || '#141414';
+    const BLUE = css.getPropertyValue('--accent').trim() || '#1f3fd1';
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    let pts: P[] = [], w = 0, h = 0, dot = 2;
+    const mouse = { x: -9999, y: -9999 };
+    let visible = true, running = false;
+
+    function build() {
+      const r = cv.getBoundingClientRect();
+      w = Math.floor(r.width); h = Math.floor(r.height);
+      if (!w || !h) return;
+      cv.width = w * dpr; cv.height = h * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      // Draw the letters off screen and sample their pixels on a grid.
+      const off = document.createElement('canvas'); off.width = w; off.height = h;
+      const oc = off.getContext('2d')!;
+      oc.fillStyle = '#000'; oc.textAlign = 'center'; oc.textBaseline = 'middle';
+      oc.font = `400 ${Math.floor(h * .8)}px "Secular One", Arial, sans-serif`;
+      oc.fillText('AI', w / 2, h * .47);
+      const data = oc.getImageData(0, 0, w, h).data;
+      const gap = Math.max(5, Math.round(w / 88));
+      dot = Math.max(1.5, w / 320);
+      const old = pts; pts = [];
+      for (let y = 0; y < h; y += gap) for (let x = 0; x < w; x += gap) {
+        if (data[(y * w + x) * 4 + 3] > 128) {
+          const prev = old[pts.length];
+          pts.push({ hx: x, hy: y, x: prev ? prev.x : (reduce ? x : Math.random() * w), y: prev ? prev.y : (reduce ? y : Math.random() * h), vx: 0, vy: 0, blue: Math.random() < .18 });
+        }
+      }
+    }
+
+    function frame() {
+      if (!visible) { running = false; return; }
+      cx.clearRect(0, 0, w, h);
+      const rad = Math.max(60, w * .16);
+      for (const p of pts) {
+        if (!reduce) {
+          const dx = p.x - mouse.x, dy = p.y - mouse.y, d = Math.hypot(dx, dy);
+          if (d < rad) { const f = (1 - d / rad) * 6; p.vx += (dx / (d || 1)) * f; p.vy += (dy / (d || 1)) * f; }
+          p.vx += (p.hx - p.x) * .05; p.vy += (p.hy - p.y) * .05; p.vx *= .82; p.vy *= .82; p.x += p.vx; p.y += p.vy;
+        }
+        cx.fillStyle = p.blue ? BLUE : INK;
+        cx.beginPath(); cx.arc(p.x, p.y, dot, 0, 6.2832); cx.fill();
+      }
+      if (reduce) { running = false; return; }
+      requestAnimationFrame(frame);
+    }
+    const start = () => { if (!running) { running = true; requestAnimationFrame(frame); } };
+
+    const move = (e: PointerEvent | TouchEvent) => {
+      const r = cv.getBoundingClientRect();
+      const p = 'touches' in e ? e.touches[0] : e;
+      mouse.x = p.clientX - r.left; mouse.y = p.clientY - r.top;
+    };
+    const leave = () => { mouse.x = mouse.y = -9999; };
+    cv.addEventListener('pointermove', move);
+    cv.addEventListener('touchmove', move, { passive: true });
+    cv.addEventListener('pointerleave', leave);
+    cv.addEventListener('touchend', leave);
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); }).observe(root);
+    }
+    let rt = 0;
+    window.addEventListener('resize', () => { clearTimeout(rt); rt = window.setTimeout(() => { build(); start(); }, 150); });
+
+    const ready = document.fonts ? document.fonts.load('400 100px "Secular One"') : Promise.resolve();
+    ready.catch(() => {}).finally(() => { build(); start(); });
+  });
+</script>

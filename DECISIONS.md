@@ -70,7 +70,13 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 60. **Logos start from the Technion, and the strip runs right to left**, so the Technion is the first logo a Hebrew reader sees.
 61. **Generated article covers** (`src/components/ArticleCover.astro`): each topic has its own visual language (agents as a network, n8n as a flow, Claude Code as a terminal, ROI as a chart, adoption as people dots, building as blocks, managers as a roadmap) and the slug seeds the variation, so every article has its own image. Inline SVG in the site palette; shown on the blog index, topic hubs, related-article blocks and the article header.
 
+62. **Headline in plural: "לומדים AI / ממי שעושים את זה."** (owner, 2026-10-26). The third credential is now "מבניית אייג׳נט בודד ועד אסטרטגיית AI לארגון שלם" instead of the Technion/IDF line. The sub-line no longer says "we build with it every day"; it says we did it in real organizations. Why-us says "עשינו בעצמנו", not "ניסינו".
+63. **The practice list now covers strategy, a work plan, and getting a whole organization to use AI**, alongside security, production, ROI and model errors (7 items).
+64. **Hero animation: "AI" drawn in dots** (`src/components/DotsAI.astro`), replacing the agent playground (owner chose prototype C of three). The dots fly in on load, scatter from the cursor or a finger and spring back; the animation pauses off screen and stays still for reduced motion.
+65. **"מה אנחנו מעבירים?" speaks to students too**, and links to two detailed pages. /companies gained "what an organization learns beyond the tools" (strategy, work plan, moving the whole organization, team skills, security, measurement). /academia gained the hiring angle: we interview candidates ourselves, the junior job market is very hard, and what interviewers look for today; plus what students leave with and what the program gains. Titles, descriptions and H1s of both pages are unchanged.
+
 ## Open questions for Dror (v2)
+- "תוריד את צה״ל" was applied to the credential line (removed). The IDF emblem is still in the homepage logo strip; say if it should go too.
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
 - Client logos still missing: University of Haifa, Ben-Gurion University, the College of Management (typographic placeholders) and Reichman University (the link was blocked from the build environment; upload the file). Any other institution you have lectured at can be added the same way.
 - Is the present tense in "לומדים עם RealAI" accurate for every institution shown?
