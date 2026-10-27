@@ -77,8 +77,9 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 
 66. **Third hero credential: "בנינו מוצרי AI עם עשרות אלפי משתמשים"** (owner, 2026-10-26), replacing the "from a single agent to strategy" line.
 
+67. **IDF emblem removed from the logo strip; universities first** (owner, 2026-10-27). Order: Technion, Tel Aviv University, Haifa, Ben-Gurion, College of Management, then 8200 and the Navy.
+
 ## Open questions for Dror (v2)
-- "תוריד את צה״ל" was applied to the credential line (removed). The IDF emblem is still in the homepage logo strip; say if it should go too.
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
 - Client logos still missing: University of Haifa, Ben-Gurion University, the College of Management (typographic placeholders) and Reichman University (the link was blocked from the build environment; upload the file). Any other institution you have lectured at can be added the same way.
 - Is the present tense in "לומדים עם RealAI" accurate for every institution shown?
