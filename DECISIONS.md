@@ -79,6 +79,8 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 
 67. **IDF emblem removed from the logo strip; universities first** (owner, 2026-10-27). Order: Technion, Tel Aviv University, Haifa, Ben-Gurion, College of Management, then 8200 and the Navy.
 
+68. **Google Analytics 4, off until an ID is set** (owner, 2026-10-27). `SITE.gaMeasurementId` in `src/config/site.ts` (or the `PUBLIC_GA_ID` build variable) turns on gtag in the page head, never on /admin. Our existing events (whatsapp_click, cta_click, lead_form_submit) are mirrored to GA as well as to D1. The privacy page switches its statistics paragraph to an honest Google Analytics description (cookies, no ad targeting, opt-out link) whenever the ID is set; its description no longer promises "no tracking cookies".
+
 ## Open questions for Dror (v2)
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
 - Client logos still missing: University of Haifa, Ben-Gurion University, the College of Management (typographic placeholders) and Reichman University (the link was blocked from the build environment; upload the file). Any other institution you have lectured at can be added the same way.

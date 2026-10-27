@@ -10,6 +10,8 @@ document.querySelectorAll('.reveal, [data-inview]').forEach((el) => (io ? io.obs
 
 // Event tracking: WhatsApp clicks and other data-track elements.
 export function track(event: string, props: Record<string, unknown> = {}) {
+  // Same event to Google Analytics, when it is on the page (see SITE.gaMeasurementId).
+  try { (window as any).gtag?.('event', event, props); } catch {}
   const body = JSON.stringify({ event, page: location.pathname, referrer: document.referrer || null, ...props });
   try {
     if (navigator.sendBeacon) navigator.sendBeacon('/api/event', new Blob([body], { type: 'application/json' }));
