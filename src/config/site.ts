@@ -26,7 +26,7 @@ export const SITE = {
   locale: 'he_IL',
   lang: 'he',
   // Entity facts: keep identical everywhere (site, LinkedIn, directories) so AI engines form one stable entity.
-  tagline: 'לומדים AI ממי שעושים את זה',
+  tagline: 'לומדים AI ממובילי ה-AI של התעשייה',
   description:
     'הרצאות, סדנאות, קורסים וליווי אישי למנהלים בהטמעת AI בארגונים בישראל. מועבר בעברית על ידי צוות שהטמיע AI בעצמו בחברות טכנולוגיה מובילות עם אלפי עובדים: Claude Code, n8n, סוכני AI ומדידת ROI.',
   whatsappNumber: WHATSAPP_NUMBER,

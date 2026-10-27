@@ -38,14 +38,13 @@ const done = [
     <div class="mt-14 grid gap-x-8 gap-y-10 md:grid-cols-3">
       {PROOF_POINTS.map((p, i) => (
         <article class="rule-top reveal" style={`transition-delay:${i * 90}ms`}>
-          <p class="font-display text-3xl md:text-4xl">{p.stat}</p>
-          <h3 class="mt-4 text-lg font-bold">{p.title}</h3>
-          <p class="mt-2 text-muted">{p.text}</p>
+          <h3 class="font-display text-3xl text-accent md:text-4xl">{p.stat}</h3>
+          <p class="mt-3 text-muted">{p.text}</p>
         </article>
       ))}
     </div>
 
-    <div class="mt-20 rounded-[4px] bg-soft p-6 md:p-10">
+    <div class="mt-20 rounded-[4px] bg-accent-soft p-6 md:p-10">
       <h3 class="h3 max-w-2xl">מה ההבדל בפועל? יש פער עצום בין מי שלמד AI ביוטיוב לבין מי שעשה את זה בארגון.</h3>
       <div class="mt-8 grid gap-10 md:grid-cols-2 md:gap-14">
         <div>
