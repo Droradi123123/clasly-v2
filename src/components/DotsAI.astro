@@ -7,18 +7,15 @@
 ---
 <div class="dots-ai" data-dots-ai>
   <canvas role="img" aria-label="האותיות AI עשויות נקודות שמתפזרות כשמעבירים עליהן את העכבר"></canvas>
-  <p class="dots-cap">העבירו את העכבר על האותיות</p>
 </div>
 
 <style>
   .dots-ai { position: relative; width: 100%; max-width: 100%; aspect-ratio: 1 / .78; }
   .dots-ai canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: pan-y; cursor: crosshair; }
-  .dots-cap { position: absolute; inset-inline: 0; bottom: 0; text-align: center; font-size: .85rem; color: var(--ink-2); pointer-events: none; }
-  @media (hover: none) { .dots-cap::after { content: " (או עם האצבע)"; } }
 </style>
 
 <script>
-  type P = { hx: number; hy: number; x: number; y: number; vx: number; vy: number; blue: boolean };
+  type P = { hx: number; hy: number; x: number; y: number; vx: number; vy: number; c: number; ph: number };
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   document.querySelectorAll<HTMLElement>('[data-dots-ai]').forEach((root) => {
@@ -27,6 +24,9 @@
     const css = getComputedStyle(document.documentElement);
     const INK = css.getPropertyValue('--ink').trim() || '#141414';
     const BLUE = css.getPropertyValue('--accent').trim() || '#1f3fd1';
+    const SKY = css.getPropertyValue('--accent-soft-strong').trim() || '#9db0f5';
+    const COLORS = [INK, BLUE, SKY];
+    let t = 0;
     const dpr = Math.min(2, window.devicePixelRatio || 1);
     let pts: P[] = [], w = 0, h = 0, dot = 2;
     const mouse = { x: -9999, y: -9999 };
@@ -50,22 +50,24 @@
       for (let y = 0; y < h; y += gap) for (let x = 0; x < w; x += gap) {
         if (data[(y * w + x) * 4 + 3] > 128) {
           const prev = old[pts.length];
-          pts.push({ hx: x, hy: y, x: prev ? prev.x : (reduce ? x : Math.random() * w), y: prev ? prev.y : (reduce ? y : Math.random() * h), vx: 0, vy: 0, blue: Math.random() < .18 });
+          pts.push({ hx: x, hy: y, x: prev ? prev.x : (reduce ? x : Math.random() * w), y: prev ? prev.y : (reduce ? y : Math.random() * h), vx: 0, vy: 0, c: Math.random() < .2 ? 1 : Math.random() < .12 ? 2 : 0, ph: Math.random() * 6.28 });
         }
       }
     }
 
     function frame() {
       if (!visible) { running = false; return; }
-      cx.clearRect(0, 0, w, h);
+      cx.clearRect(0, 0, w, h); t += .02;
       const rad = Math.max(60, w * .16);
       for (const p of pts) {
         if (!reduce) {
           const dx = p.x - mouse.x, dy = p.y - mouse.y, d = Math.hypot(dx, dy);
           if (d < rad) { const f = (1 - d / rad) * 6; p.vx += (dx / (d || 1)) * f; p.vy += (dy / (d || 1)) * f; }
-          p.vx += (p.hx - p.x) * .05; p.vy += (p.hy - p.y) * .05; p.vx *= .82; p.vy *= .82; p.x += p.vx; p.y += p.vy;
+          // A slow idle wobble keeps the letters breathing even when nobody touches them.
+          const tx = p.hx + Math.sin(t + p.ph) * 1.2, ty = p.hy + Math.cos(t * .8 + p.ph) * 1.2;
+          p.vx += (tx - p.x) * .05; p.vy += (ty - p.y) * .05; p.vx *= .82; p.vy *= .82; p.x += p.vx; p.y += p.vy;
         }
-        cx.fillStyle = p.blue ? BLUE : INK;
+        cx.fillStyle = COLORS[p.c];
         cx.beginPath(); cx.arc(p.x, p.y, dot, 0, 6.2832); cx.fill();
       }
       if (reduce) { running = false; return; }
