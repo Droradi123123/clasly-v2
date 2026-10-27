@@ -83,8 +83,9 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 
 69. **Official logos for Ben-Gurion University and the College of Management** (owner-supplied, 2026-10-27). BGU is the owner's vector, recoloured to ink with the white flame kept; the College of Management is converted to an ink silhouette like the others.
 
+70. **Official logos for the University of Haifa and Reichman University** (owner-supplied, 2026-10-27). Reichman is the owner's vector recoloured to ink; Haifa is converted to an ink silhouette. Every logo in the strip is now an official file; no placeholders remain.
+
 ## Open questions for Dror (v2)
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
-- Client logos still missing: University of Haifa (typographic placeholder) and Reichman University (the link was blocked from the build environment; upload the file). Any other institution you have lectured at can be added the same way.
 - Is the present tense in "לומדים עם RealAI" accurate for every institution shown?
 - Proposed copy not applied (titles and FAQ questions): see "Proposed, not applied" in `copy-audit-pages.md`.
