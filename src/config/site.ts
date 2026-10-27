@@ -100,7 +100,7 @@ export const FOOTER_LINKS = {
 } as const;
 
 /**
- * Client logos, shown in the marquee in this order. Files live in /public/logos; width/height are the file's pixel size.
+ * Client logos, shown in the marquee in this order: universities and colleges first. Files live in /public/logos; width/height are the file's pixel size.
  * Real logos are white on transparency (the strip inverts them in light mode).
  * TODO(Dror): haifa, bgu and colman are still typographic placeholders: send the official files.
  */
@@ -108,12 +108,11 @@ export type Audience = 'academia' | 'company';
 export const LOGOS: { id: string; name: string; file: string; width: number; height: number; audience: Audience; placeholder: boolean }[] = [
   { id: 'technion-thub', name: 'הטכניון, t:hub', file: '/logos/technion-thub.png', width: 482, height: 96, audience: 'academia', placeholder: false },
   { id: 'tau', name: 'אוניברסיטת תל אביב', file: '/logos/tau.png', width: 293, height: 160, audience: 'academia', placeholder: false },
-  { id: 'idf', name: 'צה״ל', file: '/logos/idf.png', width: 171, height: 160, audience: 'company', placeholder: false },
-  { id: '8200', name: 'יחידה 8200', file: '/logos/8200.png', width: 160, height: 160, audience: 'company', placeholder: false },
-  { id: 'navy', name: 'חיל הים', file: '/logos/navy.png', width: 294, height: 110, audience: 'company', placeholder: false },
   { id: 'haifa', name: 'אוניברסיטת חיפה', file: '/logos/haifa.svg', width: 220, height: 56, audience: 'academia', placeholder: true },
   { id: 'bgu', name: 'אוניברסיטת בן-גוריון', file: '/logos/bgu.svg', width: 220, height: 56, audience: 'academia', placeholder: true },
   { id: 'colman', name: 'המכללה למינהל', file: '/logos/colman.svg', width: 220, height: 56, audience: 'academia', placeholder: true },
+  { id: '8200', name: 'יחידה 8200', file: '/logos/8200.png', width: 160, height: 160, audience: 'company', placeholder: false },
+  { id: 'navy', name: 'חיל הים', file: '/logos/navy.png', width: 294, height: 110, audience: 'company', placeholder: false },
 ];
 
 /** Proof points. Never name an employer. */
