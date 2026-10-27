@@ -34,6 +34,8 @@ export const SITE = {
   defaultOgImage: '/og/default.png',
   // Public analytics token for Cloudflare Web Analytics (set in Cloudflare dashboard, then paste here or via PUBLIC_CF_ANALYTICS_TOKEN).
   cfAnalyticsToken: import.meta.env?.PUBLIC_CF_ANALYTICS_TOKEN ?? '',
+  // Google Analytics 4 Measurement ID (G-XXXXXXXXXX). Empty = no Google Analytics on the site.
+  gaMeasurementId: import.meta.env?.PUBLIC_GA_ID || '',
   turnstileSiteKey: import.meta.env?.PUBLIC_TURNSTILE_SITE_KEY ?? '',
 } as const;
 

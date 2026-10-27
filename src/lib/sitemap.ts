@@ -21,7 +21,7 @@ const STATIC: { path: string; lastmod: string; priority: number }[] = [
   { path: '/blog', lastmod: today(), priority: 0.8 },
   { path: '/topics', lastmod: today(), priority: 0.7 },
   { path: '/accessibility', lastmod: '2026-10-23', priority: 0.2 },
-  { path: '/privacy', lastmod: '2026-10-23', priority: 0.2 },
+  { path: '/privacy', lastmod: '2026-10-27', priority: 0.2 },
 ];
 
 export async function pagesUrls(): Promise<UrlEntry[]> {

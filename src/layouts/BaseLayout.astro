@@ -17,6 +17,7 @@ const og = absolute(ogImage ?? ogPathFor(path));
 // Append the brand only when the result still fits Google's ~60 character title width.
 const withBrand = `${title} | ${BRAND_NAME}`;
 const fullTitle = title.includes(BRAND_NAME) || withBrand.length > 60 ? title : withBrand;
+const gaId = !path.startsWith('/admin') && /^G-[A-Z0-9]+$/.test(SITE.gaMeasurementId) ? SITE.gaMeasurementId : '';
 const jsonLd = JSON.stringify(graph(organizationSchema(), websiteSchema(), webPageSchema({ title, description, path, updatedAt, publishedAt, image: og }), ...schema)).replace(/</g, '\\u003c');
 ---
 <!doctype html>
@@ -62,6 +63,18 @@ const jsonLd = JSON.stringify(graph(organizationSchema(), websiteSchema(), webPa
     <script is:inline>
       document.documentElement.classList.add('js');
     </script>
+    {gaId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline define:vars={{ gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', gaId);
+        </script>
+      </>
+    )}
     <slot name="head" />
   </head>
   <body class="bg-bg text-fg antialiased">

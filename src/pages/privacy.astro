@@ -1,13 +1,18 @@
 ---
 import PageLayout from '@/layouts/PageLayout.astro';
-import { CONTACT_EMAIL, BRAND_NAME } from '@/config/site';
+import { CONTACT_EMAIL, BRAND_NAME, SITE } from '@/config/site';
+const ga = /^G-[A-Z0-9]+$/.test(SITE.gaMeasurementId);
 ---
-<PageLayout title="מדיניות פרטיות" description="איזה מידע האתר אוסף, לאיזו מטרה, היכן הוא נשמר ואיך לבקש מחיקה. בלי עוגיות מעקב, בלי מכירת מידע." path="/privacy" h1="מדיניות פרטיות" updatedAt="2026-10-24">
-  <p>{BRAND_NAME} אוספת רק את המידע הדרוש כדי לענות לפניות ולשפר את האתר. אנחנו לא מוכרים מידע ולא משתמשים בעוגיות מעקב פרסומיות.</p>
+<PageLayout title="מדיניות פרטיות" description="איזה מידע האתר אוסף, לאיזו מטרה, היכן הוא נשמר ואיך לבקש מחיקה. בלי מכירת מידע ובלי פרסום ממוקד." path="/privacy" h1="מדיניות פרטיות" updatedAt="2026-10-27">
+  <p>{BRAND_NAME} אוספת רק את המידע הדרוש כדי לענות לפניות ולשפר את האתר. אנחנו לא מוכרים מידע ולא משתמשים בפרסום ממוקד.</p>
   <h2>מה אנחנו אוספים</h2>
   <ul>
     <li><strong>פניות:</strong> שם, ארגון, טלפון או אימייל וההודעה שכתבתם בטופס או בוואטסאפ. משמש למענה בלבד.</li>
-    <li><strong>סטטיסטיקה:</strong> ניתוח תנועה אנונימי (Cloudflare Web Analytics) ואירועים כלליים כמו לחיצה על כפתור וואטסאפ, ללא עוגיות וללא מזהה אישי.</li>
+    {ga ? (
+      <li><strong>סטטיסטיקה:</strong> אנחנו משתמשים ב-Google Analytics כדי להבין אילו עמודים עוזרים למבקרים ומאיפה הם מגיעים. Google Analytics שומר עוגיות בדפדפן ומעבד נתוני שימוש כמו עמודים שנצפו, סוג מכשיר ומיקום משוער. אנחנו לא משתמשים בו לפרסום ממוקד ולא משייכים אותו לפרטים שמסרתם בטופס. אפשר לחסום אותו דרך הגדרות הדפדפן או עם <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener">התוסף של Google לחסימת Analytics</a>.</li>
+    ) : (
+      <li><strong>סטטיסטיקה:</strong> ניתוח תנועה אנונימי (Cloudflare Web Analytics) ואירועים כלליים כמו לחיצה על כפתור וואטסאפ, ללא עוגיות וללא מזהה אישי.</li>
+    )}
     <li><strong>הגנה מספאם:</strong> Cloudflare Turnstile עשוי לעבד נתוני דפדפן לצורך אימות שאתם לא בוט.</li>
   </ul>
   <h2>איפה המידע נשמר</h2>
