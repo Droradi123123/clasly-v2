@@ -91,6 +91,8 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 
 73. **"מאות סוכני AI שעובדים בארגונים"** instead of "מאות אייג׳נטים" (owner, 2026-10-28): the hero credential, the proof stat and the why-us copy say they are AI agents and that they work in organizations. Clearer key-sentence highlight (taller band, larger type). Logo strip: much wider gaps and at least three rounds of the list per loop. The BGU logo moved to a new file name, because the old name was cached in browsers for a week with the placeholder; logos are now cached for one day.
 
+74. **No invented figures in older articles** (owner, 2026-10-28). The 43 articles and 6 hubs written by content agents were rewritten: client and participant results, "cases from the field", market statistics without a link and prices presented as fact are gone. What stays: structure and recommendations (plans, agendas, sample sizes, thresholds labelled as recommendations), a few calculations explicitly labelled as hypothetical, the owner facts in #53, and links to official vendor pricing pages instead of quoted prices. Descriptions that promised "a real example" or "the numbers" were aligned with the bodies.
+
 ## Open questions for Dror (v2)
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
 - Is the present tense in "לומדים עם RealAI" accurate for every institution shown?
