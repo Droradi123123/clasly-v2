@@ -2,11 +2,13 @@ import { getCollection } from 'astro:content';
 import { SITE, BRAND_NAME, TOPICS, PROOF_POINTS, LOGOS, CONTACT_EMAIL, PHONE_DISPLAY } from '@/config/site';
 import { OFFER_PAGES } from '@/data/offers';
 import { PROGRAMS } from '@/data/programs';
+import { GLOSSARY } from '@/data/glossary';
 
 const abs = (p: string) => `${SITE.url}${p}`;
 
 export async function llmsShort(): Promise<string> {
   const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => a.data.title.localeCompare(b.data.title, 'he'));
+  const terms = (await getCollection('terms')).sort((a, b) => a.data.term.localeCompare(b.data.term, 'he'));
   return [
     `# ${BRAND_NAME}`,
     '',
@@ -38,11 +40,12 @@ export async function llmsShort(): Promise<string> {
     '## מאמרים',
     ...posts.map((p) => `- [${p.data.title}](${abs(`/blog/${p.data.slug}`)}): ${p.data.description}`),
     '',
+    ...(terms.length ? ['## מה זה? הסברי מונחים', ...terms.map((t) => `- [${t.data.title}](${abs(`/glossary/${t.data.slug}`)}): ${t.data.description}`), ''] : []),
     '## עוד',
     `- [אודות](${abs('/about')})`,
     `- [הצוות](${abs('/team')})`,
     `- [איך נבנה האתר](${abs('/how-this-site-was-built')})`,
-    `- [מילון מונחים](${abs('/glossary')}): הגדרות קצרות ל-36 מונחי AI בעברית.`,
+    `- [מילון מונחים](${abs('/glossary')}): הגדרות קצרות ל-${GLOSSARY.length} מונחי AI בעברית.`,
     `- [llms-full.txt](${abs('/llms-full.txt')}): הגרסה המלאה עם תוכן העמודים.`,
     '',
   ].join('\n');
@@ -52,6 +55,7 @@ export async function llmsFull(): Promise<string> {
   const short = await llmsShort();
   const posts = await getCollection('blog', ({ data }) => !data.draft);
   const hubs = await getCollection('hubs');
+  const terms = await getCollection('terms');
   const strip = (mdx: string) => mdx.replace(/^---[\s\S]*?---\n/, '').replace(/<[^>]+>/g, '').replace(/^import .*$/gm, '').trim();
   const sections = [
     short,
@@ -66,6 +70,7 @@ export async function llmsFull(): Promise<string> {
     ].join('\n')),
     '# מרכזי נושא: תוכן מלא',
     ...hubs.map((h) => `## ${h.data.h1}\n${abs(`/topics/${h.data.slug}`)}\n\n${strip(h.body ?? '')}\n`),
+    ...(terms.length ? ['# הסברי מונחים: תוכן מלא', ...terms.map((t) => `## ${t.data.title}\n${abs(`/glossary/${t.data.slug}`)}\n\n${strip(t.body ?? '')}\n`)] : []),
     '# מאמרים: תוכן מלא',
     ...posts.map((p) => `## ${p.data.title}\n${abs(`/blog/${p.data.slug}`)}\nעודכן: ${p.data.updatedAt.toISOString().slice(0, 10)}\n\n${strip(p.body ?? '')}\n\nשאלות נפוצות:\n${p.data.faq.map((f) => `- ש: ${f.q}\n  ת: ${f.a}`).join('\n')}\n`),
   ];

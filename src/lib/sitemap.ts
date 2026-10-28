@@ -28,6 +28,7 @@ export async function pagesUrls(): Promise<UrlEntry[]> {
   return [
     ...STATIC.map((s) => ({ loc: abs(s.path), lastmod: s.lastmod, changefreq: 'monthly' as const, priority: s.priority })),
     ...OFFER_PAGES.map((o) => ({ loc: abs(o.path), lastmod: o.updatedAt, changefreq: 'monthly' as const, priority: 0.95 })),
+    ...(await getCollection('terms')).map((t) => ({ loc: abs(`/glossary/${t.data.slug}`), lastmod: iso(t.data.updatedAt), changefreq: 'monthly' as const, priority: 0.6 })),
   ];
 }
 
