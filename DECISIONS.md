@@ -87,6 +87,8 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 
 71. **Headline "לומדים AI / ממובילי ה-AI של התעשייה."** and a livelier layer on the same design (owner, 2026-10-27): hero credentials as blue check badges (the long dashes looked bad), the key sentence "עשינו את זה בארגונים אמיתיים..." bold with a highlighter stroke, a shorter CTA "בואו נבנה לכם תוכנית" on every page that used the long one, no caption under the dots (which now breathe and use a third light-blue tint), proof cards with one heading each (the stat, in blue) instead of a stat plus a near-duplicate title, blue primary buttons with a playful offset shadow, eyebrows as soft blue pills, numbered badges in "why now", and soft blue panels instead of grey.
 
+72. **Daily article pipeline** (owner, 2026-10-28). A scheduled task writes and publishes one article every morning. Supporting pieces: `npm run figure` renders SVG diagrams to PNG with the site fonts (shared loader `scripts/lib/fonts.mjs`, also used by the OG images); `content:check` requires every article published from 2026-10-28 to have at least one figure with a descriptive alt under `public/blog/<slug>/` and a "## מקורות" section with at least two external links; `content/STYLE.md` drops the "anonymized example with specific numbers" rule (it invited invented figures) and adds the daily-post rules (sources only, no invented numbers or cases, human writing).
+
 ## Open questions for Dror (v2)
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
 - Is the present tense in "לומדים עם RealAI" accurate for every institution shown?

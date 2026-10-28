@@ -157,6 +157,9 @@ html.js .reveal.in { opacity: 1; transform: none; }
 .prose th, .prose td { border-bottom: 1px solid var(--rule); padding: .6em .75em; text-align: start; vertical-align: top; }
 .prose th { border-bottom: 2px solid var(--ink); font-weight: 700; }
 .prose img { border-radius: 3px; }
+.prose figure { margin-block: 2em; }
+.prose figure img { width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 6px; }
+.prose figcaption { margin-top: .6em; font-size: .9rem; color: var(--ink-2); }
 .prose .definition { background: var(--paper-2); border-inline-start: 3px solid var(--accent); padding: 1rem 1.1rem; }
 .prose hr { border: 0; border-top: 1px solid var(--rule); }
 .prose h2, .prose h3 { scroll-margin-top: 6rem; }

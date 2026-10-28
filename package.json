@@ -12,7 +12,8 @@
     "new-article": "node scripts/new-article.mjs",
     "content:check": "node scripts/content-check.mjs",
     "indexnow": "node scripts/indexnow.mjs",
-    "icons": "node scripts/icons.mjs"
+    "icons": "node scripts/icons.mjs",
+    "figure": "node scripts/figure.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.4.2",
