@@ -56,6 +56,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 38. איך כותבים מפרט לסוכן קוד
 39. Claude Code לאנליסטים: דוחות ואוטומציה
 40. ~~בניית אתר עם Claude Code: מה למדנו~~ ✅ `/blog/build-internal-tool-with-claude-code`
+51. ~~קובץ CLAUDE.md: איך כותבים הוראות ש-Claude Code מקיים~~ ✅ `/blog/how-to-write-claude-md`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
