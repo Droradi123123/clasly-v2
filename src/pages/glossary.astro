@@ -8,7 +8,7 @@ import { breadcrumbSchema, absolute } from '@/lib/seo';
 import { BRAND_NAME } from '@/config/site';
 const path = '/glossary';
 const title = 'מילון מונחי AI לארגונים: הגדרות קצרות בעברית';
-const description = `${GLOSSARY.length} מונחי AI שארגונים צריכים להכיר, כל אחד במשפט אחד ועם דוגמה מהשטח: סוכנים, RAG, טוקנים, n8n, Claude Code, ROI ועוד.`;
+const description = `${GLOSSARY.length} מונחי AI שארגונים צריכים להכיר, כל אחד במשפט אחד ועם הערה מעשית: סוכנים, RAG, טוקנים, n8n, Claude Code, ROI ועוד.`;
 const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'מילון מונחים', path }];
 const bySlug = Object.fromEntries(GLOSSARY.map((t) => [t.slug, t]));
 // Terms with a full "מה זה X?" page under /glossary/<slug>.
@@ -32,7 +32,7 @@ const schema = [
   },
 ];
 ---
-<BaseLayout title={title} description={description} path={path} schema={schema} updatedAt="2026-10-23">
+<BaseLayout title={title} description={description} path={path} schema={schema} updatedAt="2026-10-28">
   <section class="relative overflow-hidden">
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="container-x relative py-12 md:py-16">
