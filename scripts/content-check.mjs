@@ -3,8 +3,10 @@
  * Quality checklist for blog articles and hubs (run: npm run content:check [file...]).
  * Checks: focus phrase in title, first paragraph, one H2, slug/description; word count 900-1800;
  * >= 3 internal links; FAQ present; no em dashes; no person names (heuristic list).
+ * Articles published from SOURCED_FROM onward must also have >= 1 figure image with alt text whose file exists
+ * under public/blog/<slug>/, and a "## מקורות" section with >= 2 external https links (no invented facts).
  */
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 
 const BLOG_DIR = 'src/content/blog';
@@ -17,6 +19,8 @@ const RESERVED = {
   'ליווי AI למנהלים': '/executive', 'אסטרטגיית AI לארגון': '/executive',
   'הכשרת AI לארגונים': '/companies', 'קורס בינה מלאכותית לאקדמיה': '/academia',
 };
+// Articles published on or after this date follow the daily-post rules in content/STYLE.md.
+const SOURCED_FROM = '2026-10-28';
 const NAME_PATTERNS = [/\bמונדיי\b/, /monday\.com/i, /\bDror\b/i, /\bדרור\b/, /\bLinkedIn\.com\/in\//i];
 
 function parse(src) {
@@ -61,6 +65,20 @@ function check(file, kind) {
   if (/[—–]/.test(src)) errs.push('em/en dash found (use comma, colon or new sentence)');
   for (const re of NAME_PATTERNS) if (re.test(src)) errs.push(`forbidden name pattern: ${re}`);
   if (/\*\*[^*]+\*\*/.test(fm.title || '')) warn.push('markdown in title');
+  if (kind === 'blog' && (fm.publishedAt || '') >= SOURCED_FROM) {
+    const imgs = [...body.matchAll(/<img\b[^>]*>/g)].map((x) => x[0]);
+    const good = imgs.filter((tag) => /\salt="[^"]{8,}"/.test(tag));
+    if (good.length < 1) errs.push('needs >= 1 figure <img> with a descriptive alt (8+ chars)');
+    for (const tag of imgs) {
+      const src = (tag.match(/\ssrc="([^"]+)"/) || [])[1] || '';
+      if (!src.startsWith(`/blog/${fm.slug}/`)) errs.push(`image ${src} must live under /blog/${fm.slug}/`);
+      else if (!existsSync(join('public', src))) errs.push(`image file missing: public${src}`);
+    }
+    const srcSection = body.split(/^## מקורות\s*$/m)[1];
+    const ext = srcSection ? [...srcSection.matchAll(/\]\((https:\/\/[^)\s]+)\)/g)].length : 0;
+    if (!srcSection) errs.push('missing "## מקורות" section');
+    else if (ext < 2) errs.push(`"## מקורות" needs >= 2 external https links (has ${ext})`);
+  }
   return { file: basename(file), words, errs, warn };
 }
 
