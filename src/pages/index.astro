@@ -14,7 +14,7 @@ import { OFFERS } from '@/config/site';
 import { serviceSchema, faqSchema } from '@/lib/seo';
 
 const title = 'הרצאות וסדנאות AI לארגונים, מאנשים שהטמיעו AI';
-const description = 'לומדים AI ממובילי ה-AI של התעשייה: הרצאות, סדנאות וקורסים לחברות, לאקדמיה ולמנהלים, מצוות שבנה מאות אייג׳נטים והטמיע AI בארגונים של אלפי עובדים.';
+const description = 'לומדים AI ממובילי ה-AI של התעשייה: הרצאות, סדנאות וקורסים לחברות, לאקדמיה ולמנהלים, מצוות שבנה מאות סוכני AI והטמיע AI בארגונים של אלפי עובדים.';
 const faq = [
   { q: 'מה אתם מעבירים בדיוק?', a: 'הרצאות, סדנאות מעשיות, קורסים והכשרות, וליווי אישי למנהלים. כל תוכנית נבנית סביב הארגון: הקהל, האתגר והקצב. הכול בעברית, לארגונים בישראל, פרונטלי או Zoom.' },
   { q: 'במה אתם שונים ממרצי AI אחרים?', a: 'לא למדנו AI מסרטונים. הטמענו אותו בעצמנו בחברות טכנולוגיה מובילות עם אלפי עובדים: אסטרטגיה ארגונית, סוכנים ואוטומציות בפרודקשן, אבטחת מידע, ניטור ומדידת ROI. כל דוגמה בכיתה היא משהו שעשינו בידיים.' },
@@ -43,12 +43,12 @@ const schema = [...OFFERS.map((o) => serviceSchema({ name: `${o.name} AI`, descr
           <span class="block text-accent">ממובילי ה-AI של התעשייה.</span>
         </h1>
         <ul class="mt-8 flex flex-wrap gap-2.5" aria-label="הרקע שלנו">
-          <li class="cred"><span class="cred-ico"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>בנינו מאות אייג׳נטים</li>
+          <li class="cred"><span class="cred-ico"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>בנינו מאות סוכני AI שעובדים בארגונים</li>
           <li class="cred"><span class="cred-ico"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>הטמענו AI בארגונים של אלפי עובדים</li>
           <li class="cred"><span class="cred-ico"><svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>בנינו מוצרי AI עם עשרות אלפי משתמשים</li>
         </ul>
         <p class="lead mt-7 max-w-2xl">הרצאות, סדנאות וקורסים על AI לחברות, לאקדמיה ולמנהלים. לא למדנו AI מסרטונים.</p>
-        <p class="mt-2 max-w-2xl text-xl font-bold leading-snug md:text-2xl"><mark class="hl">עשינו את זה בארגונים אמיתיים, ומלמדים מתוך מה שעבד ומה שנשבר.</mark></p>
+        <p class="mt-3 max-w-2xl text-2xl font-bold leading-snug md:text-[1.75rem]"><mark class="hl">עשינו את זה בארגונים אמיתיים, ומלמדים מתוך מה שעבד ומה שנשבר.</mark></p>
         <div class="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
           <a href="/program" class="btn btn-primary" data-track="cta_click" data-track-label="hero">בואו נבנה לכם תוכנית</a>
           <a href="#offers-title" class="btn btn-ghost">מה אנחנו מעבירים?</a>

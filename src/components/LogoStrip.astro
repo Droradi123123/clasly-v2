@@ -7,7 +7,7 @@ import { LOGOS, type Audience } from '@/config/site';
 interface Props { audience?: Audience; title?: string; compact?: boolean }
 const { audience, title = 'לומדים עם RealAI', compact = false } = Astro.props;
 const logos = audience ? LOGOS.filter((l) => l.audience === audience) : LOGOS;
-const repeat = Math.max(2, Math.ceil(10 / Math.max(1, logos.length)));
+const repeat = Math.max(3, Math.ceil(16 / Math.max(1, logos.length)));
 const group = Array.from({ length: repeat }, () => logos).flat();
 const duration = `${Math.max(90, group.length * 12)}s`;
 ---

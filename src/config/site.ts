@@ -110,7 +110,7 @@ export const LOGOS: { id: string; name: string; file: string; width: number; hei
   { id: 'technion-thub', name: 'הטכניון, t:hub', file: '/logos/technion-thub.png', width: 482, height: 96, audience: 'academia', placeholder: false },
   { id: 'tau', name: 'אוניברסיטת תל אביב', file: '/logos/tau.png', width: 293, height: 160, audience: 'academia', placeholder: false },
   { id: 'haifa', name: 'אוניברסיטת חיפה', file: '/logos/haifa.png', width: 265, height: 160, audience: 'academia', placeholder: false },
-  { id: 'bgu', name: 'אוניברסיטת בן-גוריון בנגב', file: '/logos/bgu.svg', width: 600, height: 148, audience: 'academia', placeholder: false },
+  { id: 'bgu', name: 'אוניברסיטת בן-גוריון בנגב', file: '/logos/bgu-negev.svg', width: 600, height: 148, audience: 'academia', placeholder: false },
   { id: 'reichman', name: 'אוניברסיטת רייכמן', file: '/logos/reichman.svg', width: 163, height: 99, audience: 'academia', placeholder: false },
   { id: 'colman', name: 'המכללה למינהל', file: '/logos/colman.png', width: 169, height: 160, audience: 'academia', placeholder: false },
   { id: '8200', name: 'יחידה 8200', file: '/logos/8200.png', width: 160, height: 160, audience: 'company', placeholder: false },
@@ -125,7 +125,7 @@ export const PROOF_POINTS = [
     text: 'בנינו והובלנו את אסטרטגיית ה-AI בחברות טכנולוגיה מובילות, עד לרגע שבו אלפי אנשים משתמשים בזה כל יום. לא בפיילוט. בעבודה עצמה.',
   },
   {
-    stat: 'מאות אייג׳נטים',
+    stat: 'מאות סוכני AI',
     title: 'בנינו מאות סוכני AI ואוטומציות',
     text: 'סוכני AI ותהליכים אוטומטיים שבנינו רצים היום בפרודקשן, עם ניטור, עם אמון של המשתמשים, ועם ROI שהנהלה בדקה ואישרה.',
   },

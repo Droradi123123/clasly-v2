@@ -89,6 +89,8 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 
 72. **Daily article pipeline** (owner, 2026-10-28). A scheduled task writes and publishes one article every morning. Supporting pieces: `npm run figure` renders SVG diagrams to PNG with the site fonts (shared loader `scripts/lib/fonts.mjs`, also used by the OG images); `content:check` requires every article published from 2026-10-28 to have at least one figure with a descriptive alt under `public/blog/<slug>/` and a "## מקורות" section with at least two external links; `content/STYLE.md` drops the "anonymized example with specific numbers" rule (it invited invented figures) and adds the daily-post rules (sources only, no invented numbers or cases, human writing).
 
+73. **"מאות סוכני AI שעובדים בארגונים"** instead of "מאות אייג׳נטים" (owner, 2026-10-28): the hero credential, the proof stat and the why-us copy say they are AI agents and that they work in organizations. Clearer key-sentence highlight (taller band, larger type). Logo strip: much wider gaps and at least three rounds of the list per loop. The BGU logo moved to a new file name, because the old name was cached in browsers for a week with the placeholder; logos are now cached for one day.
+
 ## Open questions for Dror (v2)
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
 - Is the present tense in "לומדים עם RealAI" accurate for every institution shown?

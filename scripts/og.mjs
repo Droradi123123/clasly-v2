@@ -62,6 +62,6 @@ for (const file of htmlFiles(DIST)) {
   const kicker = /\/blog\//.test(og) ? 'מהבלוג' : /\/topics\//.test(og) ? 'מרכז נושא' : 'AI יישומי לארגונים';
   jobs.push(sharp(Buffer.from(svg({ title, description, kicker }))).png({ compressionLevel: 9 }).toFile(join(OUT, name)).then(() => count++));
 }
-jobs.push(sharp(Buffer.from(svg({ title: 'לומדים AI ממובילי ה-AI של התעשייה.', description: 'הרצאות, סדנאות וקורסים על AI, מצוות שבנה מאות אייג׳נטים והטמיע AI בארגונים של אלפי עובדים.', kicker: 'AI יישומי לארגונים' }))).png().toFile(join(OUT, 'default.png')).then(() => count++));
+jobs.push(sharp(Buffer.from(svg({ title: 'לומדים AI ממובילי ה-AI של התעשייה.', description: 'הרצאות, סדנאות וקורסים על AI, מצוות שבנה מאות סוכני AI והטמיע AI בארגונים של אלפי עובדים.', kicker: 'AI יישומי לארגונים' }))).png().toFile(join(OUT, 'default.png')).then(() => count++));
 await Promise.all(jobs);
 console.log(`[og] generated ${count} images in ${OUT}`);
