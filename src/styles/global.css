@@ -94,7 +94,7 @@ a.glow-card:hover { border-color: var(--ink); }
 .cred { display: inline-flex; align-items: center; gap: .5rem; padding: .45rem .9rem .45rem 1rem; border-radius: 999px; background: var(--accent-soft); font-weight: 700; font-size: 1rem; line-height: 1.3; }
 .cred-ico { display: inline-flex; align-items: center; justify-content: center; width: 1.4rem; height: 1.4rem; flex-shrink: 0; border-radius: 999px; background: var(--accent); color: var(--accent-ink); }
 /* A highlighter stroke under a key sentence. */
-mark.hl { background: linear-gradient(transparent 58%, var(--accent-soft-strong) 58%, var(--accent-soft-strong) 92%, transparent 92%); color: inherit; padding-inline: .1em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+mark.hl { background: linear-gradient(transparent 38%, var(--accent-soft-strong) 38%, var(--accent-soft-strong) 96%, transparent 96%); color: inherit; padding-inline: .1em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .num-badge { display: inline-flex; align-items: center; justify-content: center; width: 2.25rem; height: 2.25rem; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-family: var(--font-display); font-size: 1.1rem; }
 
 /* Gentle reveal on scroll; respects reduced motion. */
@@ -119,7 +119,7 @@ html.js .reveal.in { opacity: 1; transform: none; }
 
 /* ---------- Client logo marquee: endless loop of two identical groups ----------
    Pauses on hover only on devices with a real pointer (a tap used to stop it for good). */
-.marquee { --gap: 3.5rem; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); direction: rtl; }
+.marquee { --gap: clamp(4.5rem, 8vw, 7.5rem); overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); direction: rtl; }
 .marquee-track { display: flex; gap: var(--gap); width: max-content; animation: marquee var(--duration, 40s) linear infinite; }
 .marquee-group { display: flex; align-items: center; gap: var(--gap); flex-shrink: 0; }
 @keyframes marquee { to { transform: translateX(calc(50% + var(--gap) / 2)); } }
