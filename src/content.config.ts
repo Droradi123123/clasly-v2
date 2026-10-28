@@ -46,4 +46,23 @@ const hubs = defineCollection({
   }),
 });
 
-export const collections = { blog, hubs };
+/** Glossary term pages ("מה זה X?"): one per term that has search demand. The slug matches the entry in src/data/glossary.ts. */
+const terms = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/glossary' }),
+  schema: z.object({
+    slug: z.string().regex(/^[a-z0-9-]+$/),
+    term: z.string(),
+    en: z.string().optional(),
+    title: z.string().max(70),
+    description: z.string().max(160),
+    focusKeyPhrase: z.string(),
+    topicHub: z.enum(topicSlugs),
+    relatedOffer: z.enum(offers),
+    related: z.array(z.string()).default([]),
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).min(2),
+    publishedAt: z.coerce.date(),
+    updatedAt: z.coerce.date(),
+  }),
+});
+
+export const collections = { blog, hubs, terms };

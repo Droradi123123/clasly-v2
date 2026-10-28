@@ -93,6 +93,8 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 
 74. **No invented figures in older articles** (owner, 2026-10-28). The 43 articles and 6 hubs written by content agents were rewritten: client and participant results, "cases from the field", market statistics without a link and prices presented as fact are gone. What stays: structure and recommendations (plans, agendas, sample sizes, thresholds labelled as recommendations), a few calculations explicitly labelled as hypothetical, the owner facts in #53, and links to official vendor pricing pages instead of quoted prices. Descriptions that promised "a real example" or "the numbers" were aligned with the bodies.
 
+75. **SEO round 1: "מה זה X" term pages and a keyword map** (owner, 2026-10-28: "the task now is traffic, focus on SEO"). Glossary terms with search demand get their own page at `/glossary/<slug>` (collection `src/content/glossary`, schema DefinedTerm + BlogPosting + FAQPage, in the pages sitemap and llms.txt). The checker requires 500 to 1,300 words, a link back to /glossary and at least 2 sources. 14 pages are live, sourced from Anthropic docs and engineering posts, because the cloud session can reach few other sites. The glossary notes lost their invented stories. `content/keywords.md` is the topic queue for the daily routine: section A is high-demand informational queries, section B is queries close to a purchase, used every third day.
+
 ## Open questions for Dror (v2)
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
 - Is the present tense in "לומדים עם RealAI" accurate for every institution shown?

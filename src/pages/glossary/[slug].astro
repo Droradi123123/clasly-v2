@@ -1,0 +1,83 @@
+---
+/**
+ * Glossary term page ("מה זה X?"): answer-first explanation of one AI term, sourced, linked to its hub and offer.
+ * Content lives in src/content/glossary/<slug>.mdx; the short definition on /glossary links here.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import FAQ from '@/components/FAQ.astro';
+import CTA from '@/components/CTA.astro';
+import { getCollection, render } from 'astro:content';
+import { TOPICS, OFFERS, whatsappUrl } from '@/config/site';
+import { GLOSSARY } from '@/data/glossary';
+import { breadcrumbSchema, faqSchema, articleSchema, ogPathFor, absolute } from '@/lib/seo';
+
+export async function getStaticPaths() {
+  const terms = await getCollection('terms');
+  return terms.map((entry) => ({ params: { slug: entry.data.slug }, props: { entry, all: terms } }));
+}
+const { entry, all } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const path = `/glossary/${d.slug}`;
+const topic = TOPICS.find((t) => t.slug === d.topicHub)!;
+const offer = OFFERS.find((o) => o.href === d.relatedOffer)!;
+const iso = (x: Date) => x.toISOString().slice(0, 10);
+const words = (entry.body ?? '').replace(/<[^>]+>/g, ' ').replace(/[#*_>|`\[\]()-]/g, ' ').split(/\s+/).filter(Boolean).length;
+const minutes = Math.max(2, Math.round(words / 200));
+const pages = new Set(all.map((t) => t.data.slug));
+const relatedTerms = d.related
+  .map((s) => GLOSSARY.find((g) => g.slug === s))
+  .filter((g): g is (typeof GLOSSARY)[number] => Boolean(g))
+  .map((g) => ({ name: g.term, href: pages.has(g.slug) ? `/glossary/${g.slug}` : `/glossary#${g.slug}` }));
+const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'מילון מונחים', path: '/glossary' }, { name: d.term, path }];
+const schema = [
+  breadcrumbSchema(crumbs),
+  articleSchema({ title: d.title, description: d.description, path, publishedAt: iso(d.publishedAt), updatedAt: iso(d.updatedAt), image: ogPathFor(path), keywords: [d.focusKeyPhrase, d.term, ...(d.en ? [d.en] : [])], section: 'מילון מונחים', words, minutes, about: d.term }),
+  {
+    '@type': 'DefinedTerm',
+    '@id': `${absolute(path)}#term`,
+    name: d.term,
+    ...(d.en ? { alternateName: d.en } : {}),
+    description: GLOSSARY.find((g) => g.slug === d.slug)?.definition ?? d.description,
+    url: absolute(path),
+    inDefinedTermSet: `${absolute('/glossary')}#terms`,
+  },
+  faqSchema(d.faq),
+];
+---
+<BaseLayout title={d.title} description={d.description} path={path} type="article" schema={schema} publishedAt={iso(d.publishedAt)} updatedAt={iso(d.updatedAt)}>
+  <article>
+    <header class="relative overflow-hidden">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container-x relative py-12 md:py-16">
+        <Breadcrumbs items={crumbs} />
+        <h1 class="h1 mt-6 max-w-4xl">{d.title}</h1>
+        <p class="lead mt-5 max-w-3xl">{d.description}</p>
+        <p class="mt-4 text-sm text-muted">
+          {d.en && <span dir="ltr" lang="en">{d.en}</span>}{d.en && ' · '}{minutes} דקות קריאה · עודכן לאחרונה: <time datetime={iso(d.updatedAt)}>{d.updatedAt.toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+        </p>
+      </div>
+    </header>
+    <div class="container-x grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_18rem]">
+      <div class="prose">
+        <Content />
+      </div>
+      <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start">
+        <div class="card p-5">
+          <p class="eyebrow">רוצים שהצוות ילמד את זה?</p>
+          <p class="mt-2 text-sm text-muted">{offer.value}</p>
+          <a href={whatsappUrl(`שלום, קראתי על ${d.term} ואשמח לשמוע על ${offer.name} לצוות שלנו.`)} target="_blank" rel="noopener" class="btn btn-primary mt-4 w-full" data-track="whatsapp_click" data-track-label={`term:${d.slug}`}>דברו איתנו בוואטסאפ</a>
+          <a href={d.relatedOffer} class="mt-2 block text-center text-sm text-accent underline underline-offset-2">על {offer.name}</a>
+        </div>
+        <div class="card p-5 text-sm">
+          <p class="font-bold">מונחים קשורים</p>
+          {relatedTerms.length > 0 && <ul class="mt-3 space-y-2 text-muted">{relatedTerms.map((r) => <li><a class="hover:text-accent" href={r.href}>{r.name}</a></li>)}</ul>}
+          <p class="mt-4"><a href="/glossary" class="text-accent">כל המילון</a> · <a href={`/topics/${topic.slug}`} class="text-accent">{topic.name}</a></p>
+        </div>
+      </aside>
+    </div>
+  </article>
+  <FAQ items={d.faq} />
+  <CTA title={`רוצים ${offer.name} על ${topic.name}?`} text={`${offer.value} נחזור אליכם תוך יום עסקים.`} whatsappMessage={`שלום, קראתי על ${d.term} ואשמח לשמוע על ${offer.name}.`} audienceType={offer.audienceType} topic={topic.name} trackLabel={`term-cta:${d.slug}`} />
+</BaseLayout>

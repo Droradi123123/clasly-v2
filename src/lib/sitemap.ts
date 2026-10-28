@@ -17,7 +17,7 @@ const STATIC: { path: string; lastmod: string; priority: number }[] = [
   { path: '/team', lastmod: '2026-10-23', priority: 0.5 },
   { path: '/contact', lastmod: '2026-10-23', priority: 0.7 },
   { path: '/how-this-site-was-built', lastmod: '2026-10-23', priority: 0.7 },
-  { path: '/glossary', lastmod: '2026-10-23', priority: 0.7 },
+  { path: '/glossary', lastmod: '2026-10-28', priority: 0.7 },
   { path: '/blog', lastmod: today(), priority: 0.8 },
   { path: '/topics', lastmod: today(), priority: 0.7 },
   { path: '/accessibility', lastmod: '2026-10-23', priority: 0.2 },
@@ -28,6 +28,7 @@ export async function pagesUrls(): Promise<UrlEntry[]> {
   return [
     ...STATIC.map((s) => ({ loc: abs(s.path), lastmod: s.lastmod, changefreq: 'monthly' as const, priority: s.priority })),
     ...OFFER_PAGES.map((o) => ({ loc: abs(o.path), lastmod: o.updatedAt, changefreq: 'monthly' as const, priority: 0.95 })),
+    ...(await getCollection('terms')).map((t) => ({ loc: abs(`/glossary/${t.data.slug}`), lastmod: iso(t.data.updatedAt), changefreq: 'monthly' as const, priority: 0.6 })),
   ];
 }
 
