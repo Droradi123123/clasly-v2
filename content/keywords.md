@@ -13,7 +13,7 @@ How to use it:
 Each one gets an article or a glossary term page.
 
 ### Claude and Anthropic
-1. מה זה Claude ואיך משתמשים בו בעברית
+1. ~~מה זה Claude ואיך משתמשים בו בעברית~~ ✅ `/blog/what-is-claude`
 2. Claude לעומת ChatGPT: מה מתאים לעבודה
 3. Claude Projects: איך מארגנים ידע ושיחות לפי פרויקט
 4. Claude Skills: מה זה ואיך בונים סקיל ראשון
