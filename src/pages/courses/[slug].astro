@@ -1,0 +1,128 @@
+---
+/**
+ * Course landing page by subject (/courses/n8n, /courses/claude-code, /courses/ai-agents).
+ * Targets commercial searches ("קורס n8n"); data lives in src/data/courses.ts.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import LogoStrip from '@/components/LogoStrip.astro';
+import FAQ from '@/components/FAQ.astro';
+import CTA from '@/components/CTA.astro';
+import RelatedArticles from '@/components/RelatedArticles.astro';
+import { COURSE_PAGES, type CoursePage } from '@/data/courses';
+import { TOPICS, whatsappUrl } from '@/config/site';
+import { breadcrumbSchema, faqSchema, courseSchema } from '@/lib/seo';
+
+export function getStaticPaths() {
+  return COURSE_PAGES.map((course) => ({ params: { slug: course.slug }, props: { course } }));
+}
+const { course } = Astro.props as { course: CoursePage };
+const topic = TOPICS.find((t) => t.slug === course.topic)!;
+const others = COURSE_PAGES.filter((c) => c.slug !== course.slug);
+const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'קורסים והכשרות', path: '/courses' }, { name: course.name, path: course.path }];
+const schema = [
+  breadcrumbSchema(crumbs),
+  courseSchema({ name: course.h1, description: course.answer, path: course.path }),
+  faqSchema(course.faq),
+];
+const updated = new Date(course.updatedAt).toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<BaseLayout title={course.title} description={course.description} path={course.path} schema={schema} updatedAt={course.updatedAt}>
+  <section class="relative overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-x relative py-12 md:py-20">
+      <Breadcrumbs items={crumbs} />
+      <h1 class="h1 mt-6 max-w-4xl">{course.h1}</h1>
+      <p class="lead mt-5 max-w-3xl">{course.answer}</p>
+      <p class="mt-3 text-sm text-muted">בעברית · פרונטלי, Zoom או משולב · מותאם לארגון · עודכן לאחרונה: <time datetime={course.updatedAt}>{updated}</time></p>
+      <div class="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+        <a href={whatsappUrl(course.whatsappMessage)} target="_blank" rel="noopener" class="btn btn-primary" data-track="whatsapp_click" data-track-label={`course:${course.slug}`}>לסילבוס והצעת מחיר בוואטסאפ</a>
+        <a href="#syllabus" class="btn btn-ghost">לסילבוס לדוגמה</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-line py-14" aria-labelledby="audience-title">
+    <div class="container-x">
+      <p class="eyebrow">למי זה מתאים</p>
+      <h2 id="audience-title" class="h2 mt-3">למי מתאים {course.name}?</h2>
+      <ul class="mt-8 grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4" role="list">
+        {course.audience.map((a) => (
+          <li class="rule-top">
+            <h3 class="text-lg font-bold">{a.title}</h3>
+            <p class="mt-2 text-muted">{a.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-14" aria-labelledby="whatis-title">
+    <div class="container-x max-w-3xl">
+      <h2 id="whatis-title" class="h2">{course.whatIs.title}</h2>
+      {course.whatIs.paragraphs.map((p) => <p class="mt-5 text-lg leading-relaxed">{p}</p>)}
+      <p class="mt-5 text-sm text-muted">
+        להרחבה: <a class="text-accent underline underline-offset-2" href={`/topics/${topic.slug}`}>{topic.name}</a>
+        {course.terms.map((t) => <>{' · '}<a class="text-accent underline underline-offset-2" href={t.href}>{t.label}</a></>)}
+      </p>
+    </div>
+  </section>
+
+  <section id="syllabus" class="scroll-mt-24 bg-accent-soft py-14" aria-labelledby="syllabus-title">
+    <div class="container-x">
+      <p class="eyebrow">סילבוס לדוגמה</p>
+      <h2 id="syllabus-title" class="h2 mt-3">מה לומדים ב{course.name}?</h2>
+      <p class="lead mt-3 max-w-2xl">זו נקודת הפתיחה. את הסדר, העומק והדוגמאות מתאימים לתהליכים ולכלים של הארגון שלכם.</p>
+      <ol class="mt-10 grid gap-6 md:grid-cols-2" role="list">
+        {course.syllabus.map((m, i) => (
+          <li class="card flex gap-4 bg-white p-6">
+            <span class="num-badge shrink-0" aria-hidden="true">{i + 1}</span>
+            <div>
+              <h3 class="text-lg font-bold">מפגש {i + 1}: {m.title}</h3>
+              <p class="mt-2 text-muted">{m.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="py-14" aria-labelledby="outcomes-title">
+    <div class="container-x grid gap-12 md:grid-cols-2">
+      <div>
+        <h2 id="outcomes-title" class="h2">עם מה יוצאים מהקורס?</h2>
+        <ul class="mt-6 space-y-4" role="list">
+          {course.outcomes.map((o) => <li class="flex gap-3"><span class="mt-0.5 font-bold text-accent" aria-hidden="true">✓</span><span>{o}</span></li>)}
+        </ul>
+      </div>
+      <div>
+        <h2 class="h2">פורמט ולוגיסטיקה</h2>
+        <dl class="mt-6 divide-y divide-line border-y border-line">
+          {course.logistics.map((l) => (
+            <div class="grid grid-cols-3 gap-4 py-3"><dt class="text-muted">{l.label}</dt><dd class="col-span-2">{l.value}</dd></div>
+          ))}
+        </dl>
+        <p class="mt-6 text-sm text-muted">רוצים משהו קצר יותר? <a class="text-accent underline underline-offset-2" href="/workshops">סדנה של יום אחד</a>. רוצים לשלב כמה נושאים? <a class="text-accent underline underline-offset-2" href="/program">בונים תוכנית מותאמת</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <LogoStrip audience="academia" title="מוסדות שלומדים עם RealAI" />
+  <FAQ items={course.faq} title={`שאלות נפוצות על ${course.name}`} />
+  <RelatedArticles slugs={course.relatedArticles} title={`מדריכים לפני ${course.name}`} limit={3} />
+
+  <section class="py-12" aria-labelledby="more-courses-title">
+    <div class="container-x">
+      <h2 id="more-courses-title" class="h3">קורסים נוספים</h2>
+      <ul class="mt-5 flex flex-wrap gap-3" role="list">
+        {others.map((c) => <li><a href={c.path} class="btn btn-ghost">{c.name}</a></li>)}
+        <li><a href="/courses" class="btn btn-ghost">כל הקורסים וההכשרות</a></li>
+      </ul>
+      {course.sources.length > 0 && (
+        <p class="mt-8 text-xs text-muted">מקורות: {course.sources.map((s, i) => <>{i > 0 && ' · '}<a class="underline underline-offset-2" href={s.href} target="_blank" rel="noopener">{s.label}</a></>)}</p>
+      )}
+    </div>
+  </section>
+
+  <CTA title={`רוצים ${course.name} לצוות שלכם?`} text="ספרו לנו מה הצוות עושה היום ומה תרצו שהוא יבנה. נחזור תוך יום עסקים עם סילבוס מותאם והצעת מחיר." whatsappMessage={course.whatsappMessage} audienceType="company" topic={course.name} trackLabel={`course-cta:${course.slug}`} />
+</BaseLayout>

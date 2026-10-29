@@ -73,6 +73,9 @@ export const FOOTER_LINKS = {
     { href: '/workshops', label: 'סדנאות AI' },
     { href: '/courses', label: 'קורסים והכשרות' },
     { href: '/executive', label: 'ליווי אישי למנהלים' },
+    { href: '/courses/n8n', label: 'קורס n8n' },
+    { href: '/courses/claude-code', label: 'קורס Claude Code' },
+    { href: '/courses/ai-agents', label: 'קורס סוכני AI' },
   ],
   audiences: [
     { href: '/academia', label: 'לאוניברסיטאות ומכללות' },

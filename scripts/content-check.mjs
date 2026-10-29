@@ -19,6 +19,7 @@ const RESERVED = {
   'קורס AI לעובדים': '/courses', 'קורס בינה מלאכותית': '/courses',
   'ליווי AI למנהלים': '/executive', 'אסטרטגיית AI לארגון': '/executive',
   'הכשרת AI לארגונים': '/companies', 'קורס בינה מלאכותית לאקדמיה': '/academia',
+  'קורס n8n': '/courses/n8n', 'קורס Claude Code': '/courses/claude-code', 'קורס סוכני AI': '/courses/ai-agents',
 };
 // Articles published on or after this date follow the daily-post rules in content/STYLE.md.
 const SOURCED_FROM = '2026-10-28';

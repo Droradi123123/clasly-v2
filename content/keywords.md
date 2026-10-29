@@ -60,9 +60,9 @@ Each one gets an article or a glossary term page.
 ## B. Commercial queries close to a purchase (leads)
 Each one gets an article that links to its money page, or a landing page. Don't repeat the RESERVED phrases.
 
-34. קורס n8n לצוותים
-35. קורס Claude Code לארגונים
-36. קורס סוכני AI
+34. ~~קורס n8n לצוותים~~ ✅ `/courses/n8n` (עמוד נחיתה)
+35. ~~קורס Claude Code לארגונים~~ ✅ `/courses/claude-code` (עמוד נחיתה)
+36. ~~קורס סוכני AI~~ ✅ `/courses/ai-agents` (עמוד נחיתה)
 37. יום עיון AI לעובדים
 38. הרצאת AI לכנס מכירות או לאירוע חברה
 39. סדנת פרומפטים לארגון
