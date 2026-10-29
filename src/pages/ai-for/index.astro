@@ -1,0 +1,33 @@
+---
+/** Index of the "AI ל[מקצוע]" pages. */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CTA from '@/components/CTA.astro';
+import { getCollection } from 'astro:content';
+import { breadcrumbSchema, collectionPageSchema } from '@/lib/seo';
+
+const path = '/ai-for';
+const title = 'AI לפי מקצוע: איך כל תפקיד משתמש בבינה מלאכותית';
+const description = 'מדריכים מעשיים ל-AI לפי מקצוע: עורכי דין, רואי חשבון, מורים, סטודנטים, משאבי אנוש, שיווק, מכירות ועוד. שימושים, פרומפטים להעתקה וכללי זהירות.';
+const all = (await getCollection('professions')).sort((a, b) => a.data.profession.localeCompare(b.data.profession, 'he'));
+const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'AI לפי מקצוע', path }];
+const schema = [breadcrumbSchema(crumbs), collectionPageSchema({ name: title, description, path, items: all.map((p) => ({ name: p.data.title, path: `/ai-for/${p.data.slug}` })) })];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema} updatedAt="2026-10-29">
+  <section class="relative overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-x relative py-12 md:py-16">
+      <Breadcrumbs items={crumbs} />
+      <h1 class="h1 mt-6 max-w-4xl">AI לפי מקצוע</h1>
+      <p class="lead mt-5 max-w-3xl">{description}</p>
+    </div>
+  </section>
+  <section class="container-x pb-16">
+    <ul class="grid gap-5 md:grid-cols-2 lg:grid-cols-3" role="list">
+      {all.map((p) => (
+        <li><a href={`/ai-for/${p.data.slug}`} class="card block h-full p-6 transition hover:border-accent"><span class="h3 block">AI ל{p.data.profession}</span><span class="mt-2 block text-sm text-muted">{p.data.description}</span></a></li>
+      ))}
+    </ul>
+  </section>
+  <CTA title="רוצים סדנת AI לצוות שלכם?" text="כל סדנה נבנית סביב המקצוע והמשימות של הצוות, ומסתיימת בכלים שעובדים." whatsappMessage="שלום, אשמח לשמוע על סדנת AI לצוות שלנו." audienceType="company" trackLabel="ai-for-index" />
+</BaseLayout>

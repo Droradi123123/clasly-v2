@@ -1,0 +1,49 @@
+---
+/** Copyable prompt cards from the prompt library (src/data/prompts.ts), filtered by role. Used on the /ai-for/<slug> pages. */
+import { PROMPTS, PROMPT_ROLES } from '@/data/prompts';
+interface Props { roles: string[]; limit?: number; title?: string }
+const { roles, limit = 6, title } = Astro.props;
+const roleName = Object.fromEntries(PROMPT_ROLES.map((r) => [r.id, r.name]));
+const picked = [...PROMPTS.filter((p) => roles.includes(p.role) && p.role !== 'everyone'), ...PROMPTS.filter((p) => p.role === 'everyone')].slice(0, limit);
+---
+{picked.length > 0 && (
+  <section class="bg-accent-soft py-14" aria-labelledby="prompt-cards-title">
+    <div class="container-x">
+      <p class="eyebrow">מספריית הפרומפטים</p>
+      <h2 id="prompt-cards-title" class="h2 mt-3">{title ?? 'פרומפטים להעתקה'}</h2>
+      <p class="lead mt-3 max-w-2xl">החליפו את מה שבסוגריים המרובעים בפרטים שלכם, והדביקו בכלי ה-AI שאתם עובדים איתו.</p>
+      <ul class="mt-8 grid gap-5 lg:grid-cols-2" role="list">
+        {picked.map((p) => (
+          <li class="pc-card card card-solid p-6">
+            <p class="text-xs font-bold text-accent">{roleName[p.role]}</p>
+            <h3 class="mt-1 text-lg font-bold">{p.title}</h3>
+            <p class="mt-1 text-sm text-muted">{p.when}</p>
+            <pre class="pc-text mt-4">{p.prompt}</pre>
+            <button type="button" class="pc-copy btn-outline mt-4" data-copy={p.id}>העתקה</button>
+          </li>
+        ))}
+      </ul>
+      <a href="/tools/prompts" class="btn btn-ghost mt-8">לכל ספריית הפרומפטים</a>
+    </div>
+  </section>
+)}
+
+<style>
+  .pc-text { white-space: pre-wrap; font-family: inherit; font-size: 1rem; line-height: 1.65; background: var(--accent-soft); border-radius: 4px; padding: 1rem; direction: rtl; text-align: start; }
+</style>
+
+<script>
+  document.addEventListener('click', async (ev) => {
+    const btn = (ev.target as HTMLElement).closest<HTMLButtonElement>('.pc-copy');
+    if (!btn) return;
+    const text = btn.closest('.pc-card')?.querySelector('.pc-text')?.textContent ?? '';
+    try { await navigator.clipboard.writeText(text); }
+    catch {
+      const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch {} ta.remove();
+    }
+    btn.textContent = 'הועתק ✓';
+    setTimeout(() => { btn.textContent = 'העתקה'; }, 1800);
+    (window as any).__track?.('prompt_copy', { label: btn.dataset.copy ?? null });
+  });
+</script>

@@ -65,4 +65,22 @@ const terms = defineCollection({
   }),
 });
 
-export const collections = { blog, hubs, terms };
+/** "AI ל[מקצוע]" pages (/ai-for/<slug>): uses, prompts (pulled from src/data/prompts.ts by role) and rules for one profession. */
+const professions = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/professions' }),
+  schema: z.object({
+    slug: z.string().regex(/^[a-z0-9-]+$/),
+    profession: z.string(),
+    title: z.string().max(70),
+    description: z.string().max(160),
+    focusKeyPhrase: z.string(),
+    topicHub: z.enum(topicSlugs),
+    relatedOffer: z.enum(offers),
+    promptRoles: z.array(z.string()).default([]),
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).min(3),
+    publishedAt: z.coerce.date(),
+    updatedAt: z.coerce.date(),
+  }),
+});
+
+export const collections = { blog, hubs, terms, professions };

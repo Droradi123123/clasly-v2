@@ -12,6 +12,7 @@ import { join, basename } from 'node:path';
 const BLOG_DIR = 'src/content/blog';
 const HUB_DIR = 'src/content/hubs';
 const TERM_DIR = 'src/content/glossary';
+const PROF_DIR = 'src/content/professions';
 // Commercial phrases owned by money pages. Articles must not use them as their focus phrase (keyword cannibalization).
 const RESERVED = {
   'הרצאה על בינה מלאכותית': '/lectures', 'מרצה בינה מלאכותית': '/lectures', 'הרצאת AI לחברות': '/lectures',
@@ -57,15 +58,15 @@ function check(file, kind) {
   if (h2s.length < (kind === 'hub' ? 4 : 4)) errs.push(`only ${h2s.length} H2 headings (need >= 4)`);
   if (!h2s.some(has)) errs.push('focus phrase not in any H2');
   const words = body.replace(/<[^>]+>/g, ' ').replace(/[#*_>|\-]/g, ' ').split(/\s+/).filter(Boolean).length;
-  const [min, max] = kind === 'hub' ? [900, 2600] : kind === 'term' ? [500, 1300] : [900, 1800];
+  const [min, max] = kind === 'hub' ? [900, 2600] : kind === 'term' ? [500, 1300] : kind === 'profession' ? [800, 1600] : [900, 1800];
   if (words < min || words > max) errs.push(`word count ${words} outside ${min}-${max}`);
   const links = [...body.matchAll(/\]\((\/[^)\s]*)\)/g)].map((x) => x[1]);
   if (links.length < 3) errs.push(`only ${links.length} internal links (need >= 3)`);
   if (kind !== 'hub' && fm.topicHub && !links.some((l) => l.startsWith(`/topics/${fm.topicHub}`))) errs.push('missing link to topic hub');
   if (fm.relatedOffer && !links.some((l) => l === fm.relatedOffer || l.startsWith(fm.relatedOffer + '#'))) errs.push(`missing link to related offer ${fm.relatedOffer}`);
   if (!Array.isArray(fm.faq) || fm.faq.length < (kind === 'term' ? 2 : 3)) errs.push(`faq missing or < ${kind === 'term' ? 2 : 3}`);
-  if (kind === 'term') {
-    if (!links.includes('/glossary')) errs.push('term page must link back to /glossary');
+  if (kind === 'term' || kind === 'profession') {
+    if (kind === 'term' && !links.includes('/glossary')) errs.push('term page must link back to /glossary');
     const srcSection = body.split(/^## מקורות\s*$/m)[1];
     const ext = srcSection ? [...srcSection.matchAll(/\]\((https:\/\/[^)\s]+)\)/g)].length : 0;
     if (ext < 2) errs.push(`term page needs "## מקורות" with >= 2 external https links (has ${ext})`);
@@ -92,10 +93,11 @@ function check(file, kind) {
 }
 
 const args = process.argv.slice(2);
-const files = args.length ? args.map((f) => [f, f.includes('/hubs/') ? 'hub' : f.includes('/glossary/') ? 'term' : 'blog']) : [
+const files = args.length ? args.map((f) => [f, f.includes('/hubs/') ? 'hub' : f.includes('/glossary/') ? 'term' : f.includes('/professions/') ? 'profession' : 'blog']) : [
   ...readdirSync(BLOG_DIR).filter((f) => f.endsWith('.mdx')).map((f) => [join(BLOG_DIR, f), 'blog']),
   ...readdirSync(HUB_DIR).filter((f) => f.endsWith('.mdx')).map((f) => [join(HUB_DIR, f), 'hub']),
   ...(existsSync(TERM_DIR) ? readdirSync(TERM_DIR).filter((f) => f.endsWith('.mdx')).map((f) => [join(TERM_DIR, f), 'term']) : []),
+  ...(existsSync(PROF_DIR) ? readdirSync(PROF_DIR).filter((f) => f.endsWith('.mdx')).map((f) => [join(PROF_DIR, f), 'profession']) : []),
 ];
 let failed = 0;
 const seen = { focus: new Map(), title: new Map(), description: new Map() };

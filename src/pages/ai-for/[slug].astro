@@ -1,0 +1,75 @@
+---
+/**
+ * "AI ל[מקצוע]" page: sourced MDX body, prompts from the library for the matching roles, FAQ and a contextual CTA.
+ * Content: src/content/professions/<slug>.mdx.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import FAQ from '@/components/FAQ.astro';
+import CTA from '@/components/CTA.astro';
+import PromptCards from '@/components/PromptCards.astro';
+import { getCollection, render } from 'astro:content';
+import { TOPICS, OFFERS, whatsappUrl } from '@/config/site';
+import { breadcrumbSchema, faqSchema, articleSchema, ogPathFor } from '@/lib/seo';
+
+export async function getStaticPaths() {
+  const all = await getCollection('professions');
+  return all.map((entry) => ({ params: { slug: entry.data.slug }, props: { entry, others: all.filter((o) => o.id !== entry.id) } }));
+}
+const { entry, others } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+const path = `/ai-for/${d.slug}`;
+const topic = TOPICS.find((t) => t.slug === d.topicHub)!;
+const offer = OFFERS.find((o) => o.href === d.relatedOffer)!;
+const iso = (x: Date) => x.toISOString().slice(0, 10);
+const words = (entry.body ?? '').replace(/<[^>]+>/g, ' ').replace(/[#*_>|`\[\]()-]/g, ' ').split(/\s+/).filter(Boolean).length;
+const minutes = Math.max(3, Math.round(words / 200));
+const toc = headings.filter((h) => h.depth === 2);
+const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'AI לפי מקצוע', path: '/ai-for' }, { name: `AI ל${d.profession}`, path }];
+const schema = [
+  breadcrumbSchema(crumbs),
+  articleSchema({ title: d.title, description: d.description, path, publishedAt: iso(d.publishedAt), updatedAt: iso(d.updatedAt), image: ogPathFor(path), keywords: [d.focusKeyPhrase, `בינה מלאכותית ל${d.profession}`], section: 'AI לפי מקצוע', words, minutes, about: d.focusKeyPhrase }),
+  faqSchema(d.faq),
+];
+---
+<BaseLayout title={d.title} description={d.description} path={path} type="article" schema={schema} publishedAt={iso(d.publishedAt)} updatedAt={iso(d.updatedAt)}>
+  <article>
+    <header class="relative overflow-hidden">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container-x relative py-12 md:py-16">
+        <Breadcrumbs items={crumbs} />
+        <h1 class="h1 mt-6 max-w-4xl">{d.title}</h1>
+        <p class="lead mt-5 max-w-3xl">{d.description}</p>
+        <p class="mt-4 text-sm text-muted">{minutes} דקות קריאה · עודכן לאחרונה: <time datetime={iso(d.updatedAt)}>{d.updatedAt.toLocaleDateString('he-IL', { year: 'numeric', month: 'long', day: 'numeric' })}</time></p>
+      </div>
+    </header>
+    <div class="container-x grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_18rem]">
+      <div>
+        {toc.length >= 3 && (
+          <nav aria-label="תוכן העניינים" class="card mb-8 max-w-[70ch] p-5">
+            <p class="font-bold">בעמוד הזה</p>
+            <ol class="mt-3 space-y-1.5 text-sm">{toc.map((h) => <li><a href={`#${h.slug}`} class="text-muted hover:text-accent">{h.text}</a></li>)}</ol>
+          </nav>
+        )}
+        <div class="prose"><Content /></div>
+      </div>
+      <aside class="space-y-4 lg:sticky lg:top-24 lg:self-start">
+        <div class="card p-5">
+          <p class="eyebrow">{offer.name} ל{d.profession}</p>
+          <p class="mt-2 text-sm text-muted">{offer.value}</p>
+          <a href={whatsappUrl(`שלום, קראתי את "AI ל${d.profession}" ואשמח לשמוע על ${offer.name} לצוות שלנו.`)} target="_blank" rel="noopener" class="btn btn-primary mt-4 w-full" data-track="whatsapp_click" data-track-label={`ai-for:${d.slug}`}>דברו איתנו בוואטסאפ</a>
+          <a href={d.relatedOffer} class="mt-2 block text-center text-sm text-accent underline underline-offset-2">על {offer.name}</a>
+        </div>
+        <div class="card p-5 text-sm">
+          <p class="font-bold">AI למקצועות נוספים</p>
+          <ul class="mt-3 space-y-2 text-muted">{others.slice(0, 8).map((o) => <li><a class="hover:text-accent" href={`/ai-for/${o.data.slug}`}>AI ל{o.data.profession}</a></li>)}</ul>
+          <p class="mt-4"><a href="/ai-for" class="text-accent">כל המקצועות</a> · <a href={`/topics/${topic.slug}`} class="text-accent">{topic.name}</a></p>
+        </div>
+      </aside>
+    </div>
+  </article>
+  <PromptCards roles={d.promptRoles} title={`פרומפטים ל${d.profession}, להעתקה`} />
+  <FAQ items={d.faq} />
+  <CTA title={`רוצים ${offer.name} ל${d.profession} בארגון שלכם?`} text={`${offer.value} נחזור אליכם תוך יום עסקים.`} whatsappMessage={`שלום, אשמח לשמוע על ${offer.name} בנושא AI ל${d.profession}.`} audienceType={offer.audienceType} topic={`AI ל${d.profession}`} trackLabel={`ai-for-cta:${d.slug}`} />
+</BaseLayout>
