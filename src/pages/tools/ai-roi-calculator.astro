@@ -1,0 +1,224 @@
+---
+/**
+ * AI ROI calculator: hours saved x loaded hourly cost x realization factor, against one-time and running costs.
+ * Same method as /topics/ai-roi. Inputs sync to the URL so a result can be shared. Targets "מחשבון ROI ל-AI".
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import FAQ from '@/components/FAQ.astro';
+import CTA from '@/components/CTA.astro';
+import { breadcrumbSchema, faqSchema, absolute } from '@/lib/seo';
+import { SITE } from '@/config/site';
+
+const path = '/tools/ai-roi-calculator';
+const title = 'מחשבון ROI ל-AI: כמה שווה פרויקט ה-AI שלכם';
+const description = 'מחשבון ROI ל-AI בחינם: הזינו נפח עבודה, זמן לפני ואחרי, עלות שעה ועלויות, וקבלו החזר השקעה, זמן החזר ותועלת ממומשת. עם מקדם מימוש.';
+const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'כלים', path: '/tools' }, { name: 'מחשבון ROI ל-AI', path }];
+const faq = [
+  { q: 'מה זה מקדם מימוש, ולמה הוא מוריד את התוצאה?', a: 'שעות שנחסכו על הנייר לא תמיד הופכות לערך. חלק מהזמן הולך למשימות אחרות, וחלק פשוט לא מנוצל. מקדם המימוש, מספר בין 0 ל-1, הוא החלק שבאמת הופך לתפוקה או לחיסכון. קובעים אותו עם המנהל הישיר של התהליך, ומציגים להנהלה את התוצאה גם איתו וגם בלעדיו.' },
+  { q: 'מאיפה מביאים את הזמן "לפני"?', a: 'ממדידה, לא מהערכה. מודדים שבועיים לפני שמתחילים: כמה מקרים יש, וכמה זמן לוקח כל אחד. בלי קו בסיס, כל מספר "אחרי" הוא ניחוש.' },
+  { q: 'מה נכנס בעלויות?', a: 'עלות חד פעמית: בנייה, חיבור למערכות ובדיקות. עלות אימוץ: הדרכה, ליווי וזמן של העובדים. עלות שוטפת: מודל, רישיונות, תשתית ותחזוקה. הטעות הנפוצה היא לספור רק את המודל.' },
+  { q: 'האם המחשבון שומר את הנתונים שלי?', a: 'לא. החישוב רץ בדפדפן שלכם. הערכים נשמרים רק בכתובת העמוד, כדי שתוכלו לשלוח קישור עם אותו חישוב.' },
+  { q: 'מה עושים אחרי שיש מספר?', a: 'מציגים אותו בעמוד אחד: התוצאה, ההנחות שמאחוריה ומסמך קו הבסיס. מי שרואה את ההנחות יכול להתווכח עליהן, וזה בדיוק מה שצריך לפני החלטה.' },
+];
+const schema = [
+  breadcrumbSchema(crumbs),
+  {
+    '@type': 'WebApplication',
+    '@id': `${absolute(path)}#app`,
+    name: 'מחשבון ROI ל-AI',
+    url: absolute(path),
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Any',
+    inLanguage: 'he',
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'ILS' },
+    publisher: { '@id': `${SITE.url}/#organization` },
+  },
+  faqSchema(faq),
+];
+// Defaults: the hypothetical example from /topics/ai-roi, so the two pages agree.
+const fields = [
+  { id: 'volume', label: 'מקרים בחודש', help: 'כמה פעמים בחודש התהליך קורה: פניות, בקשות, דוחות.', value: 1000, step: 1, suffix: '' },
+  { id: 'before', label: 'דקות למקרה, לפני', help: 'זמן טיפול ממוצע היום, לפי מדידה.', value: 30, step: 0.5, suffix: 'דקות' },
+  { id: 'after', label: 'דקות למקרה, אחרי', help: 'ממוצע אחרי ה-AI, כולל בדיקה ותיקון של מה שהוא עשה.', value: 7.5, step: 0.5, suffix: 'דקות' },
+  { id: 'rate', label: 'עלות שעה טעונה', help: 'שכר ועלויות מעסיק לשעה של מי שעושה את העבודה.', value: 100, step: 1, suffix: '₪' },
+  { id: 'factor', label: 'מקדם מימוש', help: 'בין 0 ל-1: איזה חלק מהזמן שנחסך באמת הופך לערך. קובעים עם המנהל הישיר.', value: 0.6, step: 0.05, suffix: '' },
+  { id: 'build', label: 'עלות בנייה חד פעמית', help: 'פיתוח, חיבור למערכות ובדיקות.', value: 60000, step: 1000, suffix: '₪' },
+  { id: 'adopt', label: 'עלות אימוץ', help: 'הדרכה, ליווי וזמן העובדים בהתחלה.', value: 15000, step: 1000, suffix: '₪' },
+  { id: 'monthly', label: 'עלות שוטפת לחודש', help: 'מודל, רישיונות, תשתית ותחזוקה.', value: 5000, step: 100, suffix: '₪' },
+];
+const outputs = [
+  { id: 'o-hours', label: 'שעות שנחסכות בחודש' },
+  { id: 'o-benefit', label: 'תועלת ממומשת בשנה' },
+  { id: 'o-cost', label: 'עלות בשנה הראשונה' },
+  { id: 'o-roi', label: 'ROI בשנה הראשונה', main: true },
+  { id: 'o-payback', label: 'זמן החזר' },
+  { id: 'o-roi-raw', label: 'ROI בלי מקדם מימוש' },
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema} updatedAt="2026-10-29">
+  <section class="relative overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-x relative py-12 md:py-16">
+      <Breadcrumbs items={crumbs} />
+      <h1 class="h1 mt-6 max-w-4xl">מחשבון ROI ל-AI</h1>
+      <p class="lead mt-5 max-w-3xl">מחשבון ROI ל-AI שמחשב החזר השקעה בדרך שהנהלה יכולה לבדוק: שעות שנחסכות, כפול עלות שעה, כפול מקדם מימוש, מול כל העלויות של השנה הראשונה. הערכים שמופיעים הם דוגמה היפותטית. החליפו אותם במספרים שלכם.</p>
+    </div>
+  </section>
+
+  <section class="border-t border-line py-12" aria-labelledby="calc-title">
+    <div class="container-x">
+      <h2 id="calc-title" class="sr-only">המחשבון</h2>
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_24rem]">
+        <form id="roi-form" class="grid gap-5 sm:grid-cols-2" novalidate>
+          {fields.map((f) => (
+            <label class="block">
+              <span class="font-bold">{f.label}{f.suffix && <span class="text-sm font-normal text-muted"> ({f.suffix})</span>}</span>
+              <input name={f.id} type="number" inputmode="decimal" min="0" max={f.id === 'factor' ? 1 : undefined} step={f.step} value={f.value} class="mt-1 w-full rounded-[4px] border border-line bg-white px-4 py-2.5 text-lg" dir="ltr" />
+              <span class="mt-1 block text-sm text-muted">{f.help}</span>
+            </label>
+          ))}
+        </form>
+        <aside class="lg:sticky lg:top-24 lg:self-start" aria-live="polite">
+          <div class="rounded-[4px] bg-accent p-6 text-white">
+            <p class="text-sm font-bold opacity-90">התוצאה</p>
+            <dl class="mt-4 space-y-3">
+              {outputs.map((o) => (
+                <div class={o.main ? 'border-y border-white/30 py-3' : ''}>
+                  <dt class="text-sm opacity-90">{o.label}</dt>
+                  <dd id={o.id} class={o.main ? 'font-display text-4xl' : 'text-xl font-bold'}>…</dd>
+                </div>
+              ))}
+            </dl>
+            <p id="o-note" class="mt-4 text-sm opacity-90"></p>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <button type="button" id="copy-summary" class="btn-outline">העתקת סיכום להנהלה</button>
+            <button type="button" id="copy-link" class="btn-outline">העתקת קישור לחישוב</button>
+          </div>
+          <div id="roi-bar" class="fixed inset-x-0 bottom-0 z-40 hidden bg-accent px-5 py-3 text-white shadow-lg lg:!hidden" aria-hidden="true">
+            <span class="font-bold">ROI: <span id="bar-roi">…</span></span> · <span>החזר: <span id="bar-payback">…</span></span>
+          </div>
+          <noscript><p class="mt-4 text-sm text-muted">המחשבון צריך JavaScript. הנוסחה המלאה מופיעה למטה, ואפשר לחשב איתה ידנית.</p></noscript>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-accent-soft py-12" aria-labelledby="formula-title">
+    <div class="container-x max-w-3xl">
+      <h2 id="formula-title" class="h2">איך המחשבון מחשב ROI של AI?</h2>
+      <ol class="mt-6 space-y-3 text-lg">
+        <li><strong>שעות שנחסכות בחודש</strong> = מקרים בחודש × (דקות לפני פחות דקות אחרי) ÷ 60.</li>
+        <li><strong>תועלת ממומשת בחודש</strong> = שעות שנחסכות × עלות שעה × מקדם מימוש.</li>
+        <li><strong>עלות בשנה הראשונה</strong> = בנייה + אימוץ + 12 × עלות שוטפת.</li>
+        <li><strong>ROI</strong> = (תועלת שנתית פחות עלות שנתית) ÷ עלות שנתית.</li>
+        <li><strong>זמן החזר</strong> = (בנייה + אימוץ) ÷ (תועלת חודשית פחות עלות שוטפת).</li>
+      </ol>
+      <p class="mt-6">זו אותה שיטה שמוסברת במרכז הנושא <a class="text-accent underline underline-offset-2" href="/topics/ai-roi">ROI של AI</a>, כולל דוגמה מלאה. המדריך <a class="text-accent underline underline-offset-2" href="/blog/how-to-measure-ai-roi">מדידת ROI של AI</a> מסביר איך בונים קו בסיס ואיך מציגים את התוצאה, ו<a class="text-accent underline underline-offset-2" href="/glossary#realization-factor">מקדם מימוש</a> מוסבר במילון המונחים.</p>
+    </div>
+  </section>
+
+  <section class="py-12" aria-labelledby="mistakes-title">
+    <div class="container-x max-w-3xl">
+      <h2 id="mistakes-title" class="h2">אילו טעויות מנפחות את ה-ROI?</h2>
+      <ul class="mt-6 space-y-4 text-lg">
+        <li><strong>זמן "אחרי" בלי בדיקה.</strong> אם עובד בודק ומתקן כל תוצר של ה-AI, הזמן הזה הוא חלק מה"אחרי".</li>
+        <li><strong>מקדם מימוש של 1.</strong> כמעט אף פעם לא כל שעה שנחסכה הופכת לערך. הציגו את שתי התוצאות, עם מקדם ובלי.</li>
+        <li><strong>רק עלות המודל.</strong> בנייה, אימוץ ותחזוקה הם בדרך כלל החלק הגדול. ראו <a class="text-accent underline underline-offset-2" href="/blog/cost-of-implementing-ai-in-a-mid-size-company">כמה עולה להטמיע AI בארגון</a>.</li>
+        <li><strong>נפח שלא נמדד.</strong> "בערך אלף בחודש" צריך להפוך לספירה של שבועיים.</li>
+      </ul>
+    </div>
+  </section>
+
+  <FAQ items={faq} title="שאלות נפוצות על המחשבון" />
+  <CTA title="רוצים לבנות את המספר הזה עם ההנהלה?" text="בליווי למנהלים בונים יחד את קו הבסיס, בוחרים יוזמות עם ROI ברור, ומציגים תוכנית שאפשר לבדוק." whatsappMessage="שלום, השתמשתי במחשבון ה-ROI ואשמח לשמוע על ליווי למנהלים." audienceType="executive" topic="ROI של AI" trackLabel="roi-cta" />
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('roi-form') as HTMLFormElement | null;
+  const nf = new Intl.NumberFormat('he-IL', { maximumFractionDigits: 0 });
+  const nf1 = new Intl.NumberFormat('he-IL', { maximumFractionDigits: 1 });
+  const ils = (n: number) => `${nf.format(Math.round(n))} ₪`;
+  const set = (id: string, text: string) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+  let tracked = false;
+  let summary = '';
+
+  function read() {
+    const v: Record<string, number> = {};
+    for (const el of form?.querySelectorAll<HTMLInputElement>('input') ?? []) v[el.name] = Math.max(0, Number(el.value) || 0);
+    v.factor = Math.min(1, v.factor);
+    return v;
+  }
+
+  function calc(updateUrl = true) {
+    const v = read();
+    const hours = (v.volume * Math.max(0, v.before - v.after)) / 60;
+    const monthlyRaw = hours * v.rate;
+    const monthly = monthlyRaw * v.factor;
+    const oneTime = v.build + v.adopt;
+    const yearCost = oneTime + 12 * v.monthly;
+    const yearBenefit = 12 * monthly;
+    const roi = yearCost > 0 ? (yearBenefit - yearCost) / yearCost : NaN;
+    const roiRaw = yearCost > 0 ? (12 * monthlyRaw - yearCost) / yearCost : NaN;
+    const net = monthly - v.monthly;
+    const payback = net > 0 ? oneTime / net : Infinity;
+    const pct = (x: number) => (Number.isFinite(x) ? `${nf.format(Math.round(x * 100))}%` : 'לא ניתן לחשב');
+    set('o-hours', nf1.format(hours));
+    set('o-benefit', ils(yearBenefit));
+    set('o-cost', ils(yearCost));
+    set('o-roi', pct(roi));
+    set('o-payback', Number.isFinite(payback) ? `${nf1.format(payback)} חודשים` : 'אין החזר: העלות השוטפת גבוהה מהתועלת');
+    set('o-roi-raw', pct(roiRaw));
+    set('bar-roi', pct(roi));
+    set('bar-payback', Number.isFinite(payback) ? `${nf1.format(payback)} חודשים` : 'אין');
+    set('o-note', v.factor < 1 ? `בלי מקדם מימוש, ה-ROI נראה ${pct(roiRaw)}. ההפרש הוא ההנחה שכדאי להציג במפורש.` : 'מקדם מימוש של 1 מניח שכל שעה שנחסכה הופכת לערך. כדאי לבדוק את ההנחה.');
+    summary = [
+      'סיכום ROI לפרויקט AI (שנה ראשונה)',
+      `נפח: ${nf.format(v.volume)} מקרים בחודש, ${nf1.format(v.before)} דקות לפני, ${nf1.format(v.after)} דקות אחרי`,
+      `שעות שנחסכות בחודש: ${nf1.format(hours)}`,
+      `עלות שעה: ${ils(v.rate)}, מקדם מימוש: ${v.factor}`,
+      `תועלת ממומשת בשנה: ${ils(yearBenefit)}`,
+      `עלות בשנה הראשונה: ${ils(yearCost)} (בנייה ${ils(v.build)}, אימוץ ${ils(v.adopt)}, שוטף ${ils(v.monthly)} לחודש)`,
+      `ROI: ${pct(roi)} (בלי מקדם מימוש: ${pct(roiRaw)})`,
+      `זמן החזר: ${Number.isFinite(payback) ? `${nf1.format(payback)} חודשים` : 'אין החזר'}`,
+      `חושב ב: ${location.href}`,
+    ].join('\n');
+    if (updateUrl) {
+      const params = new URLSearchParams(Object.entries(v).map(([k, n]) => [k, String(n)]));
+      history.replaceState(null, '', `${location.pathname}?${params}`);
+    }
+  }
+
+  // Restore values from the URL (shared links).
+  const qs = new URLSearchParams(location.search);
+  for (const el of form?.querySelectorAll<HTMLInputElement>('input') ?? []) if (qs.has(el.name)) el.value = qs.get(el.name)!;
+  form?.addEventListener('input', () => {
+    calc();
+    if (!tracked) { tracked = true; (window as any).__track?.('roi_calculate', { label: 'input' }); }
+  });
+  calc(qs.toString() !== '');
+
+  // Mobile: while the form is on screen and the result panel is not, show the result in a bottom bar.
+  const bar = document.getElementById('roi-bar');
+  const panel = document.querySelector('aside[aria-live]');
+  if (bar && form && panel && 'IntersectionObserver' in window) {
+    let formIn = false, panelIn = false;
+    const sync = () => bar.classList.toggle('hidden', !(formIn && !panelIn));
+    new IntersectionObserver(([e]) => { formIn = e.isIntersecting; sync(); }).observe(form);
+    new IntersectionObserver(([e]) => { panelIn = e.isIntersecting; sync(); }).observe(panel);
+  }
+
+  async function copy(text: string, btn: HTMLButtonElement, done: string) {
+    try { await navigator.clipboard.writeText(text); } catch {
+      const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch {} ta.remove();
+    }
+    const old = btn.textContent; btn.textContent = done; setTimeout(() => { btn.textContent = old; }, 1800);
+  }
+  const sumBtn = document.getElementById('copy-summary') as HTMLButtonElement | null;
+  const linkBtn = document.getElementById('copy-link') as HTMLButtonElement | null;
+  sumBtn?.addEventListener('click', () => { copy(summary, sumBtn, 'הסיכום הועתק ✓'); (window as any).__track?.('roi_calculate', { label: 'copy-summary' }); });
+  linkBtn?.addEventListener('click', () => { copy(location.href, linkBtn, 'הקישור הועתק ✓'); (window as any).__track?.('roi_calculate', { label: 'copy-link' }); });
+</script>

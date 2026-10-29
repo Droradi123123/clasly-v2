@@ -1,0 +1,36 @@
+---
+/** Free tools index: prompt library and ROI calculator. */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import CTA from '@/components/CTA.astro';
+import { PROMPTS } from '@/data/prompts';
+import { breadcrumbSchema, collectionPageSchema } from '@/lib/seo';
+
+const path = '/tools';
+const title = 'כלי AI חינמיים לעבודה: פרומפטים ומחשבון ROI';
+const description = 'כלים חינמיים בעברית לעבודה עם AI: ספריית פרומפטים להעתקה לפי תפקיד, ומחשבון ROI לפרויקט AI עם מקדם מימוש.';
+const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'כלים', path }];
+const tools = [
+  { name: 'ספריית פרומפטים בעברית', path: '/tools/prompts', text: `${PROMPTS.length} תבניות להעתקה, לפי תפקיד: מנהלים, HR, שיווק, מכירות, שירות, כספים ועוד.` },
+  { name: 'מחשבון ROI ל-AI', path: '/tools/ai-roi-calculator', text: 'החזר השקעה וזמן החזר לפרויקט AI, עם מקדם מימוש וסיכום מוכן להנהלה.' },
+];
+const schema = [breadcrumbSchema(crumbs), collectionPageSchema({ name: title, description, path, items: tools.map((t) => ({ name: t.name, path: t.path })) })];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema} updatedAt="2026-10-29">
+  <section class="relative overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-x relative py-12 md:py-16">
+      <Breadcrumbs items={crumbs} />
+      <h1 class="h1 mt-6 max-w-4xl">כלים חינמיים לעבודה עם AI</h1>
+      <p class="lead mt-5 max-w-3xl">{description} בלי הרשמה, בעברית.</p>
+    </div>
+  </section>
+  <section class="container-x pb-16">
+    <ul class="grid gap-5 md:grid-cols-2" role="list">
+      {tools.map((t) => (
+        <li><a href={t.path} class="card block h-full p-8 transition hover:border-accent"><span class="h3 block">{t.name}</span><span class="mt-3 block text-muted">{t.text}</span><span class="mt-5 block font-bold text-accent">לכלי ←</span></a></li>
+      ))}
+    </ul>
+  </section>
+  <CTA title="רוצים שהצוות ילמד לעבוד כך?" text="סדנה אחת הופכת כלים כאלה להרגל של צוות שלם." whatsappMessage="שלום, אשמח לשמוע על סדנת AI לצוות שלנו." audienceType="company" trackLabel="tools-cta" />
+</BaseLayout>

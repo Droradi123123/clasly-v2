@@ -5,7 +5,7 @@ import { db, insertEvent } from '@/lib/db';
 
 export const prerender = false;
 
-const ALLOWED = new Set(['whatsapp_click', 'lead_form_submit', 'cta_click']);
+const ALLOWED = new Set(['whatsapp_click', 'lead_form_submit', 'cta_click', 'prompt_copy', 'roi_calculate']);
 
 /** Lightweight, privacy-friendly events: no cookies, no user ids. */
 export const POST: APIRoute = async ({ request }) => {
