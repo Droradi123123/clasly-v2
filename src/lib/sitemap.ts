@@ -20,6 +20,7 @@ const STATIC: { path: string; lastmod: string; priority: number }[] = [
   { path: '/how-this-site-was-built', lastmod: '2026-10-23', priority: 0.7 },
   { path: '/glossary', lastmod: '2026-10-28', priority: 0.7 },
   { path: '/tools', lastmod: '2026-10-29', priority: 0.7 },
+  { path: '/ai-for', lastmod: '2026-10-29', priority: 0.7 },
   { path: '/tools/prompts', lastmod: '2026-10-29', priority: 0.8 },
   { path: '/tools/ai-roi-calculator', lastmod: '2026-10-29', priority: 0.8 },
   { path: '/blog', lastmod: today(), priority: 0.8 },
@@ -33,6 +34,7 @@ export async function pagesUrls(): Promise<UrlEntry[]> {
     ...STATIC.map((s) => ({ loc: abs(s.path), lastmod: s.lastmod, changefreq: 'monthly' as const, priority: s.priority })),
     ...OFFER_PAGES.map((o) => ({ loc: abs(o.path), lastmod: o.updatedAt, changefreq: 'monthly' as const, priority: 0.95 })),
     ...COURSE_PAGES.map((c) => ({ loc: abs(c.path), lastmod: c.updatedAt, changefreq: 'monthly' as const, priority: 0.9 })),
+    ...(await getCollection('professions')).map((p) => ({ loc: abs(`/ai-for/${p.data.slug}`), lastmod: iso(p.data.updatedAt), changefreq: 'monthly' as const, priority: 0.7 })),
     ...(await getCollection('terms')).map((t) => ({ loc: abs(`/glossary/${t.data.slug}`), lastmod: iso(t.data.updatedAt), changefreq: 'monthly' as const, priority: 0.6 })),
   ];
 }

@@ -10,6 +10,7 @@ const abs = (p: string) => `${SITE.url}${p}`;
 export async function llmsShort(): Promise<string> {
   const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => a.data.title.localeCompare(b.data.title, 'he'));
   const terms = (await getCollection('terms')).sort((a, b) => a.data.term.localeCompare(b.data.term, 'he'));
+  const professions = (await getCollection('professions')).sort((a, b) => a.data.profession.localeCompare(b.data.profession, 'he'));
   return [
     `# ${BRAND_NAME}`,
     '',
@@ -44,6 +45,7 @@ export async function llmsShort(): Promise<string> {
     '## מאמרים',
     ...posts.map((p) => `- [${p.data.title}](${abs(`/blog/${p.data.slug}`)}): ${p.data.description}`),
     '',
+    ...(professions.length ? ['## AI לפי מקצוע', ...professions.map((p) => `- [${p.data.title}](${abs(`/ai-for/${p.data.slug}`)}): ${p.data.description}`), ''] : []),
     ...(terms.length ? ['## מה זה? הסברי מונחים', ...terms.map((t) => `- [${t.data.title}](${abs(`/glossary/${t.data.slug}`)}): ${t.data.description}`), ''] : []),
     '## עוד',
     `- [אודות](${abs('/about')})`,
