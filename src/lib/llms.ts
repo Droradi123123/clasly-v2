@@ -50,6 +50,8 @@ export async function llmsShort(): Promise<string> {
     `- [הצוות](${abs('/team')})`,
     `- [איך נבנה האתר](${abs('/how-this-site-was-built')})`,
     `- [מילון מונחים](${abs('/glossary')}): הגדרות קצרות ל-${GLOSSARY.length} מונחי AI בעברית.`,
+    `- [ספריית פרומפטים בעברית](${abs('/tools/prompts')}): תבניות פרומפטים להעתקה לפי תפקיד.`,
+    `- [מחשבון ROI ל-AI](${abs('/tools/ai-roi-calculator')}): מחשבון החזר השקעה לפרויקט AI, עם מקדם מימוש.`,
     `- [llms-full.txt](${abs('/llms-full.txt')}): הגרסה המלאה עם תוכן העמודים.`,
     '',
   ].join('\n');

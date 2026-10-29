@@ -95,6 +95,8 @@ export const FOOTER_LINKS = {
     { href: '/blog', label: 'בלוג' },
     { href: '/topics', label: 'נושאים' },
     { href: '/glossary', label: 'מילון מונחים' },
+    { href: '/tools/prompts', label: 'ספריית פרומפטים' },
+    { href: '/tools/ai-roi-calculator', label: 'מחשבון ROI ל-AI' },
     { href: '/how-this-site-was-built', label: 'איך נבנה האתר' },
     { href: '/contact', label: 'צור קשר' },
   ],

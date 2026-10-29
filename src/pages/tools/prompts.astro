@@ -1,0 +1,150 @@
+---
+/**
+ * Hebrew prompt library: copyable templates by role, with filter and search (works without JS: everything is visible).
+ * Targets "פרומפטים בעברית" / "פרומפטים לעבודה". Data: src/data/prompts.ts.
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import FAQ from '@/components/FAQ.astro';
+import CTA from '@/components/CTA.astro';
+import { PROMPTS, PROMPT_ROLES } from '@/data/prompts';
+import { breadcrumbSchema, faqSchema, absolute } from '@/lib/seo';
+
+const path = '/tools/prompts';
+const title = `פרומפטים בעברית לעבודה: ${PROMPTS.length} תבניות להעתקה לפי תפקיד`;
+const description = `ספריית פרומפטים בעברית: ${PROMPTS.length} תבניות מוכנות להעתקה למנהלים, HR, שיווק, מכירות, שירות, כספים ועוד. לשימוש ב-Claude, ChatGPT או Gemini.`;
+const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'כלים', path: '/tools' }, { name: 'ספריית פרומפטים', path }];
+const faq = [
+  { q: 'איך משתמשים בתבניות?', a: 'מעתיקים את התבנית, מחליפים את מה שבסוגריים המרובעים בפרטים שלכם, ומדביקים בכלי ה-AI. ככל שההקשר שתוסיפו מדויק יותר, התוצאה טובה יותר.' },
+  { q: 'הפרומפטים עובדים ב-ChatGPT וב-Gemini, או רק ב-Claude?', a: 'הם כתובים בעברית פשוטה ולא תלויים בכלי מסוים, כך שאפשר להשתמש בהם בכל עוזר AI. כדאי לנסות את אותה תבנית בשני כלים ולהשוות.' },
+  { q: 'מותר להדביק מידע של העבודה?', a: 'תלוי במדיניות הארגון ובחשבון שבו אתם עובדים. אל תדביקו שמות, פרטים מזהים או מידע רגיש בלי לבדוק מה מותר. בתבניות שבהן זה רלוונטי, יש תזכורת.' },
+  { q: 'למה התבניות ארוכות יותר ממה שאני כותב בדרך כלל?', a: 'כי הן כוללות את מה שבדרך כלל חסר: למי התוצר מיועד, באיזה פורמט, ומה לא לעשות. השורה שאומרת למודל לא להמציא מידע, או לשאול לפני שהוא עונה, חוסכת את רוב הסבבים.' },
+];
+const schema = [
+  breadcrumbSchema(crumbs),
+  {
+    '@type': 'ItemList',
+    '@id': `${absolute(path)}#prompts`,
+    name: 'ספריית פרומפטים בעברית לעבודה',
+    numberOfItems: PROMPTS.length,
+    itemListElement: PROMPTS.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.title, url: `${absolute(path)}#${p.id}` })),
+  },
+  faqSchema(faq),
+];
+const roleName = Object.fromEntries(PROMPT_ROLES.map((r) => [r.id, r.name]));
+const anatomy = [
+  { t: 'מי אתם', d: 'התפקיד וההקשר: "אני מנהלת צוות שירות של 12 נציגים".' },
+  { t: 'מה המשימה', d: 'פועל אחד ברור: סכם, נסח, השווה, בנה.' },
+  { t: 'למי התוצר', d: 'הקורא והמטרה: "למנכ״ל שיש לו שתי דקות".' },
+  { t: 'איזה פורמט', d: 'אורך, מבנה וטון: "טבלה", "עד 120 מילים", "עברית מדוברת".' },
+  { t: 'מה לא לעשות', d: '"אל תמציא מידע", "שאל אותי לפני שאתה עונה".' },
+];
+---
+<BaseLayout title={title} description={description} path={path} schema={schema} updatedAt="2026-10-29">
+  <section class="relative overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container-x relative py-12 md:py-16">
+      <Breadcrumbs items={crumbs} />
+      <h1 class="h1 mt-6 max-w-4xl">פרומפטים בעברית לעבודה: {PROMPTS.length} תבניות להעתקה</h1>
+      <p class="lead mt-5 max-w-3xl">ספריית פרומפטים בעברית, מסודרת לפי תפקיד: בחרו תבנית, העתיקו בלחיצה, החליפו את מה שבסוגריים המרובעים בפרטים שלכם, והדביקו ב-Claude, ב-ChatGPT או ב-Gemini. כל תבנית כוללת את מה שבדרך כלל חסר: הקשר, קהל, פורמט, ומה לא לעשות.</p>
+    </div>
+  </section>
+
+  <section class="border-t border-line py-12" aria-labelledby="anatomy-title">
+    <div class="container-x">
+      <h2 id="anatomy-title" class="h2">מה יש בפרומפט טוב?</h2>
+      <ol class="mt-8 grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-5" role="list">
+        {anatomy.map((a, i) => (
+          <li class="rule-top"><span class="num-badge" aria-hidden="true">{i + 1}</span><h3 class="mt-4 text-lg font-bold">{a.t}</h3><p class="mt-2 text-muted">{a.d}</p></li>
+        ))}
+      </ol>
+      <p class="mt-8 text-muted">ההסבר המלא נמצא בעמוד <a class="text-accent underline underline-offset-2" href="/glossary/prompt">מה זה פרומפט</a>. עובדים עם Claude? התחילו מהמדריך <a class="text-accent underline underline-offset-2" href="/blog/what-is-claude">מה זה Claude</a>.</p>
+    </div>
+  </section>
+
+  <section id="library" class="bg-accent-soft py-12" aria-labelledby="library-title">
+    <div class="container-x">
+      <h2 id="library-title" class="h2">ספריית הפרומפטים</h2>
+      <div class="mt-6 flex flex-col gap-4">
+        <label class="block max-w-md">
+          <span class="text-sm font-bold">חיפוש</span>
+          <input id="prompt-search" type="search" placeholder="למשל: מייל, אקסל, ראיון" class="mt-1 w-full rounded-[4px] border border-line bg-white px-4 py-2.5" />
+        </label>
+        <div class="flex flex-wrap gap-2" role="group" aria-label="סינון לפי תפקיד">
+          <button type="button" class="role-chip" data-role="all" aria-pressed="true">הכול</button>
+          {PROMPT_ROLES.map((r) => <button type="button" class="role-chip" data-role={r.id} aria-pressed="false">{r.name}</button>)}
+        </div>
+        <p id="prompt-count" class="text-sm text-muted" aria-live="polite">{PROMPTS.length} תבניות</p>
+      </div>
+      <ul id="prompt-list" class="mt-6 grid gap-5 lg:grid-cols-2" role="list">
+        {PROMPTS.map((p) => (
+          <li id={p.id} class="prompt-card card card-solid scroll-mt-24 p-6" data-role={p.role} data-search={`${p.title} ${p.when} ${p.prompt} ${roleName[p.role]}`}>
+            <p class="text-xs font-bold text-accent">{roleName[p.role]}</p>
+            <h3 class="mt-1 text-lg font-bold">{p.title}</h3>
+            <p class="mt-1 text-sm text-muted">{p.when}</p>
+            <pre class="prompt-text mt-4">{p.prompt}</pre>
+            {p.tip && <p class="mt-3 text-sm"><strong>טיפ:</strong> {p.tip}</p>}
+            <button type="button" class="copy-btn btn-outline mt-4" data-copy={p.id}>העתקה</button>
+          </li>
+        ))}
+      </ul>
+      <p id="prompt-empty" class="mt-6 hidden text-muted">לא נמצאו תבניות. נסו מילה אחרת או בחרו "הכול".</p>
+    </div>
+  </section>
+
+  <section class="py-12" aria-labelledby="next-title">
+    <div class="container-x max-w-3xl">
+      <h2 id="next-title" class="h2">מה עושים כשתבנית עובדת?</h2>
+      <p class="mt-5 text-lg">שומרים אותה. תבנית שאתם משתמשים בה כל שבוע שווה מקום קבוע: פרויקט ב-Claude עם ההנחיות שלה, או סקיל שהצוות כולו משתמש בו. כך עוברים מבקשה חד פעמית לתהליך עבודה. עוד על זה במאמר <a class="text-accent underline underline-offset-2" href="/blog/ai-skills-in-the-organization">סקילים של AI בארגון</a>, ובמרכז הנושא <a class="text-accent underline underline-offset-2" href="/topics/ai-adoption">הטמעת AI בארגון</a>.</p>
+    </div>
+  </section>
+
+  <FAQ items={faq} title="שאלות נפוצות על הספרייה" />
+  <CTA title="רוצים שכל הצוות יעבוד כך?" text="בסדנה אחת הצוות בונה את ספריית הפרומפטים שלו, על המשימות האמיתיות שלו, ויוצא עם כלים שעובדים." whatsappMessage="שלום, ראיתי את ספריית הפרומפטים ואשמח לשמוע על סדנה לצוות שלנו." audienceType="company" topic="פרומפטים" trackLabel="prompts-cta" />
+</BaseLayout>
+
+<style>
+  .role-chip { min-height: 2.5rem; padding: .4rem 1rem; border-radius: 999px; border: 1px solid var(--rule); background: #fff; font-weight: 700; font-size: .95rem; }
+  .role-chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .prompt-text { white-space: pre-wrap; font-family: inherit; font-size: 1rem; line-height: 1.65; background: var(--accent-soft); border-radius: 4px; padding: 1rem; direction: rtl; text-align: start; }
+</style>
+
+<script>
+  const cards = [...document.querySelectorAll<HTMLElement>('.prompt-card')];
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('.role-chip')];
+  const search = document.getElementById('prompt-search') as HTMLInputElement | null;
+  const count = document.getElementById('prompt-count');
+  const empty = document.getElementById('prompt-empty');
+  let role = 'all';
+  const norm = (s: string) => s.toLowerCase().replace(/[֑-ׇ]/g, '');
+  function apply() {
+    const q = norm(search?.value.trim() ?? '');
+    let shown = 0;
+    for (const c of cards) {
+      const ok = (role === 'all' || c.dataset.role === role) && (!q || norm(c.dataset.search ?? '').includes(q));
+      c.hidden = !ok;
+      if (ok) shown++;
+    }
+    if (count) count.textContent = `${shown} תבניות`;
+    empty?.classList.toggle('hidden', shown > 0);
+  }
+  for (const chip of chips) chip.addEventListener('click', () => {
+    role = chip.dataset.role ?? 'all';
+    chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+    apply();
+  });
+  search?.addEventListener('input', apply);
+  document.addEventListener('click', async (ev) => {
+    const btn = (ev.target as HTMLElement).closest<HTMLButtonElement>('.copy-btn');
+    if (!btn) return;
+    const text = btn.closest('.prompt-card')?.querySelector('.prompt-text')?.textContent ?? '';
+    try { await navigator.clipboard.writeText(text); }
+    catch {
+      const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch {} ta.remove();
+    }
+    btn.textContent = 'הועתק ✓';
+    setTimeout(() => { btn.textContent = 'העתקה'; }, 1800);
+    (window as any).__track?.('prompt_copy', { label: btn.dataset.copy ?? null });
+  });
+</script>
