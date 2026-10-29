@@ -99,6 +99,15 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 
 77. **Free tools for links and searches** (owner, 2026-10-29). `/tools/prompts`: a library of 44 Hebrew prompt templates across 11 roles, with role filter, search and copy buttons. It works without JavaScript, and its data lives in `src/data/prompts.ts`. `/tools/ai-roi-calculator`: hours saved times loaded hourly cost times realization factor, against build, adoption and running costs. It is the same method as /topics/ai-roi, and the defaults are that page's hypothetical example, so both pages show 100% / 233%. The calculator runs in the browser, keeps its values in the URL so a calculation can be shared, copies a summary for management, and shows a result bar on mobile. `/tools` lists both tools. New events `prompt_copy` and `roi_calculate` are allowed in the event API and mirrored to GA. Schema: ItemList and WebApplication. Both pages are linked in the footer and listed in the sitemap and llms.txt. "פרומפטים בעברית" and "מחשבון ROI ל-AI" are RESERVED for these pages. `.card-solid` and `.btn-outline` were added, because the unlayered `.card` rule overrides Tailwind background utilities.
 
+78. **"AI ל[מקצוע]" pages** (owner, 2026-10-29). Ten pages at `/ai-for/<slug>`: lawyers, accountants, teachers, students, HR, marketing, sales, product managers, customer service and small businesses. Collection `src/content/professions`, rendered by `src/pages/ai-for/[slug].astro`, with an index at `/ai-for`. Each page has:
+   - a table of uses with what to check;
+   - steps for getting started;
+   - risks;
+   - three prompts written for that profession;
+   - the matching prompts from the prompt library, through `PromptCards.astro` and the `promptRoles` field.
+
+   Facts come only from Anthropic sources this session can reach: the Economic Index (including the September 2025 finding that Israel leads per-capita Claude usage, with an index of 7), the claude.com solution pages, the education reports, the Usage Policy and the pricing page. Israeli regulations are not claimed; the pages say "check the guidelines that apply to you". The checker covers `kind: profession` (800 to 1,600 words, at least 2 sources). The pages are in the footer, the sitemap and llms.txt.
+
 ## Open questions for Dror (v2)
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
 - Is the present tense in "לומדים עם RealAI" accurate for every institution shown?
