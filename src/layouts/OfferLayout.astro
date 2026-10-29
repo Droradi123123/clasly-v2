@@ -10,6 +10,7 @@ import { programsFor } from '@/data/programs';
 import { TOPICS } from '@/config/site';
 import { breadcrumbSchema, faqSchema, serviceSchema, courseSchema } from '@/lib/seo';
 import type { OfferPageData } from '@/data/offers';
+import { COURSE_PAGES } from '@/data/courses';
 
 interface Props { data: OfferPageData }
 const { data } = Astro.props;
@@ -72,6 +73,19 @@ const topics = TOPICS.filter((t) => data.relatedTopics.includes(t.slug));
       </div>
     </div>
   </section>
+
+  {data.slug === 'courses' && (
+    <section class="py-14" aria-labelledby="by-topic-title">
+      <div class="container-x">
+        <h2 id="by-topic-title" class="h2">קורסים לפי נושא</h2>
+        <ul class="mt-8 grid gap-5 md:grid-cols-3" role="list">
+          {COURSE_PAGES.map((c) => (
+            <li><a href={c.path} class="card block h-full p-6 transition hover:border-accent"><span class="h3 block">{c.name}</span><span class="mt-2 block text-muted">{c.description}</span><span class="mt-4 block font-bold text-accent">לסילבוס ←</span></a></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
 
   <section class="py-14" aria-labelledby="logistics-title">
     <div class="container-x grid gap-10 md:grid-cols-2">

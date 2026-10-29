@@ -3,6 +3,7 @@ import { SITE, BRAND_NAME, TOPICS, PROOF_POINTS, LOGOS, CONTACT_EMAIL, PHONE_DIS
 import { OFFER_PAGES } from '@/data/offers';
 import { PROGRAMS } from '@/data/programs';
 import { GLOSSARY } from '@/data/glossary';
+import { COURSE_PAGES } from '@/data/courses';
 
 const abs = (p: string) => `${SITE.url}${p}`;
 
@@ -25,6 +26,9 @@ export async function llmsShort(): Promise<string> {
     '',
     '## הצעות',
     ...OFFER_PAGES.map((o) => `- [${o.h1}](${abs(o.path)}): ${o.answer}`),
+    '',
+    '## קורסים לפי נושא',
+    ...COURSE_PAGES.map((c) => `- [${c.h1}](${abs(c.path)}): ${c.answer}`),
     '',
     '## תוכניות בשם',
     ...PROGRAMS.map((p) => `- ${p.name} (${p.offer}, ${p.length}): ${p.summary}`),

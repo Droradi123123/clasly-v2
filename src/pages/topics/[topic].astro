@@ -6,6 +6,7 @@ import FAQ from '@/components/FAQ.astro';
 import CTA from '@/components/CTA.astro';
 import { getCollection, render } from 'astro:content';
 import { TOPICS, OFFERS } from '@/config/site';
+import { COURSE_PAGES } from '@/data/courses';
 import { breadcrumbSchema, faqSchema, howToSchema, collectionPageSchema } from '@/lib/seo';
 
 export async function getStaticPaths() {
@@ -28,6 +29,7 @@ const offer = OFFERS.find((o) => o.href === relatedOffer)!;
 const schema: object[] = [breadcrumbSchema(crumbs), collectionPageSchema({ name: h1, description, path, items: posts.map((p) => ({ name: p.data.title, path: `/blog/${p.data.slug}` })) })];
 if (hub) schema.push(faqSchema(hub.data.faq));
 if (hub?.data.howTo) schema.push(howToSchema({ ...hub.data.howTo, path }));
+const course = COURSE_PAGES.find((c) => c.topic === topic.slug);
 const iso = hub ? hub.data.updatedAt.toISOString().slice(0, 10) : null;
 ---
 <BaseLayout title={title} description={description} path={path} schema={schema} updatedAt={iso ?? undefined}>
@@ -41,6 +43,14 @@ const iso = hub ? hub.data.updatedAt.toISOString().slice(0, 10) : null;
     </div>
   </section>
   {Content && <div class="container-x prose pb-8"><Content /></div>}
+  {course && (
+    <section class="container-x pb-6" aria-label={course.name}>
+      <a href={course.path} class="card flex flex-col gap-2 border-accent/40 bg-accent-soft p-6 transition hover:border-accent sm:flex-row sm:items-center sm:justify-between">
+        <span><span class="block font-display text-xl text-accent">{course.name}</span><span class="mt-1 block text-muted">{course.answer.split(':')[0]}.</span></span>
+        <span class="font-bold text-accent">לסילבוס ←</span>
+      </a>
+    </section>
+  )}
   <section class="container-x py-10" aria-labelledby="articles-title">
     <h2 id="articles-title" class="h2">מאמרים בנושא {topic.name}</h2>
     {posts.length === 0 ? <p class="mt-4 text-muted">מאמרים בנושא הזה בקרוב. בינתיים, קפצו <a class="text-accent underline" href="/blog">לבלוג</a>.</p> : (

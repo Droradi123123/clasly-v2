@@ -1,6 +1,7 @@
 import { getCollection } from 'astro:content';
 import { SITE, TOPICS } from '@/config/site';
 import { OFFER_PAGES } from '@/data/offers';
+import { COURSE_PAGES } from '@/data/courses';
 
 export interface UrlEntry { loc: string; lastmod: string; changefreq: 'daily' | 'weekly' | 'monthly' | 'yearly'; priority: number }
 const abs = (p: string) => `${SITE.url}${p}`;
@@ -28,6 +29,7 @@ export async function pagesUrls(): Promise<UrlEntry[]> {
   return [
     ...STATIC.map((s) => ({ loc: abs(s.path), lastmod: s.lastmod, changefreq: 'monthly' as const, priority: s.priority })),
     ...OFFER_PAGES.map((o) => ({ loc: abs(o.path), lastmod: o.updatedAt, changefreq: 'monthly' as const, priority: 0.95 })),
+    ...COURSE_PAGES.map((c) => ({ loc: abs(c.path), lastmod: c.updatedAt, changefreq: 'monthly' as const, priority: 0.9 })),
     ...(await getCollection('terms')).map((t) => ({ loc: abs(`/glossary/${t.data.slug}`), lastmod: iso(t.data.updatedAt), changefreq: 'monthly' as const, priority: 0.6 })),
   ];
 }
