@@ -19,11 +19,11 @@ Each one gets an article or a glossary term page.
 4. Claude Skills: מה זה ואיך בונים סקיל ראשון
 5. Claude Cowork: מה זה ולמי זה מתאים
 6. ~~קובץ CLAUDE.md~~ ✅ `/blog/how-to-write-claude-md`
-7. איך מתקינים Claude Code: מדריך למתחילים
+7. ~~איך מתקינים Claude Code: מדריך למתחילים~~ ✅ `/blog/how-to-install-claude-code`
 8. Claude Code פקודות שימושיות: מדריך מהיר
 
 ### Prompts and daily use at work
-9. איך כותבים פרומפט טוב: מבנה ודוגמאות בעברית
+9. ~~איך כותבים פרומפט טוב: מבנה ודוגמאות בעברית~~ ✅ `/blog/how-to-write-a-good-prompt`
 10. ~~פרומפטים לעבודה: תבניות להעתקה לפי תפקיד~~ ✅ `/tools/prompts` (ספריית פרומפטים)
 11. AI לסיכום מסמכים ופגישות: איך עושים את זה נכון
 12. AI לכתיבת מיילים בעברית: מה עובד ומה לא
