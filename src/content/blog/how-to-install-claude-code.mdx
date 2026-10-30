@@ -1,0 +1,156 @@
+---
+title: "איך מתקינים Claude Code: מדריך התקנה למתחילים, צעד אחרי צעד"
+slug: "how-to-install-claude-code"
+description: "איך מתקינים Claude Code ב-Mac, ב-Windows וב-Linux: דרישות, פקודת ההתקנה הנכונה, התחברות, השיחה הראשונה, ופתרון לשגיאות הנפוצות."
+focusKeyPhrase: "איך מתקינים Claude Code"
+topicHub: "claude-code"
+relatedOffer: "/workshops"
+keywords: ["התקנת Claude Code", "Claude Code", "Claude Code Windows", "Claude Code התקנה", "טרמינל", "PowerShell"]
+publishedAt: 2026-10-30
+updatedAt: 2026-10-30
+faq:
+  - q: "Claude Code חינמי?"
+    a: "הכלי עצמו מותקן בלי תשלום, אבל כדי להשתמש בו צריך חשבון Claude בתשלום (Pro, Max, Team או Enterprise) או חשבון Console עם קרדיט. לפי התיעוד, המסלול החינמי של claude.ai לא כולל גישה ל-Claude Code."
+  - q: "צריך הרשאות מנהל כדי להתקין ב-Windows?"
+    a: "לא. לפי התיעוד, מריצים את פקודת ההתקנה מ-PowerShell או מ-CMD בלי הרשאות מנהל. Git for Windows הוא אופציונלי."
+  - q: "מה ההבדל בין התקנה רגילה להתקנה דרך Homebrew?"
+    a: "ההתקנה הרגילה (Native) מתעדכנת אוטומטית ברקע. התקנה דרך Homebrew לא מתעדכנת לבד, וצריך להריץ פקודת עדכון. ערוץ היציב ב-Homebrew מקבל גרסאות בדרך כלל כשבוע אחרי שהן יוצאות."
+  - q: "אפשר להשתמש ב-Claude Code בלי טרמינל?"
+    a: "כן. לפי התיעוד, Claude Code זמין גם בתוספים לסביבות פיתוח, באפליקציה למחשב ובדפדפן. המדריך הזה מתמקד בטרמינל, שהוא הגרסה המלאה ביותר."
+  - q: "איך מעדכנים את Claude Code?"
+    a: "בהתקנה הרגילה, העדכון אוטומטי. בהתקנה דרך Homebrew, WinGet או מנהלי חבילות של Linux, מעדכנים ידנית דרך מנהל החבילות."
+---
+
+איך מתקינים Claude Code? מריצים פקודה אחת בטרמינל, שתלויה במערכת ההפעלה: ב-Mac וב-Linux פקודת `curl`, וב-Windows פקודה ל-PowerShell או ל-CMD. אחר כך בודקים את ההתקנה עם `claude --version`, נכנסים לתיקיית פרויקט, מקלידים `claude` ומתחברים בדפדפן עם חשבון Claude בתשלום. המדריך הזה עובר על כל שלב לפי התיעוד הרשמי, כולל השגיאות שהכי הרבה אנשים נתקעים בהן.
+
+<div class="definition">**Claude Code:** כלי תכנות סוכני של Anthropic. לפי התיעוד, הוא קורא את הפרויקט, עורך קבצים, מריץ פקודות ומשתלב בכלי הפיתוח. הוא זמין בטרמינל, בתוספים לסביבות פיתוח, באפליקציה למחשב ובדפדפן.</div>
+
+## מה צריך לפני שמתקינים Claude Code?
+
+לפי עמוד ההתקנה המתקדמת בתיעוד, אלה הדרישות:
+
+- **מערכת הפעלה:** macOS 13 ומעלה, Windows 10 גרסה 1809 ומעלה (או Windows Server 2019), Ubuntu 20.04 ומעלה, Debian 10 ומעלה, או Alpine Linux 3.19 ומעלה.
+- **חומרה:** לפחות 4GB זיכרון, ומעבד x64 או ARM64.
+- **רשת:** חיבור לאינטרנט.
+- **מעטפת (Shell):** Bash, Zsh, PowerShell או CMD.
+- **מיקום:** מדינה שבה השירות זמין. ישראל ברשימה.
+- **חשבון:** Pro, Max, Team, Enterprise או Console. המסלול החינמי של claude.ai לא כולל Claude Code. ההבדלים בין המסלולים מוסברים במדריך [מה זה Claude](/blog/what-is-claude).
+
+אם אף פעם לא פתחתם טרמינל, זה בסדר. טרמינל הוא חלון שבו מקלידים פקודות, ובמדריך הזה תצטרכו רק כמה מהן.
+
+## איך מתקינים Claude Code ב-Mac וב-Linux?
+
+פותחים טרמינל (ב-Mac: חיפוש Spotlight ואז Terminal) ומריצים את פקודת ההתקנה הרשמית:
+
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+הפקודה הזו עובדת גם ב-WSL על Windows. לפי התיעוד, היא לא מציגה התקדמות בזמן ההורדה, אז אל תיבהלו מהשקט. כשהיא מסתיימת, פותחים חלון טרמינל חדש.
+
+מי שמעדיף Homebrew יכול להתקין כך:
+
+```bash
+brew install --cask claude-code
+```
+
+ההבדל חשוב: ההתקנה הרגילה מתעדכנת אוטומטית ברקע, והתקנה דרך Homebrew לא. ערוץ היציב של Homebrew מקבל גרסאות בדרך כלל כשבוע אחרי שהן יוצאות, ומדלג על גרסאות עם תקלות משמעותיות.
+
+## איך מתקינים Claude Code ב-Windows?
+
+ב-Windows יש שתי מעטפות, ולכל אחת פקודה אחרת. ככה יודעים איפה אתם: ב-PowerShell השורה מתחילה ב-`PS C:\`, וב-CMD היא מתחילה ב-`C:\` בלי `PS`.
+
+ב-PowerShell:
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+ב-CMD:
+
+```batch
+curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
+```
+
+לא צריך הרשאות מנהל. Git for Windows הוא אופציונלי: בלעדיו, Claude Code מריץ פקודות דרך PowerShell, ואיתו הוא משתמש ב-Git Bash. התיעוד ממליץ עליו ב-Windows. אפשר גם להתקין בתוך WSL, ואז מריצים את הפקודה של Linux בתוך הטרמינל של WSL, לא מ-PowerShell.
+
+### Windows רגיל או WSL?
+
+התיעוד מציג שלוש אפשרויות ב-Windows:
+
+| אפשרות | מה צריך | בידוד פקודות (Sandboxing) | מתי לבחור |
+|---|---|---|---|
+| Windows רגיל | כלום, Git for Windows אופציונלי | לא נתמך | פרויקטים וכלים של Windows |
+| WSL 2 | WSL 2 מופעל | נתמך | כלי פיתוח של Linux, או כשרוצים בידוד פקודות |
+| WSL 1 | WSL 1 מופעל | לא נתמך | כש-WSL 2 לא זמין |
+
+למי שרק מתחיל ועובד על קבצים רגילים של Windows, ההתקנה הרגילה היא הפשוטה ביותר.
+
+<figure><a href="/blog/how-to-install-claude-code/which-command.png"><img src="/blog/how-to-install-claude-code/which-command.png" alt="איזו פקודת התקנה להריץ: ב-Mac, ב-Linux וב-WSL פקודת curl עם install.sh, ב-Windows PowerShell פקודת irm עם install.ps1, וב-Windows CMD פקודת curl עם install.cmd. בכל המקרים בודקים אחר כך עם claude --version" width="1600" height="900" loading="lazy" /></a><figcaption>הטעות הנפוצה ביותר: להריץ את הפקודה של מערכת אחרת. בדקו קודם איפה אתם.</figcaption></figure>
+
+## איך בודקים שההתקנה הצליחה ומתחברים?
+
+1. **פותחים חלון טרמינל חדש** ומריצים `claude --version`. התקנה תקינה מדפיסה מספר גרסה.
+2. **אם משהו לא תקין,** מריצים `claude doctor`. לפי התיעוד, הפקודה מציגה אבחון של ההתקנה וההגדרות בלי לפתוח שיחה, כולל אזהרות והצעות לתיקון.
+3. **נכנסים לתיקיית פרויקט** ומפעילים: `cd` לתיקייה, ואחר כך `claude`.
+4. **מתחברים בדפדפן.** בהפעלה הראשונה Claude Code מבקש להתחבר, ופותח את הדפדפן. אחרי ההתחברות, הפרטים נשמרים ולא צריך להתחבר שוב.
+5. **מקלידים `/help`** כדי לראות את הפקודות הזמינות.
+
+<figure><a href="/blog/how-to-install-claude-code/first-steps.png"><img src="/blog/how-to-install-claude-code/first-steps.png" alt="ארבעה צעדים מההתקנה לשימוש: מתקינים בפקודה אחת, בודקים עם claude --version, מתחברים בדפדפן בהפעלה הראשונה, ומבקשים מ-Claude להסביר את הפרויקט לפני שמשנים משהו" width="1600" height="900" loading="lazy" /></a><figcaption>ארבעה צעדים מהתקנה לשיחה הראשונה.</figcaption></figure>
+
+## מה עושים בשיחה הראשונה עם Claude Code?
+
+לא מתחילים משינוי. מתחילים משאלה. מדריך ההתחלה הרשמי מציע שאלות כמו "מה הפרויקט הזה עושה?", "אילו טכנולוגיות הוא משתמש?" ו"הסבר את מבנה התיקיות". אפשר לשאול בעברית.
+
+שני טיפים מהמדריך הרשמי שכדאי לאמץ מהיום הראשון: היו ספציפיים, למשל "תקן את הבאג שבו משתמשים רואים מסך ריק אחרי סיסמה שגויה" במקום "תקן את הבאג". ופרקו משימה גדולה לשלבים ממוספרים.
+
+הפקודות שתשתמשו בהן הכי הרבה:
+
+| פקודה | מה היא עושה |
+|---|---|
+| `claude` | פותחת שיחה בתיקייה הנוכחית |
+| `claude -c` | ממשיכה את השיחה האחרונה בתיקייה |
+| `claude -r` | בוחרת שיחה קודמת להמשיך |
+| `claude -p "שאלה"` | שאלה אחת, תשובה, ויציאה |
+| `/help` | מציגה את הפקודות בתוך השיחה |
+| `/clear` | מנקה את היסטוריית השיחה |
+| `/exit` | יציאה. אפשר גם Ctrl+D פעמיים |
+
+## אילו שגיאות נפוצות בהתקנה, ואיך מתקנים?
+
+רוב התקלות נובעות מפקודה שהועתקה למעטפת הלא נכונה. לפי מדריך פתרון התקלות הרשמי:
+
+| ההודעה שקיבלתם | מה קרה | מה עושים |
+|---|---|---|
+| `'irm' is not recognized` | אתם ב-CMD, לא ב-PowerShell | פותחים PowerShell, או מריצים את פקודת ה-CMD |
+| `The token '&&' is not a valid statement separator` | הרצתם את פקודת ה-CMD ב-PowerShell | מריצים את פקודת ה-PowerShell |
+| `cannot be found that matches parameter name 'fsSL'` | הרצתם את פקודת ה-Mac ב-PowerShell | מריצים את פקודת ה-PowerShell |
+| `command not found: claude` | הטרמינל לא מוצא את הכלי | פותחים חלון חדש, ואם לא עוזר, בודקים את ה-PATH לפי התיעוד |
+
+אם אף אחת מההודעות לא מתאימה, `claude doctor` הוא המקום להתחיל בו.
+
+## מה צריך לדעת כשמתקינים Claude Code בארגון?
+
+התקנה על מחשב אחד והתקנה לצוות של עשרות אנשים הן לא אותו דבר. כמה דברים שכדאי לסגור עם ה-IT, לפי התיעוד:
+
+- **סוג החשבון.** חשבונות Team או Enterprise, או Console עם תקציב מרכזי. לפי מדריך ההתחלה, בהתחברות הראשונה עם Console נוצר אוטומטית Workspace בשם Claude Code למעקב עלויות מרוכז.
+- **ערוץ עדכונים.** ברירת המחדל היא latest, שמקבל תכונות חדשות מיד. הערוץ stable משתמש בגרסה שבדרך כלל ותיקה בכשבוע ומדלג על גרסאות עם תקלות משמעותיות. בארגון אפשר לאכוף ערוץ אחיד דרך הגדרות מנוהלות.
+- **עדכונים אוטומטיים.** אפשר לכבות אותם בהגדרות, אם הארגון מעדיף לעדכן בצורה מבוקרת.
+- **התקנה מנוהלת.** יש התקנה דרך Homebrew, WinGet ומנהלי חבילות של Linux, שמתאימים לכלי ניהול המחשבים של ה-IT.
+- **אימות הקבצים.** כל גרסה מפרסמת קובץ עם סכומי ביקורת חתום, כך שאבטחת המידע יכולה לאמת את הקבצים שהותקנו.
+
+וכמו בכל כלי AI, כדאי שיהיו כללי שימוש כתובים לפני שמתחילים. אפשר להתחיל מ[תבנית מדיניות שימוש ב-AI](/blog/ai-usage-policy-template).
+
+## מה הלאה אחרי ההתקנה?
+
+הצעד הבא הוא לתת ל-Claude Code הקשר קבוע על הפרויקט, בקובץ הוראות. איך כותבים אותו מוסבר במדריך [קובץ CLAUDE.md](/blog/how-to-write-claude-md). מי שלא מתכנת ימצא את הדרך להתחיל במדריך [Claude Code למי שלא מתכנת](/blog/claude-code-for-non-developers), וכל החומרים על הכלי נמצאים במרכז הנושא [Claude Code לארגונים](/topics/claude-code).
+
+רוצים שהצוות יתחיל לעבוד עם Claude Code נכון מהיום הראשון? [לסדנאות שלנו](/workshops), או [לקורס Claude Code](/courses/claude-code).
+
+## מקורות
+
+- [Claude Code Docs: Overview](https://code.claude.com/docs/en/overview)
+- [Claude Code Docs: Advanced setup](https://code.claude.com/docs/en/setup)
+- [Claude Code Docs: Quickstart](https://code.claude.com/docs/en/quickstart)
+- [Claude Code Docs: Troubleshoot installation and login](https://code.claude.com/docs/en/troubleshoot-install)
+- [Claude Help Center: Where can I access Claude?](https://support.claude.com/en/articles/8461763-where-can-i-access-claude)

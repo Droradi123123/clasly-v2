@@ -59,6 +59,8 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 51. ~~קובץ CLAUDE.md: איך כותבים הוראות ש-Claude Code מקיים~~ ✅ `/blog/how-to-write-claude-md`
 52. ~~מה זה Claude? מדריך מעשי למתחילים, כולל עבודה בעברית~~ ✅ `/blog/what-is-claude`
 53. ~~יום עיון AI לעובדים: איך בונים יום שמשנה הרגלי עבודה~~ ✅ `/blog/ai-day-for-employees`
+54. ~~איך כותבים פרומפט טוב: מבנה, דוגמאות ותבנית בעברית~~ ✅ `/blog/how-to-write-a-good-prompt`
+55. ~~איך מתקינים Claude Code: מדריך התקנה למתחילים~~ ✅ `/blog/how-to-install-claude-code`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
