@@ -15,12 +15,12 @@ Each one gets an article or a glossary term page.
 ### Claude and Anthropic
 1. ~~מה זה Claude ואיך משתמשים בו בעברית~~ ✅ `/blog/what-is-claude`
 2. Claude לעומת ChatGPT: מה מתאים לעבודה
-3. Claude Projects: איך מארגנים ידע ושיחות לפי פרויקט
+3. ~~Claude Projects: איך מארגנים ידע ושיחות לפי פרויקט~~ ✅ `/blog/claude-projects-guide`
 4. ~~Claude Skills: מה זה ואיך בונים סקיל ראשון~~ ✅ `/blog/claude-skills-guide`
 5. Claude Cowork: מה זה ולמי זה מתאים
 6. ~~קובץ CLAUDE.md~~ ✅ `/blog/how-to-write-claude-md`
 7. ~~איך מתקינים Claude Code: מדריך למתחילים~~ ✅ `/blog/how-to-install-claude-code`
-8. Claude Code פקודות שימושיות: מדריך מהיר
+8. ~~Claude Code פקודות שימושיות: מדריך מהיר~~ ✅ `/blog/claude-code-commands`
 
 ### Prompts and daily use at work
 9. ~~איך כותבים פרומפט טוב: מבנה ודוגמאות בעברית~~ ✅ `/blog/how-to-write-a-good-prompt`

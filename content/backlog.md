@@ -63,6 +63,8 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 55. ~~איך מתקינים Claude Code: מדריך התקנה למתחילים~~ ✅ `/blog/how-to-install-claude-code`
 56. ~~Claude Skills: מה זה ואיך בונים סקיל ראשון~~ ✅ `/blog/claude-skills-guide`
 57. ~~AI לאקסל: ניתוח נתונים, נוסחאות ודוחות בעזרת Claude~~ ✅ `/blog/ai-for-excel`
+58. ~~פקודות Claude Code: מדריך מהיר לפקודות ולקיצורים~~ ✅ `/blog/claude-code-commands`
+59. ~~Claude Projects: איך מארגנים ידע, הוראות ושיחות לפי פרויקט~~ ✅ `/blog/claude-projects-guide`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
