@@ -63,7 +63,7 @@ Each one gets an article that links to its money page, or a landing page. Don't 
 34. ~~קורס n8n לצוותים~~ ✅ `/courses/n8n` (עמוד נחיתה)
 35. ~~קורס Claude Code לארגונים~~ ✅ `/courses/claude-code` (עמוד נחיתה)
 36. ~~קורס סוכני AI~~ ✅ `/courses/ai-agents` (עמוד נחיתה)
-37. יום עיון AI לעובדים
+37. ~~יום עיון AI לעובדים~~ ✅ `/blog/ai-day-for-employees`
 38. הרצאת AI לכנס מכירות או לאירוע חברה
 39. סדנת פרומפטים לארגון
 40. הכשרת AI למנהלים
