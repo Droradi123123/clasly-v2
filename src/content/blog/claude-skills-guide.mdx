@@ -1,0 +1,121 @@
+---
+title: "Claude Skills: מה זה ואיך בונים סקיל ראשון, צעד אחרי צעד"
+slug: "claude-skills-guide"
+description: "Claude Skills: מה זה סקיל, איך הוא נטען רק כשצריך, איך כותבים SKILL.md ותיאור שעובד, איפה מתקינים ב-claude.ai וב-Claude Code, ומה לבדוק באבטחה."
+focusKeyPhrase: "Claude Skills"
+topicHub: "ai-agents"
+relatedOffer: "/workshops"
+keywords: ["Claude Skills", "Agent Skills", "SKILL.md", "סקיל", "סקילים", "Claude Code"]
+publishedAt: 2026-10-30
+updatedAt: 2026-10-30
+faq:
+  - q: "מה ההבדל בין Skill לבין פרומפט שמור?"
+    a: "פרומפט הוא הוראה לשיחה אחת. Skill הוא תיקייה עם הוראות, ואפשר גם קבצים וסקריפטים, ש-Claude טוען בעצמו כשהבקשה מתאימה לתיאור שלו. לא צריך להדביק אותו מחדש בכל שיחה."
+  - q: "באילו מסלולים אפשר ליצור Skills ב-claude.ai?"
+    a: "לפי התיעוד של Anthropic, העלאת Skills מותאמים אישית ב-claude.ai זמינה במסלולי Pro, Max, Team ו-Enterprise, כשהרצת קוד מופעלת. הם אישיים לכל משתמש."
+  - q: "Skill שיצרתי ב-claude.ai יעבוד גם ב-Claude Code?"
+    a: "לא אוטומטית. לפי התיעוד, Skills לא מסתנכרנים בין המוצרים: ב-claude.ai, ב-API וב-Claude Code מנהלים ומעלים אותם בנפרד."
+  - q: "צריך לדעת לתכנת כדי לכתוב Skill?"
+    a: "לא. Skill בסיסי הוא קובץ טקסט עם תיאור והוראות. סקריפטים הם תוספת אופציונלית, למשימות שבהן קוד מדויק יותר מהסבר."
+  - q: "האם בטוח להתקין Skill שמצאתי ברשת?"
+    a: "Anthropic ממליצה להשתמש רק ב-Skills ממקורות אמינים: שכתבתם בעצמכם או שקיבלתם מ-Anthropic. Skill יכול להורות ל-Claude להריץ קוד ולהשתמש בכלים, ולכן מתייחסים אליו כמו להתקנת תוכנה ובודקים כל קובץ."
+---
+
+Claude Skills הם תיקיות עם הוראות, ולפעמים גם קבצים וסקריפטים, שהופכים את Claude למומחה במשימה מסוימת. כותבים פעם אחת איך עושים דוח שבועי, מצגת לפי התבנית של החברה או בדיקה של חוזה, ומאותו רגע Claude טוען את ההוראות לבד כשהבקשה מתאימה. ההבדל מפרומפט: לא מדביקים אותו מחדש, והוא לא תופס מקום בשיחה עד שצריך אותו.
+
+<div class="definition">**Skill (Agent Skill):** לפי התיעוד של Anthropic, יכולת מודולרית שמרחיבה את Claude. כל Skill אורז הוראות, מטא דאטה ומשאבים אופציונליים כמו סקריפטים ותבניות, ו-Claude משתמש בו אוטומטית כשהוא רלוונטי. בלב כל Skill יש קובץ בשם `SKILL.md`.</div>
+
+## מה ההבדל בין Skill, פרומפט ו-CLAUDE.md?
+
+שלושתם הוראות ל-Claude. ההבדל הוא מתי הם נטענים ולמה הם מתאימים:
+
+| | פרומפט | CLAUDE.md | Skill |
+|---|---|---|---|
+| מתי נטען | בשיחה שבה כתבתם אותו | בתחילת כל שיחה בפרויקט | רק כשהבקשה מתאימה לתיאור |
+| מתאים ל | משימה חד פעמית | עובדות קבועות על הפרויקט | תהליך שחוזר על עצמו |
+| איפה חי | בחלון הצ'אט | בתיקיית הפרויקט | בתיקייה משלו, או בהגדרות |
+| יכול לכלול קוד | לא | לא | כן, סקריפטים וקבצים |
+
+התיעוד של Claude Code מנסח כלל שימושי: כשסעיף ב-CLAUDE.md הפך מעובדה לתהליך של כמה שלבים, הוא שייך ל-Skill. על הקובץ עצמו כתבנו במדריך [קובץ CLAUDE.md](/blog/how-to-write-claude-md), ועל פרומפטים במדריך [איך כותבים פרומפט טוב](/blog/how-to-write-a-good-prompt).
+
+## איך Claude Skills עובדים מאחורי הקלעים?
+
+הרעיון המרכזי נקרא טעינה הדרגתית (Progressive disclosure). Claude לא קורא את כל ה-Skills מראש, אלא בשלושה שלבים:
+
+<figure><a href="/blog/claude-skills-guide/progressive-loading.png"><img src="/blog/claude-skills-guide/progressive-loading.png" alt="שלוש רמות הטעינה של Claude Skills: הכותרת והתיאור נטענים תמיד, ההוראות בקובץ SKILL.md נטענות רק כשהבקשה מתאימה, וקבצים וסקריפטים נוספים נקראים רק כשהמשימה צריכה אותם, ומהסקריפטים נכנס לשיחה רק הפלט" width="1600" height="900" loading="lazy" /></a><figcaption>טעינה הדרגתית: רק מה שהמשימה צריכה נכנס לחלון ההקשר.</figcaption></figure>
+
+1. **שם ותיאור, תמיד.** בתחילת העבודה נטענים רק השם והתיאור של כל Skill. לפי התיעוד, התיאור הוא מה ש-Claude משווה אליו את הבקשה שלכם כדי להחליט אם להפעיל את ה-Skill.
+2. **ההוראות, כשצריך.** כשהבקשה מתאימה, Claude קורא את `SKILL.md` ומכניס את ההוראות לשיחה.
+3. **קבצים וסקריפטים, רק לפי הצורך.** אם ההוראות מפנות לקבצים נוספים, Claude קורא רק את מה שהמשימה דורשת. כשהוא מריץ סקריפט, לפי התיעוד, קוד הסקריפט לא נכנס לשיחה, אלא רק הפלט שלו.
+
+המשמעות המעשית: אפשר להתקין הרבה Skills בלי לשלם על כולם ב[חלון ההקשר](/glossary/context-window), ו-Skill יכול לכלול חומר עזר נרחב שעולה משהו רק כשמשתמשים בו.
+
+## איך בונים Skill ראשון, צעד אחרי צעד?
+
+1. **בוחרים תהליך שחוזר.** משהו שאתם מסבירים ל-Claude שוב ושוב: דוח סטטוס שבועי, סיכום פגישה בפורמט קבוע, בדיקת הצעת מחיר.
+2. **בוחרים שם.** לפי כללי התיעוד: עד 64 תווים, רק אותיות קטנות באנגלית, ספרות ומקפים, ובלי המילים `claude` או `anthropic`. Anthropic ממליצה על שם שמתאר פעולה, כמו `writing-status-reports`, ולא על שמות כלליים כמו `helper`.
+3. **כותבים תיאור שאומר מה וגם מתי.** התיאור מוגבל ל-1,024 תווים, ולפי ההמלצות כותבים אותו בגוף שלישי: "מכין דוח סטטוס שבועי. משתמשים בו כשמבקשים עדכון שבועי או סיכום של המשימות". תיאור כמו "אני יכול לעזור עם דוחות" גורם לבעיות בזיהוי.
+4. **כותבים הוראות קצרות.** Anthropic מזכירה ש-Claude כבר חכם מאוד, ולכן כותבים רק מה שהוא לא יודע: הפורמט שלכם, הכללים, הטעויות שחשוב להימנע מהן. בתיעוד של Claude Code ההמלצה היא להשאיר את `SKILL.md` מתחת ל-500 שורות, ולהעביר חומר עזר לקבצים נפרדים.
+5. **מוסיפים קבצים, אם צריך.** תבנית, דוגמה לתוצר טוב, או סקריפט למשימה שבה קוד מדויק יותר מהסבר.
+6. **מתקינים.** ב-claude.ai: מעלים את התיקייה כקובץ zip דרך Settings ואז Features. ב-Claude Code: שמים את התיקייה ב-`~/.claude/skills/` לשימוש אישי, או ב-`.claude/skills/` בתוך הפרויקט, לשימוש של כל הצוות.
+7. **בודקים.** מבקשים משהו שמתאים לתיאור, ורואים אם ה-Skill הופעל. ב-Claude Code אפשר גם להפעיל אותו ישירות עם `/` ושם ה-Skill.
+
+## איך נראה קובץ SKILL.md?
+
+הנה דוגמה ל-Skill שמכין דוח סטטוס שבועי. הקובץ כתוב באנגלית, כמו הדוגמאות בתיעוד, אבל ההוראות יכולות להיות גם בעברית:
+
+```markdown
+---
+name: writing-status-reports
+description: Writes the weekly team status report in the company format. Use when the user asks for a weekly update, a status report, or a summary of the week's tasks.
+---
+
+# Weekly status report
+
+1. Start with one line: on track, at risk, or delayed.
+2. Then four sections: done, in progress, blocked, needs a decision.
+3. Max 8 lines. Name an owner for every blocked item.
+4. Write in Hebrew, plain and direct.
+5. Never invent progress. If an item has no update, write "no update".
+
+For an example of a good report, see example.md in this folder.
+```
+
+<figure><a href="/blog/claude-skills-guide/skill-folder.png"><img src="/blog/claude-skills-guide/skill-folder.png" alt="המבנה של תיקיית Skill: קובץ SKILL.md עם שם, תיאור והוראות, קובץ דוגמה לתוצר טוב, תבנית, וסקריפט אופציונלי. רק SKILL.md חובה" width="1600" height="900" loading="lazy" /></a><figcaption>רק SKILL.md חובה. כל השאר נקרא רק כשצריך.</figcaption></figure>
+
+## איפה Claude Skills עובדים, ומה ההבדלים?
+
+| איפה | איך מוסיפים | מי רואה |
+|---|---|---|
+| claude.ai | העלאת zip בהגדרות, במסלולי Pro, Max, Team ו-Enterprise | כל משתמש לעצמו |
+| Claude Code | תיקייה ב-`~/.claude/skills/` או ב-`.claude/skills/` | אישי, או כל מי שעובד בפרויקט |
+| Claude API | העלאה דרך ה-API | כל חברי ה-Workspace |
+
+שני דברים שכדאי לדעת. הראשון: Skills לא מסתנכרנים בין המקומות, ולכן Skill שהעליתם ל-claude.ai לא יופיע לבד ב-Claude Code. השני: Anthropic מספקת Skills מוכנים לעבודה עם PowerPoint, Excel, Word ו-PDF, שפועלים ב-claude.ai אוטומטית כשיוצרים מסמכים.
+
+## מה בודקים באבטחה לפני שמתקינים Skill?
+
+Skill יכול להורות ל-Claude להריץ קוד ולהשתמש בכלים, ולכן Anthropic ממליצה להתייחס אליו כמו להתקנת תוכנה:
+
+- **רק ממקורות אמינים:** Skills שכתבתם בעצמכם או שקיבלתם מ-Anthropic.
+- **בודקים כל קובץ:** את `SKILL.md`, את הסקריפטים ואת שאר הקבצים, ומחפשים פעולות שלא מתאימות למטרה המוצהרת.
+- **זהירות מתוכן חיצוני:** Skill שמושך מידע מכתובות ברשת חשוף לתוכן זדוני, גם אם הוא עצמו אמין.
+- **זהירות עם מידע רגיש:** ככל שיש ל-Claude יותר גישה בזמן שה-Skill רץ, הבדיקה צריכה להיות קפדנית יותר.
+
+## אילו טעויות הכי נפוצות בכתיבת Skill?
+
+- **תיאור עמום.** "עוזר עם מסמכים" לא אומר ל-Claude מתי להפעיל. כתבו מה ה-Skill עושה ובאילו בקשות להשתמש בו.
+- **הסבר של מה ש-Claude כבר יודע.** כל שורה מיותרת תופסת מקום. כתבו רק את מה שייחודי לכם.
+- **קובץ אחד ענק.** פצלו: הוראות ב-`SKILL.md`, וחומר עזר בקבצים נפרדים שנקראים רק כשצריך.
+- **אין דוגמה לתוצר טוב.** דוגמה אחת שווה פסקה של הסברים.
+- **לא בודקים אחרי כל שינוי.** Skill שעבד בחודש שעבר יכול להתנהג אחרת אחרי עדכון. בדקו אותו מול כמה בקשות אמיתיות.
+
+איך הופכים Skills ממשהו של אדם אחד לשיטת עבודה של ארגון שלם, ולמה הם גם מתעדים את תהליכי העבודה, מוסבר במאמר [סקילים של AI בארגון](/blog/ai-skills-in-the-organization). כל החומרים על סוכנים נמצאים במרכז הנושא [סוכני AI](/topics/ai-agents).
+
+רוצים שכל צוות יבנה את ה-Skills שלו, על התהליכים האמיתיים שלו? [לסדנאות שלנו](/workshops).
+
+## מקורות
+
+- [Claude Docs: Agent Skills overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview)
+- [Claude Docs: Skill authoring best practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
+- [Claude Code Docs: Extend Claude with skills](https://code.claude.com/docs/en/skills)
