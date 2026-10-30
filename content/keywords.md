@@ -16,7 +16,7 @@ Each one gets an article or a glossary term page.
 1. ~~מה זה Claude ואיך משתמשים בו בעברית~~ ✅ `/blog/what-is-claude`
 2. Claude לעומת ChatGPT: מה מתאים לעבודה
 3. Claude Projects: איך מארגנים ידע ושיחות לפי פרויקט
-4. Claude Skills: מה זה ואיך בונים סקיל ראשון
+4. ~~Claude Skills: מה זה ואיך בונים סקיל ראשון~~ ✅ `/blog/claude-skills-guide`
 5. Claude Cowork: מה זה ולמי זה מתאים
 6. ~~קובץ CLAUDE.md~~ ✅ `/blog/how-to-write-claude-md`
 7. ~~איך מתקינים Claude Code: מדריך למתחילים~~ ✅ `/blog/how-to-install-claude-code`
@@ -27,7 +27,7 @@ Each one gets an article or a glossary term page.
 10. ~~פרומפטים לעבודה: תבניות להעתקה לפי תפקיד~~ ✅ `/tools/prompts` (ספריית פרומפטים)
 11. AI לסיכום מסמכים ופגישות: איך עושים את זה נכון
 12. AI לכתיבת מיילים בעברית: מה עובד ומה לא
-13. AI לאקסל ולניתוח נתונים: מדריך מעשי
+13. ~~AI לאקסל ולניתוח נתונים: מדריך מעשי~~ ✅ `/blog/ai-for-excel`
 
 ### AI agents and automation
 14. איך בונים סוכן AI: מדריך למתחילים בלי קוד
