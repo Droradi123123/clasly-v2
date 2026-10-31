@@ -1,0 +1,28 @@
+name: SEO live check
+# Fetches the live site the way Googlebot does and prints what it gets: status codes, redirects,
+# robots headers, sitemaps. Run it from the Actions tab whenever indexing looks wrong.
+on:
+  workflow_dispatch:
+  push:
+    paths: ['.github/workflows/seo-live-check.yml']
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: DNS
+        run: dig +short realai.co.il A; dig +short www.realai.co.il; dig +short realai.co.il TXT
+      - name: Fetch as Googlebot
+        env:
+          UA: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+        run: |
+          for u in https://realai.co.il/ http://realai.co.il/ https://www.realai.co.il/ \
+                   https://realai.co.il/robots.txt https://realai.co.il/sitemap-index.xml \
+                   https://realai.co.il/sitemap.xml https://realai.co.il/sitemaps/blog.xml \
+                   https://realai.co.il/blog/what-is-claude https://realai.co.il/lectures; do
+            echo "=== $u"
+            curl -s -o /tmp/body -D - -A "$UA" --max-time 20 "$u" | grep -iE '^(HTTP|location|content-type|x-robots-tag|cf-mitigated|server|cache-control)' || true
+            grep -oiE '<meta name="robots"[^>]*>|<link rel="canonical"[^>]*>|<title>[^<]*' /tmp/body | head -3 || true
+            head -c 200 /tmp/body | tr '\n' ' '; echo
+          done
+      - name: Fetch as a normal browser
+        run: curl -s -o /dev/null -w 'browser %{http_code} %{url_effective}\n' -L -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0 Safari/537.36' https://realai.co.il/
