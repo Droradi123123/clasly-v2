@@ -12,6 +12,8 @@ document.querySelectorAll('.reveal, [data-inview]').forEach((el) => (io ? io.obs
 export function track(event: string, props: Record<string, unknown> = {}) {
   // Same event to Google Analytics, when it is on the page (see SITE.gaMeasurementId).
   try { (window as any).gtag?.('event', event, props); } catch {}
+  // And to Microsoft Clarity, so recordings can be filtered by event (see SITE.clarityProjectId).
+  try { (window as any).clarity?.('event', event); } catch {}
   const body = JSON.stringify({ event, page: location.pathname, referrer: document.referrer || null, ...props });
   try {
     if (navigator.sendBeacon) navigator.sendBeacon('/api/event', new Blob([body], { type: 'application/json' }));
