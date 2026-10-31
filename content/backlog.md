@@ -65,6 +65,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 57. ~~AI לאקסל: ניתוח נתונים, נוסחאות ודוחות בעזרת Claude~~ ✅ `/blog/ai-for-excel`
 58. ~~פקודות Claude Code: מדריך מהיר לפקודות ולקיצורים~~ ✅ `/blog/claude-code-commands`
 59. ~~Claude Projects: איך מארגנים ידע, הוראות ושיחות לפי פרויקט~~ ✅ `/blog/claude-projects-guide`
+60. ~~Claude Cowork: מה זה, למי זה מתאים ואיך מתחילים~~ ✅ `/blog/what-is-claude-cowork`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ

@@ -17,7 +17,7 @@ Each one gets an article or a glossary term page.
 2. Claude לעומת ChatGPT: מה מתאים לעבודה
 3. ~~Claude Projects: איך מארגנים ידע ושיחות לפי פרויקט~~ ✅ `/blog/claude-projects-guide`
 4. ~~Claude Skills: מה זה ואיך בונים סקיל ראשון~~ ✅ `/blog/claude-skills-guide`
-5. Claude Cowork: מה זה ולמי זה מתאים
+5. ~~Claude Cowork: מה זה ולמי זה מתאים~~ ✅ `/blog/what-is-claude-cowork`
 6. ~~קובץ CLAUDE.md~~ ✅ `/blog/how-to-write-claude-md`
 7. ~~איך מתקינים Claude Code: מדריך למתחילים~~ ✅ `/blog/how-to-install-claude-code`
 8. ~~Claude Code פקודות שימושיות: מדריך מהיר~~ ✅ `/blog/claude-code-commands`
