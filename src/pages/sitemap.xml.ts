@@ -1,4 +1,7 @@
 import type { APIRoute } from 'astro';
-import { SITE } from '@/config/site';
-/** Convenience alias: many tools request /sitemap.xml. */
-export const GET: APIRoute = () => Response.redirect(`${SITE.url}/sitemap-index.xml`, 301);
+import { GET as sitemapIndex } from './sitemap-index.xml';
+/**
+ * Many tools (and people in Search Console) request /sitemap.xml. A static redirect here builds to an HTML
+ * meta-refresh page, which Google rejects as "Sitemap is HTML", so serve the same XML index instead.
+ */
+export const GET: APIRoute = (ctx) => sitemapIndex(ctx);
