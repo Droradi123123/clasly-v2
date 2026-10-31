@@ -36,6 +36,8 @@ export const SITE = {
   cfAnalyticsToken: import.meta.env?.PUBLIC_CF_ANALYTICS_TOKEN ?? '',
   // Google Analytics 4 Measurement ID (G-XXXXXXXXXX). Empty = no Google Analytics on the site.
   gaMeasurementId: import.meta.env?.PUBLIC_GA_ID || 'G-P337N4P5SD',
+  // Microsoft Clarity project ID (heatmaps and session recordings). Empty = no Clarity on the site.
+  clarityProjectId: import.meta.env?.PUBLIC_CLARITY_ID || 'z67l1lx9gu',
   turnstileSiteKey: import.meta.env?.PUBLIC_TURNSTILE_SITE_KEY ?? '',
 } as const;
 
