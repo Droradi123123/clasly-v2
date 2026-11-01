@@ -25,7 +25,7 @@ Each one gets an article or a glossary term page.
 ### Prompts and daily use at work
 9. ~~איך כותבים פרומפט טוב: מבנה ודוגמאות בעברית~~ ✅ `/blog/how-to-write-a-good-prompt`
 10. ~~פרומפטים לעבודה: תבניות להעתקה לפי תפקיד~~ ✅ `/tools/prompts` (ספריית פרומפטים)
-11. AI לסיכום מסמכים ופגישות: איך עושים את זה נכון
+11. ~~AI לסיכום מסמכים ופגישות: איך עושים את זה נכון~~ ✅ `/blog/ai-document-meeting-summary`
 12. AI לכתיבת מיילים בעברית: מה עובד ומה לא
 13. ~~AI לאקסל ולניתוח נתונים: מדריך מעשי~~ ✅ `/blog/ai-for-excel`
 
