@@ -1,5 +1,5 @@
--- Daily snapshots of Google Analytics 4 and Search Console reports, pulled by the Worker
--- (cron in wrangler.jsonc, or the "refresh" button on /admin/analytics). One row per source per run.
+-- Snapshots of Google Analytics 4 and Search Console reports, pulled by the Worker cron
+-- (wrangler.jsonc, src/lib/analytics.ts). One row per source per run.
 -- payload is the JSON report; error is set instead when the pull failed.
 
 CREATE TABLE IF NOT EXISTS analytics_snapshots (
