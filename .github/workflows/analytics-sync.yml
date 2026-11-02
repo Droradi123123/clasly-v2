@@ -1,0 +1,19 @@
+name: Analytics sync
+# Asks the site to pull Google Analytics and Search Console into D1 (src/pages/api/analytics-sync.ts).
+# The site pulls at most once every 6 hours, so running this more often only returns "fresh".
+on:
+  schedule:
+    - cron: '41 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['src/lib/analytics.ts', 'src/pages/api/analytics-sync.ts', '.github/workflows/analytics-sync.yml']
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for the Cloudflare deploy
+        if: github.event_name == 'push'
+        run: sleep 240
+      - name: Trigger the pull
+        run: curl -s -X POST --max-time 120 https://realai.co.il/api/analytics-sync; echo
