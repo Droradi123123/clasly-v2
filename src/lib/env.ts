@@ -5,6 +5,9 @@ export interface AppEnv {
   TURNSTILE_SECRET_KEY?: string;
   RESEND_API_KEY?: string;
   ADMIN_PASSWORD?: string;
+  GOOGLE_SA_KEY?: string;
+  GA4_PROPERTY_ID?: string;
+  GSC_SITE?: string;
   PUBLIC_SITE_URL?: string;
   AGENT_KV?: KVNamespace;
   DB?: D1Database;
