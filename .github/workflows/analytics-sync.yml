@@ -16,4 +16,5 @@ jobs:
         if: github.event_name == 'push'
         run: sleep 240
       - name: Trigger the pull
-        run: curl -s -i -X POST -H 'content-type: application/json' -H 'origin: https://realai.co.il' --max-time 120 https://realai.co.il/api/analytics-sync | grep -iE '^HTTP|^content-type|^location|ok|status'; echo
+        run: |
+          curl -s -i -X POST -H 'content-type: application/json' -H 'origin: https://realai.co.il' --max-time 120 https://realai.co.il/api/analytics-sync | grep -iE '^HTTP|^content-type|^location|ok|status' || true
