@@ -5,8 +5,9 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "clasly-v2",
   // Astro handles requests; the cron below pulls Google Analytics and Search Console into D1 (src/lib/analytics.ts).
+  // It ticks every 15 minutes but only pulls when the last pull is old enough (see maybeSyncAnalytics).
   "main": "./src/worker.ts",
-  "triggers": { "crons": ["23 3 * * *"] },
+  "triggers": { "crons": ["*/15 * * * *"] },
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },

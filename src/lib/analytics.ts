@@ -1,6 +1,7 @@
 /**
  * Pulls Google Analytics 4 and Search Console reports with a read-only Google service account and stores
- * them in D1 (table analytics_snapshots). Runs from the daily cron (src/worker.ts) and from /admin/analytics.
+ * them in D1 (table analytics_snapshots). Runs from the cron in src/worker.ts. The report itself is read from D1
+ * by Claude and published as a private dashboard, so there is no public or admin page for it on the site.
  *
  * Secrets (Cloudflare dashboard > Workers > clasly-v2 > Settings > Variables and Secrets):
  *   GOOGLE_SA_KEY    the service account's JSON key, pasted as is
@@ -111,10 +112,6 @@ async function pullGsc(token: string, site: string, startDate: string, endDate: 
   return { totals: totals[0] ?? {}, daily, queries, pages, queryPages, devices, countries, sitemaps };
 }
 
-export function analyticsConfigured(env: AnalyticsEnv) {
-  return { ga4: Boolean(env.GOOGLE_SA_KEY && env.GA4_PROPERTY_ID), gsc: Boolean(env.GOOGLE_SA_KEY) };
-}
-
 /** Pulls the last 28 days from GA4 and Search Console and stores one snapshot row per source. */
 export async function syncAnalytics(env: AnalyticsEnv): Promise<{ ga4: string; gsc: string }> {
   const result = { ga4: 'skipped', gsc: 'skipped' };
@@ -147,14 +144,14 @@ export async function syncAnalytics(env: AnalyticsEnv): Promise<{ ga4: string; g
   return result;
 }
 
-/** Latest successful snapshot per source, plus the latest error if it is newer. */
-export async function latestSnapshots(db: D1Database) {
-  const out: Record<'ga4' | 'gsc', { created_at: string; start_date: string; end_date: string; data: any } | null> & { errors: { source: string; created_at: string; error: string }[] } = { ga4: null, gsc: null, errors: [] };
-  for (const source of ['ga4', 'gsc'] as const) {
-    const ok: any = await db.prepare('SELECT created_at, start_date, end_date, payload FROM analytics_snapshots WHERE source = ? AND payload IS NOT NULL ORDER BY id DESC LIMIT 1').bind(source).first();
-    if (ok) out[source] = { created_at: ok.created_at, start_date: ok.start_date, end_date: ok.end_date, data: JSON.parse(ok.payload) };
-    const err: any = await db.prepare('SELECT created_at, error FROM analytics_snapshots WHERE source = ? ORDER BY id DESC LIMIT 1').bind(source).first();
-    if (err?.error) out.errors.push({ source, created_at: err.created_at, error: err.error });
-  }
-  return out;
+/**
+ * Cron entry: pulls only when the newest snapshot is older than 6 hours, or 1 hour after a failed pull,
+ * so a frequent cron gives fresh data soon after setup without hammering the Google APIs.
+ */
+export async function maybeSyncAnalytics(env: AnalyticsEnv) {
+  if (!env.DB || !env.GOOGLE_SA_KEY) return { ga4: 'skipped', gsc: 'skipped' };
+  const last: any = await env.DB.prepare('SELECT created_at, error FROM analytics_snapshots ORDER BY id DESC LIMIT 1').first();
+  const age = last ? Date.now() - Date.parse(last.created_at) : Infinity;
+  if (age < (last?.error ? 1 : 6) * 3600000) return { ga4: 'fresh', gsc: 'fresh' };
+  return syncAnalytics(env);
 }
