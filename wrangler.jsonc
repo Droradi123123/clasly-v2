@@ -10,6 +10,8 @@
   "triggers": { "crons": ["*/15 * * * *"] },
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
+  // Keep variables added in the Cloudflare dashboard when deploying from this file.
+  "keep_vars": true,
   "observability": { "enabled": true },
   "d1_databases": [
     // Leads, hero-agent sessions and events. Schema in migrations/.
