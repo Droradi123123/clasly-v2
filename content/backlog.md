@@ -67,6 +67,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 59. ~~Claude Projects: איך מארגנים ידע, הוראות ושיחות לפי פרויקט~~ ✅ `/blog/claude-projects-guide`
 60. ~~Claude Cowork: מה זה, למי זה מתאים ואיך מתחילים~~ ✅ `/blog/what-is-claude-cowork`
 61. ~~AI לסיכום מסמכים ופגישות: איך עושים את זה נכון~~ ✅ `/blog/ai-document-meeting-summary`
+62. ~~AI לכתיבת מיילים בעברית: מה עובד ומה לא~~ ✅ `/blog/ai-for-writing-emails-hebrew`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
