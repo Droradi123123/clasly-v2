@@ -130,6 +130,7 @@ export async function syncAnalytics(env: AnalyticsEnv): Promise<{ ga4: string; g
   }
   const jobs: [keyof typeof result, () => Promise<unknown>][] = [['gsc', () => pullGsc(token, env.GSC_SITE || 'sc-domain:realai.co.il', startDate, endDate)]];
   if (env.GA4_PROPERTY_ID) jobs.push(['ga4', () => pullGa4(token, env.GA4_PROPERTY_ID!.replace(/\D/g, ''), startDate, endDate)]);
+  else await env.DB.prepare('INSERT INTO analytics_snapshots (source, start_date, end_date, error) VALUES (?, ?, ?, ?)').bind('ga4', startDate, endDate, 'GA4_PROPERTY_ID is not set').run();
   for (const [source, job] of jobs) {
     try {
       const payload = await job();
@@ -149,9 +150,15 @@ export async function syncAnalytics(env: AnalyticsEnv): Promise<{ ga4: string; g
  * so a frequent cron gives fresh data soon after setup without hammering the Google APIs.
  */
 export async function maybeSyncAnalytics(env: AnalyticsEnv) {
-  if (!env.DB || !env.GOOGLE_SA_KEY) return { ga4: 'skipped', gsc: 'skipped' };
+  if (!env.DB) return { ga4: 'skipped', gsc: 'skipped' };
   const last: any = await env.DB.prepare('SELECT created_at, error FROM analytics_snapshots ORDER BY id DESC LIMIT 1').first();
   const age = last ? Date.now() - Date.parse(last.created_at) : Infinity;
   if (age < (last?.error ? 1 : 6) * 3600000) return { ga4: 'fresh', gsc: 'fresh' };
+  if (!env.GOOGLE_SA_KEY) {
+    // Leave a trace so a missing secret is visible in D1 instead of failing silently.
+    const day = isoDay(new Date());
+    await env.DB.prepare('INSERT INTO analytics_snapshots (source, start_date, end_date, error) VALUES (?, ?, ?, ?)').bind('gsc', day, day, 'GOOGLE_SA_KEY is not set').run();
+    return { ga4: 'skipped', gsc: 'GOOGLE_SA_KEY is not set' };
+  }
   return syncAnalytics(env);
 }
