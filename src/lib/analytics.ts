@@ -56,6 +56,13 @@ async function post(url: string, token: string, payload: unknown): Promise<any> 
 
 const isoDay = (d: Date) => d.toISOString().slice(0, 10);
 
+/** Error text that is safe to log or return: no fragments of the key (JSON.parse quotes its input). */
+export function safeError(e: unknown): string {
+  const msg = String((e as Error)?.message ?? e);
+  if (/JSON|Unexpected token|Unexpected end/i.test(msg)) return 'GOOGLE_SA_KEY is not valid JSON (paste the whole key file)';
+  return msg.replace(/[A-Za-z0-9+/=_-]{40,}/g, '[redacted]').slice(0, 300);
+}
+
 /** Flattens a GA4 runReport response into rows of { dimension: value, metric: number }. */
 function gaRows(report: any): Record<string, string | number>[] {
   const dims = (report.dimensionHeaders ?? []).map((h: any) => h.name);
@@ -124,7 +131,7 @@ export async function syncAnalytics(env: AnalyticsEnv): Promise<{ ga4: string; g
   try {
     token = await accessToken(env.GOOGLE_SA_KEY);
   } catch (e) {
-    const error = String((e as Error).message ?? e).slice(0, 500);
+    const error = safeError(e);
     for (const source of ['ga4', 'gsc']) await env.DB.prepare('INSERT INTO analytics_snapshots (source, start_date, end_date, error) VALUES (?, ?, ?, ?)').bind(source, startDate, endDate, error).run();
     return { ga4: error, gsc: error };
   }
@@ -137,7 +144,7 @@ export async function syncAnalytics(env: AnalyticsEnv): Promise<{ ga4: string; g
       await env.DB.prepare('INSERT INTO analytics_snapshots (source, start_date, end_date, payload) VALUES (?, ?, ?, ?)').bind(source, startDate, endDate, JSON.stringify(payload)).run();
       result[source] = 'ok';
     } catch (e) {
-      const error = String((e as Error).message ?? e).slice(0, 500);
+      const error = safeError(e);
       await env.DB.prepare('INSERT INTO analytics_snapshots (source, start_date, end_date, error) VALUES (?, ?, ?, ?)').bind(source, startDate, endDate, error).run();
       result[source] = error;
     }

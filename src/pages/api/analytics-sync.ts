@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { json, getEnv, clientIp } from '@/lib/env';
 import { rateLimit } from '@/lib/ratelimit';
 import { db } from '@/lib/db';
-import { maybeSyncAnalytics } from '@/lib/analytics';
+import { maybeSyncAnalytics, safeError } from '@/lib/analytics';
 
 export const prerender = false;
 
@@ -17,6 +17,11 @@ export const POST: APIRoute = async ({ request }) => {
   if (!rl.ok) return json({ ok: false }, 429);
   const database = db();
   if (!database) return json({ ok: false, status: 'no database' }, 503);
-  const status = await maybeSyncAnalytics({ ...env, DB: database });
-  return json({ ok: true, status });
+  try {
+    const status = await maybeSyncAnalytics({ ...env, DB: database });
+    return json({ ok: true, status });
+  } catch (e) {
+    console.error('analytics sync failed', safeError(e));
+    return json({ ok: false, error: safeError(e) }, 500);
+  }
 };
