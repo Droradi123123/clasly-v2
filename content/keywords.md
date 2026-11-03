@@ -65,7 +65,7 @@ Each one gets an article that links to its money page, or a landing page. Don't 
 36. ~~קורס סוכני AI~~ ✅ `/courses/ai-agents` (עמוד נחיתה)
 37. ~~יום עיון AI לעובדים~~ ✅ `/blog/ai-day-for-employees`
 38. הרצאת AI לכנס מכירות או לאירוע חברה
-39. סדנת פרומפטים לארגון
+39. ~~סדנת פרומפטים לארגון~~ ✅ `/blog/prompt-workshop-for-organizations`
 40. הכשרת AI למנהלים
 41. תוכנית AI לתלמידים ולסטודנטים במוסד אקדמי
 
