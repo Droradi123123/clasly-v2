@@ -30,7 +30,7 @@ Each one gets an article or a glossary term page.
 13. ~~AI לאקסל ולניתוח נתונים: מדריך מעשי~~ ✅ `/blog/ai-for-excel`
 
 ### AI agents and automation
-14. איך בונים סוכן AI: מדריך למתחילים בלי קוד
+14. ~~איך בונים סוכן AI: מדריך למתחילים בלי קוד~~ ✅ `/blog/how-to-build-ai-agent-no-code`
 15. מדריך n8n למתחילים בעברית
 16. n8n התקנה: ענן או שרת משלכם, צעד אחרי צעד
 17. n8n ו-WhatsApp: בוט AI לעסק
