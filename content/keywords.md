@@ -84,8 +84,8 @@ Built from real search data (28 days to 2026-11-04). The daily article run takes
 The academia cluster brings most of the demand (991 of 1,587 impressions). Almost all of it lands on one article, `/blog/ai-workshop-for-faculty-and-teachers`, which can't answer every sub-intent. Each item below gets its own focused page, linked both ways with that article and with `/academia`.
 
 1. ~~סדנת AI למחקר אקדמי ולחוקרים~~ ✅ `/blog/ai-workshop-for-academic-research` ("סדנת ai לחוקרים באוניברסיטה" 47 impressions, position 17; "סדנת ai למחקר אקדמי" 44, 14).
-2. קורס AI לסגל אקדמי: מה ההבדל מסדנה ומה לומדים לאורך סמסטר: "קורס בינה מלאכותית לסגל אקדמי" (87, 16.8), "קורס ai לסגל אקדמי" (28, 11.1). Don't use the reserved phrase "קורס בינה מלאכותית לאקדמיה".
-3. סדנת AI לסגל מנהלי ולעובדי אוניברסיטה: "סדנת ai לסגל מנהלי באוניברסיטה" (21, 15.6), "סדנת ai לעובדי אוניברסיטה" (30, 24.2).
+2. ~~קורס AI לסגל אקדמי~~ ✅ `/blog/ai-course-for-faculty` ("קורס בינה מלאכותית לסגל אקדמי" 94 impressions, position 16.9 on 2026-11-05).
+3. ~~סדנת AI לסגל מנהלי ולעובדי אוניברסיטה~~ ✅ `/blog/ai-workshop-for-university-staff` ("סדנת ai לעובדי אוניברסיטה" 33 impressions, position 24.8; "סדנת ai לסגל מנהלי באוניברסיטה" 23, 15.8 on 2026-11-05).
 4. סדנת AI לסגל הוראה ולמרצים: הוראה, מטלות והערכה: "סדנת ai לסגל הוראה" (37, 17.6), "סדנת ai למרצים" (19, 26.2).
 5. איך מודדים ROI של סוכן AI: "כיצד מודדים roi של פתרון agentic ai?" (8, 8.6), "כיצד מודדים roi והצלחה עסקית של פתרון ai או ai agent בארגון?" (7, 6.4). These now land on `/topics/ai-roi`.
 6. n8n עם GPT ו-CRM: אוטומציה לניהול לידים מקצה לקצה: a group of long queries at positions 45 to 58, for example "איך לחבר n8n, gpt ו-crm..." (6, 45.7) and "איך לשלב gpt ו-n8n בזרימת עבודה אחת..." (10, 57.8).
