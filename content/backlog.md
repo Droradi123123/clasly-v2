@@ -71,6 +71,8 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 63. ~~סדנת פרומפטים לארגון: מה לומדים, איך בונים ואיך מודדים~~ ✅ `/blog/prompt-workshop-for-organizations`
 64. ~~איך בונים סוכן AI בלי קוד: מדריך למתחילים עם Claude~~ ✅ `/blog/how-to-build-ai-agent-no-code`
 65. ~~סדנת AI למחקר אקדמי: מה חוקרים לומדים ואיך בונים אותה~~ ✅ `/blog/ai-workshop-for-academic-research`
+66. ~~קורס AI לסגל אקדמי: מה לומדים ומה המרצים יוצאים איתו~~ ✅ `/blog/ai-course-for-faculty`
+67. ~~סדנת AI לעובדי אוניברסיטה: איך הסגל המנהלי חוסך עבודה~~ ✅ `/blog/ai-workshop-for-university-staff`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
