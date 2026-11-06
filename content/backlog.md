@@ -73,6 +73,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 65. ~~סדנת AI למחקר אקדמי: מה חוקרים לומדים ואיך בונים אותה~~ ✅ `/blog/ai-workshop-for-academic-research`
 66. ~~קורס AI לסגל אקדמי: מה לומדים ומה המרצים יוצאים איתו~~ ✅ `/blog/ai-course-for-faculty`
 67. ~~סדנת AI לעובדי אוניברסיטה: איך הסגל המנהלי חוסך עבודה~~ ✅ `/blog/ai-workshop-for-university-staff`
+68. ~~סדנת AI למרצים: מטלות, הערכה וכללים לסטודנטים~~ ✅ `/blog/ai-workshop-for-lecturers`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ

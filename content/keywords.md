@@ -86,6 +86,6 @@ The academia cluster brings most of the demand (991 of 1,587 impressions). Almos
 1. ~~סדנת AI למחקר אקדמי ולחוקרים~~ ✅ `/blog/ai-workshop-for-academic-research` ("סדנת ai לחוקרים באוניברסיטה" 47 impressions, position 17; "סדנת ai למחקר אקדמי" 44, 14).
 2. ~~קורס AI לסגל אקדמי~~ ✅ `/blog/ai-course-for-faculty` ("קורס בינה מלאכותית לסגל אקדמי" 94 impressions, position 16.9 on 2026-11-05).
 3. ~~סדנת AI לסגל מנהלי ולעובדי אוניברסיטה~~ ✅ `/blog/ai-workshop-for-university-staff` ("סדנת ai לעובדי אוניברסיטה" 33 impressions, position 24.8; "סדנת ai לסגל מנהלי באוניברסיטה" 23, 15.8 on 2026-11-05).
-4. סדנת AI לסגל הוראה ולמרצים: הוראה, מטלות והערכה: "סדנת ai לסגל הוראה" (37, 17.6), "סדנת ai למרצים" (19, 26.2).
-5. איך מודדים ROI של סוכן AI: "כיצד מודדים roi של פתרון agentic ai?" (8, 8.6), "כיצד מודדים roi והצלחה עסקית של פתרון ai או ai agent בארגון?" (7, 6.4). These now land on `/topics/ai-roi`.
-6. n8n עם GPT ו-CRM: אוטומציה לניהול לידים מקצה לקצה: a group of long queries at positions 45 to 58, for example "איך לחבר n8n, gpt ו-crm..." (6, 45.7) and "איך לשלב gpt ו-n8n בזרימת עבודה אחת..." (10, 57.8).
+4. ~~סדנת AI לסגל הוראה ולמרצים~~ ✅ `/blog/ai-workshop-for-lecturers` ("סדנת ai לסגל הוראה" 44 impressions, position 16.4; "סדנת ai בהוראה אקדמית" 37, 36.8; "סדנת בינה מלאכותית למרצים" 25+18 on 2026-11-06).
+5. איך מודדים ROI של סוכן AI: "כיצד מודדים roi של פתרון agentic ai?" (8, 8.6), "כיצד מודדים roi והצלחה עסקית של פתרון ai או ai agent בארגון?" (7, 6.4). These now land on `/topics/ai-roi`. Not yet: on 2026-11-06 both queries were already at positions 6.4 and 8.6 on `/topics/ai-roi`; weekly review to decide.
+6. n8n עם GPT ו-CRM: אוטומציה לניהול לידים מקצה לקצה: a group of long queries at positions 45 to 58, for example "איך לחבר n8n, gpt ו-crm..." (6, 45.7) and "איך לשלב gpt ו-n8n בזרימת עבודה אחת..." (10, 57.8). Blocked for now: n8n docs are not reachable from the session network.
