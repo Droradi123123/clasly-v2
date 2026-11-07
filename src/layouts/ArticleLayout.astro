@@ -19,7 +19,7 @@ const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'בלוג', path: 
 const iso = (x: Date) => x.toISOString().slice(0, 10);
 const schema = [
   breadcrumbSchema(crumbs),
-  articleSchema({ title: d.title, description: d.description, path, publishedAt: iso(d.publishedAt), updatedAt: iso(d.updatedAt), image: ogPathFor(path), keywords: [d.focusKeyPhrase, ...d.keywords], section: topic.name, words, minutes, about: d.focusKeyPhrase }),
+  articleSchema({ title: d.title, description: d.description, path, publishedAt: iso(d.publishedAt), updatedAt: iso(d.updatedAt), image: ogPathFor(path), keywords: [d.focusKeyPhrase, ...d.keywords], section: topic.name, words, minutes, about: d.focusKeyPhrase, audience: d.topicHub === 'ai-in-education' ? 'educator' : undefined }),
   faqSchema(d.faq),
 ];
 const ctaByOffer: Record<string, string> = {

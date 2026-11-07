@@ -2,7 +2,7 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const topicSlugs = ['claude-code', 'n8n', 'ai-agents', 'ai-adoption', 'building-with-ai', 'ai-roi', 'ai-for-managers'] as const;
+const topicSlugs = ['claude-code', 'n8n', 'ai-agents', 'ai-adoption', 'building-with-ai', 'ai-roi', 'ai-for-managers', 'ai-in-education'] as const;
 const offers = ['/lectures', '/workshops', '/courses', '/executive'] as const;
 
 /** Blog articles: one focus key phrase each, answer-first, FAQ, contextual CTA. */

@@ -19,7 +19,7 @@ const RESERVED = {
   'סדנת AI לארגונים': '/workshops', 'סדנת בינה מלאכותית': '/workshops',
   'קורס AI לעובדים': '/courses', 'קורס בינה מלאכותית': '/courses',
   'ליווי AI למנהלים': '/executive', 'אסטרטגיית AI לארגון': '/executive',
-  'הכשרת AI לארגונים': '/companies', 'קורס בינה מלאכותית לאקדמיה': '/academia',
+  'הכשרת AI לארגונים': '/companies', 'קורס בינה מלאכותית לאקדמיה': '/academia', 'בינה מלאכותית בחינוך': '/topics/ai-in-education',
   'פרומפטים בעברית': '/tools/prompts', 'מחשבון ROI ל-AI': '/tools/ai-roi-calculator',
   'קורס n8n': '/courses/n8n', 'קורס Claude Code': '/courses/claude-code', 'קורס סוכני AI': '/courses/ai-agents',
 };

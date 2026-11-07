@@ -87,6 +87,7 @@ export const FOOTER_LINKS = {
   ],
   guides: [
     { href: '/topics/ai-adoption', label: 'איך להטמיע AI בארגון' },
+    { href: '/topics/ai-in-education', label: 'AI בחינוך ובאקדמיה' },
     { href: '/blog/hours-saved-is-not-an-ai-strategy', label: 'חיסכון בשעות הוא לא אסטרטגיה' },
     { href: '/blog/how-to-measure-ai-roi', label: 'מדידת ROI של AI' },
     { href: '/blog/chatbot-vs-automation-vs-agent', label: 'צ׳אטבוט, אוטומציה או סוכן?' },
@@ -188,6 +189,7 @@ export const TOPICS = [
   { slug: 'building-with-ai', name: 'בניית מוצרים עם AI', keyPhrase: 'בניית מוצרים עם AI', full: false },
   { slug: 'ai-roi', name: 'ROI של AI', keyPhrase: 'ROI של AI', full: false },
   { slug: 'ai-for-managers', name: 'AI למנהלים', keyPhrase: 'AI למנהלים', full: false },
+  { slug: 'ai-in-education', name: 'AI בחינוך ובאקדמיה', keyPhrase: 'בינה מלאכותית בחינוך', full: false },
 ] as const;
 export type TopicSlug = (typeof TOPICS)[number]['slug'];
 
