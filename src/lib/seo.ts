@@ -113,7 +113,7 @@ export function courseSchema(opts: { name: string; description: string; path: st
   };
 }
 
-export function articleSchema(opts: { title: string; description: string; path: string; publishedAt: string; updatedAt: string; image: string; keywords?: string[]; section?: string; words?: number; minutes?: number; about?: string }) {
+export function articleSchema(opts: { title: string; description: string; path: string; publishedAt: string; updatedAt: string; image: string; keywords?: string[]; section?: string; words?: number; minutes?: number; about?: string; audience?: string }) {
   return {
     '@type': 'BlogPosting',
     '@id': `${absolute(opts.path)}#article`,
@@ -130,6 +130,7 @@ export function articleSchema(opts: { title: string; description: string; path: 
     ...(opts.words ? { wordCount: opts.words } : {}),
     ...(opts.minutes ? { timeRequired: `PT${opts.minutes}M` } : {}),
     ...(opts.about ? { about: { '@type': 'Thing', name: opts.about } } : {}),
+    ...(opts.audience ? { audience: { '@type': 'EducationalAudience', educationalRole: opts.audience } } : {}),
     speakable: { '@type': 'SpeakableSpecification', cssSelector: ['.lead', '.prose > p:first-of-type'] },
     isPartOf: { '@id': `${SITE.url}/#website` },
     author: { '@id': `${SITE.url}/#organization` },

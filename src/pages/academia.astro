@@ -8,8 +8,8 @@ import RelatedArticles from '@/components/RelatedArticles.astro';
 import { breadcrumbSchema, faqSchema, serviceSchema } from '@/lib/seo';
 import { PROGRAM_NAMES } from '@/config/site';
 const path = '/academia';
-const title = 'קורס בינה מלאכותית לאקדמיה | AI לאוניברסיטאות ומכללות';
-const description = 'קורס בינה מלאכותית לאקדמיה, הרצאות אורח וסדנאות לתוכניות יזמות ולימודי המשך. סילבוס, מטלות והערכה, מאנשים שהטמיעו AI בתעשייה.';
+const title = 'קורס בינה מלאכותית לאקדמיה | סדנאות AI לאוניברסיטאות ומכללות';
+const description = 'קורס בינה מלאכותית לאקדמיה, סדנאות AI לסגל ולעובדי אוניברסיטאות ומכללות, והרצאות אורח. סילבוס, מטלות והערכה, מאנשים שהטמיעו AI בתעשייה.';
 const crumbs = [{ name: 'דף הבית', path: '/' }, { name: 'לאקדמיה', path }];
 const faq = [
   { q: 'למה סטודנטים צריכים יכולות AI פרקטיות כבר עכשיו?', a: 'כי זה מה שמראיינים בודקים היום. אנחנו מגייסים בעצמנו לחברות טכנולוגיה, ובכל ראיון שואלים איך המועמד עובד עם AI ומה הוא בנה איתו. שוק העבודה לג׳וניורים קשה מאוד, ומי שמגיע בלי יכולות AI פרקטיות מתחיל מאחור, גם עם ציונים טובים.' },
@@ -17,9 +17,19 @@ const faq = [
   { q: 'האם יש סילבוס אקדמי?', a: 'כן. לכל קורס יש סילבוס עם מטרות, מפגשים, מטלות והערכה, מוכן להגשה לוועדת הוראה.' },
   { q: 'האם הסטודנטים צריכים רקע בתכנות?', a: 'תלוי בקורס. הקורס לבניית מוצרים עם AI ו-Claude Code מתאים גם לסטודנטים בלי רקע טכני. בוטקמפ סוכני AI מתאים לסטודנטים עם רקע בסיסי בנתונים או בקוד.' },
   { q: 'מה עם סגל ומרצים?', a: 'אנחנו מעבירים גם סדנאות לסגל: איך להשתמש ב-AI בהוראה ובמחקר, ואיך לשלב כלי AI בקורסים קיימים.' },
+  { q: 'האם אתם מעבירים סדנאות AI לסגל ולעובדי אוניברסיטה?', a: 'כן. סדנה היא חצי יום (4 שעות) או יום מלא (7 שעות), עם 8 עד 25 משתתפים, פרונטלי במוסד או ב-Zoom עם חדרי עבודה. יש מסלולים נפרדים למרצים, לחוקרים ולעובדי מנהלה, וכל משתתף עובד על חומר אמיתי שלו.' },
+  { q: 'אפשר לבנות תוכנית AI לכל המוסד ולא רק לפקולטה אחת?', a: 'כן. מתחילים בשלוש החלטות של המוסד: באיזה כלי וחשבון משתמשים, מה מותר להעלות אליו, ומה הכלל לגבי ציונים. אחר כך פיילוט ביחידה אחת, מסלול לכל קהל, ומדידה אחרי 30 יום.' },
   { q: 'איך מתחילים?', a: 'מתחילים בשיחה קצרה עם מנהלי התוכנית, ואחריה שולחים הצעה עם סילבוס ולוח זמנים. בדרך כלל אפשר לצאת לדרך תוך שבועות ספורים.' },
 ];
 const schema = [breadcrumbSchema(crumbs), faqSchema(faq), serviceSchema({ name: 'הרצאות וקורסי AI לאקדמיה', description, path, serviceType: 'AI education for academia', audience: 'Universities and colleges in Israel' })];
+const staffTracks = [
+  { title: 'תוכנית לכל המוסד', text: 'החלטות על כלים, נתונים וציונים, פיילוט ביחידה אחת ומסלול לכל קהל.', href: '/blog/ai-workshop-for-academic-institutions' },
+  { title: 'סדנה לסגל אקדמי', text: 'הוראה ומחקר ביום אחד: מטלה מעודכנת, מחוון ושגרת מחקר.', href: '/blog/ai-workshop-for-faculty-and-teachers' },
+  { title: 'סדנה למרצים', text: 'מבחן מטלה, שינוי שמחייב חשיבה מקורית, מחוון וכללים לסטודנטים בסילבוס.', href: '/blog/ai-workshop-for-lecturers' },
+  { title: 'סדנה לחוקרים', text: 'סקירת ספרות, ניתוח וכתיבה עם בדיקת מקורות בכל שלב.', href: '/blog/ai-workshop-for-academic-research' },
+  { title: 'סדנה לעובדי מנהלה', text: 'פניות, מסמכים ונהלים: תהליך אחד שעובד ביחידה כבר בשבוע הבא.', href: '/blog/ai-workshop-for-university-staff' },
+  { title: 'קורס לסגל אקדמי', text: 'ליווי לאורך כמה מפגשים, עם תרגול על הקורסים והמחקר של המשתתפים.', href: '/blog/ai-course-for-faculty' },
+];
 const blocks = [
   { title: 'תוכניות יזמות', text: `${PROGRAM_NAMES.claudeCodeDay} או ${PROGRAM_NAMES.productBuildersCourse}: הסטודנטים בונים מוצר עובד, לא מצגת.` , href: '/workshops' },
   { title: 'לימודי המשך', text: `${PROGRAM_NAMES.agentsBootcamp} או קורס AI יישומי למנהלים: קורס שמושך נרשמים, כי מלמדים בו אנשים שבונים בתעשייה.`, href: '/courses' },
@@ -84,6 +94,14 @@ const blocks = [
       {blocks.map((b) => <a href={b.href} class="card reveal p-6 hover:border-accent"><h3 class="h3">{b.title}</h3><p class="mt-2 text-muted">{b.text}</p><span class="mt-4 block font-bold text-accent">לפרטים ←</span></a>)}
     </div>
   </div></section>
+  <section class="border-t border-line py-14" aria-labelledby="staff-title"><div class="container-x">
+    <p class="eyebrow">לסגל ולעובדי המוסד</p>
+    <h2 id="staff-title" class="h2 mt-3">סדנאות וקורסי AI לסגל אקדמי ולעובדי אוניברסיטאות ומכללות</h2>
+    <p class="lead mt-4 max-w-3xl">כל קהל במוסד משתמש ב-AI אחרת, ולכן לכל אחד יש מסלול משלו. בחרו את המדריך שמתאים לכם, או קראו את כל המדריכים במרכז הנושא <a class="text-accent underline" href="/topics/ai-in-education">בינה מלאכותית בחינוך ובאקדמיה</a>.</p>
+    <div class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {staffTracks.map((b) => <a href={b.href} class="card reveal p-6 hover:border-accent"><h3 class="h3">{b.title}</h3><p class="mt-2 text-muted">{b.text}</p><span class="mt-4 block font-bold text-accent">למדריך ←</span></a>)}
+    </div>
+  </div></section>
   <section class="py-14 bg-elev/40"><div class="container-x grid gap-10 md:grid-cols-2">
     <div><h2 class="h2">למה מנהלי תוכניות בוחרים בנו</h2>
       <ul class="mt-6 space-y-3">
@@ -104,6 +122,6 @@ const blocks = [
   </div></section>
   <!-- Testimonials for academia: hidden until genuine quotes are collected (TODO.md). -->
   <FAQ items={faq} />
-  <RelatedArticles slugs={['ai-course-for-academia-what-is-different', 'ai-for-entrepreneurship-programs', 'ai-workshop-for-faculty-and-teachers', 'build-product-with-ai-without-developers', 'claude-code-for-non-developers', 'ai-agents-bootcamp-who-is-it-for']} />
+  <RelatedArticles title="מדריכים לאוניברסיטאות ולמכללות" slugs={['ai-course-for-academia-what-is-different', 'ai-for-entrepreneurship-programs', 'build-product-with-ai-without-developers', 'claude-code-for-non-developers', 'ai-agents-bootcamp-who-is-it-for', 'ai-usage-policy-template']} moreHref="/topics/ai-in-education" moreLabel="לכל המדריכים לאקדמיה ולחינוך" />
   <CTA whatsappMessage="שלום, אני ממוסד אקדמי ואשמח לשמוע על קורס או סדנת AI לתוכנית שלנו." audienceType="academia" topic="אקדמיה" trackLabel="academia" title="בואו נבנה תוכנית AI לסטודנטים שלכם" />
 </BaseLayout>

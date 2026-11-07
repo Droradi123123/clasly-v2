@@ -55,6 +55,17 @@ switch (topic) {
     rect(x + 24, ly, 10, 12, BLUE);
     break;
   }
+  case 'ai-in-education': {
+    // A shelf of books, one highlighted, and an open book beside it.
+    const base = H - 40; let x = r(40, 70); const n = ri(6, 9), hi = ri(0, n - 1);
+    for (let i = 0; i < n; i++) { const bw = r(16, 26), bh = r(70, 130); rect(x, base - bh, bw, bh, i === hi ? BLUE : i % 2 ? SOFT : GROUND, { stroke: INK, 'stroke-width': 2, rx: 2 }); line(x + 4, base - bh + 14, x + bw - 4, base - bh + 14, i === hi ? '#ffffff' : INK, 1.5); x += bw + 3; }
+    line(30, base, W - 30, base, INK, 2.5);
+    const ox = Math.max(x + 30, r(250, 270)), oy = base - r(70, 90), ow = W - ox - 30;
+    path(`M${ox} ${oy + 10} Q ${ox + ow / 4} ${oy - 6}, ${ox + ow / 2} ${oy + 8} Q ${ox + ow * 3 / 4} ${oy - 6}, ${ox + ow} ${oy + 10} L ${ox + ow} ${base - 6} Q ${ox + ow * 3 / 4} ${base - 20}, ${ox + ow / 2} ${base - 6} Q ${ox + ow / 4} ${base - 20}, ${ox} ${base - 6} Z`, INK, 2, GROUND);
+    line(ox + ow / 2, oy + 8, ox + ow / 2, base - 6, INK, 2);
+    for (let k = 0; k < 3; k++) { line(ox + 10, oy + 28 + k * 14, ox + ow / 2 - 10, oy + 28 + k * 14, k === 0 ? BLUE : LINE, 3); line(ox + ow / 2 + 10, oy + 28 + k * 14, ox + ow - 10, oy + 28 + k * 14, LINE, 3); }
+    break;
+  }
   case 'ai-roi': {
     // Bars growing, with a trend line.
     const n = ri(6, 8), base = H - 40, bw = (W - 100) / n;
