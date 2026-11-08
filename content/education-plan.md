@@ -36,7 +36,8 @@ The daily article run and the weekly review both read this file. Content items t
 | סדנת ai למוסדות אקדמיים (56, 19.2); סדנת ai לאוניברסיטאות (73, 31.3); סדנת בינה מלאכותית לאוניברסיטאות (53, 50.1); סדנת ai למכללות (35, 19.6) | `/blog/ai-workshop-for-academic-institutions` | top 3 |
 | קורס ai לאוניברסיטאות (18, 50.7); קורס ai למכללות (22, 71.4); קורס בינה מלאכותית למוסדות אקדמיים (21, 87.1); קורס בינה מלאכותית לאקדמיה | `/academia` | top 5, then top 3 with backlinks |
 | בינה מלאכותית בחינוך; AI בחינוך; בינה מלאכותית באקדמיה | `/topics/ai-in-education` | top 10 within 3 months |
-| AI למורים; השתלמות AI למורים; סדנת AI למורים | `/ai-for/teachers` and section E articles | new pages, then top 10 |
+| AI למורים | `/ai-for/teachers` | top 10 |
+| השתלמות AI למורים; השתלמות בינה מלאכותית למורים; סדנת AI למורים | `/blog/ai-training-for-teachers` (2026-11-08) | top 10, then top 3 |
 | קורס chatgpt לסגל אקדמי (41, 24.1); סדנת chatgpt לסגל אקדמי (33, 58.2) | blocked, see section 8 | |
 
 ## 4. Phase 1: structure (done on 2026-11-07)
