@@ -76,6 +76,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 68. ~~סדנת AI למרצים: מטלות, הערכה וכללים לסטודנטים~~ ✅ `/blog/ai-workshop-for-lecturers`
 69. ~~סדנת AI למוסדות אקדמיים: איך בונים תוכנית לכל המוסד~~ ✅ `/blog/ai-workshop-for-academic-institutions`
 70. ~~השתלמות AI למורים: מה לומדים ואיך בונים השתלמות לצוות~~ ✅ `/blog/ai-training-for-teachers`
+71. ~~סדנת AI למנהלי חוגים ודיקנים: החלטות, מדיניות ותקציב~~ ✅ `/blog/ai-workshop-for-department-heads`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
