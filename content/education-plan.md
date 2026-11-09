@@ -34,6 +34,7 @@ The daily article run and the weekly review both read this file. Content items t
 | סדנת ai לסגל הוראה (44, 16.4); סדנת ai בהוראה אקדמית (38, 36.9); סדנת ai למרצים (20, 28.8); סדנת בינה מלאכותית למרצים (18, 33.4) | `/blog/ai-workshop-for-lecturers` | top 3 |
 | סדנת ai לעובדי אוניברסיטה (35, 25.6); סדנת ai לסגל מנהלי באוניברסיטה (26, 16); קורס ai לעובדי אוניברסיטה (26, 52.7) | `/blog/ai-workshop-for-university-staff` | top 3 |
 | סדנת ai למוסדות אקדמיים (56, 19.2); סדנת ai לאוניברסיטאות (73, 31.3); סדנת בינה מלאכותית לאוניברסיטאות (53, 50.1); סדנת ai למכללות (35, 19.6) | `/blog/ai-workshop-for-academic-institutions` | top 3 |
+| סדנת ai למנהלי חוגים (25, 92.2); סדנת ai לדיקנים (5, 89.2) on 2026-11-09 | `/blog/ai-workshop-for-department-heads` (2026-11-09) | top 10, then top 3 |
 | קורס ai לאוניברסיטאות (18, 50.7); קורס ai למכללות (22, 71.4); קורס בינה מלאכותית למוסדות אקדמיים (21, 87.1); קורס בינה מלאכותית לאקדמיה | `/academia` | top 5, then top 3 with backlinks |
 | בינה מלאכותית בחינוך; AI בחינוך; בינה מלאכותית באקדמיה | `/topics/ai-in-education` | top 10 within 3 months |
 | AI למורים | `/ai-for/teachers` | top 10 |
