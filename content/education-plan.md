@@ -28,8 +28,8 @@ The daily article run and the weekly review both read this file. Content items t
 
 | Query (impressions, position on 2026-11-07) | Target page | Goal |
 |---|---|---|
-| סדנאות לסגל אקדמי (87, 8); סדנת ai לסגל אקדמי (39, 7.8); סדנאות בינה מלאכותית לסגל אקדמי (64, 23); הדרכות בינה מלאכותית לסגל אקדמי (40, 14.4) | `/blog/ai-workshop-for-faculty-and-teachers` | top 3 |
-| קורס בינה מלאכותית לסגל אקדמי (106, 17.5); קורס ai לסגל אקדמי (33, 10.8) | `/blog/ai-course-for-faculty` | top 3 |
+| סדנאות לסגל אקדמי (87, 8); סדנת ai לסגל אקדמי (39, 7.8); סדנאות בינה מלאכותית לסגל אקדמי (64, 23); הדרכות בינה מלאכותית לסגל אקדמי (40, 14.4); השתלמויות לסגל אקדמי (8, 8.4 on 2026-11-09) | `/blog/ai-workshop-for-faculty-and-teachers` | top 3 |
+| קורס בינה מלאכותית לסגל אקדמי (106, 17.5); קורס ai לסגל אקדמי (33, 10.8); קורס בינה מלאכותית למרצים (23, 26.2 on 2026-11-09); קורס ai למרצים (12, 17.2 on 2026-11-09) | `/blog/ai-course-for-faculty` | top 3 |
 | סדנת ai לחוקרים באוניברסיטה (61, 17.6); סדנת ai למחקר אקדמי (51, 14.3) | `/blog/ai-workshop-for-academic-research` | top 3 |
 | סדנת ai לסגל הוראה (44, 16.4); סדנת ai בהוראה אקדמית (38, 36.9); סדנת ai למרצים (20, 28.8); סדנת בינה מלאכותית למרצים (18, 33.4) | `/blog/ai-workshop-for-lecturers` | top 3 |
 | סדנת ai לעובדי אוניברסיטה (35, 25.6); סדנת ai לסגל מנהלי באוניברסיטה (26, 16); קורס ai לעובדי אוניברסיטה (26, 52.7) | `/blog/ai-workshop-for-university-staff` | top 3 |
