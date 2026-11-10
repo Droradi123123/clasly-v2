@@ -78,6 +78,8 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 70. ~~השתלמות AI למורים: מה לומדים ואיך בונים השתלמות לצוות~~ ✅ `/blog/ai-training-for-teachers`
 71. ~~סדנת AI למנהלי חוגים ודיקנים: החלטות, מדיניות ותקציב~~ ✅ `/blog/ai-workshop-for-department-heads`
 72. ~~Claude for Education: מה זה ומה מקבל מוסד אקדמי~~ ✅ `/blog/what-is-claude-for-education`
+73. ~~מצב למידה ב-Claude: ללמוד עם AI בלי לקבל תשובות מוכנות~~ ✅ `/blog/claude-learning-mode`
+74. ~~מערך שיעור עם AI: מדריך למורים צעד אחרי צעד~~ ✅ `/blog/ai-lesson-plan`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ

@@ -40,6 +40,8 @@ The daily article run and the weekly review both read this file. Content items t
 | AI למורים | `/ai-for/teachers` | top 10 |
 | השתלמות AI למורים; השתלמות בינה מלאכותית למורים; סדנת AI למורים | `/blog/ai-training-for-teachers` (2026-11-08) | top 10, then top 3 |
 | Claude for Education; Claude לאוניברסיטאות; מצב למידה Claude | `/blog/what-is-claude-for-education` (2026-11-10) | top 10, then top 3 |
+| מצב למידה ב-Claude; ללמוד עם AI | `/blog/claude-learning-mode` (2026-11-10) | top 10, then top 3 |
+| מערך שיעור עם AI; מערך שיעור בינה מלאכותית | `/blog/ai-lesson-plan` (2026-11-10) | top 10, then top 3 |
 | קורס chatgpt לסגל אקדמי (41, 24.1); סדנת chatgpt לסגל אקדמי (33, 58.2) | blocked, see section 8 | |
 
 ## 4. Phase 1: structure (done on 2026-11-07)
