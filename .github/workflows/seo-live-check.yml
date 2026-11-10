@@ -63,3 +63,16 @@ jobs:
           echo "bing bytes=$(wc -c < /tmp/bing.html)"
           grep -oE 'class="sb_count"[^<]*<?[^<]*|[0-9,]+ results' /tmp/bing.html | head -3 || true
           grep -oE 'https://realai\.co\.il/[a-z0-9/_-]*' /tmp/bing.html | sort -u | head -60 || true
+      - name: Newest pages, homepage H1 and asset caching
+        run: |
+          curl -s https://realai.co.il/sitemaps/blog.xml | grep -o '<loc>[^<]*' | sed 's/<loc>//' | head -6 > /tmp/new.txt
+          for u in $(cat /tmp/new.txt) https://realai.co.il/workshops https://realai.co.il/companies; do
+            curl -s -o /tmp/b -w "%{http_code} $u " -A 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' "$u"
+            echo "related=$(grep -c 'read-next-title' /tmp/b) guides=$(grep -c 'guides-title\|by-team-title' /tmp/b) title=$(grep -o '<title>[^<]*' /tmp/b | head -1)"
+          done
+          curl -s https://realai.co.il/ > /tmp/home.html
+          grep -o '<h1[^>]*>.*</h1>' /tmp/home.html | sed 's/<[^>]*>//g' | head -1
+          css=$(grep -o '/_astro/[^"]*\.css' /tmp/home.html | head -1)
+          echo "asset $css"; curl -s -o /dev/null -D - "https://realai.co.il$css" | grep -i '^cache-control' || true
+          curl -s -o /dev/null -D - https://realai.co.il/blog/ai-lesson-plan/lesson-steps.png | grep -i '^cache-control' || true
+          curl -s -o /dev/null -D - https://realai.co.il/blog/ai-lesson-plan | grep -i '^cache-control' || true
