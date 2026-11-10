@@ -77,6 +77,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 69. ~~סדנת AI למוסדות אקדמיים: איך בונים תוכנית לכל המוסד~~ ✅ `/blog/ai-workshop-for-academic-institutions`
 70. ~~השתלמות AI למורים: מה לומדים ואיך בונים השתלמות לצוות~~ ✅ `/blog/ai-training-for-teachers`
 71. ~~סדנת AI למנהלי חוגים ודיקנים: החלטות, מדיניות ותקציב~~ ✅ `/blog/ai-workshop-for-department-heads`
+72. ~~Claude for Education: מה זה ומה מקבל מוסד אקדמי~~ ✅ `/blog/what-is-claude-for-education`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
