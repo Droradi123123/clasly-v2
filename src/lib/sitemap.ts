@@ -11,8 +11,8 @@ const iso = (d: Date) => d.toISOString().slice(0, 10);
 /** Static pages with a hand-maintained lastmod (update when copy changes). */
 const STATIC: { path: string; lastmod: string; priority: number }[] = [
   { path: '/', lastmod: '2026-10-23', priority: 1.0 },
-  { path: '/academia', lastmod: '2026-10-23', priority: 0.9 },
-  { path: '/companies', lastmod: '2026-10-23', priority: 0.9 },
+  { path: '/academia', lastmod: '2026-11-10', priority: 0.9 },
+  { path: '/companies', lastmod: '2026-11-10', priority: 0.9 },
   { path: '/program', lastmod: '2026-10-25', priority: 0.9 },
   { path: '/about', lastmod: '2026-10-23', priority: 0.6 },
   { path: '/team', lastmod: '2026-10-23', priority: 0.5 },

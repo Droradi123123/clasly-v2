@@ -52,6 +52,7 @@ export function websiteSchema() {
     '@id': `${SITE.url}/#website`,
     url: SITE.url,
     name: BRAND_NAME,
+    alternateName: ['Real AI', 'realai.co.il'],
     inLanguage: 'he',
     publisher: { '@id': `${SITE.url}/#organization` },
   };
@@ -113,7 +114,7 @@ export function courseSchema(opts: { name: string; description: string; path: st
   };
 }
 
-export function articleSchema(opts: { title: string; description: string; path: string; publishedAt: string; updatedAt: string; image: string; keywords?: string[]; section?: string; words?: number; minutes?: number; about?: string; audience?: string }) {
+export function articleSchema(opts: { title: string; description: string; path: string; publishedAt: string; updatedAt: string; image: string; keywords?: string[]; section?: string; words?: number; minutes?: number; about?: string; audience?: string; figures?: string[] }) {
   return {
     '@type': 'BlogPosting',
     '@id': `${absolute(opts.path)}#article`,
@@ -121,7 +122,7 @@ export function articleSchema(opts: { title: string; description: string; path: 
     description: opts.description,
     url: absolute(opts.path),
     mainEntityOfPage: absolute(opts.path),
-    image: absolute(opts.image),
+    image: opts.figures?.length ? [absolute(opts.image), ...opts.figures.map(absolute)] : absolute(opts.image),
     datePublished: opts.publishedAt,
     dateModified: opts.updatedAt,
     inLanguage: 'he',

@@ -6,6 +6,7 @@ import FAQ from '@/components/FAQ.astro';
 import CTA from '@/components/CTA.astro';
 import OfferCards from '@/components/OfferCards.astro';
 import RelatedArticles from '@/components/RelatedArticles.astro';
+import GuideLinks from '@/components/GuideLinks.astro';
 import { programsFor } from '@/data/programs';
 import { TOPICS } from '@/config/site';
 import { breadcrumbSchema, faqSchema, serviceSchema, courseSchema } from '@/lib/seo';
@@ -107,9 +108,14 @@ const topics = TOPICS.filter((t) => data.relatedTopics.includes(t.slug));
     </div>
   </section>
 
+  {data.guides && (
+    <GuideLinks title={data.guides.title} intro={data.guides.intro} items={data.guides.items} tinted>
+      <p class="mt-8 text-muted">לפי סוג הארגון: <a class="text-accent underline underline-offset-2" href="/companies">הכשרת AI לארגונים ולחברות</a> · <a class="text-accent underline underline-offset-2" href="/academia">קורסי וסדנאות AI לאוניברסיטאות ולמכללות</a></p>
+    </GuideLinks>
+  )}
   <LogoStrip audience={data.logoAudience} />
   <FAQ items={data.faq} />
-  <RelatedArticles offer={data.path} />
+  <RelatedArticles offer={data.path} exclude={data.guides?.items.map((g) => g.slug ?? '')} limit={3} title="מאמרים חדשים בנושא" moreHref="/blog" />
   <CTA whatsappMessage={data.whatsappMessage} audienceType={data.audienceType} topic={data.focusKeyPhrase} trackLabel={data.slug} title={`רוצים ${CTA_NOUN[data.slug]} לארגון שלכם?`} />
   <OfferCards title="עוד דרכים ללמוד איתנו" exclude={data.slug} />
 </BaseLayout>

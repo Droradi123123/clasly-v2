@@ -18,6 +18,8 @@ export interface OfferPageData {
   serviceType: string;
   schemaAudience: string;
   relatedTopics: string[];
+  /** Curated guides by audience or topic. Each label is a phrase people search for; the card text comes from the linked article. */
+  guides?: { title: string; intro: string; items: { label: string; slug?: string; href?: string; text?: string }[] };
   updatedAt: string; // YYYY-MM-DD, shown on the page and used as sitemap lastmod
 }
 
@@ -58,8 +60,20 @@ export const OFFER_PAGES: OfferPageData[] = [
     audienceType: 'company',
     serviceType: 'AI lecture',
     schemaAudience: 'Companies and academic institutions in Israel',
+    guides: {
+      title: 'הרצאת בינה מלאכותית לפי קהל: עובדים, מנהלים וכנסים',
+      intro: 'לכל קהל יש שאלות אחרות, ולכן הרצאה אחרת. בחרו את המדריך שמתאים לאירוע שלכם.',
+      items: [
+        { label: 'הרצאת בינה מלאכותית לעובדים', slug: 'ai-lecture-for-employees-what-to-include' },
+        { label: 'הרצאת בינה מלאכותית למנהלים ולהנהלה', slug: 'ai-lecture-for-senior-management' },
+        { label: 'הרצאת AI לכנס', slug: 'ai-lecture-for-conferences-mistakes' },
+        { label: 'יום עיון AI לעובדים', slug: 'ai-day-for-employees' },
+        { label: 'איך בוחרים מרצה בינה מלאכותית', slug: 'how-to-choose-an-ai-speaker' },
+        { label: 'AI למנהלים לא טכניים', slug: 'ai-for-non-technical-managers' },
+      ],
+    },
     relatedTopics: ['ai-adoption', 'ai-agents', 'ai-for-managers'],
-    updatedAt: '2026-10-23',
+    updatedAt: '2026-11-10',
   },
   {
     slug: 'workshops',
@@ -98,8 +112,23 @@ export const OFFER_PAGES: OfferPageData[] = [
     audienceType: 'company',
     serviceType: 'AI workshop',
     schemaAudience: 'Teams at companies and academic programs in Israel',
+    guides: {
+      title: 'סדנאות בינה מלאכותית לפי צוות ונושא',
+      intro: 'כל צוות בונה בסדנה משהו אחר. בחרו את המדריך שקרוב לצוות שלכם, וראו מה בונים בו ביום אחד.',
+      items: [
+        { label: 'סדנאות בינה מלאכותית לארגונים: איך בוחרים', slug: 'ai-workshops-for-organizations-guide' },
+        { label: 'סדנת AI למחלקת HR', slug: 'ai-workshop-for-hr-teams' },
+        { label: 'סדנת AI לצוות שיווק', slug: 'ai-workshop-for-marketing-teams' },
+        { label: 'סדנת סוכני AI לארגונים', slug: 'ai-agents-workshop-for-organizations' },
+        { label: 'סדנת n8n לצוותים', slug: 'n8n-workshop-for-teams' },
+        { label: 'סדנת Claude Code', slug: 'claude-code-workshop-what-to-expect' },
+        { label: 'סדנת פרומפטים לארגון', slug: 'prompt-workshop-for-organizations' },
+        { label: 'סדנת AI לסגל אקדמי', slug: 'ai-workshop-for-faculty-and-teachers' },
+        { label: 'סדנת AI למוסדות אקדמיים', slug: 'ai-workshop-for-academic-institutions' },
+      ],
+    },
     relatedTopics: ['claude-code', 'n8n', 'ai-agents'],
-    updatedAt: '2026-10-23',
+    updatedAt: '2026-11-10',
   },
   {
     slug: 'courses',
@@ -138,8 +167,20 @@ export const OFFER_PAGES: OfferPageData[] = [
     audienceType: 'academia',
     serviceType: 'AI course',
     schemaAudience: 'Universities, colleges and companies in Israel',
+    guides: {
+      title: 'קורסי בינה מלאכותית לפי קהל',
+      intro: 'קורס לעובדים, קורס לסגל אקדמי ובוטקמפ לצוות טכני בנויים אחרת. בחרו את המדריך שמתאים לקהל שלכם.',
+      items: [
+        { label: 'קורס AI לעובדים: סילבוס לדוגמה', slug: 'ai-course-for-employees-sample-syllabus' },
+        { label: 'קורס בינה מלאכותית לסגל אקדמי', slug: 'ai-course-for-faculty' },
+        { label: 'קורס AI לאוניברסיטאות ולמכללות', slug: 'ai-course-for-universities-and-colleges' },
+        { label: 'קורס AI לאקדמיה: סילבוס, מטלות ומחוון', slug: 'ai-course-for-academia-what-is-different' },
+        { label: 'בוטקמפ סוכני AI', slug: 'ai-agents-bootcamp-who-is-it-for' },
+        { label: 'קורס AI לתוכניות יזמות', slug: 'ai-for-entrepreneurship-programs' },
+      ],
+    },
     relatedTopics: ['ai-agents', 'building-with-ai', 'claude-code'],
-    updatedAt: '2026-10-23',
+    updatedAt: '2026-11-10',
   },
   {
     slug: 'executive',
@@ -177,8 +218,20 @@ export const OFFER_PAGES: OfferPageData[] = [
     audienceType: 'executive',
     serviceType: 'Executive AI coaching',
     schemaAudience: 'Executives and managers in Israel',
+    guides: {
+      title: 'מדריכים למנהלים שמובילים AI בארגון',
+      intro: 'הכלים שעובדים איתם בליווי: אסטרטגיה בעמוד אחד, תוכנית ל-90 יום, מדידה והצגה לדירקטוריון.',
+      items: [
+        { label: 'איך נראה ליווי AI למנהלים', slug: 'executive-ai-coaching-what-happens' },
+        { label: 'תבנית אסטרטגיית AI בעמוד אחד', slug: 'ai-strategy-one-page-template' },
+        { label: 'תוכנית הטמעת AI ל-90 יום', slug: 'ai-adoption-90-day-plan' },
+        { label: 'מדידת ROI של AI', slug: 'how-to-measure-ai-roi' },
+        { label: 'הצגת תוכנית AI לדירקטוריון', slug: 'presenting-ai-plan-to-the-board' },
+        { label: 'האם צריך מנהל AI בארגון?', slug: 'do-you-need-a-head-of-ai' },
+      ],
+    },
     relatedTopics: ['ai-for-managers', 'ai-roi', 'ai-adoption'],
-    updatedAt: '2026-10-23',
+    updatedAt: '2026-11-10',
   },
 ];
 

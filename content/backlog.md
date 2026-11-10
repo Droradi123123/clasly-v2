@@ -80,6 +80,8 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 72. ~~Claude for Education: מה זה ומה מקבל מוסד אקדמי~~ ✅ `/blog/what-is-claude-for-education`
 73. ~~מצב למידה ב-Claude: ללמוד עם AI בלי לקבל תשובות מוכנות~~ ✅ `/blog/claude-learning-mode`
 74. ~~מערך שיעור עם AI: מדריך למורים צעד אחרי צעד~~ ✅ `/blog/ai-lesson-plan`
+75. ~~סדנאות בינה מלאכותית לארגונים: 7 סוגים ואיך בוחרים~~ ✅ `/blog/ai-workshops-for-organizations-guide`
+76. ~~קורס AI לאוניברסיטאות ולמכללות: מה סטודנטים לומדים ובונים~~ ✅ `/blog/ai-course-for-universities-and-colleges`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ

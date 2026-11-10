@@ -35,7 +35,8 @@ The daily article run and the weekly review both read this file. Content items t
 | סדנת ai לעובדי אוניברסיטה (35, 25.6); סדנת ai לסגל מנהלי באוניברסיטה (26, 16); קורס ai לעובדי אוניברסיטה (26, 52.7) | `/blog/ai-workshop-for-university-staff` | top 3 |
 | סדנת ai למוסדות אקדמיים (56, 19.2); סדנת ai לאוניברסיטאות (73, 31.3); סדנת בינה מלאכותית לאוניברסיטאות (53, 50.1); סדנת ai למכללות (35, 19.6) | `/blog/ai-workshop-for-academic-institutions` | top 3 |
 | סדנת ai למנהלי חוגים (25, 92.2); סדנת ai לדיקנים (5, 89.2) on 2026-11-09 | `/blog/ai-workshop-for-department-heads` (2026-11-09) | top 10, then top 3 |
-| קורס ai לאוניברסיטאות (18, 50.7); קורס ai למכללות (22, 71.4); קורס בינה מלאכותית למוסדות אקדמיים (21, 87.1); קורס בינה מלאכותית לאקדמיה | `/academia` | top 5, then top 3 with backlinks |
+| קורס ai לאוניברסיטאות (28, 51.1); קורס ai למכללות (27, 72.3); קורס בינה מלאכותית לאוניברסיטאות (25, 54.6); קורס בינה מלאכותית למוסדות אקדמיים (28, 85) on 2026-11-10 | `/blog/ai-course-for-universities-and-colleges` (2026-11-10). These queries sat on `/academia` at positions 51 to 85 while articles in the cluster rank 13 to 30, so they moved to an article that links to `/academia`. | top 10, then top 3 |
+| קורס בינה מלאכותית לאקדמיה | `/academia` | top 5, then top 3 with backlinks |
 | בינה מלאכותית בחינוך; AI בחינוך; בינה מלאכותית באקדמיה | `/topics/ai-in-education` | top 10 within 3 months |
 | AI למורים | `/ai-for/teachers` | top 10 |
 | השתלמות AI למורים; השתלמות בינה מלאכותית למורים; סדנת AI למורים | `/blog/ai-training-for-teachers` (2026-11-08) | top 10, then top 3 |
