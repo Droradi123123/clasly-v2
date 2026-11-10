@@ -9,7 +9,7 @@ import FAQ from '@/components/FAQ.astro';
 import CTA from '@/components/CTA.astro';
 import PromptCards from '@/components/PromptCards.astro';
 import { getCollection, render } from 'astro:content';
-import { TOPICS, OFFERS, whatsappUrl } from '@/config/site';
+import { TOPICS, OFFERS, whatsappUrl, offerAnchor } from '@/config/site';
 import { breadcrumbSchema, faqSchema, articleSchema, ogPathFor } from '@/lib/seo';
 
 export async function getStaticPaths() {
@@ -59,7 +59,7 @@ const schema = [
           <p class="eyebrow">{offer.name} ל{d.profession}</p>
           <p class="mt-2 text-sm text-muted">{offer.value}</p>
           <a href={whatsappUrl(`שלום, קראתי את "AI ל${d.profession}" ואשמח לשמוע על ${offer.name} לצוות שלנו.`)} target="_blank" rel="noopener" class="btn btn-primary mt-4 w-full" data-track="whatsapp_click" data-track-label={`ai-for:${d.slug}`}>דברו איתנו בוואטסאפ</a>
-          <a href={d.relatedOffer} class="mt-2 block text-center text-sm text-accent underline underline-offset-2">על {offer.name}</a>
+          <a href={d.relatedOffer} class="mt-2 block text-center text-sm text-accent underline underline-offset-2">{offerAnchor(d.relatedOffer, d.slug)}</a>
         </div>
         <div class="card p-5 text-sm">
           <p class="font-bold">AI למקצועות נוספים</p>

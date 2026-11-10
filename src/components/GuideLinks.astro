@@ -1,0 +1,28 @@
+---
+/**
+ * Curated guide links for a money page: each card's heading is a phrase people search for,
+ * and the text is the linked article's own description, so nothing is written twice.
+ */
+import { getCollection } from 'astro:content';
+export interface GuideItem { label: string; slug?: string; href?: string; text?: string }
+interface Props { title: string; intro?: string; items: GuideItem[]; id?: string; tinted?: boolean }
+const { title, intro, items, id = 'guides-title', tinted = false } = Astro.props;
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+const cards = items.map((it) => {
+  const post = it.slug ? posts.find((p) => p.data.slug === it.slug) : undefined;
+  if (it.slug && !post) throw new Error(`GuideLinks: no article with slug "${it.slug}"`);
+  return { label: it.label, href: post ? `/blog/${post.data.slug}` : it.href!, text: it.text ?? post?.data.description ?? '' };
+});
+---
+<section class={`py-14 ${tinted ? 'bg-elev/40' : ''}`} aria-labelledby={id}>
+  <div class="container-x">
+    <h2 id={id} class="h2 max-w-3xl">{title}</h2>
+    {intro && <p class="lead mt-3 max-w-3xl">{intro}</p>}
+    <ul class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3" role="list">
+      {cards.map((c) => (
+        <li><a href={c.href} class="card block h-full p-6 transition hover:border-accent"><h3 class="h3">{c.label}</h3><p class="mt-2 text-sm text-muted">{c.text}</p><span class="mt-4 block font-bold text-accent">למדריך ←</span></a></li>
+      ))}
+    </ul>
+    <slot />
+  </div>
+</section>

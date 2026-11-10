@@ -89,3 +89,28 @@ Each article owns one long-tail phrase. `npm run content:check` fails when an ar
   - Share every article on LinkedIn with a link back.
   - Pitch the adoption pillar and "how this site was built" to Israeli tech and HR publications.
 - **Reviews:** collect real testimonials and case studies. Add Review schema only for genuine, verifiable reviews.
+
+## 7. Audit of 2026-11-10 (three weeks after launch)
+
+**What was checked:** all 134 built pages (titles, canonicals, headings, structured data, internal links), the live site as crawlers see it (the "SEO live check" workflow), Search Console and Analytics data in D1, and Lighthouse on mobile.
+
+**What is healthy:**
+- Indexing: about 104 of 133 URLs already get impressions on Google, and Bing lists about 87 pages.
+- Crawlers: Googlebot, Bingbot and the AI answer-engine crawlers (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot and others) all get 200 responses. `robots.txt` is served as written.
+- Redirects: http and www redirect to https://realai.co.il with a 301.
+- Speed: brotli, a TTFB under 0.1s, and Lighthouse SEO 100 with performance 85 to 98 on mobile.
+- No duplicate titles or descriptions, one H1 per page, valid JSON-LD on every page.
+
+**What was holding rankings back, and what changed:**
+1. **Generic anchor text to money pages.** About 250 internal links said "על סדנאות" or "לסדנאות שלנו". They now use search phrases, varied by page (`offerAnchor` in `src/config/site.ts`, and the rule in `content/STYLE.md`).
+2. **Related articles pointed at the same four posts per hub.** Some articles had 2 internal links. `src/lib/related.ts` now picks by relevance and spreads links: every article has at least 7, the median is 11.
+3. **`/companies` had 3 internal links and `/academia` had 14 with the text "עמוד האקדמיה".** Every article now links to one of them with a search phrase, and course pages and the ROI calculator get a link from their hubs.
+4. **Money pages did not name the audiences people search for.** `/lectures`, `/workshops`, `/courses`, `/executive` and `/companies` have a guides section whose headings are the queries (for example "הרצאת בינה מלאכותית לעובדים"), each linking to its article (`guides` in `src/data/offers.ts`, `GuideLinks.astro`).
+5. **Queries say "בינה מלאכותית", titles said "AI".** Two lecture articles were retargeted to the exact queries. New articles and anchors alternate between the two forms.
+6. **Articles outrank money pages at this domain age.** For the same kind of query, articles sit at positions 13 to 30 and money pages at 50 to 85. Queries that sat on a money page far down the results now get a guide article that links to the money page: workshops for organizations, and courses for universities and colleges.
+7. **Small fixes:** the homepage H1 words ran together ("AIממובילי"), hashed assets had no long cache, article figures are now listed in the BlogPosting schema, and the WebSite schema names the brand variants.
+
+**What on-site work cannot fix:** head commercial queries ("סדנת AI לארגונים", "הרצאת AI לארגונים") sit at positions 67 to 80 with an exact-match page behind them. That gap is authority: links from other sites, a Google Business Profile, and brand searches. The owner tasks are in `content/education-plan.md` section 6.
+
+**Known and left as is:** trailing-slash and `.html` URLs redirect with a 307 (Cloudflare static assets default). The canonical tag covers it.
+

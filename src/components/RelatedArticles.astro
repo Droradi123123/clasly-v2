@@ -2,12 +2,12 @@
 /** Internal-linking block: articles that support a money page or audience page. */
 import { getCollection } from 'astro:content';
 import ArticleCover from './ArticleCover.astro';
-interface Props { offer?: string; slugs?: string[]; title?: string; limit?: number; moreHref?: string; moreLabel?: string }
-const { offer, slugs, title = 'מדריכים שיעזרו לכם להחליט', limit = 6, moreHref, moreLabel = 'לכל המאמרים' } = Astro.props;
+interface Props { offer?: string; slugs?: string[]; exclude?: string[]; title?: string; limit?: number; moreHref?: string; moreLabel?: string }
+const { offer, slugs, exclude = [], title = 'מדריכים שיעזרו לכם להחליט', limit = 6, moreHref, moreLabel = 'לכל המאמרים' } = Astro.props;
 const all = await getCollection('blog', ({ data }) => !data.draft);
 const picked = slugs
   ? slugs.map((s) => all.find((p) => p.data.slug === s)).filter((p): p is NonNullable<typeof p> => Boolean(p))
-  : all.filter((p) => p.data.relatedOffer === offer).sort((a, b) => b.data.updatedAt.getTime() - a.data.updatedAt.getTime());
+  : all.filter((p) => p.data.relatedOffer === offer && !exclude.includes(p.data.slug)).sort((a, b) => b.data.updatedAt.getTime() - a.data.updatedAt.getTime());
 const posts = picked.slice(0, limit);
 ---
 {posts.length > 0 && (

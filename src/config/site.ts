@@ -150,6 +150,7 @@ export const OFFERS = [
     slug: 'lectures',
     href: '/lectures',
     name: 'הרצאות',
+    anchors: ['הרצאה על בינה מלאכותית לארגונים', 'הרצאת AI לחברות ולכנסים', 'הרצאות בינה מלאכותית לעובדים ולמנהלים'],
     value: 'הרצאה אחת שמשנה איך הצוות חושב על AI, עם דוגמאות חיות מפרודקשן.',
     audience: 'כנסים, ימי עיון, הנהלות וצוותים',
     audienceType: 'company',
@@ -158,6 +159,7 @@ export const OFFERS = [
     slug: 'workshops',
     href: '/workshops',
     name: 'סדנאות',
+    anchors: ['סדנת AI לארגונים', 'סדנת בינה מלאכותית מעשית לצוותים', 'סדנאות AI לארגונים'],
     value: 'יום בנייה מעשי: יוצאים עם אוטומציה או סוכן שעובד, לא עם מצגת.',
     audience: 'צוותי פיתוח, מוצר, תפעול ומחלקות שלמות',
     audienceType: 'company',
@@ -166,6 +168,7 @@ export const OFFERS = [
     slug: 'courses',
     href: '/courses',
     name: 'קורסים והכשרות',
+    anchors: ['קורס AI לעובדים', 'קורס בינה מלאכותית לארגונים', 'קורסי AI לצוותים ולאקדמיה'],
     value: 'מסלול של כמה מפגשים שבונה יכולת AI אמיתית בארגון או בתוכנית אקדמית.',
     audience: 'אוניברסיטאות, מכללות וחברות שמכשירות קבוצות',
     audienceType: 'academia',
@@ -174,6 +177,7 @@ export const OFFERS = [
     slug: 'executive',
     href: '/executive',
     name: 'ליווי אישי למנהלים',
+    anchors: ['ליווי AI למנהלים', 'ליווי אישי ב-AI למנהלים', 'אסטרטגיית AI לארגון, בליווי אישי'],
     value: 'אסטרטגיית AI יישומית למנהל או למנהלת: מה לעשות ברבעון הקרוב, ואיך.',
     audience: 'מנכ"לים, סמנכ"לים, ראשי מחלקות',
     audienceType: 'executive',
@@ -192,6 +196,18 @@ export const TOPICS = [
   { slug: 'ai-in-education', name: 'AI בחינוך ובאקדמיה', keyPhrase: 'בינה מלאכותית בחינוך', full: false },
 ] as const;
 export type TopicSlug = (typeof TOPICS)[number]['slug'];
+
+/**
+ * Link text for an offer page: a search phrase instead of a generic "על סדנאות".
+ * The variant is picked from the linking page's slug, so anchors vary across the site but stay stable per page.
+ */
+export function offerAnchor(href: string, seed: string): string {
+  const offer = OFFERS.find((o) => o.href === href);
+  if (!offer) return '';
+  let h = 0;
+  for (const c of seed) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  return offer.anchors[h % offer.anchors.length];
+}
 
 /** Build a WhatsApp click-to-chat URL with a pre-filled Hebrew message. */
 export function whatsappUrl(message: string): string {

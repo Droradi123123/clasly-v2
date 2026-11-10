@@ -8,7 +8,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import FAQ from '@/components/FAQ.astro';
 import CTA from '@/components/CTA.astro';
 import { getCollection, render } from 'astro:content';
-import { TOPICS, OFFERS, whatsappUrl } from '@/config/site';
+import { TOPICS, OFFERS, whatsappUrl, offerAnchor } from '@/config/site';
 import { GLOSSARY } from '@/data/glossary';
 import { breadcrumbSchema, faqSchema, articleSchema, ogPathFor, absolute } from '@/lib/seo';
 
@@ -68,7 +68,7 @@ const schema = [
           <p class="eyebrow">רוצים שהצוות ילמד את זה?</p>
           <p class="mt-2 text-sm text-muted">{offer.value}</p>
           <a href={whatsappUrl(`שלום, קראתי על ${d.term} ואשמח לשמוע על ${offer.name} לצוות שלנו.`)} target="_blank" rel="noopener" class="btn btn-primary mt-4 w-full" data-track="whatsapp_click" data-track-label={`term:${d.slug}`}>דברו איתנו בוואטסאפ</a>
-          <a href={d.relatedOffer} class="mt-2 block text-center text-sm text-accent underline underline-offset-2">על {offer.name}</a>
+          <a href={d.relatedOffer} class="mt-2 block text-center text-sm text-accent underline underline-offset-2">{offerAnchor(d.relatedOffer, d.slug)}</a>
         </div>
         <div class="card p-5 text-sm">
           <p class="font-bold">מונחים קשורים</p>

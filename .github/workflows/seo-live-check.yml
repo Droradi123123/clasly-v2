@@ -26,3 +26,40 @@ jobs:
           done
       - name: Fetch as a normal browser
         run: curl -s -o /dev/null -w 'browser %{http_code} %{url_effective}\n' -L -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0 Safari/537.36' https://realai.co.il/
+      - name: AI and search crawlers (status, bytes, blocks)
+        run: |
+          for ua in 'GPTBot/1.2' 'OAI-SearchBot/1.0' 'ChatGPT-User/1.0' 'ClaudeBot/1.0' 'Claude-SearchBot/1.0' 'Claude-User/1.0' 'PerplexityBot/1.0' 'Perplexity-User/1.0' 'Google-Extended' 'bingbot/2.0' 'Applebot/0.1' 'CCBot/2.0' 'Bytespider' 'meta-externalagent/1.1' 'Amazonbot/0.1'; do
+            for u in https://realai.co.il/ https://realai.co.il/blog/what-is-claude https://realai.co.il/llms.txt; do
+              curl -s -o /tmp/b -D /tmp/h -A "Mozilla/5.0 (compatible; $ua)" --max-time 20 "$u"
+              printf '%-22s %-45s %s bytes=%s mitigated=%s\n' "$ua" "$u" "$(head -1 /tmp/h | tr -d '\r')" "$(wc -c < /tmp/b)" "$(grep -i '^cf-mitigated' /tmp/h | tr -d '\r' || true)"
+            done
+          done
+      - name: robots.txt as served
+        run: curl -s https://realai.co.il/robots.txt | head -80
+      - name: URL forms (trailing slash, .html, http, www, case, 404)
+        run: |
+          for u in http://realai.co.il/blog/what-is-claude https://realai.co.il/blog/what-is-claude/ https://realai.co.il/blog/what-is-claude.html https://realai.co.il/blog/ https://realai.co.il/blog https://realai.co.il/Blog https://www.realai.co.il/blog http://www.realai.co.il/ https://realai.co.il/index.html https://realai.co.il/this-page-does-not-exist https://realai.co.il/blog/nope https://realai.co.il/topics/ai-in-education https://realai.co.il/4ef9fbb594cfbcbfcdebc3a32bd23749.txt https://realai.co.il/llms-full.txt https://realai.co.il/rss.xml https://realai.co.il/og/blog-what-is-claude.png https://realai.co.il/blog/ai-lesson-plan/lesson-steps.png; do
+            echo "=== $u"
+            curl -s -o /tmp/b -D - -A 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' --max-time 20 "$u" | grep -iE '^(HTTP|location|content-type|content-length|content-encoding|cache-control|x-robots-tag|age|cf-cache-status|link|etag|last-modified|strict-transport)' || true
+            echo "bytes=$(wc -c < /tmp/b)"
+          done
+      - name: Compression and timing
+        run: |
+          for u in https://realai.co.il/ https://realai.co.il/blog https://realai.co.il/blog/what-is-claude https://realai.co.il/academia; do
+            curl -s -o /dev/null -H 'accept-encoding: br, gzip' -A 'Mozilla/5.0 Chrome/130' -w "%{url_effective} code=%{http_code} ttfb=%{time_starttransfer}s total=%{time_total}s size=%{size_download}\n" "$u"
+            curl -s -o /dev/null -D - -H 'accept-encoding: br, gzip' -A 'Mozilla/5.0 Chrome/130' "$u" | grep -iE '^(content-encoding|cache-control|cf-cache-status)' || true
+          done
+      - name: Sitemap counts and lastmod
+        run: |
+          for s in pages topics blog; do
+            curl -s https://realai.co.il/sitemaps/$s.xml > /tmp/s.xml
+            echo "$s urls=$(grep -o '<loc>' /tmp/s.xml | wc -l) lastmod=$(grep -o '<lastmod>' /tmp/s.xml | wc -l) newest=$(grep -o '<lastmod>[^<]*' /tmp/s.xml | sort | tail -1)"
+          done
+          curl -s https://realai.co.il/sitemap-index.xml | head -20
+      - name: Bing index and IndexNow key
+        run: |
+          curl -s -o /dev/null -w 'indexnow key %{http_code}\n' https://realai.co.il/4ef9fbb594cfbcbfcdebc3a32bd23749.txt
+          curl -s -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130.0 Safari/537.36' 'https://www.bing.com/search?q=site%3Arealai.co.il&count=50' > /tmp/bing.html || true
+          echo "bing bytes=$(wc -c < /tmp/bing.html)"
+          grep -oE 'class="sb_count"[^<]*<?[^<]*|[0-9,]+ results' /tmp/bing.html | head -3 || true
+          grep -oE 'https://realai\.co\.il/[a-z0-9/_-]*' /tmp/bing.html | sort -u | head -60 || true

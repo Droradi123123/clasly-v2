@@ -3,7 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import FAQ from '@/components/FAQ.astro';
 import CTA from '@/components/CTA.astro';
-import RelatedArticles from '@/components/RelatedArticles.astro';
+import GuideLinks from '@/components/GuideLinks.astro';
 import ProofBlocks from '@/components/ProofBlocks.astro';
 import { breadcrumbSchema, faqSchema, serviceSchema } from '@/lib/seo';
 const path = '/companies';
@@ -33,7 +33,7 @@ const paths = [
       <Breadcrumbs items={crumbs} />
       <h1 class="h1 mt-6 max-w-4xl">הכשרת AI לארגונים שרוצים תוצאות, לא מצגות</h1>
       <p class="lead mt-5 max-w-3xl">הרצאות, סדנאות וקורסי AI לחברות ולצוותים, מאנשים שבנו אסטרטגיית AI, סוכנים ואוטומציות בפרודקשן. כל מפגש מסתיים במשהו שעובד ובמספר שאפשר להציג.</p>
-      <div class="mt-8 flex flex-wrap gap-3"><a href="/program" class="btn btn-primary" data-track="cta_click" data-track-label="companies">בואו נבנה לכם תוכנית</a><a href="/workshops" class="btn btn-ghost">לסדנאות</a></div>
+      <div class="mt-8 flex flex-wrap gap-3"><a href="/program" class="btn btn-primary" data-track="cta_click" data-track-label="companies">בואו נבנה לכם תוכנית</a><a href="/workshops" class="btn btn-ghost">סדנת AI לארגונים</a></div>
     </div>
   </section>
   <section class="py-14"><div class="container-x">
@@ -42,6 +42,20 @@ const paths = [
       {paths.map((p) => <a href={p.href} class="card reveal flex items-start justify-between gap-4 p-6 hover:border-accent"><div><p class="text-sm text-muted">{p.who}</p><p class="mt-1 text-lg font-bold">{p.what}</p></div><span class="text-accent">←</span></a>)}
     </div>
   </div></section>
+
+  <GuideLinks id="by-team-title" tinted title="הדרכת בינה מלאכותית לעובדים, לפי מחלקה" intro="כל מחלקה מתחילה ממשימה אחרת. אלה המדריכים שלנו לפי צוות, עם מה שלומדים ומה שבונים בכל אחד." items={[
+    { label: 'קורס AI לעובדים: סילבוס לדוגמה', slug: 'ai-course-for-employees-sample-syllabus' },
+    { label: 'הרצאת בינה מלאכותית לעובדים', slug: 'ai-lecture-for-employees-what-to-include' },
+    { label: 'סדנת AI למחלקת HR', slug: 'ai-workshop-for-hr-teams' },
+    { label: 'סדנת AI לצוות שיווק', slug: 'ai-workshop-for-marketing-teams' },
+    { label: 'הכשרת AI לצוות שירות לקוחות', slug: 'ai-training-for-customer-service-teams' },
+    { label: 'אבטחת מידע ו-AI בארגון', slug: 'ai-security-rules-for-organizations' },
+    { label: 'למה עובדים לא משתמשים בכלי AI', slug: 'why-employees-dont-use-ai-tools' },
+    { label: 'תוכנית הטמעת AI ל-90 יום', slug: 'ai-adoption-90-day-plan' },
+    { label: 'סדנאות בינה מלאכותית לארגונים: איך בוחרים', slug: 'ai-workshops-for-organizations-guide' },
+  ]}>
+    <p class="mt-8 text-muted">לפי סוג ההכשרה: <a class="text-accent underline underline-offset-2" href="/lectures">הרצאה על בינה מלאכותית</a> · <a class="text-accent underline underline-offset-2" href="/workshops">סדנת AI לארגונים</a> · <a class="text-accent underline underline-offset-2" href="/courses">קורס AI לעובדים</a> · <a class="text-accent underline underline-offset-2" href="/executive">ליווי AI למנהלים</a></p>
+  </GuideLinks>
 
   <section class="border-t border-line py-20 md:py-24" aria-labelledby="beyond-title">
     <div class="container-x">
@@ -61,6 +75,5 @@ const paths = [
   <ProofBlocks />
   <!-- Testimonials for companies: hidden until genuine quotes are collected (TODO.md). -->
   <FAQ items={faq} />
-  <RelatedArticles slugs={['ai-course-for-employees-sample-syllabus', 'measuring-ai-training-success', 'ai-lecture-for-employees-what-to-include', 'why-employees-dont-use-ai-tools', 'ai-workshop-for-hr-teams', 'ai-adoption-90-day-plan']} />
   <CTA whatsappMessage="שלום, אני מחברה ואשמח לשמוע על הכשרת AI לצוות שלנו." audienceType="company" topic="חברות" trackLabel="companies" title="בואו נבנה תוכנית AI לצוות שלכם" />
 </BaseLayout>
