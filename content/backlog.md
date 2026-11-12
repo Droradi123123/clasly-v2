@@ -83,6 +83,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 75. ~~סדנאות בינה מלאכותית לארגונים: 7 סוגים ואיך בוחרים~~ ✅ `/blog/ai-workshops-for-organizations-guide`
 76. ~~קורס AI לאוניברסיטאות ולמכללות: מה סטודנטים לומדים ובונים~~ ✅ `/blog/ai-course-for-universities-and-colleges`
 77. ~~AI לגיוס עובדים: מה מגייסים עושים איתו, ומה נשאר החלטה שלהם~~ ✅ `/blog/ai-for-recruiting`
+78. ~~אוטומציה לניהול לידים עם n8n, GPT ו-CRM: מדריך מקצה לקצה~~ ✅ `/blog/n8n-lead-management-automation`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
