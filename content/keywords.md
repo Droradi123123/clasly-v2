@@ -96,7 +96,7 @@ The academia cluster brings most of the demand (991 of 1,587 impressions). Almos
 11. ~~קורס AI לאוניברסיטאות ולמכללות~~ ✅ `/blog/ai-course-for-universities-and-colleges` (four queries, 108 impressions, positions 51 to 85 on `/academia` on 2026-11-10).
 12. ~~AI לגיוס עובדים ולמגייסים~~ ✅ `/blog/ai-for-recruiting` ("סדנת גיוס בבינה מלאכותית" 24 impressions, position 94; "כלי ai לגיוס עובדים" 23, 78.3; "קורס גיוס בבינה מלאכותית" 18, 66.1; "הדרכת בינה מלאכותית למגייסים" 13, 66.3 on 2026-11-11).
 13. קורס בינה מלאכותית למנהלים: "קורס בינה מלאכותית למנהלים" (14, 75.4), "הדרכת בינה מלאכותית למנהלים" (17, 97.3) on 2026-11-10. Lands on `/courses` and `/topics/ai-for-managers`. Write a focused article and link to `/executive`.
-14. קורס בינה מלאכותית לארגונים: "קורס ai לארגונים" (39, 68.4) on 2026-11-10, on `/courses`. Write a buying guide like item 10 ("קורס בינה מלאכותית לארגונים: סוגים ואיך בוחרים"), linking to `/courses` and to each course article.
+14. ~~קורס בינה מלאכותית לארגונים: סוגים ואיך בוחרים~~ ✅ `/blog/ai-courses-for-organizations-guide` ("קורס ai לארגונים" 45 impressions, position 68.9 on `/workshops` on 2026-11-13). A buying guide that links to `/courses` and to each course page.
 
 ## E. Education cluster queue (plan: `content/education-plan.md`)
 The daily article run takes the first open item here once section D has nothing open that the data supports. Each article links to `/topics/ai-in-education`, to `/academia` or `/workshops`, and to at least two cluster articles. Add a link to it from at least one existing cluster page. Teacher and school articles are informational: `src/data/offers.ts` has no schools offer, so never claim school clients or a schools program.
