@@ -171,12 +171,12 @@ export const OFFER_PAGES: OfferPageData[] = [
       title: 'קורסי בינה מלאכותית לפי קהל',
       intro: 'קורס לעובדים, קורס לסגל אקדמי ובוטקמפ לצוות טכני בנויים אחרת. בחרו את המדריך שמתאים לקהל שלכם.',
       items: [
+        { label: 'קורס בינה מלאכותית לארגונים: איך בוחרים', slug: 'ai-courses-for-organizations-guide' },
         { label: 'קורס AI לעובדים: סילבוס לדוגמה', slug: 'ai-course-for-employees-sample-syllabus' },
         { label: 'קורס בינה מלאכותית לסגל אקדמי', slug: 'ai-course-for-faculty' },
         { label: 'קורס AI לאוניברסיטאות ולמכללות', slug: 'ai-course-for-universities-and-colleges' },
         { label: 'קורס AI לאקדמיה: סילבוס, מטלות ומחוון', slug: 'ai-course-for-academia-what-is-different' },
         { label: 'בוטקמפ סוכני AI', slug: 'ai-agents-bootcamp-who-is-it-for' },
-        { label: 'קורס AI לתוכניות יזמות', slug: 'ai-for-entrepreneurship-programs' },
       ],
     },
     relatedTopics: ['ai-agents', 'building-with-ai', 'claude-code'],
