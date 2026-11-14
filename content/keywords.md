@@ -95,7 +95,7 @@ The academia cluster brings most of the demand (991 of 1,587 impressions). Almos
 10. ~~סדנאות בינה מלאכותית לארגונים: סוגים ואיך בוחרים~~ ✅ `/blog/ai-workshops-for-organizations-guide` ("סדנאות בינה מלאכותית לארגונים" 37 impressions, position 80.9; "סדנת ai לארגונים" 36, 67.3 on 2026-11-10). A buying guide, not the offer page: it links to `/workshops` and to every workshop article.
 11. ~~קורס AI לאוניברסיטאות ולמכללות~~ ✅ `/blog/ai-course-for-universities-and-colleges` (four queries, 108 impressions, positions 51 to 85 on `/academia` on 2026-11-10).
 12. ~~AI לגיוס עובדים ולמגייסים~~ ✅ `/blog/ai-for-recruiting` ("סדנת גיוס בבינה מלאכותית" 24 impressions, position 94; "כלי ai לגיוס עובדים" 23, 78.3; "קורס גיוס בבינה מלאכותית" 18, 66.1; "הדרכת בינה מלאכותית למגייסים" 13, 66.3 on 2026-11-11).
-13. קורס בינה מלאכותית למנהלים: "קורס בינה מלאכותית למנהלים" (14, 75.4), "הדרכת בינה מלאכותית למנהלים" (17, 97.3) on 2026-11-10. Lands on `/courses` and `/topics/ai-for-managers`. Write a focused article and link to `/executive`.
+13. ~~קורס בינה מלאכותית למנהלים~~ ✅ `/blog/ai-course-for-managers` ("הדרכת בינה מלאכותית למנהלים" 18 impressions, position 39; "קורס בינה מלאכותית למנהלים" 16, 75.9; "הכשרת מנהלים בבינה מלאכותית" 4, 77.5; "קורס ai למנהלים" 3, 70 on 2026-11-14).
 14. ~~קורס בינה מלאכותית לארגונים: סוגים ואיך בוחרים~~ ✅ `/blog/ai-courses-for-organizations-guide` ("קורס ai לארגונים" 45 impressions, position 68.9 on `/workshops` on 2026-11-13). A buying guide that links to `/courses` and to each course page.
 
 ## E. Education cluster queue (plan: `content/education-plan.md`)
