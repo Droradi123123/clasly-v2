@@ -86,6 +86,8 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 78. ~~אוטומציה לניהול לידים עם n8n, GPT ו-CRM: מדריך מקצה לקצה~~ ✅ `/blog/n8n-lead-management-automation`
 79. ~~קורס בינה מלאכותית לארגונים: 5 סוגים ואיך בוחרים~~ ✅ `/blog/ai-courses-for-organizations-guide`
 80. ~~קורס בינה מלאכותית למנהלים: מה לומדים ואיך בוחרים~~ ✅ `/blog/ai-course-for-managers`
+81. ~~מדיניות AI למוסד אקדמי: מה כותבים ואיך מיישמים~~ ✅ `/blog/ai-policy-for-universities`
+82. ~~פרטיות תלמידים ו-AI: מה מותר להעלות ואיך שומרים על המידע~~ ✅ `/blog/student-privacy-and-ai`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
