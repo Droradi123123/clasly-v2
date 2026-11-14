@@ -85,6 +85,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 77. ~~AI לגיוס עובדים: מה מגייסים עושים איתו, ומה נשאר החלטה שלהם~~ ✅ `/blog/ai-for-recruiting`
 78. ~~אוטומציה לניהול לידים עם n8n, GPT ו-CRM: מדריך מקצה לקצה~~ ✅ `/blog/n8n-lead-management-automation`
 79. ~~קורס בינה מלאכותית לארגונים: 5 סוגים ואיך בוחרים~~ ✅ `/blog/ai-courses-for-organizations-guide`
+80. ~~קורס בינה מלאכותית למנהלים: מה לומדים ואיך בוחרים~~ ✅ `/blog/ai-course-for-managers`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
