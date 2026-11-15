@@ -64,9 +64,9 @@ Each one gets an article that links to its money page, or a landing page. Don't 
 35. ~~קורס Claude Code לארגונים~~ ✅ `/courses/claude-code` (עמוד נחיתה)
 36. ~~קורס סוכני AI~~ ✅ `/courses/ai-agents` (עמוד נחיתה)
 37. ~~יום עיון AI לעובדים~~ ✅ `/blog/ai-day-for-employees`
-38. הרצאת AI לכנס מכירות או לאירוע חברה
+38. ~~הרצאת AI לכנס מכירות או לאירוע חברה~~ ✅ `/blog/ai-lecture-for-sales-conference` (section B fallback on 2026-11-15: every education gap query was already mapped).
 39. ~~סדנת פרומפטים לארגון~~ ✅ `/blog/prompt-workshop-for-organizations`
-40. הכשרת AI למנהלים
+40. ~~הכשרת AI למנהלים~~ ✅ covered by `/blog/ai-course-for-managers` (2026-11-14).
 41. תוכנית AI לתלמידים ולסטודנטים במוסד אקדמי
 
 ## C. Glossary term pages ("מה זה X")

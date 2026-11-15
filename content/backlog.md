@@ -88,6 +88,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 80. ~~קורס בינה מלאכותית למנהלים: מה לומדים ואיך בוחרים~~ ✅ `/blog/ai-course-for-managers`
 81. ~~מדיניות AI למוסד אקדמי: מה כותבים ואיך מיישמים~~ ✅ `/blog/ai-policy-for-universities`
 82. ~~פרטיות תלמידים ו-AI: מה מותר להעלות ואיך שומרים על המידע~~ ✅ `/blog/student-privacy-and-ai`
+83. ~~הרצאת AI לכנס מכירות: מה אנשי מכירות צריכים לראות~~ ✅ `/blog/ai-lecture-for-sales-conference`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
