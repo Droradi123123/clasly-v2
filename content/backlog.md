@@ -89,6 +89,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 81. ~~מדיניות AI למוסד אקדמי: מה כותבים ואיך מיישמים~~ ✅ `/blog/ai-policy-for-universities`
 82. ~~פרטיות תלמידים ו-AI: מה מותר להעלות ואיך שומרים על המידע~~ ✅ `/blog/student-privacy-and-ai`
 83. ~~הרצאת AI לכנס מכירות: מה אנשי מכירות צריכים לראות~~ ✅ `/blog/ai-lecture-for-sales-conference`
+84. ~~אוטומציה לרואי חשבון: קליטת מסמכים ומיילים עם AI ו-n8n~~ ✅ `/blog/accounting-firm-automation`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
