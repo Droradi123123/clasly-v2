@@ -112,3 +112,6 @@ Decisions made where the brief left room, with the reasoning. Newest last.
 - WhatsApp: the reviewer saw a chat open with "Tal". The code uses 054-802-3445, the number you gave. If that is the wrong chat, send the right number and change only `WHATSAPP_NUMBER`.
 - Is the present tense in "לומדים עם RealAI" accurate for every institution shown?
 - Proposed copy not applied (titles and FAQ questions): see "Proposed, not applied" in `copy-audit-pages.md`.
+
+## 2026-11-17: editorial broadsheet redesign
+The owner asked for a site that looks less like a generic AI template. Adapted the WIRED system from nexu-io/open-design and its anti-AI-slop rules: paper-white page, near-black ink, Frank Ruhl Libre (Hebrew newspaper serif) for headlines and Heebo for text, square corners everywhere, 2px black rules, black ribbon kickers instead of pastel pills, black buttons that invert on hover, an inverted footer, and a strict accent budget (blue only for links, the wordmark and one mark per screen). The blue accent stays so the 100+ article figures still match.

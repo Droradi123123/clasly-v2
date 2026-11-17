@@ -4,7 +4,7 @@ import Wordmark from './Wordmark.astro';
 const current = Astro.url.pathname;
 const wa = whatsappUrl('שלום, אשמח לשמוע על הרצאות וסדנאות AI לארגון שלנו.');
 ---
-<header class="sticky top-0 z-40 border-b border-line bg-bg">
+<header class="sticky top-0 z-40 border-b-2 border-ink bg-bg">
   <div class="container-x flex h-16 items-center justify-between gap-4">
     <a href="/" class="text-2xl" aria-label={`${BRAND_NAME}, דף הבית`}>
       <Wordmark />
@@ -19,10 +19,10 @@ const wa = whatsappUrl('שלום, אשמח לשמוע על הרצאות וסדנ
     <div class="flex items-center gap-3">
       <a href={wa} class="btn btn-primary !min-h-10 !px-4 text-sm" data-track="whatsapp_click" data-track-label="header" target="_blank" rel="noopener">וואטסאפ</a>
       <details class="md:hidden relative">
-        <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center border border-line" aria-label="תפריט">
+        <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center border-2 border-ink" aria-label="תפריט">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
         </summary>
-        <nav aria-label="ניווט נייד" class="absolute left-0 mt-2 w-60 border border-line bg-bg p-2">
+        <nav aria-label="ניווט נייד" class="absolute left-0 mt-2 w-60 border-2 border-ink bg-bg p-2">
           <ul class="flex flex-col">
             {NAV.map((item) => (
               <li><a href={item.href} class="block px-3 py-2 font-bold hover:bg-soft">{item.label}</a></li>
