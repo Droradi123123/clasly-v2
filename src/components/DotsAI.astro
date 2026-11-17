@@ -41,7 +41,7 @@
       const off = document.createElement('canvas'); off.width = w; off.height = h;
       const oc = off.getContext('2d')!;
       oc.fillStyle = '#000'; oc.textAlign = 'center'; oc.textBaseline = 'middle';
-      oc.font = `400 ${Math.floor(h * .8)}px "Secular One", Arial, sans-serif`;
+      oc.font = `900 ${Math.floor(h * .8)}px "Frank Ruhl Libre", Georgia, serif`;
       oc.fillText('AI', w / 2, h * .47);
       const data = oc.getImageData(0, 0, w, h).data;
       const gap = Math.max(5, Math.round(w / 88));
@@ -92,7 +92,7 @@
     let rt = 0;
     window.addEventListener('resize', () => { clearTimeout(rt); rt = window.setTimeout(() => { build(); start(); }, 150); });
 
-    const ready = document.fonts ? document.fonts.load('400 100px "Secular One"') : Promise.resolve();
+    const ready = document.fonts ? document.fonts.load('900 100px "Frank Ruhl Libre"') : Promise.resolve();
     ready.catch(() => {}).finally(() => { build(); start(); });
   });
 </script>
