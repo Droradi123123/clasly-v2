@@ -91,6 +91,8 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 83. ~~הרצאת AI לכנס מכירות: מה אנשי מכירות צריכים לראות~~ ✅ `/blog/ai-lecture-for-sales-conference`
 84. ~~אוטומציה לרואי חשבון: קליטת מסמכים ומיילים עם AI ו-n8n~~ ✅ `/blog/accounting-firm-automation`
 85. ~~AI לחוויית לקוח: איפה הוא משפר את השירות ואיפה צריך נציג~~ ✅ `/blog/ai-customer-experience`
+86. ~~קיצור תהליכי עבודה עם AI: איך ממפים תהליך ומה באמת מתקצר~~ ✅ `/blog/shorten-work-processes-with-ai`
+87. ~~הדרכת בינה מלאכותית למגייסים: הרצאה, סדנה או קורס גיוס~~ ✅ `/blog/ai-training-for-recruiters`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
