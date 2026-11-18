@@ -31,7 +31,7 @@ Each one gets an article or a glossary term page.
 
 ### AI agents and automation
 14. ~~איך בונים סוכן AI: מדריך למתחילים בלי קוד~~ ✅ `/blog/how-to-build-ai-agent-no-code`
-15. מדריך n8n למתחילים בעברית
+15. ~~מדריך n8n למתחילים בעברית~~ ✅ `/blog/n8n-beginners-guide` (2026-11-18). Fallback pick: no section D/E item or data gap was open; B41 skipped (covered by `/blog/ai-course-for-universities-and-colleges` and `/ai-for/students`, and "תלמידים" implies schools, which we do not offer); A2 skipped (OpenAI sources blocked).
 16. n8n התקנה: ענן או שרת משלכם, צעד אחרי צעד
 17. n8n ו-WhatsApp: בוט AI לעסק
 18. אוטומציות AI לעסק קטן: 10 רעיונות שאפשר לבנות השבוע

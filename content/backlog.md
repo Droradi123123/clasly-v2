@@ -93,6 +93,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 85. ~~AI לחוויית לקוח: איפה הוא משפר את השירות ואיפה צריך נציג~~ ✅ `/blog/ai-customer-experience`
 86. ~~קיצור תהליכי עבודה עם AI: איך ממפים תהליך ומה באמת מתקצר~~ ✅ `/blog/shorten-work-processes-with-ai`
 87. ~~הדרכת בינה מלאכותית למגייסים: הרצאה, סדנה או קורס גיוס~~ ✅ `/blog/ai-training-for-recruiters`
+88. ~~מדריך n8n למתחילים: המושגים וה-workflow הראשון שלכם~~ ✅ `/blog/n8n-beginners-guide`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
