@@ -95,6 +95,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 87. ~~הדרכת בינה מלאכותית למגייסים: הרצאה, סדנה או קורס גיוס~~ ✅ `/blog/ai-training-for-recruiters`
 88. ~~מדריך n8n למתחילים: המושגים וה-workflow הראשון שלכם~~ ✅ `/blog/n8n-beginners-guide`
 89. ~~התקנת n8n: ענן או שרת משלכם, צעד אחרי צעד~~ ✅ `/blog/n8n-installation-guide`
+90. ~~בוט WhatsApp עם n8n ו-AI: מדריך לעסק, צעד אחרי צעד~~ ✅ `/blog/n8n-whatsapp-bot`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
