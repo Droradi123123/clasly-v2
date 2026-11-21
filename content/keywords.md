@@ -34,7 +34,7 @@ Each one gets an article or a glossary term page.
 15. ~~מדריך n8n למתחילים בעברית~~ ✅ `/blog/n8n-beginners-guide` (2026-11-18). Fallback pick: no section D/E item or data gap was open; B41 skipped (covered by `/blog/ai-course-for-universities-and-colleges` and `/ai-for/students`, and "תלמידים" implies schools, which we do not offer); A2 skipped (OpenAI sources blocked).
 16. ~~n8n התקנה: ענן או שרת משלכם, צעד אחרי צעד~~ ✅ `/blog/n8n-installation-guide` (2026-11-19). Fallback pick: no open section D/E item or data gap; A2 still blocked (OpenAI sources).
 17. ~~n8n ו-WhatsApp: בוט AI לעסק~~ ✅ `/blog/n8n-whatsapp-bot` (2026-11-20). Fallback pick: no open section D/E item or data gap; A2 still blocked (OpenAI sources).
-18. אוטומציות AI לעסק קטן: 10 רעיונות שאפשר לבנות השבוע
+18. ~~אוטומציות AI לעסק קטן: 10 רעיונות שאפשר לבנות השבוע~~ ✅ `/blog/ai-automations-for-small-business` (2026-11-21). Fallback pick: no open section D/E item or data gap; section B (day divisible by 3) has only B41, already covered; A2 still blocked.
 19. Vibe coding: מה זה, למי זה מתאים ואיפה זה נשבר
 
 ### AI by profession (long tail with clear intent)
