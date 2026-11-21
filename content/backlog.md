@@ -96,6 +96,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 88. ~~מדריך n8n למתחילים: המושגים וה-workflow הראשון שלכם~~ ✅ `/blog/n8n-beginners-guide`
 89. ~~התקנת n8n: ענן או שרת משלכם, צעד אחרי צעד~~ ✅ `/blog/n8n-installation-guide`
 90. ~~בוט WhatsApp עם n8n ו-AI: מדריך לעסק, צעד אחרי צעד~~ ✅ `/blog/n8n-whatsapp-bot`
+91. ~~אוטומציות AI לעסק קטן: 10 רעיונות שאפשר לבנות השבוע~~ ✅ `/blog/ai-automations-for-small-business`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
