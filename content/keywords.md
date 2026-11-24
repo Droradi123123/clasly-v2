@@ -35,7 +35,7 @@ Each one gets an article or a glossary term page.
 16. ~~n8n התקנה: ענן או שרת משלכם, צעד אחרי צעד~~ ✅ `/blog/n8n-installation-guide` (2026-11-19). Fallback pick: no open section D/E item or data gap; A2 still blocked (OpenAI sources).
 17. ~~n8n ו-WhatsApp: בוט AI לעסק~~ ✅ `/blog/n8n-whatsapp-bot` (2026-11-20). Fallback pick: no open section D/E item or data gap; A2 still blocked (OpenAI sources).
 18. ~~אוטומציות AI לעסק קטן: 10 רעיונות שאפשר לבנות השבוע~~ ✅ `/blog/ai-automations-for-small-business` (2026-11-21). Fallback pick: no open section D/E item or data gap; section B (day divisible by 3) has only B41, already covered; A2 still blocked.
-19. Vibe coding: מה זה, למי זה מתאים ואיפה זה נשבר
+19. ~~Vibe coding: מה זה, למי זה מתאים ואיפה זה נשבר~~ ✅ `/blog/what-is-vibe-coding` (2026-11-24). Fallback pick: no open D/E item or data gap; section B (day divisible by 3) has only B41, already covered; A2 still blocked.
 
 ### AI by profession (long tail with clear intent)
 20. ~~AI לעורכי דין: שימושים, סיכונים וכללים~~ ✅ `/ai-for/lawyers`
@@ -56,6 +56,11 @@ Each one gets an article or a glossary term page.
 31. רגולציה של AI בישראל: מה ארגון צריך לדעת
 32. ה-AI Act האירופי: מה זה אומר לחברה ישראלית
 33. פרטיות ו-AI: מה מותר להעלות לצ׳אט
+34. MCP למתחילים: איך מחברים את Claude למערכות של הארגון (sources: Claude docs on MCP connectors; glossary `/glossary/mcp` already ranks, an article can take the how-to intent)
+35. Evals לסוכן AI: איך בודקים שסוכן עובד לפני שמעלים אותו (sources: Claude docs "develop tests" and use-case guides; `/glossary/evals` ranks at position 1.8 for "מה זה evals")
+36. Claude בעברית: מה עובד, מה פחות, ואיך מנסחים בקשות (source: Claude docs multilingual support and prompting best practices)
+37. אוטומציות מתוזמנות ב-n8n: דוחות ותזכורות שרצים לבד (sources: n8n Schedule Trigger docs, Gmail and Google Sheets nodes)
+38. Prompt caching: איך מורידים את עלות ה-API של סוכן (source: Claude docs prompt caching; link with `/blog/token-costs-how-to-control-llm-spend`)
 
 ## B. Commercial queries close to a purchase (leads)
 Each one gets an article that links to its money page, or a landing page. Don't repeat the RESERVED phrases.
