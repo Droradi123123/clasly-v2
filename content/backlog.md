@@ -99,6 +99,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 91. ~~אוטומציות AI לעסק קטן: 10 רעיונות שאפשר לבנות השבוע~~ ✅ `/blog/ai-automations-for-small-business`
 92. ~~הרצאת AI ליזמים: מה כדאי לשמוע לפני שבונים מוצר עם AI~~ ✅ `/blog/ai-lecture-for-entrepreneurs`
 93. ~~סדנת AI למנהלים: מה עושים ביום אחד ומה יוצאים איתו~~ ✅ `/blog/ai-workshop-for-managers`
+94. ~~Vibe coding: מה זה, למי זה מתאים ואיפה זה נשבר~~ ✅ `/blog/what-is-vibe-coding`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
