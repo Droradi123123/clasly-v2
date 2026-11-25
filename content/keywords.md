@@ -48,7 +48,7 @@ Each one gets an article or a glossary term page.
 27. ~~AI לאנשי מכירות~~ ✅ `/ai-for/sales`
 
 ### Careers and learning
-28. איך ללמוד AI: מסלול לפי תפקיד ורמה
+28. ~~איך ללמוד AI: מסלול לפי תפקיד ורמה~~ ✅ `/blog/how-to-learn-ai` (2026-11-25). Fallback pick: no open D/E item or data gap; A2 still blocked.
 29. מקצועות AI: אילו תפקידים נפתחים ומה צריך לדעת
 30. כישורי AI שמעסיקים מחפשים בראיון עבודה
 
