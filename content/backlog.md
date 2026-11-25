@@ -100,6 +100,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 92. ~~הרצאת AI ליזמים: מה כדאי לשמוע לפני שבונים מוצר עם AI~~ ✅ `/blog/ai-lecture-for-entrepreneurs`
 93. ~~סדנת AI למנהלים: מה עושים ביום אחד ומה יוצאים איתו~~ ✅ `/blog/ai-workshop-for-managers`
 94. ~~Vibe coding: מה זה, למי זה מתאים ואיפה זה נשבר~~ ✅ `/blog/what-is-vibe-coding`
+95. ~~איך ללמוד AI: מסלול לפי תפקיד ורמה, ותוכנית לחודש~~ ✅ `/blog/how-to-learn-ai`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
