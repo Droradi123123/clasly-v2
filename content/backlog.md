@@ -102,6 +102,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 94. ~~Vibe coding: מה זה, למי זה מתאים ואיפה זה נשבר~~ ✅ `/blog/what-is-vibe-coding`
 95. ~~איך ללמוד AI: מסלול לפי תפקיד ורמה, ותוכנית לחודש~~ ✅ `/blog/how-to-learn-ai`
 96. ~~מקצועות AI: איך תפקידים משתנים ומה צריך לדעת~~ ✅ `/blog/ai-professions`
+97. ~~כישורי AI בראיון עבודה: מה מעסיקים בודקים ואיך מתכוננים~~ ✅ `/blog/ai-skills-for-job-interviews`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ

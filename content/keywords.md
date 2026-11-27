@@ -50,7 +50,7 @@ Each one gets an article or a glossary term page.
 ### Careers and learning
 28. ~~איך ללמוד AI: מסלול לפי תפקיד ורמה~~ ✅ `/blog/how-to-learn-ai` (2026-11-25). Fallback pick: no open D/E item or data gap; A2 still blocked.
 29. ~~מקצועות AI: אילו תפקידים נפתחים ומה צריך לדעת~~ ✅ `/blog/ai-professions` (2026-11-26). Written as "how roles change", since the sources show change within roles rather than lists of new job titles. Fallback pick: no open D/E item or data gap; A2 still blocked.
-30. כישורי AI שמעסיקים מחפשים בראיון עבודה
+30. ~~כישורי AI שמעסיקים מחפשים בראיון עבודה~~ ✅ `/blog/ai-skills-for-job-interviews` (2026-11-27). Written from the candidate side, to stay distinct from `/blog/ai-professions`. Fallback pick: no open D/E item or data gap; section B (day divisible by 3) has only B41, already covered; A2 still blocked.
 
 ### Regulation and safety
 31. רגולציה של AI בישראל: מה ארגון צריך לדעת
