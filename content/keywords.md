@@ -53,9 +53,9 @@ Each one gets an article or a glossary term page.
 30. ~~כישורי AI שמעסיקים מחפשים בראיון עבודה~~ ✅ `/blog/ai-skills-for-job-interviews` (2026-11-27). Written from the candidate side, to stay distinct from `/blog/ai-professions`. Fallback pick: no open D/E item or data gap; section B (day divisible by 3) has only B41, already covered; A2 still blocked.
 
 ### Regulation and safety
-31. רגולציה של AI בישראל: מה ארגון צריך לדעת
-32. ה-AI Act האירופי: מה זה אומר לחברה ישראלית
-33. פרטיות ו-AI: מה מותר להעלות לצ׳אט
+31. רגולציה של AI בישראל: מה ארגון צריך לדעת (skipped on 2026-11-28: gov.il, eur-lex and EU sites are blocked from the session network)
+32. ה-AI Act האירופי: מה זה אומר לחברה ישראלית (skipped on 2026-11-28: gov.il, eur-lex and EU sites are blocked from the session network)
+33. ~~פרטיות ו-AI: מה מותר להעלות לצ׳אט~~ ✅ `/blog/privacy-and-ai-chat` (2026-11-28). Fallback pick: no open D/E item or data gap; A2, A31 and A32 skipped (sources blocked).
 34. MCP למתחילים: איך מחברים את Claude למערכות של הארגון (sources: Claude docs on MCP connectors; glossary `/glossary/mcp` already ranks, an article can take the how-to intent)
 35. Evals לסוכן AI: איך בודקים שסוכן עובד לפני שמעלים אותו (sources: Claude docs "develop tests" and use-case guides; `/glossary/evals` ranks at position 1.8 for "מה זה evals")
 36. Claude בעברית: מה עובד, מה פחות, ואיך מנסחים בקשות (source: Claude docs multilingual support and prompting best practices)
