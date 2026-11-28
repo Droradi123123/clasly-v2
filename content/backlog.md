@@ -103,6 +103,7 @@ Create a draft with `npm run new-article -- "ביטוי" --slug slug --hub hub -
 95. ~~איך ללמוד AI: מסלול לפי תפקיד ורמה, ותוכנית לחודש~~ ✅ `/blog/how-to-learn-ai`
 96. ~~מקצועות AI: איך תפקידים משתנים ומה צריך לדעת~~ ✅ `/blog/ai-professions`
 97. ~~כישורי AI בראיון עבודה: מה מעסיקים בודקים ואיך מתכוננים~~ ✅ `/blog/ai-skills-for-job-interviews`
+98. ~~פרטיות ו-AI: מה מותר להעלות לצ'אט ומה עדיף להשאיר בחוץ~~ ✅ `/blog/privacy-and-ai-chat`
 
 ## n8n and agents
 41. איך בונים סוכן AI עם n8n לוואטסאפ
